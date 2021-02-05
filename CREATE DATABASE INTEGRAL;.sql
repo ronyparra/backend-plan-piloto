@@ -8,22 +8,23 @@ CREATE TABLE usuario (
     PRIMARY KEY(idusuario)
 );
 
-CREATE TABLE tecnico(
-    idtecnico SERIAL,
-    nombre TEXT NOT NULL,
-    apellido TEXT NOT NULL,
-    precio DOUBLE PRECISION NOT NULL,
-    PRIMARY KEY(idtecnico)
-);
 
 CREATE TABLE cliente(
     idcliente SERIAL,
     razonsocial TEXT NOT NULL,
     ruc TEXT NOT NULL,
-    latitud TEXT NULL,
-    longitud TEXT NULL,
     PRIMARY KEY (idcliente)
 );
+
+CREATE TABLE cliente_sucursal(
+    idcliente INT NOT NULL REFERENCES cliente (idcliente),
+    idcliente_sucursal SERIAL,
+    descripcion TEXT NOT NULL,
+    latitud TEXT NULL,
+    longitud TEXT NULL,
+    PRIMARY KEY (idcliente, idcliente_sucursal)
+);
+
 
 CREATE TABLE vehiculo(
     idvehiculo SERIAL,
