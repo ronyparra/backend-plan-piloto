@@ -13,13 +13,13 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
-var _cliente = _interopRequireDefault(require("../services/cliente.service"));
+var _actividad = _interopRequireDefault(require("../services/actividad.service"));
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-var ClienteController = {
+var ActividadController = {
   get: function () {
     var _get = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
       var users;
@@ -29,7 +29,7 @@ var ClienteController = {
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return _cliente["default"].getAll();
+              return _actividad["default"].getAll();
 
             case 3:
               users = _context.sent;
@@ -69,7 +69,7 @@ var ClienteController = {
             case 0:
               _context2.prev = 0;
               _context2.next = 3;
-              return _cliente["default"].getById(req.params.id);
+              return _actividad["default"].getById(req.params.id);
 
             case 3:
               users = _context2.sent;
@@ -102,43 +102,56 @@ var ClienteController = {
   }(),
   create: function () {
     var _create = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
-      var cliente;
+      var master, detailTecnico, detailConcepto, actividad;
       return _regenerator["default"].wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              _context3.prev = 0;
+              master = {
+                idcliente: req.idcliente.idcliente,
+                idusuario: req.idusuario.idusuario,
+                idestadocobro: 1,
+                solicitante: req.solicitante,
+                comentario: req.comentario,
+                fecha: req.fecha
+              };
+              detailTecnico = req.body.tecnico.reduce(function (acc, curr) {
+                if (acc !== "") acc = acc + ",";
+                return acc = acc + "($$,".concat(curr.idusuario.idusuario, ",").concat(curr.precio, ")");
+              });
+              detailConcepto = req.body.detalle.reduce(function (acc, curr) {
+                if (acc !== "") acc = acc + ",";
+                return acc = acc + "($$,".concat(curr.idconcepto.idconcepto, ",").concat(curr.precio, ",").concat(curr.cantidad, ")");
+              });
+              _context3.prev = 3;
+              _context3.next = 6;
+              return _actividad["default"].create({
+                master: master,
+                detailTecnico: detailTecnico,
+                detailConcepto: detailConcepto
+              });
 
-              if (req.body.sucursal.length === 0) {
-                req.body.sucursal = [{
-                  descripcion: "N/A"
-                }];
-              }
-
-              _context3.next = 4;
-              return _cliente["default"].create(req.body);
-
-            case 4:
-              cliente = _context3.sent;
+            case 6:
+              actividad = _context3.sent;
               return _context3.abrupt("return", res.status(200).json({
                 status: 200,
-                data: cliente
+                data: actividad
               }));
 
-            case 8:
-              _context3.prev = 8;
-              _context3.t0 = _context3["catch"](0);
+            case 10:
+              _context3.prev = 10;
+              _context3.t0 = _context3["catch"](3);
               return _context3.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context3.t0.message
               }));
 
-            case 11:
+            case 13:
             case "end":
               return _context3.stop();
           }
         }
-      }, _callee3, null, [[0, 8]]);
+      }, _callee3, null, [[3, 10]]);
     }));
 
     function create(_x5, _x6) {
@@ -156,7 +169,7 @@ var ClienteController = {
             case 0:
               _context4.prev = 0;
               _context4.next = 3;
-              return _cliente["default"].update(_objectSpread(_objectSpread({}, req.body), {}, {
+              return _actividad["default"].update(_objectSpread(_objectSpread({}, req.body), {}, {
                 id: req.params.id
               }));
 
@@ -198,7 +211,7 @@ var ClienteController = {
             case 0:
               _context5.prev = 0;
               _context5.next = 3;
-              return _cliente["default"]["delete"](req.params.id);
+              return _actividad["default"]["delete"](req.params.id);
 
             case 3:
               users = _context5.sent;
@@ -230,5 +243,5 @@ var ClienteController = {
     return _delete;
   }()
 };
-var _default = ClienteController;
+var _default = ActividadController;
 exports["default"] = _default;

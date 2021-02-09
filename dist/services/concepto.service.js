@@ -13,7 +13,7 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _db = _interopRequireDefault(require("../db"));
 
-var ClienteService = {
+var ConceptoService = {
   getAll: function () {
     var _getAll = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
       var results;
@@ -23,7 +23,7 @@ var ClienteService = {
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return _db["default"].query("SELECT * FROM cliente");
+              return _db["default"].query("SELECT * FROM concepto");
 
             case 3:
               results = _context.sent;
@@ -57,7 +57,7 @@ var ClienteService = {
             case 0:
               _context2.prev = 0;
               _context2.next = 3;
-              return _db["default"].query("SELECT * FROM cliente WHERE idcliente  = $1", [id]);
+              return _db["default"].query("SELECT * FROM concepto WHERE idconcepto  = $1", [id]);
 
             case 3:
               results = _context2.sent;
@@ -84,44 +84,31 @@ var ClienteService = {
   }(),
   create: function () {
     var _create = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(_ref) {
-      var razonsocial, ruc, sucursal, results, idcliente, detail, resultsDetail;
+      var descripcion, precio, results;
       return _regenerator["default"].wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              razonsocial = _ref.razonsocial, ruc = _ref.ruc, sucursal = _ref.sucursal;
+              descripcion = _ref.descripcion, precio = _ref.precio;
               _context3.prev = 1;
               _context3.next = 4;
-              return _db["default"].query("INSERT INTO cliente(razonsocial, ruc) VALUES ($1, $2) RETURNING *", [razonsocial, ruc]);
+              return _db["default"].query("INSERT INTO concepto(descripcion, precio) VALUES ($1, $2) RETURNING *", [descripcion, precio]);
 
             case 4:
               results = _context3.sent;
-              idcliente = results.rows[0].idcliente;
-              detail = sucursal.reduce(function (acc, curr) {
-                if (acc !== "") acc = acc + ",";
-                var latitud = curr.latitud ? "'".concat(curr.latitud, "'") : null;
-                var longitud = curr.longitud ? "'".concat(curr.longitud, "'") : null;
-                return acc = acc + "(".concat(idcliente, ",'").concat(curr.descripcion, "',").concat(latitud, ",").concat(longitud, ")");
-              }, "");
-              _context3.next = 9;
-              return _db["default"].query("INSERT INTO cliente_sucursal( idcliente, descripcion, latitud, longitud) VALUES ".concat(detail, " RETURNING *"));
-
-            case 9:
-              resultsDetail = _context3.sent;
-              results.rows[0].sucursal = resultsDetail.rows;
               return _context3.abrupt("return", results.rows);
 
-            case 14:
-              _context3.prev = 14;
+            case 8:
+              _context3.prev = 8;
               _context3.t0 = _context3["catch"](1);
               throw _context3.t0;
 
-            case 17:
+            case 11:
             case "end":
               return _context3.stop();
           }
         }
-      }, _callee3, null, [[1, 14]]);
+      }, _callee3, null, [[1, 8]]);
     }));
 
     function create(_x2) {
@@ -132,15 +119,15 @@ var ClienteService = {
   }(),
   update: function () {
     var _update = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(_ref2) {
-      var razonsocial, ruc, results;
+      var descripcion, precio, results;
       return _regenerator["default"].wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              razonsocial = _ref2.razonsocial, ruc = _ref2.ruc;
+              descripcion = _ref2.descripcion, precio = _ref2.precio;
               _context4.prev = 1;
               _context4.next = 4;
-              return _db["default"].query("UPDATE cliente SET razonsocial = $1, ruc = $2 RETURNING *", [razonsocial, ruc]);
+              return _db["default"].query("UPDATE concepto SET descripcion = $1, precio = $2 RETURNING *", [descripcion, precio]);
 
             case 4:
               results = _context4.sent;
@@ -174,7 +161,7 @@ var ClienteService = {
             case 0:
               _context5.prev = 0;
               _context5.next = 3;
-              return _db["default"].query("DELETE FROM cliente WHERE idcliente  = $1", [id]);
+              return _db["default"].query("DELETE FROM concepto WHERE idconcepto  = $1", [id]);
 
             case 3:
               results = _context5.sent;
@@ -200,5 +187,5 @@ var ClienteService = {
     return _delete;
   }()
 };
-var _default = ClienteService;
+var _default = ConceptoService;
 exports["default"] = _default;

@@ -29,9 +29,10 @@ const ClienteService = {
       const idcliente = results.rows[0].idcliente;
       const detail = sucursal.reduce((acc, curr) => {
         if (acc !== "") acc = acc + ",";
+        const latitud = curr.latitud ? `'${curr.latitud}'` : null;
+        const longitud = curr.longitud ? `'${curr.longitud}'` : null;
         return (acc =
-          acc +
-          `(${idcliente},'${curr.descripcion}','${curr.latitud}','${curr.longitud}')`);
+          acc + `(${idcliente},'${curr.descripcion}',${latitud},${longitud})`);
       }, "");
       const resultsDetail = await db.query(
         `INSERT INTO cliente_sucursal( idcliente, descripcion, latitud, longitud) VALUES ${detail} RETURNING *`

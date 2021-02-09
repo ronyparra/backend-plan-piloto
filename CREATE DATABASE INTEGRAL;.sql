@@ -26,67 +26,42 @@ CREATE TABLE cliente_sucursal(
 );
 
 
-CREATE TABLE vehiculo(
-    idvehiculo SERIAL,
-    descripcion TEXT NOT NULL,
-    precio DOUBLE PRECISION NOT NULL,
-    PRIMARY KEY(idvehiculo)
-);
-
 CREATE TABLE estadocobro(
     idestadocobro SERIAL,
     descripcion TEXT NOT NULL,
     PRIMARY KEY(idestadocobro)
 );
 
-CREATE TABLE articulo (
-    idarticulo SERIAL,
+CREATE TABLE concepto (
+    idconcepto SERIAL,
     descripcion TEXT NOT NULL,
     precio DOUBLE PRECISION NOT NULL,
-    PRIMARY KEY (idarticulo)
+    PRIMARY KEY (idconcepto)
 );
 
-CREATE TABLE unidadservicio(
-    idunidadservicio SERIAL,
-    descripcion TEXT NOT NULL,
-    precio DOUBLE PRECISION NULL,
-    PRIMARY KEY (idunidadservicio)
-);
 
 CREATE TABLE actividad (
     idactividad SERIAL,
     idcliente INT NOT NULL REFERENCES cliente (idcliente),
     idusuario INT NOT NULL REFERENCES usuario (idusuario),
     idestadocobro INT NOT NULL REFERENCES estadocobro (idestadocobro),
-    idunidadservicio INT NOT NULL REFERENCES unidadservicio (idunidadservicio),
-    cantidad DOUBLE PRECISION NOT NULL,
-    precio DOUBLE PRECISION NOT NULL,
-    descripcion TEXT NOT NULL,
-    comentario TEXT NOT NULL,
-    fecha DATE NOT NULL,
-    hora TIME NOT NULL,
+    solicitante TEXT  NULL,
+    comentario TEXT  NULL,
+    fecha DATE NOT NULL
     PRIMARY KEY (idactividad)
 );
 
 CREATE TABLE actividad_tecnico_detalle (
     idactividad INT NOT NULL REFERENCES actividad (idactividad),
-    idtecnico INT NOT NULL REFERENCES tecnico (idtecnico),
+    idusuario INT NOT NULL REFERENCES usuario (idusuario),
     precio DOUBLE PRECISION NOT NULL,
-    PRIMARY KEY (idactividad,idtecnico)
+    PRIMARY KEY (idactividad,idusuario)
 );
 
-CREATE TABLE actividad_vehiculo_detalle (
+CREATE TABLE actividad_concepto_detalle (
     idactividad INT NOT NULL REFERENCES actividad (idactividad),
-    idvehiculo INT NOT NULL REFERENCES vehiculo (idvehiculo),
-    precio DOUBLE PRECISION NOT NULL,
-    distanciakm DOUBLE PRECISION NOT NULL,
-    PRIMARY KEY (idactividad,idvehiculo)
-);
-
-CREATE TABLE actividad_articulo_detalle (
-    idactividad INT NOT NULL REFERENCES actividad (idactividad),
-    idarticulo INT NOT NULL REFERENCES articulo (idarticulo),
+    idconcepto INT NOT NULL REFERENCES concepto (idconcepto),
     precio DOUBLE PRECISION NULL,
     cantidad DOUBLE PRECISION NULL,
-    PRIMARY KEY (idactividad,idarticulo)
+    PRIMARY KEY (idactividad,idconcepto)
 );

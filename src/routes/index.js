@@ -1,9 +1,11 @@
 import auth from "./auth.router";
 import user from "./user.router";
 import cliente from  "./cliente.router"
+import concepto from "./concepto.router"
 
 export default {
   auth,
   user,
-  cliente
+  cliente,
+  concepto
 };
