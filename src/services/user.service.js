@@ -3,7 +3,7 @@ import db from "../db";
 const UserService = {
   getAll: async () => {
     try {
-      const results = await db.query("SELECT * FROM usuario");
+      const results = await db.query("SELECT idusuario, username, nombre, apellido, precio FROM usuario");
       return results.rows;
     } catch (e) {
       throw e;
@@ -12,7 +12,7 @@ const UserService = {
   getById: async (id) => {
     try {
       const results = await db.query(
-        "SELECT * FROM usuario WHERE idusuario  = $1",
+        "SELECT idusuario, username, nombre, apellido, precio FROM usuario WHERE idusuario  = $1",
         [id]
       );
       return results.rows;
@@ -23,7 +23,7 @@ const UserService = {
   getByUsername: async ({ username }) => {
     try {
       const results = await db.query(
-        "SELECT * FROM usuario WHERE username  LIKE $1",
+        "SELECT idusuario, username, nombre, apellido, precio FROM usuario WHERE username  LIKE $1",
         [username]
       );
       return results.rows[0];

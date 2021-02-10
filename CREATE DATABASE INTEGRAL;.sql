@@ -7,7 +7,7 @@ CREATE TABLE usuario (
     apellido TEXT NOT NULL,
     PRIMARY KEY(idusuario)
 );
-
+ALTER TABLE usuario ADD COLUMN precio DOUBLE PRECISION NOT NULL DEFAULT 80000;
 
 CREATE TABLE cliente(
     idcliente SERIAL,
@@ -31,6 +31,10 @@ CREATE TABLE estadocobro(
     descripcion TEXT NOT NULL,
     PRIMARY KEY(idestadocobro)
 );
+INSERT INTO estadocobro(
+	idestadocobro, descripcion)
+VALUES (1, 'Pendiente'),(2, 'Cobrado');
+
 
 CREATE TABLE concepto (
     idconcepto SERIAL,

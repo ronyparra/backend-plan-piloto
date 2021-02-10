@@ -16,30 +16,34 @@ var _db = _interopRequireDefault(require("../db"));
 var ActividadService = {
   getAll: function () {
     var _getAll = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
-      var results;
+      var query, results;
       return _regenerator["default"].wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
-              _context.next = 3;
-              return _db["default"].query("SELECT * FROM actividad");
+              query = "SELECT json_build_object(\n      'idactividad',idactividad,\n      'idcliente', json_build_object(\n        'idcliente', cliente.idcliente,\n        'razonsocial', cliente.razonsocial\n      ),\n      'idusuario', json_build_object(\n        'idusuario', usuario.idusuario,\n        'nombre', usuario.nombre\n      ),\n      'idestadocobro', json_build_object(\n        'idestadocobro', estadocobro.idestadocobro,\n        'descripcion', estadocobro.descripcion\n      ),\n      'solicitante', solicitante,\n      'comentario', comentario,\n      'fecha', fecha\n    ) as rows\n    FROM actividad\n    JOIN cliente USING (idcliente)\n    JOIN estadocobro USING (idestadocobro)\n    JOIN usuario USING (idusuario)";
+              _context.prev = 1;
+              _context.next = 4;
+              return _db["default"].query(query);
 
-            case 3:
+            case 4:
               results = _context.sent;
-              return _context.abrupt("return", results.rows);
+              console.log(results);
+              return _context.abrupt("return", results.rows.map(function (x) {
+                return x.rows;
+              }));
 
-            case 7:
-              _context.prev = 7;
-              _context.t0 = _context["catch"](0);
+            case 9:
+              _context.prev = 9;
+              _context.t0 = _context["catch"](1);
               throw _context.t0;
 
-            case 10:
+            case 12:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 7]]);
+      }, _callee, null, [[1, 9]]);
     }));
 
     function getAll() {
@@ -84,12 +88,12 @@ var ActividadService = {
   }(),
   create: function () {
     var _create = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(_ref) {
-      var master, detailTecnico, detailConcepto, results, idactividad, resultsTecnico, resultsConcepto;
+      var master, tecnico, detalle, results, idactividad, actividad_tecnico, actividad_detalle, resultsTecnico, resultsConcepto;
       return _regenerator["default"].wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              master = _ref.master, detailTecnico = _ref.detailTecnico, detailConcepto = _ref.detailConcepto;
+              master = _ref.master, tecnico = _ref.tecnico, detalle = _ref.detalle;
               _context3.prev = 1;
               _context3.next = 4;
               return _db["default"].query("INSERT INTO actividad( idcliente, idusuario, idestadocobro, solicitante, comentario, fecha) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *", [master.idcliente, master.idusuario, master.idestadocobro, master.solicitante, master.comentario, master.fecha]);
@@ -97,19 +101,21 @@ var ActividadService = {
             case 4:
               results = _context3.sent;
               idactividad = results.rows[0].idactividad;
-              detailTecnico.map(function (d) {
-                d.idactividad = idactividad;
-              });
-              detailConcepto.map(function (c) {
-                c.idactividad - idactividad;
-              });
+              actividad_tecnico = [tecnico.reduce(function (acc, curr) {
+                if (acc !== "") acc = acc + ",";
+                return acc = acc + "(".concat(idactividad, ",").concat(curr.idusuario, ",").concat(curr.precio, ")");
+              }, "")];
+              actividad_detalle = [detalle.reduce(function (acc, curr) {
+                if (acc !== "") acc = acc + ",";
+                return acc = acc + "(".concat(idactividad, ",").concat(curr.idconcepto.idconcepto, ",").concat(curr.precio, ",").concat(curr.cantidad, ")");
+              }, "")];
               _context3.next = 10;
-              return _db["default"].query("INSERT INTO actividad_tecnico_detalle(idactividad, idusuario, precio) VALUES ".concat(detailTecnico, " RETURNING *"));
+              return _db["default"].query("INSERT INTO actividad_tecnico_detalle(idactividad, idusuario, precio) VALUES ".concat(actividad_tecnico, " RETURNING *"));
 
             case 10:
               resultsTecnico = _context3.sent;
               _context3.next = 13;
-              return _db["default"].query("INSERT INTO actividad_concepto_detalle(idactividad, idconcepto, precio, cantidad)VALUES ".concat(detailConcepto, " RETURNING *"));
+              return _db["default"].query("INSERT INTO actividad_concepto_detalle(idactividad, idconcepto, precio, cantidad)VALUES ".concat(actividad_detalle, " RETURNING *"));
 
             case 13:
               resultsConcepto = _context3.sent;

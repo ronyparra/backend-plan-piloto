@@ -15,10 +15,13 @@ var _cliente = _interopRequireDefault(require("./cliente.router"));
 
 var _concepto = _interopRequireDefault(require("./concepto.router"));
 
+var _actividad = _interopRequireDefault(require("./actividad.router"));
+
 var _default = {
   auth: _auth["default"],
   user: _user["default"],
   cliente: _cliente["default"],
-  concepto: _concepto["default"]
+  concepto: _concepto["default"],
+  actividad: _actividad["default"]
 };
 exports["default"] = _default;

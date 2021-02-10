@@ -19,28 +19,20 @@ const ActividadController = {
   },
   create: async (req, res) => {
     const master = {
-      idcliente: req.idcliente.idcliente,
-      idusuario: req.idusuario.idusuario,
+      idcliente: req.body.idcliente.idcliente,
+      idusuario: req.body.idusuario.idusuario,
       idestadocobro: 1,
-      solicitante: req.solicitante,
-      comentario: req.comentario,
-      fecha: req.fecha,
+      solicitante: req.body.solicitante,
+      comentario: req.body.comentario,
+      fecha: req.body.fecha,
     };
-    const detailTecnico = req.body.tecnico.reduce((acc, curr) => {
-      if (acc !== "") acc = acc + ",";
-      return (acc = acc + `($$,${curr.idusuario.idusuario},${curr.precio})`);
-    });
-    const detailConcepto = req.body.detalle.reduce((acc, curr) => {
-      if (acc !== "") acc = acc + ",";
-      return (acc =
-        acc +
-        `($$,${curr.idconcepto.idconcepto},${curr.precio},${curr.cantidad})`);
-    });
+    const tecnico = req.body.tecnico;
+    const detalle = req.body.detalle;
     try {
       const actividad = await ActividadService.create({
         master,
-        detailTecnico,
-        detailConcepto,
+        tecnico,
+        detalle,
       });
       return res.status(200).json({ status: 200, data: actividad });
     } catch (e) {

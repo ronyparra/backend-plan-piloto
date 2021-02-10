@@ -23,7 +23,7 @@ var UserService = {
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return _db["default"].query("SELECT * FROM usuario");
+              return _db["default"].query("SELECT idusuario, username, nombre, apellido, precio FROM usuario");
 
             case 3:
               results = _context.sent;
@@ -57,7 +57,7 @@ var UserService = {
             case 0:
               _context2.prev = 0;
               _context2.next = 3;
-              return _db["default"].query("SELECT * FROM usuario WHERE idusuario  = $1", [id]);
+              return _db["default"].query("SELECT idusuario, username, nombre, apellido, precio FROM usuario WHERE idusuario  = $1", [id]);
 
             case 3:
               results = _context2.sent;
@@ -92,7 +92,7 @@ var UserService = {
               username = _ref.username;
               _context3.prev = 1;
               _context3.next = 4;
-              return _db["default"].query("SELECT * FROM usuario WHERE username  LIKE $1", [username]);
+              return _db["default"].query("SELECT idusuario, username, nombre, apellido, precio FROM usuario WHERE username  LIKE $1", [username]);
 
             case 4:
               results = _context3.sent;

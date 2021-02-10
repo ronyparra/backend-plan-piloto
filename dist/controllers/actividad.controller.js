@@ -102,33 +102,27 @@ var ActividadController = {
   }(),
   create: function () {
     var _create = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
-      var master, detailTecnico, detailConcepto, actividad;
+      var master, tecnico, detalle, actividad;
       return _regenerator["default"].wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
               master = {
-                idcliente: req.idcliente.idcliente,
-                idusuario: req.idusuario.idusuario,
+                idcliente: req.body.idcliente.idcliente,
+                idusuario: req.body.idusuario.idusuario,
                 idestadocobro: 1,
-                solicitante: req.solicitante,
-                comentario: req.comentario,
-                fecha: req.fecha
+                solicitante: req.body.solicitante,
+                comentario: req.body.comentario,
+                fecha: req.body.fecha
               };
-              detailTecnico = req.body.tecnico.reduce(function (acc, curr) {
-                if (acc !== "") acc = acc + ",";
-                return acc = acc + "($$,".concat(curr.idusuario.idusuario, ",").concat(curr.precio, ")");
-              });
-              detailConcepto = req.body.detalle.reduce(function (acc, curr) {
-                if (acc !== "") acc = acc + ",";
-                return acc = acc + "($$,".concat(curr.idconcepto.idconcepto, ",").concat(curr.precio, ",").concat(curr.cantidad, ")");
-              });
+              tecnico = req.body.tecnico;
+              detalle = req.body.detalle;
               _context3.prev = 3;
               _context3.next = 6;
               return _actividad["default"].create({
                 master: master,
-                detailTecnico: detailTecnico,
-                detailConcepto: detailConcepto
+                tecnico: tecnico,
+                detalle: detalle
               });
 
             case 6:
