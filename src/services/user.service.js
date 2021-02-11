@@ -23,7 +23,7 @@ const UserService = {
   getByUsername: async ({ username }) => {
     try {
       const results = await db.query(
-        "SELECT idusuario, username, nombre, apellido, precio FROM usuario WHERE username  LIKE $1",
+        "SELECT idusuario, username, password, nombre, apellido, precio FROM usuario WHERE username  LIKE $1",
         [username]
       );
       return results.rows[0];

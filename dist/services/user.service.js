@@ -92,7 +92,7 @@ var UserService = {
               username = _ref.username;
               _context3.prev = 1;
               _context3.next = 4;
-              return _db["default"].query("SELECT idusuario, username, nombre, apellido, precio FROM usuario WHERE username  LIKE $1", [username]);
+              return _db["default"].query("SELECT idusuario, username, password, nombre, apellido, precio FROM usuario WHERE username  LIKE $1", [username]);
 
             case 4:
               results = _context3.sent;

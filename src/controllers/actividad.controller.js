@@ -21,7 +21,7 @@ const ActividadController = {
     const master = {
       idcliente: req.body.idcliente.idcliente,
       idusuario: req.body.idusuario.idusuario,
-      idestadocobro: 1,
+      idestadocobro: 1, 
       solicitante: req.body.solicitante,
       comentario: req.body.comentario,
       fecha: req.body.fecha,
