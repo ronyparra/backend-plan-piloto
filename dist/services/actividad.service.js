@@ -13,37 +13,51 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _db = _interopRequireDefault(require("../db"));
 
+var query = "SELECT \n        json_build_object(\n          'idactividad', idactividad, \n          'idcliente', json_build_object(\n            'idcliente', cliente.idcliente, \n            'razonsocial', cliente.razonsocial\n          ), \n          'idusuario', json_build_object(\n            'idusuario', usuario.idusuario, \n            'nombre', usuario.nombre\n          ), \n          'idestadocobro', json_build_object(\n            'idestadocobro', estadocobro.idestadocobro, \n            'descripcion', estadocobro.descripcion\n          ), \n          'solicitante', solicitante, \n          'comentario', comentario, \n          'fecha', to_char(fecha, 'DD-MM-YYYY'), \n          'tecnico', (\n            SELECT json_agg(\n                json_build_object(\n                      'idusuario', tec.idusuario,\n                      'nombre', usu.nombre,\n                      'precio', tec.precio\n                )\n            )\n            FROM    actividad_tecnico_detalle as tec\n            JOIN    usuario as usu ON tec.idusuario = usu.idusuario\n            WHERE   idactividad = actividad.idactividad\n          ), \n          'detalle', (\n            SELECT json_agg(\n                json_build_object(\n                    'idconcepto', json_build_object(\n                        'idconcepto', conc.idconcepto,\n                        'descripcion', conc.descripcion\n                    ), \n                    'precio', det.precio, \n                    'cantidad', det.cantidad\n                )\n            )\n            FROM    actividad_concepto_detalle AS det\n            JOIN    concepto as conc ON det.idconcepto = conc.idconcepto\n            WHERE   idactividad = actividad.idactividad\n\n          )) as rows\n    FROM actividad\n    JOIN cliente USING (idcliente)\n    JOIN estadocobro USING (idestadocobro)\n    JOIN usuario USING (idusuario)";
+
+var formatTecnico = function formatTecnico(tecnico, id) {
+  return [tecnico.reduce(function (acc, curr) {
+    if (acc !== "") acc = acc + ",";
+    return acc = acc + "(".concat(id, ",").concat(curr.idusuario, ",").concat(curr.precio, ")");
+  }, "")];
+};
+
+var formatDetalle = function formatDetalle(detalle, id) {
+  return [detalle.reduce(function (acc, curr) {
+    if (acc !== "") acc = acc + ",";
+    return acc = acc + "(".concat(id, ",").concat(curr.idconcepto.idconcepto, ",").concat(curr.precio, ",").concat(curr.cantidad, ")");
+  }, "")];
+};
+
 var ActividadService = {
   getAll: function () {
     var _getAll = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
-      var query, results;
+      var results;
       return _regenerator["default"].wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              query = "SELECT json_build_object(\n      'idactividad',idactividad,\n      'idcliente', json_build_object(\n        'idcliente', cliente.idcliente,\n        'razonsocial', cliente.razonsocial\n      ),\n      'idusuario', json_build_object(\n        'idusuario', usuario.idusuario,\n        'nombre', usuario.nombre\n      ),\n      'idestadocobro', json_build_object(\n        'idestadocobro', estadocobro.idestadocobro,\n        'descripcion', estadocobro.descripcion\n      ),\n      'solicitante', solicitante,\n      'comentario', comentario,\n      'fecha', fecha\n    ) as rows\n    FROM actividad\n    JOIN cliente USING (idcliente)\n    JOIN estadocobro USING (idestadocobro)\n    JOIN usuario USING (idusuario)";
-              _context.prev = 1;
-              _context.next = 4;
+              _context.prev = 0;
+              _context.next = 3;
               return _db["default"].query(query);
 
-            case 4:
+            case 3:
               results = _context.sent;
-              console.log(results);
               return _context.abrupt("return", results.rows.map(function (x) {
                 return x.rows;
               }));
 
-            case 9:
-              _context.prev = 9;
-              _context.t0 = _context["catch"](1);
+            case 7:
+              _context.prev = 7;
+              _context.t0 = _context["catch"](0);
               throw _context.t0;
 
-            case 12:
+            case 10:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1, 9]]);
+      }, _callee, null, [[0, 7]]);
     }));
 
     function getAll() {
@@ -61,11 +75,11 @@ var ActividadService = {
             case 0:
               _context2.prev = 0;
               _context2.next = 3;
-              return _db["default"].query("SELECT * FROM actividad WHERE idactividad  = $1", [id]);
+              return _db["default"].query(query + "WHERE idactividad  = $1", [id]);
 
             case 3:
               results = _context2.sent;
-              return _context2.abrupt("return", results.rows);
+              return _context2.abrupt("return", results.rows[0].rows);
 
             case 7:
               _context2.prev = 7;
@@ -96,44 +110,50 @@ var ActividadService = {
               master = _ref.master, tecnico = _ref.tecnico, detalle = _ref.detalle;
               _context3.prev = 1;
               _context3.next = 4;
-              return _db["default"].query("INSERT INTO actividad( idcliente, idusuario, idestadocobro, solicitante, comentario, fecha) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *", [master.idcliente, master.idusuario, master.idestadocobro, master.solicitante, master.comentario, master.fecha]);
+              return _db["default"].query("BEGIN");
 
             case 4:
+              _context3.next = 6;
+              return _db["default"].query("INSERT INTO actividad( idcliente, idusuario, idestadocobro, solicitante, comentario, fecha) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *", [master.idcliente, master.idusuario, master.idestadocobro, master.solicitante, master.comentario, master.fecha]);
+
+            case 6:
               results = _context3.sent;
               idactividad = results.rows[0].idactividad;
-              actividad_tecnico = [tecnico.reduce(function (acc, curr) {
-                if (acc !== "") acc = acc + ",";
-                return acc = acc + "(".concat(idactividad, ",").concat(curr.idusuario, ",").concat(curr.precio, ")");
-              }, "")];
-              actividad_detalle = [detalle.reduce(function (acc, curr) {
-                if (acc !== "") acc = acc + ",";
-                return acc = acc + "(".concat(idactividad, ",").concat(curr.idconcepto.idconcepto, ",").concat(curr.precio, ",").concat(curr.cantidad, ")");
-              }, "")];
-              _context3.next = 10;
+              actividad_tecnico = formatTecnico(tecnico, idactividad);
+              actividad_detalle = formatDetalle(detalle, idactividad);
+              _context3.next = 12;
               return _db["default"].query("INSERT INTO actividad_tecnico_detalle(idactividad, idusuario, precio) VALUES ".concat(actividad_tecnico, " RETURNING *"));
 
-            case 10:
+            case 12:
               resultsTecnico = _context3.sent;
-              _context3.next = 13;
+              _context3.next = 15;
               return _db["default"].query("INSERT INTO actividad_concepto_detalle(idactividad, idconcepto, precio, cantidad)VALUES ".concat(actividad_detalle, " RETURNING *"));
 
-            case 13:
+            case 15:
               resultsConcepto = _context3.sent;
               results.rows[0].tecnico = resultsTecnico.rows;
               results.rows[0].detalle = resultsConcepto.rows;
+              _context3.next = 20;
+              return _db["default"].query("COMMIT");
+
+            case 20:
               return _context3.abrupt("return", results.rows);
 
-            case 19:
-              _context3.prev = 19;
+            case 23:
+              _context3.prev = 23;
               _context3.t0 = _context3["catch"](1);
+              _context3.next = 27;
+              return _db["default"].query("ROLLBACK");
+
+            case 27:
               throw _context3.t0;
 
-            case 22:
+            case 28:
             case "end":
               return _context3.stop();
           }
         }
-      }, _callee3, null, [[1, 19]]);
+      }, _callee3, null, [[1, 23]]);
     }));
 
     function create(_x2) {
@@ -144,31 +164,65 @@ var ActividadService = {
   }(),
   update: function () {
     var _update = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(_ref2) {
-      var razonsocial, ruc, results;
+      var id, master, tecnico, detalle, results, actividad_tecnico, actividad_detalle, resultsTecnico, resultsConcepto;
       return _regenerator["default"].wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              razonsocial = _ref2.razonsocial, ruc = _ref2.ruc;
+              id = _ref2.id, master = _ref2.master, tecnico = _ref2.tecnico, detalle = _ref2.detalle;
               _context4.prev = 1;
               _context4.next = 4;
-              return _db["default"].query("UPDATE actividad SET razonsocial = $1, ruc = $2 RETURNING *", [razonsocial, ruc]);
+              return _db["default"].query("BEGIN");
 
             case 4:
-              results = _context4.sent;
-              return _context4.abrupt("return", results.rows);
+              _context4.next = 6;
+              return _db["default"].query("UPDATE actividad SET idcliente=$2, idusuario=$3, idestadocobro=$4, solicitante=$5, comentario=$6, fecha=$7 WHERE idactividad = $1 RETURNING *", [id, master.idcliente, master.idusuario, master.idestadocobro, master.solicitante, master.comentario, master.fecha]);
 
-            case 8:
-              _context4.prev = 8;
-              _context4.t0 = _context4["catch"](1);
-              throw _context4.t0;
+            case 6:
+              results = _context4.sent;
+              _context4.next = 9;
+              return _db["default"].query("DELETE FROM actividad_tecnico_detalle WHERE idactividad  = $1", [id]);
+
+            case 9:
+              _context4.next = 11;
+              return _db["default"].query("DELETE FROM actividad_concepto_detalle WHERE idactividad  = $1", [id]);
 
             case 11:
+              actividad_tecnico = formatTecnico(tecnico, id);
+              actividad_detalle = formatDetalle(detalle, id);
+              _context4.next = 15;
+              return _db["default"].query("INSERT INTO actividad_tecnico_detalle(idactividad, idusuario, precio) VALUES ".concat(actividad_tecnico, " RETURNING *"));
+
+            case 15:
+              resultsTecnico = _context4.sent;
+              _context4.next = 18;
+              return _db["default"].query("INSERT INTO actividad_concepto_detalle(idactividad, idconcepto, precio, cantidad)VALUES ".concat(actividad_detalle, " RETURNING *"));
+
+            case 18:
+              resultsConcepto = _context4.sent;
+              results.rows[0].tecnico = resultsTecnico.rows;
+              results.rows[0].detalle = resultsConcepto.rows;
+              _context4.next = 23;
+              return _db["default"].query("COMMIT");
+
+            case 23:
+              return _context4.abrupt("return", results.rows);
+
+            case 26:
+              _context4.prev = 26;
+              _context4.t0 = _context4["catch"](1);
+              _context4.next = 30;
+              return _db["default"].query("ROLLBACK");
+
+            case 30:
+              throw _context4.t0;
+
+            case 31:
             case "end":
               return _context4.stop();
           }
         }
-      }, _callee4, null, [[1, 8]]);
+      }, _callee4, null, [[1, 26]]);
     }));
 
     function update(_x3) {

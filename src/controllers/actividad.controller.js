@@ -3,29 +3,22 @@ import ActividadService from "../services/actividad.service";
 const ActividadController = {
   get: async (req, res) => {
     try {
-      const users = await ActividadService.getAll();
-      return res.status(200).json({ status: 200, data: users });
+      const actividad = await ActividadService.getAll();
+      return res.status(200).json({ status: 200, data: actividad });
     } catch (e) {
       return res.status(400).json({ status: 400, message: e.message });
     }
   },
   getById: async (req, res) => {
     try {
-      const users = await ActividadService.getById(req.params.id);
-      return res.status(200).json({ status: 200, data: users });
+      const actividad = await ActividadService.getById(req.params.id);
+      return res.status(200).json({ status: 200, data: actividad });
     } catch (e) {
       return res.status(400).json({ status: 400, message: e.message });
     }
   },
   create: async (req, res) => {
-    const master = {
-      idcliente: req.body.idcliente.idcliente,
-      idusuario: req.body.idusuario.idusuario,
-      idestadocobro: 1, 
-      solicitante: req.body.solicitante,
-      comentario: req.body.comentario,
-      fecha: req.body.fecha,
-    };
+    const master = formatMaster(req.body);
     const tecnico = req.body.tecnico;
     const detalle = req.body.detalle;
     try {
@@ -40,20 +33,25 @@ const ActividadController = {
     }
   },
   update: async (req, res) => {
+    const master = formatMaster(req.body);
+    const tecnico = req.body.tecnico;
+    const detalle = req.body.detalle;
     try {
-      const users = await ActividadService.update({
-        ...req.body,
+      const actividad = await ActividadService.update({
         id: req.params.id,
+        master,
+        tecnico,
+        detalle,
       });
-      return res.status(200).json({ status: 200, data: users });
+      return res.status(200).json({ status: 200, data: actividad });
     } catch (e) {
       return res.status(400).json({ status: 400, message: e.message });
     }
   },
   delete: async (req, res) => {
     try {
-      const users = await ActividadService.delete(req.params.id);
-      return res.status(200).json({ status: 200, data: users });
+      const actividad = await ActividadService.delete(req.params.id);
+      return res.status(200).json({ status: 200, data: actividad });
     } catch (e) {
       return res.status(400).json({ status: 400, message: e.message });
     }
@@ -61,3 +59,14 @@ const ActividadController = {
 };
 
 export default ActividadController;
+
+const formatMaster = (body) => {
+  return {
+    idcliente: body.idcliente.idcliente,
+    idusuario: body.idusuario.idusuario,
+    idestadocobro: 1,
+    solicitante: body.solicitante,
+    comentario: body.comentario,
+    fecha: body.fecha,
+  };
+};
