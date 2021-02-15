@@ -240,23 +240,43 @@ var ActividadService = {
             case 0:
               _context5.prev = 0;
               _context5.next = 3;
-              return _db["default"].query("DELETE FROM actividad WHERE idactividad  = $1", [id]);
+              return _db["default"].query("BEGIN");
 
             case 3:
-              results = _context5.sent;
-              return _context5.abrupt("return", results.rows);
+              _context5.next = 5;
+              return _db["default"].query("DELETE FROM actividad_tecnico_detalle WHERE idactividad  = $1", [id]);
+
+            case 5:
+              _context5.next = 7;
+              return _db["default"].query("DELETE FROM actividad_concepto_detalle WHERE idactividad  = $1", [id]);
 
             case 7:
-              _context5.prev = 7;
+              _context5.next = 9;
+              return _db["default"].query("DELETE FROM actividad WHERE idactividad  = $1", [id]);
+
+            case 9:
+              results = _context5.sent;
+              _context5.next = 12;
+              return _db["default"].query("COMMIT");
+
+            case 12:
+              return _context5.abrupt("return", results.rows);
+
+            case 15:
+              _context5.prev = 15;
               _context5.t0 = _context5["catch"](0);
+              _context5.next = 19;
+              return _db["default"].query("ROLLBACK");
+
+            case 19:
               throw _context5.t0;
 
-            case 10:
+            case 20:
             case "end":
               return _context5.stop();
           }
         }
-      }, _callee5, null, [[0, 7]]);
+      }, _callee5, null, [[0, 15]]);
     }));
 
     function _delete(_x4) {

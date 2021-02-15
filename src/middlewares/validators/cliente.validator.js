@@ -8,7 +8,6 @@ const ClienteValidator = {
       .withMessage("Razon social es obligatorio")
       .bail(),
     body("ruc").not().isEmpty().withMessage("Ruc es obligatorio").bail(),
-    body("sucursal.*.descripcion").not().isEmpty().bail(),
 
     (req, res, next) => {
       const errors = validationResult(req);

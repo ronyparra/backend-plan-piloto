@@ -8,7 +8,7 @@ exports["default"] = void 0;
 var _expressValidator = require("express-validator");
 
 var ClienteValidator = {
-  body: [(0, _expressValidator.body)("razonsocial").not().isEmpty().withMessage("Razon social es obligatorio").bail(), (0, _expressValidator.body)("ruc").not().isEmpty().withMessage("Ruc es obligatorio").bail(), (0, _expressValidator.body)("sucursal.*.descripcion").not().isEmpty().bail(), function (req, res, next) {
+  body: [(0, _expressValidator.body)("razonsocial").not().isEmpty().withMessage("Razon social es obligatorio").bail(), (0, _expressValidator.body)("ruc").not().isEmpty().withMessage("Ruc es obligatorio").bail(), function (req, res, next) {
     var errors = (0, _expressValidator.validationResult)(req);
 
     if (!errors.isEmpty()) {

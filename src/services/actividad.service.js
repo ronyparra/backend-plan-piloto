@@ -164,12 +164,23 @@ const ActividadService = {
   },
   delete: async (id) => {
     try {
+      await db.query("BEGIN");
+      await db.query(
+        "DELETE FROM actividad_tecnico_detalle WHERE idactividad  = $1",
+        [id]
+      );
+      await db.query(
+        "DELETE FROM actividad_concepto_detalle WHERE idactividad  = $1",
+        [id]
+      );
       const results = await db.query(
         "DELETE FROM actividad WHERE idactividad  = $1",
         [id]
       );
+      await db.query("COMMIT");
       return results.rows;
     } catch (e) {
+      await db.query("ROLLBACK");
       throw e;
     }
   },

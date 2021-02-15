@@ -3,16 +3,16 @@ import ClienteService from "../services/cliente.service";
 const ClienteController = {
   get: async (req, res) => {
     try {
-      const users = await ClienteService.getAll();
-      return res.status(200).json({ status: 200, data: users });
+      const cliente = await ClienteService.getAll();
+      return res.status(200).json({ status: 200, data: cliente });
     } catch (e) {
       return res.status(400).json({ status: 400, message: e.message });
     }
   },
   getById: async (req, res) => {
     try {
-      const users = await ClienteService.getById(req.params.id);
-      return res.status(200).json({ status: 200, data: users });
+      const cliente = await ClienteService.getById(req.params.id);
+      return res.status(200).json({ status: 200, data: cliente });
     } catch (e) {
       return res.status(400).json({ status: 400, message: e.message });
     }
@@ -34,19 +34,26 @@ const ClienteController = {
   },
   update: async (req, res) => {
     try {
-      const users = await ClienteService.update({
+      if (req.body.sucursal.length === 0) {
+        req.body.sucursal = [
+          {
+            descripcion: "N/A",
+          },
+        ];
+      }
+      const cliente = await ClienteService.update({
         ...req.body,
         id: req.params.id,
       });
-      return res.status(200).json({ status: 200, data: users });
+      return res.status(200).json({ status: 200, data: cliente });
     } catch (e) {
       return res.status(400).json({ status: 400, message: e.message });
     }
   },
   delete: async (req, res) => {
     try {
-      const users = await ClienteService.delete(req.params.id);
-      return res.status(200).json({ status: 200, data: users });
+      const cliente = await ClienteService.delete(req.params.id);
+      return res.status(200).json({ status: 200, data: cliente });
     } catch (e) {
       return res.status(400).json({ status: 400, message: e.message });
     }

@@ -13,6 +13,8 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _actividad = _interopRequireDefault(require("../services/actividad.service"));
 
+var _date = require("../util/date.util");
+
 var ActividadController = {
   get: function () {
     var _get = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
@@ -234,6 +236,7 @@ var _default = ActividadController;
 exports["default"] = _default;
 
 var formatMaster = function formatMaster(body) {
+  body.fecha = (0, _date.parse_date)(body.fecha);
   return {
     idcliente: body.idcliente.idcliente,
     idusuario: body.idusuario.idusuario,
