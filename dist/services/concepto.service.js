@@ -61,7 +61,7 @@ var ConceptoService = {
 
             case 3:
               results = _context2.sent;
-              return _context2.abrupt("return", results.rows);
+              return _context2.abrupt("return", results.rows[0]);
 
             case 7:
               _context2.prev = 7;
@@ -119,15 +119,15 @@ var ConceptoService = {
   }(),
   update: function () {
     var _update = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(_ref2) {
-      var descripcion, precio, results;
+      var descripcion, precio, id, results;
       return _regenerator["default"].wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              descripcion = _ref2.descripcion, precio = _ref2.precio;
+              descripcion = _ref2.descripcion, precio = _ref2.precio, id = _ref2.id;
               _context4.prev = 1;
               _context4.next = 4;
-              return _db["default"].query("UPDATE concepto SET descripcion = $1, precio = $2 RETURNING *", [descripcion, precio]);
+              return _db["default"].query("UPDATE concepto SET descripcion = $1, precio = $2 WHERE idconcepto = $3 RETURNING *", [descripcion, precio, id]);
 
             case 4:
               results = _context4.sent;

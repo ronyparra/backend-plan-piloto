@@ -7,6 +7,10 @@ const query = `SELECT
             'idcliente', cliente.idcliente, 
             'razonsocial', cliente.razonsocial
           ), 
+          'idcliente_sucursal', json_build_object(
+            'idcliente_sucursal',cli_suc.idcliente_sucursal,
+            'descripcion', cli_suc.descripcion
+          ),
           'idusuario', json_build_object(
             'idusuario', usuario.idusuario, 
             'nombre', usuario.nombre
@@ -48,6 +52,9 @@ const query = `SELECT
           )) as rows
     FROM actividad
     JOIN cliente USING (idcliente)
+    JOIN cliente_sucursal as cli_suc 
+      ON  actividad.idcliente = cli_suc.idcliente
+      AND actividad.idcliente_sucursal = cli_suc.idcliente_sucursal
     JOIN estadocobro USING (idestadocobro)
     JOIN usuario USING (idusuario)`;
 
@@ -92,9 +99,10 @@ const ActividadService = {
     try {
       await db.query("BEGIN");
       const results = await db.query(
-        "INSERT INTO actividad( idcliente, idusuario, idestadocobro, solicitante, comentario, fecha) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+        "INSERT INTO actividad( idcliente,idcliente_sucursal, idusuario, idestadocobro, solicitante, comentario, fecha) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
         [
           master.idcliente,
+          master.idcliente_sucursal,
           master.idusuario,
           master.idestadocobro,
           master.solicitante,
@@ -125,10 +133,11 @@ const ActividadService = {
     try {
       await db.query("BEGIN");
       const results = await db.query(
-        "UPDATE actividad SET idcliente=$2, idusuario=$3, idestadocobro=$4, solicitante=$5, comentario=$6, fecha=$7 WHERE idactividad = $1 RETURNING *",
+        "UPDATE actividad SET idcliente=$2, idcliente_sucursal=$3 idusuario=$4, idestadocobro=$5, solicitante=$6, comentario=$7, fecha=$8 WHERE idactividad = $1 RETURNING *",
         [
           id,
           master.idcliente,
+          master.idcliente_sucursal,
           master.idusuario,
           master.idestadocobro,
           master.solicitante,

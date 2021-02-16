@@ -25,7 +25,6 @@ CREATE TABLE cliente_sucursal(
     PRIMARY KEY (idcliente, idcliente_sucursal)
 );
 
-
 CREATE TABLE estadocobro(
     idestadocobro SERIAL,
     descripcion TEXT NOT NULL,
@@ -43,7 +42,6 @@ CREATE TABLE concepto (
     PRIMARY KEY (idconcepto)
 );
 
-
 CREATE TABLE actividad (
     idactividad SERIAL,
     idcliente INT NOT NULL REFERENCES cliente (idcliente),
@@ -54,6 +52,13 @@ CREATE TABLE actividad (
     fecha DATE NOT NULL
     PRIMARY KEY (idactividad)
 );
+
+ALTER TABLE actividad DROP CONSTRAINT actividad_idcliente_fkey;
+ALTER TABLE actividad ADD COLUMN idcliente_sucursal INT NOT NULL;
+ALTER TABLE actividad 
+ADD CONSTRAINT actividad_idcliente_fkey FOREIGN KEY (idcliente_sucursal, idcliente)
+REFERENCES cliente_sucursal (idcliente_sucursal, idcliente) ON UPDATE CASCADE;
+
 
 CREATE TABLE actividad_tecnico_detalle (
     idactividad INT NOT NULL REFERENCES actividad (idactividad),

@@ -15,7 +15,7 @@ const ConceptoService = {
         "SELECT * FROM concepto WHERE idconcepto  = $1",
         [id]
       );
-      return results.rows;
+      return results.rows[0];
     } catch (e) {
       throw e;
     }
@@ -31,11 +31,11 @@ const ConceptoService = {
       throw e;
     }
   },
-  update: async ({ descripcion, precio}) => {
+  update: async ({ descripcion, precio, id}) => {
     try {
       const results = await db.query(
-        "UPDATE concepto SET descripcion = $1, precio = $2 RETURNING *",
-        [descripcion, precio]
+        "UPDATE concepto SET descripcion = $1, precio = $2 WHERE idconcepto = $3 RETURNING *",
+        [descripcion, precio, id]
       );
       return results.rows;
     } catch (e) {
