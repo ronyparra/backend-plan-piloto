@@ -65,6 +65,7 @@ const formatMaster = (body) => {
   body.fecha = parse_date(body.fecha)
   return {
     idcliente: body.idcliente.idcliente,
+    idcliente_sucursal: body.idcliente_sucursal.idcliente_sucursal,
     idusuario: body.idusuario.idusuario,
     idestadocobro: 1,
     solicitante: body.solicitante,

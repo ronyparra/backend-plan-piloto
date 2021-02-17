@@ -17,7 +17,7 @@ CREATE TABLE cliente(
 );
 
 CREATE TABLE cliente_sucursal(
-    idcliente INT NOT NULL REFERENCES cliente (idcliente),
+    idcliente INT NOT NULL REFERENCES cliente (idcliente) ON UPDATE CASCADE,
     idcliente_sucursal SERIAL,
     descripcion TEXT NOT NULL,
     latitud TEXT NULL,
@@ -34,7 +34,6 @@ INSERT INTO estadocobro(
 	idestadocobro, descripcion)
 VALUES (1, 'Pendiente'),(2, 'Cobrado');
 
-
 CREATE TABLE concepto (
     idconcepto SERIAL,
     descripcion TEXT NOT NULL,
@@ -44,12 +43,12 @@ CREATE TABLE concepto (
 
 CREATE TABLE actividad (
     idactividad SERIAL,
-    idcliente INT NOT NULL REFERENCES cliente (idcliente),
-    idusuario INT NOT NULL REFERENCES usuario (idusuario),
-    idestadocobro INT NOT NULL REFERENCES estadocobro (idestadocobro),
+    idcliente INT NOT NULL REFERENCES cliente (idcliente) ON UPDATE CASCADE,
+    idusuario INT NOT NULL REFERENCES usuario (idusuario) ON UPDATE CASCADE,
+    idestadocobro INT NOT NULL REFERENCES estadocobro (idestadocobro) ON UPDATE CASCADE,
     solicitante TEXT  NULL,
     comentario TEXT  NULL,
-    fecha DATE NOT NULL
+    fecha DATE NOT NULL,
     PRIMARY KEY (idactividad)
 );
 
@@ -59,17 +58,16 @@ ALTER TABLE actividad
 ADD CONSTRAINT actividad_idcliente_fkey FOREIGN KEY (idcliente_sucursal, idcliente)
 REFERENCES cliente_sucursal (idcliente_sucursal, idcliente) ON UPDATE CASCADE;
 
-
 CREATE TABLE actividad_tecnico_detalle (
-    idactividad INT NOT NULL REFERENCES actividad (idactividad),
-    idusuario INT NOT NULL REFERENCES usuario (idusuario),
+    idactividad INT NOT NULL REFERENCES actividad (idactividad) ON UPDATE CASCADE,
+    idusuario INT NOT NULL REFERENCES usuario (idusuario) ON UPDATE CASCADE,
     precio DOUBLE PRECISION NOT NULL,
     PRIMARY KEY (idactividad,idusuario)
 );
 
 CREATE TABLE actividad_concepto_detalle (
-    idactividad INT NOT NULL REFERENCES actividad (idactividad),
-    idconcepto INT NOT NULL REFERENCES concepto (idconcepto),
+    idactividad INT NOT NULL REFERENCES actividad (idactividad) ON UPDATE CASCADE,
+    idconcepto INT NOT NULL REFERENCES concepto (idconcepto) ON UPDATE CASCADE,
     precio DOUBLE PRECISION NULL,
     cantidad DOUBLE PRECISION NULL,
     PRIMARY KEY (idactividad,idconcepto)

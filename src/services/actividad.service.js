@@ -99,7 +99,7 @@ const ActividadService = {
     try {
       await db.query("BEGIN");
       const results = await db.query(
-        "INSERT INTO actividad( idcliente,idcliente_sucursal, idusuario, idestadocobro, solicitante, comentario, fecha) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+        "INSERT INTO actividad( idcliente,idcliente_sucursal, idusuario, idestadocobro, solicitante, comentario, fecha) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
         [
           master.idcliente,
           master.idcliente_sucursal,

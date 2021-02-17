@@ -20,16 +20,47 @@ const query = `SELECT
 	  ) as rows
     FROM cliente`;
 
-const formatSucursal = (sucursal, id) => {
+const formatSucursalDelete = (sucursal, id) => {
   return sucursal.reduce((acc, curr) => {
-    if (acc !== "") acc = acc + ",";
+    return (acc =
+      acc +
+      `DELETE FROM cliente_sucursal WHERE idcliente  = ${id} AND idcliente_sucursal = ${curr.idcliente_sucursal}; \n`);
+  }, "");
+};
+
+const formatSucursalUpdate = (sucursal, id) => {
+  return sucursal.reduce((acc, curr) => {
+    const latitud = curr.latitud ? `'${curr.latitud}'` : null;
+    const longitud = curr.longitud ? `'${curr.longitud}'` : null;
+    return (acc =
+      acc +
+      `UPDATE cliente_sucursal SET descripcion = '${curr.descripcion}', latitud = ${latitud}, longitud = ${longitud} WHERE idcliente = ${id} AND idcliente_sucursal = ${curr.idcliente_sucursal}; \n`);
+  }, "");
+};
+
+const formatSucursalInsert = (sucursal, id) => {
+  const detalle = sucursal.reduce((acc, curr) => {
+    if (acc !== "") acc = acc + ", \n";
     const latitud = curr.latitud ? `'${curr.latitud}'` : null;
     const longitud = curr.longitud ? `'${curr.longitud}'` : null;
     return (acc = acc + `(${id},'${curr.descripcion}',${latitud},${longitud})`);
   }, "");
+  return `INSERT INTO cliente_sucursal( idcliente, descripcion, latitud, longitud) VALUES \n${detalle};`;
 };
 
 const ClienteService = {
+  getSucursalByCliente: async (idcliente) => {
+    try {
+      const results = await db.query(
+        `SELECT idcliente, idcliente_sucursal, descripcion, latitud, longitud
+        FROM cliente_sucursal WHERE idcliente = $1`,
+        [idcliente]
+      );
+      return results.rows;
+    } catch (e) {
+      throw e;
+    }
+  },
   getAll: async () => {
     try {
       const results = await db.query(query);
@@ -54,12 +85,7 @@ const ClienteService = {
         [razonsocial, ruc]
       );
       const idcliente = results.rows[0].idcliente;
-
-      const detail = formatSucursal(sucursal, idcliente);
-
-      const resultsDetail = await db.query(
-        `INSERT INTO cliente_sucursal( idcliente, descripcion, latitud, longitud) VALUES ${detail} RETURNING *`
-      );
+      const resultsDetail = await db.query(formatSucursalInsert(sucursal, idcliente));
       results.rows[0].sucursal = resultsDetail.rows;
       await db.query("COMMIT");
       return results.rows;
@@ -69,21 +95,27 @@ const ClienteService = {
     }
   },
   update: async ({ razonsocial, ruc, sucursal, id }) => {
+
     try {
       await db.query("BEGIN");
+      const oldSucursal = await ClienteService.getSucursalByCliente(id);
+      const inserts = sucursal.filter((suc_new) => !suc_new.idcliente_sucursal);
+      const updates = sucursal.filter((suc_new) => suc_new.idcliente_sucursal);
+      const deletes = oldSucursal.filter(
+        (suc_old) =>
+          !updates.find(
+            ({ idcliente_sucursal }) =>
+              suc_old.idcliente_sucursal === idcliente_sucursal
+          )
+      );
       const results = await db.query(
         "UPDATE cliente SET razonsocial = $1, ruc = $2 WHERE idcliente = $3 RETURNING *",
         [razonsocial, ruc, id]
       );
-      await db.query("DELETE FROM cliente_sucursal WHERE idcliente  = $1", [
-        id,
-      ]);
-      const detail = formatSucursal(sucursal, id);
-
-      const resultsDetail = await db.query(
-        `INSERT INTO cliente_sucursal( idcliente, descripcion, latitud, longitud) VALUES ${detail} RETURNING *`
-      );
-      results.rows[0].sucursal = resultsDetail.rows;
+      
+      if (inserts.length > 0) await db.query(formatSucursalInsert(inserts, id));
+      if (updates.length > 0) await db.query(formatSucursalUpdate(updates, id));
+      if (deletes.length > 0) await db.query(formatSucursalDelete(deletes, id));
       await db.query("COMMIT");
       return results.rows;
     } catch (e) {
