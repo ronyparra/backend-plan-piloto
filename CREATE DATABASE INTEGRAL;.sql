@@ -72,3 +72,21 @@ CREATE TABLE actividad_concepto_detalle (
     cantidad DOUBLE PRECISION NULL,
     PRIMARY KEY (idactividad,idconcepto)
 );
+
+CREATE TABLE tipo_pendiente(
+    idtipo_pendiente SERIAL NOT NULL,
+    descripcion TEXT NOT NULL,
+    color TEXT NOT NULL,
+    PRIMARY KEY (idtipo_pendiente)
+);
+
+CREATE TABLE pendiente (
+    idpendiente SERIAL NOT NULL,
+    idtipo_pendiente INT NOT NULL REFERENCES tipo_pendiente (idtipo_pendiente) ON UPDATE CASCADE,
+    fecha DATE NOT NULL,
+    descripcion TEXT NOT NULL,
+    PRIMARY KEY (idpendiente)
+);
+
+INSERT INTO tipo_pendiente(idtipo_pendiente, descripcion, color)
+VALUES (1, 'PRESUPUESTO', 'green'),(2, 'SERVICIO', 'green'),(3, 'COMPRA', 'green');

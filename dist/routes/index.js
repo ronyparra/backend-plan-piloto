@@ -17,11 +17,17 @@ var _concepto = _interopRequireDefault(require("./concepto.router"));
 
 var _actividad = _interopRequireDefault(require("./actividad.router"));
 
+var _pendiente = _interopRequireDefault(require("./pendiente.router"));
+
+var _tipo_pendiente = _interopRequireDefault(require("./tipo_pendiente.router"));
+
 var _default = {
   auth: _auth["default"],
   user: _user["default"],
   cliente: _cliente["default"],
   concepto: _concepto["default"],
-  actividad: _actividad["default"]
+  actividad: _actividad["default"],
+  pendiente: _pendiente["default"],
+  tipo_pendiente: _tipo_pendiente["default"]
 };
 exports["default"] = _default;

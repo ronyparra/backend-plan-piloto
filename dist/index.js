@@ -25,6 +25,8 @@ app.use("/user", _routes["default"].user);
 app.use("/cliente", _routes["default"].cliente);
 app.use("/concepto", _routes["default"].concepto);
 app.use("/actividad", _routes["default"].actividad);
+app.use("/pendiente", _routes["default"].pendiente);
+app.use("/tipopendiente", _routes["default"].tipo_pendiente);
 app.listen(8001, function () {
   console.log("server started at http://localhost:8001");
 });
