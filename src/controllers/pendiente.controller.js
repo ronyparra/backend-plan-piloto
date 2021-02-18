@@ -2,6 +2,14 @@ import PendienteService from "../services/pendiente.service";
 import {parse_date} from '../util/date.util';
 
 const PendienteController = {
+  getDashboard: async (req, res) => {
+    try {
+      const response = await PendienteService.getDashboard();
+      return res.status(200).json({ status: 200, data: response });
+    } catch (e) {
+      return res.status(400).json({ status: 400, message: e.message });
+    }
+  },
   get: async (req, res) => {
     try {
       const pendiente = await PendienteService.getAll();

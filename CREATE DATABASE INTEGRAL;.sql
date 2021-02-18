@@ -88,5 +88,7 @@ CREATE TABLE pendiente (
     PRIMARY KEY (idpendiente)
 );
 
-INSERT INTO tipo_pendiente(idtipo_pendiente, descripcion, color)
-VALUES (1, 'PRESUPUESTO', 'green'),(2, 'SERVICIO', 'green'),(3, 'COMPRA', 'green');
+INSERT INTO tipo_pendiente(idtipo_pendiente, descripcion, color, icon)
+VALUES (1, 'PRESUPUESTO', 'green', 'post_add'),(2, 'SERVICIO', 'green', 'support_agent'),(3, 'COMPRA', 'green', 'shopping_cart');
+
+ALTER TABLE tipo_pendiente ADD COLUMN icon TEXT NULL;

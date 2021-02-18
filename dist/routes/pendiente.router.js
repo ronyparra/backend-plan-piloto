@@ -17,6 +17,7 @@ var _auth = _interopRequireDefault(require("../middlewares/auth"));
 
 var router = (0, _express.Router)();
 router.get("/", _auth["default"], _pendiente["default"].get);
+router.get("/dashboard", _auth["default"], _pendiente["default"].getDashboard);
 router.get("/:id", _auth["default"], _pendiente["default"].getById);
 router.post("/", _auth["default"], _pendiente2["default"].body, _pendiente["default"].create);
 router.put("/:id", _auth["default"], _pendiente2["default"].body, _pendiente["default"].update);
