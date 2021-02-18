@@ -57,7 +57,7 @@ const PendienteController = {
   },
   delete: async (req, res) => {
     try {
-      const pendiente = await PendienteService.delete(req.params.id);
+      const pendiente = await PendienteService.delet(req.params.id);
       return res.status(200).json({ status: 200, data: pendiente });
     } catch (e) {
       return res.status(400).json({ status: 400, message: e.message });

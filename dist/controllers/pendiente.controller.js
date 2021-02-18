@@ -243,7 +243,7 @@ var PendienteController = {
             case 0:
               _context6.prev = 0;
               _context6.next = 3;
-              return _pendiente["default"]["delete"](req.params.id);
+              return _pendiente["default"].delet(req.params.id);
 
             case 3:
               pendiente = _context6.sent;
