@@ -3,7 +3,6 @@ import { parse_date } from "../util/date.util";
 
 const ActividadController = {
   get: async (req, res) => {
-    console.log(req.query.cliente);
     const params = {
       idcliente:
         req.query.cliente !== "undefined" ? req.query.cliente : undefined,
@@ -60,7 +59,7 @@ const ActividadController = {
   },
   delete: async (req, res) => {
     try {
-      const actividad = await ActividadService.delete(req.params.id);
+      const actividad = await ActividadService.delet(req.params.id);
       return res.status(200).json({ status: 200, data: actividad });
     } catch (e) {
       return res.status(400).json({ status: 400, message: e.message });

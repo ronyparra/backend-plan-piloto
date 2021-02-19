@@ -96,6 +96,5 @@ var generateFilter = function generateFilter(_ref3) {
   var filterFecha = "fecha BETWEEN '".concat(desde, "'::date AND '").concat(hasta, "'::date");
   var filterEstado = idestadocobro ? "idestadocobro = ".concat(idestadocobro) : null;
   var filter = "WHERE ".concat(filterFecha, " ").concat(filterCliente ? "AND ".concat(filterCliente) : '', " ").concat(filterEstado ? "AND ".concat(filterEstado) : '');
-  console.log(filter);
   return filter;
 };

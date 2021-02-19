@@ -80,7 +80,6 @@ const generateFilter = ({idcliente, desde, hasta, idestadocobro}) => {
   const filterFecha = `fecha BETWEEN '${desde}'::date AND '${hasta}'::date`;
   const filterEstado = idestadocobro ? `idestadocobro = ${idestadocobro}` : null;
   const filter  = `WHERE ${ filterFecha } ${ filterCliente ? `AND ${filterCliente}` : '' } ${filterEstado ? `AND ${filterEstado}` : ''}`
-  console.log(filter)
   return filter;
 };
 

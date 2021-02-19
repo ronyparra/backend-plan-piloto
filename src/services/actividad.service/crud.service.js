@@ -1,3 +1,4 @@
+import db from "../../db";
 import { formatDetalle, formatTecnico } from "./formatter";
 
 export const create = async ({ master, tecnico, detalle }) => {
@@ -38,7 +39,7 @@ export const update = async ({ id, master, tecnico, detalle }) => {
   try {
     await db.query("BEGIN");
     const results = await db.query(
-      "UPDATE actividad SET idcliente=$2, idcliente_sucursal=$3 idusuario=$4, idestadocobro=$5, solicitante=$6, comentario=$7, fecha=$8 WHERE idactividad = $1 RETURNING *",
+      "UPDATE actividad SET idcliente=$2, idcliente_sucursal=$3, idusuario=$4, idestadocobro=$5, solicitante=$6, comentario=$7, fecha=$8 WHERE idactividad = $1 RETURNING *",
       [
         id,
         master.idcliente,

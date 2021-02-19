@@ -23,38 +23,37 @@ var ActividadController = {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              console.log(req.query.cliente);
               params = {
                 idcliente: req.query.cliente !== "undefined" ? req.query.cliente : undefined,
                 desde: (0, _date.parse_date)(req.query.desde),
                 hasta: (0, _date.parse_date)(req.query.hasta),
                 idestadocobro: req.query.estado !== "undefined" ? req.query.estado : undefined
               };
-              _context.prev = 2;
-              _context.next = 5;
+              _context.prev = 1;
+              _context.next = 4;
               return _actividad["default"].getAll(params);
 
-            case 5:
+            case 4:
               actividad = _context.sent;
               return _context.abrupt("return", res.status(200).json({
                 status: 200,
                 data: actividad
               }));
 
-            case 9:
-              _context.prev = 9;
-              _context.t0 = _context["catch"](2);
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](1);
               return _context.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context.t0.message
               }));
 
-            case 12:
+            case 11:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[2, 9]]);
+      }, _callee, null, [[1, 8]]);
     }));
 
     function get(_x, _x2) {
@@ -207,7 +206,7 @@ var ActividadController = {
             case 0:
               _context5.prev = 0;
               _context5.next = 3;
-              return _actividad["default"]["delete"](req.params.id);
+              return _actividad["default"].delet(req.params.id);
 
             case 3:
               actividad = _context5.sent;
