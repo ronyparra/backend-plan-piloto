@@ -18,6 +18,7 @@ var _auth = _interopRequireDefault(require("../middlewares/auth"));
 var router = (0, _express.Router)();
 router.get("/", _auth["default"], _actividad["default"].get);
 router.get("/:id", _auth["default"], _actividad["default"].getById);
+router.post("/status", _auth["default"], _actividad["default"].changeStatus);
 router.post("/", _auth["default"], _actividad2["default"].body, _actividad["default"].create);
 router.put("/:id", _auth["default"], _actividad2["default"].body, _actividad["default"].update);
 router["delete"]("/:id", _auth["default"], _actividad["default"]["delete"]);

@@ -13,6 +13,7 @@ var _default = {
   getAll: _fetch.getAll,
   getById: _fetch.getById,
   create: _crud.create,
+  changeStatus: _crud.changeStatus,
   update: _crud.update,
   delet: _crud.delet
 };

@@ -102,55 +102,48 @@ var ActividadController = {
 
     return getById;
   }(),
-  create: function () {
-    var _create = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
-      var master, tecnico, detalle, actividad;
+  changeStatus: function () {
+    var _changeStatus = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
+      var actividad;
       return _regenerator["default"].wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              master = formatMaster(req.body);
-              tecnico = req.body.tecnico;
-              detalle = req.body.detalle;
-              _context3.prev = 3;
-              _context3.next = 6;
-              return _actividad["default"].create({
-                master: master,
-                tecnico: tecnico,
-                detalle: detalle
-              });
+              _context3.prev = 0;
+              _context3.next = 3;
+              return _actividad["default"].changeStatus(req.body);
 
-            case 6:
+            case 3:
               actividad = _context3.sent;
               return _context3.abrupt("return", res.status(200).json({
                 status: 200,
                 data: actividad
               }));
 
-            case 10:
-              _context3.prev = 10;
-              _context3.t0 = _context3["catch"](3);
+            case 7:
+              _context3.prev = 7;
+              _context3.t0 = _context3["catch"](0);
               return _context3.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context3.t0.message
               }));
 
-            case 13:
+            case 10:
             case "end":
               return _context3.stop();
           }
         }
-      }, _callee3, null, [[3, 10]]);
+      }, _callee3, null, [[0, 7]]);
     }));
 
-    function create(_x5, _x6) {
-      return _create.apply(this, arguments);
+    function changeStatus(_x5, _x6) {
+      return _changeStatus.apply(this, arguments);
     }
 
-    return create;
+    return changeStatus;
   }(),
-  update: function () {
-    var _update = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
+  create: function () {
+    var _create = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
       var master, tecnico, detalle, actividad;
       return _regenerator["default"].wrap(function _callee4$(_context4) {
         while (1) {
@@ -161,8 +154,7 @@ var ActividadController = {
               detalle = req.body.detalle;
               _context4.prev = 3;
               _context4.next = 6;
-              return _actividad["default"].update({
-                id: req.params.id,
+              return _actividad["default"].create({
                 master: master,
                 tecnico: tecnico,
                 detalle: detalle
@@ -191,47 +183,95 @@ var ActividadController = {
       }, _callee4, null, [[3, 10]]);
     }));
 
-    function update(_x7, _x8) {
-      return _update.apply(this, arguments);
+    function create(_x7, _x8) {
+      return _create.apply(this, arguments);
     }
 
-    return update;
+    return create;
   }(),
-  "delete": function () {
-    var _delete2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
-      var actividad;
+  update: function () {
+    var _update = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
+      var master, tecnico, detalle, actividad;
       return _regenerator["default"].wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
-              _context5.prev = 0;
-              _context5.next = 3;
-              return _actividad["default"].delet(req.params.id);
+              master = formatMaster(req.body);
+              tecnico = req.body.tecnico;
+              detalle = req.body.detalle;
+              _context5.prev = 3;
+              _context5.next = 6;
+              return _actividad["default"].update({
+                id: req.params.id,
+                master: master,
+                tecnico: tecnico,
+                detalle: detalle
+              });
 
-            case 3:
+            case 6:
               actividad = _context5.sent;
               return _context5.abrupt("return", res.status(200).json({
                 status: 200,
                 data: actividad
               }));
 
-            case 7:
-              _context5.prev = 7;
-              _context5.t0 = _context5["catch"](0);
+            case 10:
+              _context5.prev = 10;
+              _context5.t0 = _context5["catch"](3);
               return _context5.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context5.t0.message
               }));
 
-            case 10:
+            case 13:
             case "end":
               return _context5.stop();
           }
         }
-      }, _callee5, null, [[0, 7]]);
+      }, _callee5, null, [[3, 10]]);
     }));
 
-    function _delete(_x9, _x10) {
+    function update(_x9, _x10) {
+      return _update.apply(this, arguments);
+    }
+
+    return update;
+  }(),
+  "delete": function () {
+    var _delete2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(req, res) {
+      var actividad;
+      return _regenerator["default"].wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              _context6.prev = 0;
+              _context6.next = 3;
+              return _actividad["default"].delet(req.params.id);
+
+            case 3:
+              actividad = _context6.sent;
+              return _context6.abrupt("return", res.status(200).json({
+                status: 200,
+                data: actividad
+              }));
+
+            case 7:
+              _context6.prev = 7;
+              _context6.t0 = _context6["catch"](0);
+              return _context6.abrupt("return", res.status(400).json({
+                status: 400,
+                message: _context6.t0.message
+              }));
+
+            case 10:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6, null, [[0, 7]]);
+    }));
+
+    function _delete(_x11, _x12) {
       return _delete2.apply(this, arguments);
     }
 

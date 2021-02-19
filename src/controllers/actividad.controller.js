@@ -26,6 +26,14 @@ const ActividadController = {
       return res.status(400).json({ status: 400, message: e.message });
     }
   },
+  changeStatus: async (req, res) => {
+    try {
+      const actividad = await ActividadService.changeStatus(req.body);
+      return res.status(200).json({ status: 200, data: actividad });
+    } catch (e) {
+      return res.status(400).json({ status: 400, message: e.message });
+    }
+  },
   create: async (req, res) => {
     const master = formatMaster(req.body);
     const tecnico = req.body.tecnico;

@@ -35,6 +35,22 @@ export const create = async ({ master, tecnico, detalle }) => {
     throw e;
   }
 };
+export const changeStatus = async ({ detalle, idestadocobro }) => {
+  const query = detalle.reduce((acc, curr) => {
+    return (acc =
+      acc +
+      `UPDATE actividad SET  idestadocobro= ${idestadocobro}  WHERE idactividad =  ${curr.idactividad};\n`);
+  }, "");
+  console.log(query)
+  try {
+    await db.query("BEGIN");
+    await db.query(query);
+    await db.query("COMMIT");
+  } catch (e) {
+    await db.query("ROLLBACK");
+    throw e;
+  }
+};
 export const update = async ({ id, master, tecnico, detalle }) => {
   try {
     await db.query("BEGIN");
