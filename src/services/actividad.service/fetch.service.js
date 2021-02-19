@@ -56,11 +56,11 @@ const query = `SELECT
       ON  actividad.idcliente = cli_suc.idcliente
       AND actividad.idcliente_sucursal = cli_suc.idcliente_sucursal
     JOIN estadocobro USING (idestadocobro)
-    JOIN usuario USING (idusuario)`;
+    JOIN usuario USING (idusuario) `;
 
-export const getAll = async () => {
+export const getAll = async (filters) => {
   try {
-    const results = await db.query(query);
+    const results = await db.query(query + generateFilter(filters));
     return results.rows.map((x) => x.rows);
   } catch (e) {
     throw e;
@@ -74,4 +74,14 @@ export const getById = async (id) => {
     throw e;
   }
 };
+
+const generateFilter = ({idcliente, desde, hasta, idestadocobro}) => {
+  const filterCliente = idcliente ? `cliente.idcliente = ${idcliente}` : null;
+  const filterFecha = `fecha BETWEEN '${desde}'::date AND '${hasta}'::date`;
+  const filterEstado = idestadocobro ? `idestadocobro = ${idestadocobro}` : null;
+  const filter  = `WHERE ${ filterFecha } ${ filterCliente ? `AND ${filterCliente}` : '' } ${filterEstado ? `AND ${filterEstado}` : ''}`
+  console.log(filter)
+  return filter;
+};
+
 
