@@ -16,7 +16,9 @@ app.use("/cliente", routes.cliente);
 app.use("/concepto", routes.concepto);
 app.use("/actividad", routes.actividad);
 app.use("/pendiente", routes.pendiente);
+app.use("/formulario", routes.formulario);
 app.use("/estadocobro", routes.estadocobro);
+app.use("/usuariorol", routes.usuario_rol);
 app.use("/tipopendiente", routes.tipo_pendiente);
 
 app.listen(8001, () => {

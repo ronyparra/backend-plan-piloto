@@ -89,38 +89,37 @@ var changeStatus = /*#__PURE__*/function () {
             query = detalle.reduce(function (acc, curr) {
               return acc = acc + "UPDATE actividad SET  idestadocobro= ".concat(idestadocobro, "  WHERE idactividad =  ").concat(curr.idactividad, ";\n");
             }, "");
-            console.log(query);
-            _context2.prev = 3;
-            _context2.next = 6;
+            _context2.prev = 2;
+            _context2.next = 5;
             return _db["default"].query("BEGIN");
 
-          case 6:
-            _context2.next = 8;
+          case 5:
+            _context2.next = 7;
             return _db["default"].query(query);
 
-          case 8:
-            _context2.next = 10;
+          case 7:
+            _context2.next = 9;
             return _db["default"].query("COMMIT");
 
-          case 10:
-            _context2.next = 17;
+          case 9:
+            _context2.next = 16;
             break;
 
-          case 12:
-            _context2.prev = 12;
-            _context2.t0 = _context2["catch"](3);
-            _context2.next = 16;
+          case 11:
+            _context2.prev = 11;
+            _context2.t0 = _context2["catch"](2);
+            _context2.next = 15;
             return _db["default"].query("ROLLBACK");
 
-          case 16:
+          case 15:
             throw _context2.t0;
 
-          case 17:
+          case 16:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[3, 12]]);
+    }, _callee2, null, [[2, 11]]);
   }));
 
   return function changeStatus(_x2) {

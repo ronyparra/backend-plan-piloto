@@ -8,6 +8,6 @@ const router = Router();
 router.get("/", Auth, UserController.get);
 router.get("/:id", Auth, UserController.getById);
 router.post("/", Auth, UserValidator.body, UserController.create);
-router.put("/:id", Auth, UserValidator.body, UserController.update);
+router.put("/:id", Auth, UserValidator.update, UserController.update);
 router.delete("/:id", Auth, UserController.delete);
 export default router;

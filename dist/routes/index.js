@@ -23,6 +23,10 @@ var _tipo_pendiente = _interopRequireDefault(require("./tipo_pendiente.router"))
 
 var _estadocobro = _interopRequireDefault(require("./estadocobro.router"));
 
+var _formulario = _interopRequireDefault(require("./formulario.router"));
+
+var _usuario_rol = _interopRequireDefault(require("./usuario_rol.router"));
+
 var _default = {
   auth: _auth["default"],
   user: _user["default"],
@@ -30,7 +34,9 @@ var _default = {
   concepto: _concepto["default"],
   actividad: _actividad["default"],
   pendiente: _pendiente["default"],
+  formulario: _formulario["default"],
   estadocobro: _estadocobro["default"],
+  usuario_rol: _usuario_rol["default"],
   tipo_pendiente: _tipo_pendiente["default"]
 };
 exports["default"] = _default;

@@ -41,7 +41,6 @@ export const changeStatus = async ({ detalle, idestadocobro }) => {
       acc +
       `UPDATE actividad SET  idestadocobro= ${idestadocobro}  WHERE idactividad =  ${curr.idactividad};\n`);
   }, "");
-  console.log(query)
   try {
     await db.query("BEGIN");
     await db.query(query);

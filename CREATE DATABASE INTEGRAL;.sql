@@ -92,3 +92,45 @@ INSERT INTO tipo_pendiente(idtipo_pendiente, descripcion, color, icon)
 VALUES (1, 'PRESUPUESTO', 'green', 'post_add'),(2, 'SERVICIO', 'green', 'support_agent'),(3, 'COMPRA', 'green', 'shopping_cart');
 
 ALTER TABLE tipo_pendiente ADD COLUMN icon TEXT NULL;
+
+
+CREATE TABLE formulario (
+    idformulario SERIAL NOT NULL,
+    descripcion TEXT NOT NULL,
+    permisos JSON NOT NULL,
+    PRIMARY KEY(idformulario)
+);
+
+INSERT INTO formulario(
+	idformulario, descripcion, permisos)
+VALUES 
+(1, 'Concepto', '{"Puede Registrar": false,"Puede Modificar": false,"Puede Eliminar": false,"Puede Listar": false}'),
+(2, 'Cliente', '{"Puede Registrar": false,"Puede Modificar": false,"Puede Eliminar": false,"Puede Listar": false}'),
+(3, 'Actividad', '{"Puede Registrar": false,"Puede Modificar": false,"Puede Eliminar": false,"Puede Listar": false}'),
+(4, 'Pendiente', '{"Puede Registrar": false,"Puede Modificar": false,"Puede Eliminar": false,"Puede Listar": false}'),
+(5, 'Usuario', '{"Puede Registrar": false,"Puede Modificar": false,"Puede Eliminar": false,"Puede Listar": false}');
+
+CREATE TABLE usuario_rol (
+    idusuario_rol SERIAL NOT NULL,
+    descripcion TEXT NOT NULL,
+	PRIMARY KEY(idusuario_rol)
+);
+
+INSERT INTO usuario_rol(
+	idusuario_rol, descripcion)
+VALUES 
+(1, 'Administrador'),
+(2, 'Tecnicos');
+
+CREATE TABLE usuario_rol_permiso (
+    idusuario_rol INT NOT NULL REFERENCES usuario_rol (idusuario_rol) ON UPDATE CASCADE,
+    idformulario INT NOT NULL REFERENCES formulario (idformulario) ON UPDATE CASCADE,
+    permisos JSON NOT NULL,
+     PRIMARY KEY (idusuario_rol, idformulario)
+);
+
+CREATE TABLE usuario_rol_detalle (
+     idusuario INT NOT NULL REFERENCES usuario (idusuario) ON UPDATE CASCADE,
+     idusuario_rol INT NOT NULL REFERENCES usuario_rol (idusuario_rol) ON UPDATE CASCADE,
+     PRIMARY KEY(idusuario,idusuario_rol)
+);

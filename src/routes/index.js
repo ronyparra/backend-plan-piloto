@@ -6,6 +6,8 @@ import actividad from "./actividad.router";
 import pendiente from './pendiente.router';
 import tipo_pendiente from './tipo_pendiente.router';
 import estadocobro from './estadocobro.router';
+import formulario from './formulario.router';
+import usuario_rol from "./usuario_rol.router"
 
 export default {
   auth,
@@ -14,6 +16,8 @@ export default {
   concepto,
   actividad,
   pendiente,
+  formulario,
   estadocobro,
+  usuario_rol,
   tipo_pendiente
 };
