@@ -37,7 +37,7 @@ var create = /*#__PURE__*/function () {
             actividad_tecnico = (0, _formatter.formatTecnico)(tecnico, idactividad);
             actividad_detalle = (0, _formatter.formatDetalle)(detalle, idactividad);
             _context.next = 12;
-            return _db["default"].query("INSERT INTO actividad_tecnico_detalle(idactividad, idusuario, precio) VALUES ".concat(actividad_tecnico, " RETURNING *"));
+            return _db["default"].query("INSERT INTO actividad_tecnico_detalle(idactividad, idusuario) VALUES ".concat(actividad_tecnico, " RETURNING *"));
 
           case 12:
             resultsTecnico = _context.sent;
@@ -158,7 +158,7 @@ var update = /*#__PURE__*/function () {
             actividad_tecnico = (0, _formatter.formatTecnico)(tecnico, id);
             actividad_detalle = (0, _formatter.formatDetalle)(detalle, id);
             _context3.next = 15;
-            return _db["default"].query("INSERT INTO actividad_tecnico_detalle(idactividad, idusuario, precio) VALUES ".concat(actividad_tecnico, " RETURNING *"));
+            return _db["default"].query("INSERT INTO actividad_tecnico_detalle(idactividad, idusuario) VALUES ".concat(actividad_tecnico, " RETURNING *"));
 
           case 15:
             resultsTecnico = _context3.sent;

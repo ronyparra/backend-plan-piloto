@@ -19,9 +19,8 @@ export const create = async ({ master, tecnico, detalle }) => {
     const idactividad = results.rows[0].idactividad;
     const actividad_tecnico = formatTecnico(tecnico, idactividad);
     const actividad_detalle = formatDetalle(detalle, idactividad);
-
     const resultsTecnico = await db.query(
-      `INSERT INTO actividad_tecnico_detalle(idactividad, idusuario, precio) VALUES ${actividad_tecnico} RETURNING *`
+      `INSERT INTO actividad_tecnico_detalle(idactividad, idusuario) VALUES ${actividad_tecnico} RETURNING *`
     );
     const resultsConcepto = await db.query(
       `INSERT INTO actividad_concepto_detalle(idactividad, idconcepto, precio, cantidad)VALUES ${actividad_detalle} RETURNING *`
@@ -78,7 +77,7 @@ export const update = async ({ id, master, tecnico, detalle }) => {
     const actividad_detalle = formatDetalle(detalle, id);
 
     const resultsTecnico = await db.query(
-      `INSERT INTO actividad_tecnico_detalle(idactividad, idusuario, precio) VALUES ${actividad_tecnico} RETURNING *`
+      `INSERT INTO actividad_tecnico_detalle(idactividad, idusuario) VALUES ${actividad_tecnico} RETURNING *`
     );
     const resultsConcepto = await db.query(
       `INSERT INTO actividad_concepto_detalle(idactividad, idconcepto, precio, cantidad)VALUES ${actividad_detalle} RETURNING *`

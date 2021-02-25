@@ -26,8 +26,7 @@ const query = `SELECT
             SELECT json_agg(
                 json_build_object(
                       'idusuario', tec.idusuario,
-                      'nombre', usu.nombre,
-                      'precio', tec.precio
+                      'nombre', usu.nombre
                 )
             )
             FROM    actividad_tecnico_detalle as tec

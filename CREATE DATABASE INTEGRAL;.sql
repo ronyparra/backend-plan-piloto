@@ -134,3 +134,5 @@ CREATE TABLE usuario_rol_detalle (
      idusuario_rol INT NOT NULL REFERENCES usuario_rol (idusuario_rol) ON UPDATE CASCADE,
      PRIMARY KEY(idusuario,idusuario_rol)
 );
+
+ALTER TABLE actividad_tecnico_detalle DROP COLUMN precio;

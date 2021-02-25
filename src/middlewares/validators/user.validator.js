@@ -12,22 +12,23 @@ const UserValidator = {
       .isEmpty()
       .withMessage("Contraseña es obligatorio")
       .bail(),
-    body("nombre")
-      .not()
-      .isEmpty()
-      .withMessage("Nombre es obligatorio")
-      .bail(),
+    body("nombre").not().isEmpty().withMessage("Nombre es obligatorio").bail(),
     body("apellido")
       .not()
       .isEmpty()
       .withMessage("Apellido es obligatorio")
+      .bail(),
+    body("usuario_rol_detalle")
+      .not()
+      .isEmpty()
+      .withMessage("Rol es obligatorio")
       .bail(),
 
     (req, res, next) => {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         const errorMessages = errors.array().map((error) => {
-          return  error.msg ;
+          return error.msg;
         });
         return res.status(400).json({
           errors: errorMessages,
@@ -42,22 +43,23 @@ const UserValidator = {
       .isEmpty()
       .withMessage("Nombre de usuario es obligatorio")
       .bail(),
-    body("nombre")
-      .not()
-      .isEmpty()
-      .withMessage("Nombre es obligatorio")
-      .bail(),
+    body("nombre").not().isEmpty().withMessage("Nombre es obligatorio").bail(),
     body("apellido")
       .not()
       .isEmpty()
       .withMessage("Apellido es obligatorio")
+      .bail(),
+    body("usuario_rol_detalle")
+      .not()
+      .isEmpty()
+      .withMessage("Rol es obligatorio")
       .bail(),
 
     (req, res, next) => {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         const errorMessages = errors.array().map((error) => {
-          return  error.msg ;
+          return error.msg;
         });
         return res.status(400).json({
           errors: errorMessages,

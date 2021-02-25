@@ -13,12 +13,12 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _db = _interopRequireDefault(require("../db"));
 
-var query = "\nSELECT \n\tjson_build_object(\n\t\t'idusuario',usuario.idusuario,\n\t\t'username',username,\n\t\t'nombre',nombre,\n\t\t'apellido', apellido,\n\t\t'usuario_rol_detalle', (\n\t\t\tSELECT json_agg(\n\t\t\t\tjson_build_object(\n\t\t\t\t\t'idusuario_rol', json_build_object(\n\t\t\t\t\t\t'idusuario_rol', rol.idusuario_rol,\n\t\t\t\t\t\t'descripcion',rol.descripcion\n\t\t\t\t\t),\n\t\t\t\t\t'idusuario', usuario.idusuario\n\t\t\t\t\t\n\t\t\t\t)\n\t\t\t)\n\t\t\tFROM usuario_rol_detalle AS userd\n\t\t\tJOIN usuario_rol AS rol USING (idusuario_rol)\n\t\t\tWHERE userd.idusuario = usuario.idusuario\n\t\t)\n\t) AS rows\nFROM usuario\n";
+var query = "\nSELECT \n\tjson_build_object(\n\t\t'idusuario',usuario.idusuario,\n\t\t'username',username,\n\t\t'nombre',nombre,\n\t\t'apellido', apellido,\n\t\t'usuario_rol_detalle', (\n\t\t\tSELECT json_agg(\n\t\t\t\t\trol.idusuario_rol\n\t\t\t)\n\t\t\tFROM usuario_rol_detalle AS userd\n\t\t\tJOIN usuario_rol AS rol USING (idusuario_rol)\n\t\t\tWHERE userd.idusuario = usuario.idusuario\n\t\t)\n\t) AS rows\nFROM usuario\n";
 
 var formatRolUsuarioInsert = function formatRolUsuarioInsert(usuario_rol_detalle, id) {
   var detalle = usuario_rol_detalle.reduce(function (acc, curr) {
     if (acc !== "") acc = acc + ", \n";
-    return acc = acc + "(".concat(id, ",").concat(curr.idusuario_rol.idusuario_rol, ")");
+    return acc = acc + "(".concat(id, ",").concat(curr, ")");
   }, "");
   return "INSERT INTO usuario_rol_detalle(idusuario, idusuario_rol) VALUES \n".concat(detalle, ";");
 };
@@ -213,31 +213,32 @@ var UserService = {
               return _db["default"].query("DELETE FROM usuario_rol_detalle WHERE idusuario = $1", [id]);
 
             case 12:
-              _context5.next = 14;
+              console.log(formatRolUsuarioInsert(usuario_rol_detalle, id));
+              _context5.next = 15;
               return _db["default"].query(formatRolUsuarioInsert(usuario_rol_detalle, id));
 
-            case 14:
-              _context5.next = 16;
+            case 15:
+              _context5.next = 17;
               return _db["default"].query("COMMIT");
 
-            case 16:
+            case 17:
               return _context5.abrupt("return", results.rows);
 
-            case 19:
-              _context5.prev = 19;
+            case 20:
+              _context5.prev = 20;
               _context5.t0 = _context5["catch"](1);
-              _context5.next = 23;
+              _context5.next = 24;
               return _db["default"].query("ROLLBACK");
 
-            case 23:
+            case 24:
               throw _context5.t0;
 
-            case 24:
+            case 25:
             case "end":
               return _context5.stop();
           }
         }
-      }, _callee5, null, [[1, 19]]);
+      }, _callee5, null, [[1, 20]]);
     }));
 
     function update(_x4) {

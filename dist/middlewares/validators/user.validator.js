@@ -8,7 +8,7 @@ exports["default"] = void 0;
 var _expressValidator = require("express-validator");
 
 var UserValidator = {
-  body: [(0, _expressValidator.body)("username").not().isEmpty().withMessage("Nombre de usuario es obligatorio").bail(), (0, _expressValidator.body)("password").not().isEmpty().withMessage("Contraseña es obligatorio").bail(), (0, _expressValidator.body)("nombre").not().isEmpty().withMessage("Nombre es obligatorio").bail(), (0, _expressValidator.body)("apellido").not().isEmpty().withMessage("Apellido es obligatorio").bail(), function (req, res, next) {
+  body: [(0, _expressValidator.body)("username").not().isEmpty().withMessage("Nombre de usuario es obligatorio").bail(), (0, _expressValidator.body)("password").not().isEmpty().withMessage("Contraseña es obligatorio").bail(), (0, _expressValidator.body)("nombre").not().isEmpty().withMessage("Nombre es obligatorio").bail(), (0, _expressValidator.body)("apellido").not().isEmpty().withMessage("Apellido es obligatorio").bail(), (0, _expressValidator.body)("usuario_rol_detalle").not().isEmpty().withMessage("Rol es obligatorio").bail(), function (req, res, next) {
     var errors = (0, _expressValidator.validationResult)(req);
 
     if (!errors.isEmpty()) {
@@ -22,7 +22,7 @@ var UserValidator = {
 
     next();
   }],
-  update: [(0, _expressValidator.body)("username").not().isEmpty().withMessage("Nombre de usuario es obligatorio").bail(), (0, _expressValidator.body)("nombre").not().isEmpty().withMessage("Nombre es obligatorio").bail(), (0, _expressValidator.body)("apellido").not().isEmpty().withMessage("Apellido es obligatorio").bail(), function (req, res, next) {
+  update: [(0, _expressValidator.body)("username").not().isEmpty().withMessage("Nombre de usuario es obligatorio").bail(), (0, _expressValidator.body)("nombre").not().isEmpty().withMessage("Nombre es obligatorio").bail(), (0, _expressValidator.body)("apellido").not().isEmpty().withMessage("Apellido es obligatorio").bail(), (0, _expressValidator.body)("usuario_rol_detalle").not().isEmpty().withMessage("Rol es obligatorio").bail(), function (req, res, next) {
     var errors = (0, _expressValidator.validationResult)(req);
 
     if (!errors.isEmpty()) {

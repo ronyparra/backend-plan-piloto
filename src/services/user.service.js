@@ -8,14 +8,7 @@ SELECT
 		'apellido', apellido,
 		'usuario_rol_detalle', (
 			SELECT json_agg(
-				json_build_object(
-					'idusuario_rol', json_build_object(
-						'idusuario_rol', rol.idusuario_rol,
-						'descripcion',rol.descripcion
-					),
-					'idusuario', usuario.idusuario
-					
-				)
+					rol.idusuario_rol
 			)
 			FROM usuario_rol_detalle AS userd
 			JOIN usuario_rol AS rol USING (idusuario_rol)
@@ -28,7 +21,7 @@ FROM usuario
 const formatRolUsuarioInsert = (usuario_rol_detalle, id) => {
   const detalle = usuario_rol_detalle.reduce((acc, curr) => {
     if (acc !== "") acc = acc + ", \n";
-    return (acc = acc + `(${id},${curr.idusuario_rol.idusuario_rol})`);
+    return (acc = acc + `(${id},${curr})`);
   }, "");
   return `INSERT INTO usuario_rol_detalle(idusuario, idusuario_rol) VALUES \n${detalle};`;
 };
@@ -105,6 +98,7 @@ const UserService = {
       await db.query("DELETE FROM usuario_rol_detalle WHERE idusuario = $1", [
         id,
       ]);
+      console.log(formatRolUsuarioInsert(usuario_rol_detalle, id))
       await db.query(formatRolUsuarioInsert(usuario_rol_detalle, id));
       await db.query("COMMIT");
       return results.rows;

@@ -2,7 +2,7 @@ export const formatTecnico = (tecnico, id) => {
   return [
     tecnico.reduce((acc, curr) => {
       if (acc !== "") acc = acc + ",";
-      return (acc = acc + `(${id},${curr.idusuario},${curr.precio})`);
+      return (acc = acc + `(${id},${curr.idusuario})`);
     }, ""),
   ];
 };

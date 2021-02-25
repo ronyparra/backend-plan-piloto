@@ -155,32 +155,45 @@ var UserController = {
           switch (_context4.prev = _context4.next) {
             case 0:
               _context4.prev = 0;
-              _context4.next = 3;
+
+              if (!req.body.password) {
+                _context4.next = 5;
+                break;
+              }
+
+              _context4.next = 4;
+              return _bcrypt["default"].hash(req.body.password, 10);
+
+            case 4:
+              req.body.password = _context4.sent;
+
+            case 5:
+              _context4.next = 7;
               return _user["default"].update(_objectSpread(_objectSpread({}, req.body), {}, {
                 id: req.params.id
               }));
 
-            case 3:
+            case 7:
               users = _context4.sent;
               return _context4.abrupt("return", res.status(200).json({
                 status: 200,
                 data: users
               }));
 
-            case 7:
-              _context4.prev = 7;
+            case 11:
+              _context4.prev = 11;
               _context4.t0 = _context4["catch"](0);
               return _context4.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context4.t0.message
               }));
 
-            case 10:
+            case 14:
             case "end":
               return _context4.stop();
           }
         }
-      }, _callee4, null, [[0, 7]]);
+      }, _callee4, null, [[0, 11]]);
     }));
 
     function update(_x7, _x8) {

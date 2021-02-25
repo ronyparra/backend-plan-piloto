@@ -38,6 +38,11 @@ const UserController = {
   },
   update: async (req, res) => {
     try {
+      if(req.body.password)
+      req.body.password = await bcrypt.hash(
+        req.body.password,
+        10
+      );
       const users = await UserService.update({
         ...req.body,
         id: req.params.id,

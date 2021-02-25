@@ -8,7 +8,7 @@ exports.formatDetalle = exports.formatTecnico = void 0;
 var formatTecnico = function formatTecnico(tecnico, id) {
   return [tecnico.reduce(function (acc, curr) {
     if (acc !== "") acc = acc + ",";
-    return acc = acc + "(".concat(id, ",").concat(curr.idusuario, ",").concat(curr.precio, ")");
+    return acc = acc + "(".concat(id, ",").concat(curr.idusuario, ")");
   }, "")];
 };
 
