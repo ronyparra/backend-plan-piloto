@@ -142,3 +142,12 @@ CREATE TABLE pendiente_tecnico (
     idusuario INT NOT NULL REFERENCES usuario (idusuario) ON UPDATE CASCADE,
     PRIMARY KEY (idpendiente, idusuario)
 );
+
+----
+CREATE TABLE cliente_cobro (
+    idcliente INT NOT NULL REFERENCES cliente (idcliente) ON UPDATE CASCADE,
+    fecha DATE NOT NULL,
+    idusuario INT NOT NULL REFERENCES usuario (idusuario) ON UPDATE CASCADE,
+    comentario TEXT NULL,
+    saldocobrado DOUBLE PRECISION NOT NULL
+)
