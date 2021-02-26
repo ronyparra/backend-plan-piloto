@@ -1,5 +1,5 @@
 import db from "../../db";
-
+import { formatTecnico } from "../actividad.service/formatter";
 const query = `
   SELECT 
 	  json_build_object(
@@ -10,7 +10,18 @@ const query = `
 		  'color', tp.color
 	  ), 
 	  'fecha', to_char(fecha, 'DD-MM-YYYY'),
-	  'descripcion', pendiente.descripcion
+    'descripcion', pendiente.descripcion,
+    'pendiente_tecnico',COALESCE((
+      SELECT json_agg(
+        json_build_object(
+          'idusuario',pen.idusuario,
+          'nombre',usu.nombre
+        )
+      )
+      FROM    pendiente_tecnico AS pen
+      JOIN    usuario AS usu ON pen.idusuario = usu.idusuario
+      WHERE   idpendiente = pendiente.idpendiente
+    ),'[]')
 	  ) as rows
   FROM pendiente
   JOIN tipo_pendiente as tp USING (idtipo_pendiente)`;
@@ -31,25 +42,61 @@ export const getById = async (id) => {
     throw e;
   }
 };
-export const create = async ({ idtipo_pendiente, fecha, descripcion }) => {
+export const create = async ({
+  idtipo_pendiente,
+  fecha,
+  descripcion,
+  pendiente_tecnico,
+}) => {
   try {
+    await db.query("BEGIN");
     const results = await db.query(
       "INSERT INTO pendiente(idtipo_pendiente, fecha, descripcion) VALUES ($1, $2, $3) RETURNING *",
       [idtipo_pendiente, fecha, descripcion]
     );
+    if (pendiente_tecnico.length > 0) {
+      const idpendiente = results.rows[0].idpendiente;
+      const tecnicos = formatTecnico(pendiente_tecnico, idpendiente);
+      const resultsTecnico = await db.query(
+        `INSERT INTO pendiente_tecnico(idpendiente, idusuario)VALUES ${tecnicos} RETURNING *`
+      );
+      results.rows[0].pendiente_tecnico = resultsTecnico.rows;
+    }
+    await db.query("COMMIT");
     return results.rows;
   } catch (e) {
+    await db.query("ROLLBACK");
     throw e;
   }
 };
-export const update = async ({ idtipo_pendiente, fecha, descripcion, id }) => {
+export const update = async ({
+  idtipo_pendiente,
+  fecha,
+  descripcion,
+  pendiente_tecnico,
+  id,
+}) => {
   try {
+    await db.query("BEGIN");
     const results = await db.query(
       "UPDATE pendiente SET idtipo_pendiente = $1, fecha = $2, descripcion = $3 WHERE idpendiente = $4 RETURNING *",
       [idtipo_pendiente, fecha, descripcion, id]
     );
+
+    await db.query("DELETE FROM pendiente_tecnico WHERE idpendiente = $1", [
+      id,
+    ]);
+    if (pendiente_tecnico.length > 0) {
+      const tecnicos = formatTecnico(pendiente_tecnico, id);
+      const resultsTecnico = await db.query(
+        `INSERT INTO pendiente_tecnico(idpendiente, idusuario)VALUES ${tecnicos} RETURNING *`
+      );
+      results.rows[0].pendiente_tecnico = resultsTecnico.rows;
+    }
+    await db.query("COMMIT");
     return results.rows;
   } catch (e) {
+    await db.query("ROLLBACK");
     throw e;
   }
 };
@@ -59,6 +106,9 @@ export const delet = async (id) => {
       "DELETE FROM pendiente WHERE idpendiente  = $1",
       [id]
     );
+    await db.query("DELETE FROM pendiente_tecnico WHERE idpendiente = $1", [
+      id,
+    ]);
     return results.rows;
   } catch (e) {
     throw e;

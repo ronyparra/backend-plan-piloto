@@ -136,3 +136,9 @@ CREATE TABLE usuario_rol_detalle (
 );
 
 ALTER TABLE actividad_tecnico_detalle DROP COLUMN precio;
+
+CREATE TABLE pendiente_tecnico (
+    idpendiente INT NOT NULL REFERENCES pendiente (idpendiente) ON UPDATE CASCADE,
+    idusuario INT NOT NULL REFERENCES usuario (idusuario) ON UPDATE CASCADE,
+    PRIMARY KEY (idpendiente, idusuario)
+);

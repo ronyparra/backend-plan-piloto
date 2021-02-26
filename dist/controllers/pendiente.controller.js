@@ -152,7 +152,8 @@ var PendienteController = {
               insert = {
                 idtipo_pendiente: req.body.idtipo_pendiente.idtipo_pendiente,
                 fecha: (0, _date.parse_date)(req.body.fecha),
-                descripcion: req.body.descripcion
+                descripcion: req.body.descripcion,
+                pendiente_tecnico: req.body.pendiente_tecnico
               };
               _context4.prev = 1;
               _context4.next = 4;
@@ -197,7 +198,8 @@ var PendienteController = {
               update = {
                 idtipo_pendiente: req.body.idtipo_pendiente.idtipo_pendiente,
                 fecha: (0, _date.parse_date)(req.body.fecha),
-                descripcion: req.body.descripcion
+                descripcion: req.body.descripcion,
+                pendiente_tecnico: req.body.pendiente_tecnico
               };
               _context5.prev = 1;
               _context5.next = 4;

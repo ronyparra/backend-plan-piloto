@@ -31,6 +31,7 @@ const PendienteController = {
       idtipo_pendiente: req.body.idtipo_pendiente.idtipo_pendiente,
       fecha: parse_date(req.body.fecha), 
       descripcion: req.body.descripcion,
+      pendiente_tecnico: req.body.pendiente_tecnico
     };
     try {
       const pendiente = await PendienteService.create({ ...insert });
@@ -44,6 +45,7 @@ const PendienteController = {
       idtipo_pendiente: req.body.idtipo_pendiente.idtipo_pendiente,
       fecha: parse_date(req.body.fecha),
       descripcion: req.body.descripcion,
+      pendiente_tecnico: req.body.pendiente_tecnico
     };
     try {
       const pendiente = await PendienteService.update({
