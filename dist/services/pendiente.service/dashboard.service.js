@@ -13,10 +13,10 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _db = _interopRequireDefault(require("../../db"));
 
-var query = "\n    SELECT\n    json_build_object(\n        'tipo', tp.descripcion,\n        'color', tp.color,\n        'icon',tp.icon,\n        'detalle', (\n            SELECT \n                json_agg(\n                    json_build_object(\n                    'idpendiente', pt.idpendiente,\n                    'descripcion', pt.descripcion\n                    )\n                ) \n            FROM pendiente as pt WHERE idtipo_pendiente = tp.idtipo_pendiente\n        )\n    ) as rows\n    FROM tipo_pendiente as tp";
+var query = "\nSELECT rows FROM (\n\tSELECT\n    json_build_object(\n        'tipo', 'Mis Pendientes',\n        'color', 'red',\n        'icon', 'hail',\n        'detalle', (\n            SELECT \n                json_agg(\n                    json_build_object(\n                    'idpendiente', pend.idpendiente,\n                    'descripcion', pend.descripcion\n                    )\n                ) \n            FROM pendiente as pend WHERE idpendiente  = pend_t.idpendiente\n        )\n    ) as rows\n    FROM pendiente_tecnico as pend_t\n    WHERE idusuario = $1\n\tUNION ALL\n    SELECT\n    json_build_object(\n        'tipo', tp.descripcion,\n        'color', tp.color,\n        'icon',tp.icon,\n        'detalle', (\n            SELECT \n                json_agg(\n                    json_build_object(\n                    'idpendiente', pt.idpendiente,\n                    'descripcion', pt.descripcion\n                    )\n                ) \n            FROM pendiente as pt WHERE idtipo_pendiente = tp.idtipo_pendiente\n        )\n    ) as rows\n    FROM tipo_pendiente as tp\n\t\n) AS pendientes";
 
 var getDashboard = /*#__PURE__*/function () {
-  var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
+  var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(idusuario) {
     var results;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
@@ -24,7 +24,7 @@ var getDashboard = /*#__PURE__*/function () {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return _db["default"].query(query);
+            return _db["default"].query(query, [idusuario]);
 
           case 3:
             results = _context.sent;
@@ -45,7 +45,7 @@ var getDashboard = /*#__PURE__*/function () {
     }, _callee, null, [[0, 7]]);
   }));
 
-  return function getDashboard() {
+  return function getDashboard(_x) {
     return _ref.apply(this, arguments);
   };
 }();

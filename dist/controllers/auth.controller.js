@@ -49,7 +49,8 @@ var AuthController = {
               }
 
               payload = {
-                user: user.username
+                user: user.username,
+                id: user.idusuario
               };
               options = {
                 expiresIn: "2d"

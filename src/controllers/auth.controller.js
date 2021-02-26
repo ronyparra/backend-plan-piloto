@@ -9,7 +9,7 @@ const AuthController = {
       if (user) {
         const match = await bcrypt.compare(req.body.password, user.password);
         if (match) {
-          const payload = { user: user.username };
+          const payload = { user: user.username, id: user.idusuario };
           const options = { expiresIn: "2d" };
           const secret = process.env.JWT_SECRET;
           const token = jwt.sign(payload, secret, options);
