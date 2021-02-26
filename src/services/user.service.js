@@ -98,7 +98,6 @@ const UserService = {
       await db.query("DELETE FROM usuario_rol_detalle WHERE idusuario = $1", [
         id,
       ]);
-      console.log(formatRolUsuarioInsert(usuario_rol_detalle, id))
       await db.query(formatRolUsuarioInsert(usuario_rol_detalle, id));
       await db.query("COMMIT");
       return results.rows;

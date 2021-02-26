@@ -213,32 +213,31 @@ var UserService = {
               return _db["default"].query("DELETE FROM usuario_rol_detalle WHERE idusuario = $1", [id]);
 
             case 12:
-              console.log(formatRolUsuarioInsert(usuario_rol_detalle, id));
-              _context5.next = 15;
+              _context5.next = 14;
               return _db["default"].query(formatRolUsuarioInsert(usuario_rol_detalle, id));
 
-            case 15:
-              _context5.next = 17;
+            case 14:
+              _context5.next = 16;
               return _db["default"].query("COMMIT");
 
-            case 17:
+            case 16:
               return _context5.abrupt("return", results.rows);
 
-            case 20:
-              _context5.prev = 20;
+            case 19:
+              _context5.prev = 19;
               _context5.t0 = _context5["catch"](1);
-              _context5.next = 24;
+              _context5.next = 23;
               return _db["default"].query("ROLLBACK");
 
-            case 24:
+            case 23:
               throw _context5.t0;
 
-            case 25:
+            case 24:
             case "end":
               return _context5.stop();
           }
         }
-      }, _callee5, null, [[1, 20]]);
+      }, _callee5, null, [[1, 19]]);
     }));
 
     function update(_x4) {
