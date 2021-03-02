@@ -115,13 +115,14 @@ export const update = async ({
 };
 export const delet = async (id) => {
   try {
+    await db.query("DELETE FROM pendiente_tecnico WHERE idpendiente = $1", [
+      id,
+    ]);
     const results = await db.query(
       "DELETE FROM pendiente WHERE idpendiente  = $1",
       [id]
     );
-    await db.query("DELETE FROM pendiente_tecnico WHERE idpendiente = $1", [
-      id,
-    ]);
+
     return results.rows;
   } catch (e) {
     throw e;
