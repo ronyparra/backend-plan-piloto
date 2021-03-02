@@ -17,6 +17,7 @@ SELECT rows FROM (
             FROM pendiente_tecnico as pend_t
             JOIN pendiente USING (idpendiente)
             WHERE idusuario = $1
+            AND pendiente.activo = true
         )
     ) as rows
 	UNION ALL
@@ -33,7 +34,9 @@ SELECT rows FROM (
                     'descripcion', pt.descripcion
                     )
                 ) 
-            FROM pendiente as pt WHERE idtipo_pendiente = tp.idtipo_pendiente
+            FROM pendiente as pt 
+            WHERE idtipo_pendiente = tp.idtipo_pendiente
+            AND  pt.activo = true
         )
     ) as rows
     FROM tipo_pendiente as tp
