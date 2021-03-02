@@ -22,6 +22,9 @@ const query = `SELECT
           'solicitante', solicitante, 
           'comentario', comentario, 
           'fecha', to_char(fecha, 'DD-MM-YYYY'), 
+          'actividad_pendiente', COALESCE((
+            SELECT json_agg(idpendiente) FROM actividad_pendiente  WHERE   idactividad = actividad.idactividad
+          ),'[]'),
           'tecnico', (
             SELECT json_agg(
                 json_build_object(
@@ -74,12 +77,14 @@ export const getById = async (id) => {
   }
 };
 
-const generateFilter = ({idcliente, desde, hasta, idestadocobro}) => {
+const generateFilter = ({ idcliente, desde, hasta, idestadocobro }) => {
   const filterCliente = idcliente ? `cliente.idcliente = ${idcliente}` : null;
   const filterFecha = `fecha BETWEEN '${desde}'::date AND '${hasta}'::date`;
-  const filterEstado = idestadocobro ? `idestadocobro = ${idestadocobro}` : null;
-  const filter  = `WHERE ${ filterFecha } ${ filterCliente ? `AND ${filterCliente}` : '' } ${filterEstado ? `AND ${filterEstado}` : ''}`
+  const filterEstado = idestadocobro
+    ? `idestadocobro = ${idestadocobro}`
+    : null;
+  const filter = `WHERE ${filterFecha} ${
+    filterCliente ? `AND ${filterCliente}` : ""
+  } ${filterEstado ? `AND ${filterEstado}` : ""}`;
   return filter;
 };
-
-

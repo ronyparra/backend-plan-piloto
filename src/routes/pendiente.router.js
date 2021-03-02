@@ -7,6 +7,7 @@ const router = Router();
 
 router.get("/", Auth, PendienteController.get);
 router.get("/dashboard", Auth, PendienteController.getDashboard);
+router.post("/status", Auth, PendienteController.changeStatus);
 router.get("/:id", Auth, PendienteController.getById);
 router.post("/", Auth, PendienteValidator.body, PendienteController.create);
 router.put("/:id", Auth, PendienteValidator.body, PendienteController.update);

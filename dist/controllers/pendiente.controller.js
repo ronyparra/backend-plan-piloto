@@ -102,52 +102,93 @@ var PendienteController = {
 
     return get;
   }(),
-  getById: function () {
-    var _getById = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
-      var pendiente;
+  changeStatus: function () {
+    var _changeStatus = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
+      var actividad;
       return _regenerator["default"].wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
               _context3.prev = 0;
-              _context3.next = 3;
-              return _pendiente["default"].getById(req.params.id);
+              console.log(req.body);
+              _context3.next = 4;
+              return _pendiente["default"].changeStatus(req.body);
 
-            case 3:
-              pendiente = _context3.sent;
+            case 4:
+              actividad = _context3.sent;
               return _context3.abrupt("return", res.status(200).json({
                 status: 200,
-                data: pendiente
+                data: actividad
               }));
 
-            case 7:
-              _context3.prev = 7;
+            case 8:
+              _context3.prev = 8;
               _context3.t0 = _context3["catch"](0);
               return _context3.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context3.t0.message
               }));
 
-            case 10:
+            case 11:
             case "end":
               return _context3.stop();
           }
         }
-      }, _callee3, null, [[0, 7]]);
+      }, _callee3, null, [[0, 8]]);
     }));
 
-    function getById(_x5, _x6) {
+    function changeStatus(_x5, _x6) {
+      return _changeStatus.apply(this, arguments);
+    }
+
+    return changeStatus;
+  }(),
+  getById: function () {
+    var _getById = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
+      var pendiente;
+      return _regenerator["default"].wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.prev = 0;
+              _context4.next = 3;
+              return _pendiente["default"].getById(req.params.id);
+
+            case 3:
+              pendiente = _context4.sent;
+              return _context4.abrupt("return", res.status(200).json({
+                status: 200,
+                data: pendiente
+              }));
+
+            case 7:
+              _context4.prev = 7;
+              _context4.t0 = _context4["catch"](0);
+              return _context4.abrupt("return", res.status(400).json({
+                status: 400,
+                message: _context4.t0.message
+              }));
+
+            case 10:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4, null, [[0, 7]]);
+    }));
+
+    function getById(_x7, _x8) {
       return _getById.apply(this, arguments);
     }
 
     return getById;
   }(),
   create: function () {
-    var _create = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
+    var _create = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
       var insert, pendiente;
-      return _regenerator["default"].wrap(function _callee4$(_context4) {
+      return _regenerator["default"].wrap(function _callee5$(_context5) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context5.prev = _context5.next) {
             case 0:
               insert = {
                 idtipo_pendiente: req.body.idtipo_pendiente.idtipo_pendiente,
@@ -155,57 +196,9 @@ var PendienteController = {
                 descripcion: req.body.descripcion,
                 pendiente_tecnico: req.body.pendiente_tecnico
               };
-              _context4.prev = 1;
-              _context4.next = 4;
-              return _pendiente["default"].create(_objectSpread({}, insert));
-
-            case 4:
-              pendiente = _context4.sent;
-              return _context4.abrupt("return", res.status(200).json({
-                status: 200,
-                data: pendiente
-              }));
-
-            case 8:
-              _context4.prev = 8;
-              _context4.t0 = _context4["catch"](1);
-              return _context4.abrupt("return", res.status(400).json({
-                status: 400,
-                message: _context4.t0.message
-              }));
-
-            case 11:
-            case "end":
-              return _context4.stop();
-          }
-        }
-      }, _callee4, null, [[1, 8]]);
-    }));
-
-    function create(_x7, _x8) {
-      return _create.apply(this, arguments);
-    }
-
-    return create;
-  }(),
-  update: function () {
-    var _update = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
-      var update, pendiente;
-      return _regenerator["default"].wrap(function _callee5$(_context5) {
-        while (1) {
-          switch (_context5.prev = _context5.next) {
-            case 0:
-              update = {
-                idtipo_pendiente: req.body.idtipo_pendiente.idtipo_pendiente,
-                fecha: (0, _date.parse_date)(req.body.fecha),
-                descripcion: req.body.descripcion,
-                pendiente_tecnico: req.body.pendiente_tecnico
-              };
               _context5.prev = 1;
               _context5.next = 4;
-              return _pendiente["default"].update(_objectSpread(_objectSpread({}, update), {}, {
-                id: req.params.id
-              }));
+              return _pendiente["default"].create(_objectSpread({}, insert));
 
             case 4:
               pendiente = _context5.sent;
@@ -230,47 +223,95 @@ var PendienteController = {
       }, _callee5, null, [[1, 8]]);
     }));
 
-    function update(_x9, _x10) {
-      return _update.apply(this, arguments);
+    function create(_x9, _x10) {
+      return _create.apply(this, arguments);
     }
 
-    return update;
+    return create;
   }(),
-  "delete": function () {
-    var _delete2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(req, res) {
-      var pendiente;
+  update: function () {
+    var _update = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(req, res) {
+      var update, pendiente;
       return _regenerator["default"].wrap(function _callee6$(_context6) {
         while (1) {
           switch (_context6.prev = _context6.next) {
             case 0:
-              _context6.prev = 0;
-              _context6.next = 3;
-              return _pendiente["default"].delet(req.params.id);
+              update = {
+                idtipo_pendiente: req.body.idtipo_pendiente.idtipo_pendiente,
+                fecha: (0, _date.parse_date)(req.body.fecha),
+                descripcion: req.body.descripcion,
+                pendiente_tecnico: req.body.pendiente_tecnico
+              };
+              _context6.prev = 1;
+              _context6.next = 4;
+              return _pendiente["default"].update(_objectSpread(_objectSpread({}, update), {}, {
+                id: req.params.id
+              }));
 
-            case 3:
+            case 4:
               pendiente = _context6.sent;
               return _context6.abrupt("return", res.status(200).json({
                 status: 200,
                 data: pendiente
               }));
 
-            case 7:
-              _context6.prev = 7;
-              _context6.t0 = _context6["catch"](0);
+            case 8:
+              _context6.prev = 8;
+              _context6.t0 = _context6["catch"](1);
               return _context6.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context6.t0.message
               }));
 
-            case 10:
+            case 11:
             case "end":
               return _context6.stop();
           }
         }
-      }, _callee6, null, [[0, 7]]);
+      }, _callee6, null, [[1, 8]]);
     }));
 
-    function _delete(_x11, _x12) {
+    function update(_x11, _x12) {
+      return _update.apply(this, arguments);
+    }
+
+    return update;
+  }(),
+  "delete": function () {
+    var _delete2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee7(req, res) {
+      var pendiente;
+      return _regenerator["default"].wrap(function _callee7$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
+              _context7.prev = 0;
+              _context7.next = 3;
+              return _pendiente["default"].delet(req.params.id);
+
+            case 3:
+              pendiente = _context7.sent;
+              return _context7.abrupt("return", res.status(200).json({
+                status: 200,
+                data: pendiente
+              }));
+
+            case 7:
+              _context7.prev = 7;
+              _context7.t0 = _context7["catch"](0);
+              return _context7.abrupt("return", res.status(400).json({
+                status: 400,
+                message: _context7.t0.message
+              }));
+
+            case 10:
+            case "end":
+              return _context7.stop();
+          }
+        }
+      }, _callee7, null, [[0, 7]]);
+    }));
+
+    function _delete(_x13, _x14) {
       return _delete2.apply(this, arguments);
     }
 

@@ -18,6 +18,15 @@ const PendienteController = {
       return res.status(400).json({ status: 400, message: e.message });
     }
   },
+  changeStatus: async (req, res) => {
+    try {
+      console.log(req.body)
+      const actividad = await PendienteService.changeStatus(req.body);
+      return res.status(200).json({ status: 200, data: actividad });
+    } catch (e) {
+      return res.status(400).json({ status: 400, message: e.message });
+    }
+  },
   getById: async (req, res) => {
     try {
       const pendiente = await PendienteService.getById(req.params.id);

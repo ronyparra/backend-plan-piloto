@@ -144,6 +144,14 @@ CREATE TABLE pendiente_tecnico (
 );
 
 ----
+CREATE TABLE actividad_pendiente (
+    idactividad INT NOT NULL REFERENCES actividad (idactividad) ON UPDATE CASCADE,
+    idpendiente INT NOT NULL REFERENCES pendiente (idpendiente) ON UPDATE CASCADE,
+    PRIMARY KEY (idactividad, idpendiente)
+);
+
+ALTER TABLE pendiente ADD COLUMN activo BOOLEAN NOT NULL DEFAULT true;
+
 CREATE TABLE cliente_cobro (
     idcliente INT NOT NULL REFERENCES cliente (idcliente) ON UPDATE CASCADE,
     fecha DATE NOT NULL,

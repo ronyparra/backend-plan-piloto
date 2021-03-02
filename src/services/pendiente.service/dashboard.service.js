@@ -10,15 +10,15 @@ SELECT rows FROM (
             SELECT 
                 json_agg(
                     json_build_object(
-                    'idpendiente', pend.idpendiente,
-                    'descripcion', pend.descripcion
+                    'idpendiente', idpendiente,
+                    'descripcion', descripcion
                     )
                 ) 
-            FROM pendiente as pend WHERE idpendiente  = pend_t.idpendiente
+            FROM pendiente_tecnico as pend_t
+            JOIN pendiente USING (idpendiente)
+            WHERE idusuario = $1
         )
     ) as rows
-    FROM pendiente_tecnico as pend_t
-    WHERE idusuario = $1
 	UNION ALL
     SELECT
     json_build_object(

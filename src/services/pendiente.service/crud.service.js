@@ -11,6 +11,7 @@ const query = `
 	  ), 
 	  'fecha', to_char(fecha, 'DD-MM-YYYY'),
     'descripcion', pendiente.descripcion,
+    'activo',pendiente.activo,
     'pendiente_tecnico',COALESCE((
       SELECT json_agg(
         json_build_object(
@@ -28,7 +29,7 @@ const query = `
 
 export const getAll = async () => {
   try {
-    const results = await db.query(query);
+    const results = await db.query(query + " ORDER BY activo DESC");
     return results.rows.map((x) => x.rows);
   } catch (e) {
     throw e;
@@ -69,6 +70,18 @@ export const create = async ({
     throw e;
   }
 };
+
+export const changeStatus = async ({ activo, idpendiente }) => {
+  try {
+    const result = await db.query("UPDATE pendiente SET activo = $1 WHERE idpendiente = $2 RETURNING * ", [
+      activo,
+      idpendiente,
+    ]);
+  } catch (e) {
+    throw e;
+  }
+};
+
 export const update = async ({
   idtipo_pendiente,
   fecha,

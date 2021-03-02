@@ -1,7 +1,12 @@
 import db from "../../db";
 import { formatDetalle, formatTecnico } from "./formatter";
 
-export const create = async ({ master, tecnico, detalle }) => {
+export const create = async ({
+  master,
+  tecnico,
+  detalle,
+  actividad_pendiente,
+}) => {
   try {
     await db.query("BEGIN");
     const results = await db.query(
@@ -25,6 +30,16 @@ export const create = async ({ master, tecnico, detalle }) => {
     const resultsConcepto = await db.query(
       `INSERT INTO actividad_concepto_detalle(idactividad, idconcepto, precio, cantidad)VALUES ${actividad_detalle} RETURNING *`
     );
+    if (actividad_pendiente.length > 0) {
+      await db.query(
+        "INSERT INTO actividad_pendiente(idactividad, idpendiente)VALUES ($1, $2)",
+        [idactividad, actividad_pendiente[0]]
+      );
+      await db.query(
+        "UPDATE pendiente SET activo = false WHERE idpendiente = $1",
+        [actividad_pendiente[0]]
+      );
+    }
     results.rows[0].tecnico = resultsTecnico.rows;
     results.rows[0].detalle = resultsConcepto.rows;
     await db.query("COMMIT");
@@ -49,7 +64,13 @@ export const changeStatus = async ({ detalle, idestadocobro }) => {
     throw e;
   }
 };
-export const update = async ({ id, master, tecnico, detalle }) => {
+export const update = async ({
+  id,
+  master,
+  tecnico,
+  detalle,
+  actividad_pendiente,
+}) => {
   try {
     await db.query("BEGIN");
     const results = await db.query(
@@ -73,6 +94,9 @@ export const update = async ({ id, master, tecnico, detalle }) => {
       "DELETE FROM actividad_concepto_detalle WHERE idactividad  = $1",
       [id]
     );
+    await db.query("DELETE FROM actividad_pendiente WHERE idactividad = $1", [
+      id,
+    ]);
     const actividad_tecnico = formatTecnico(tecnico, id);
     const actividad_detalle = formatDetalle(detalle, id);
 
@@ -82,6 +106,13 @@ export const update = async ({ id, master, tecnico, detalle }) => {
     const resultsConcepto = await db.query(
       `INSERT INTO actividad_concepto_detalle(idactividad, idconcepto, precio, cantidad)VALUES ${actividad_detalle} RETURNING *`
     );
+
+    if (actividad_pendiente.length > 0)
+      await db.query(
+        "INSERT INTO actividad_pendiente(idactividad, idpendiente)VALUES ($1, $2)",
+        [id, actividad_pendiente[0]]
+      );
+
     results.rows[0].tecnico = resultsTecnico.rows;
     results.rows[0].detalle = resultsConcepto.rows;
     await db.query("COMMIT");
@@ -102,6 +133,15 @@ export const delet = async (id) => {
       "DELETE FROM actividad_concepto_detalle WHERE idactividad  = $1",
       [id]
     );
+    const pendiente = await db.query(
+      "DELETE FROM actividad_pendiente WHERE idactividad = $1 RETURNING *",
+      [id]
+    );
+    if (pendiente.rows.length > 0)
+      await db.query(
+        "UPDATE pendiente SET activo = true WHERE idpendiente = $1",
+        [pendiente.rows[0].idpendiente]
+      );
     const results = await db.query(
       "DELETE FROM actividad WHERE idactividad  = $1",
       [id]

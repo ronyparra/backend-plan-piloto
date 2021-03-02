@@ -17,12 +17,12 @@ var _formatter = require("./formatter");
 
 var create = /*#__PURE__*/function () {
   var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_ref) {
-    var master, tecnico, detalle, results, idactividad, actividad_tecnico, actividad_detalle, resultsTecnico, resultsConcepto;
+    var master, tecnico, detalle, actividad_pendiente, results, idactividad, actividad_tecnico, actividad_detalle, resultsTecnico, resultsConcepto;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            master = _ref.master, tecnico = _ref.tecnico, detalle = _ref.detalle;
+            master = _ref.master, tecnico = _ref.tecnico, detalle = _ref.detalle, actividad_pendiente = _ref.actividad_pendiente;
             _context.prev = 1;
             _context.next = 4;
             return _db["default"].query("BEGIN");
@@ -46,29 +46,43 @@ var create = /*#__PURE__*/function () {
 
           case 15:
             resultsConcepto = _context.sent;
+
+            if (!(actividad_pendiente.length > 0)) {
+              _context.next = 21;
+              break;
+            }
+
+            _context.next = 19;
+            return _db["default"].query("INSERT INTO actividad_pendiente(idactividad, idpendiente)VALUES ($1, $2)", [idactividad, actividad_pendiente[0]]);
+
+          case 19:
+            _context.next = 21;
+            return _db["default"].query("UPDATE pendiente SET activo = false WHERE idpendiente = $1", [actividad_pendiente[0]]);
+
+          case 21:
             results.rows[0].tecnico = resultsTecnico.rows;
             results.rows[0].detalle = resultsConcepto.rows;
-            _context.next = 20;
+            _context.next = 25;
             return _db["default"].query("COMMIT");
 
-          case 20:
+          case 25:
             return _context.abrupt("return", results.rows);
 
-          case 23:
-            _context.prev = 23;
+          case 28:
+            _context.prev = 28;
             _context.t0 = _context["catch"](1);
-            _context.next = 27;
+            _context.next = 32;
             return _db["default"].query("ROLLBACK");
 
-          case 27:
+          case 32:
             throw _context.t0;
 
-          case 28:
+          case 33:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[1, 23]]);
+    }, _callee, null, [[1, 28]]);
   }));
 
   return function create(_x) {
@@ -131,12 +145,12 @@ exports.changeStatus = changeStatus;
 
 var update = /*#__PURE__*/function () {
   var _ref6 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(_ref5) {
-    var id, master, tecnico, detalle, results, actividad_tecnico, actividad_detalle, resultsTecnico, resultsConcepto;
+    var id, master, tecnico, detalle, actividad_pendiente, results, actividad_tecnico, actividad_detalle, resultsTecnico, resultsConcepto;
     return _regenerator["default"].wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            id = _ref5.id, master = _ref5.master, tecnico = _ref5.tecnico, detalle = _ref5.detalle;
+            id = _ref5.id, master = _ref5.master, tecnico = _ref5.tecnico, detalle = _ref5.detalle, actividad_pendiente = _ref5.actividad_pendiente;
             _context3.prev = 1;
             _context3.next = 4;
             return _db["default"].query("BEGIN");
@@ -155,41 +169,55 @@ var update = /*#__PURE__*/function () {
             return _db["default"].query("DELETE FROM actividad_concepto_detalle WHERE idactividad  = $1", [id]);
 
           case 11:
+            _context3.next = 13;
+            return _db["default"].query("DELETE FROM actividad_pendiente WHERE idactividad = $1", [id]);
+
+          case 13:
             actividad_tecnico = (0, _formatter.formatTecnico)(tecnico, id);
             actividad_detalle = (0, _formatter.formatDetalle)(detalle, id);
-            _context3.next = 15;
+            _context3.next = 17;
             return _db["default"].query("INSERT INTO actividad_tecnico_detalle(idactividad, idusuario) VALUES ".concat(actividad_tecnico, " RETURNING *"));
 
-          case 15:
+          case 17:
             resultsTecnico = _context3.sent;
-            _context3.next = 18;
+            _context3.next = 20;
             return _db["default"].query("INSERT INTO actividad_concepto_detalle(idactividad, idconcepto, precio, cantidad)VALUES ".concat(actividad_detalle, " RETURNING *"));
 
-          case 18:
+          case 20:
             resultsConcepto = _context3.sent;
+
+            if (!(actividad_pendiente.length > 0)) {
+              _context3.next = 24;
+              break;
+            }
+
+            _context3.next = 24;
+            return _db["default"].query("INSERT INTO actividad_pendiente(idactividad, idpendiente)VALUES ($1, $2)", [id, actividad_pendiente[0]]);
+
+          case 24:
             results.rows[0].tecnico = resultsTecnico.rows;
             results.rows[0].detalle = resultsConcepto.rows;
-            _context3.next = 23;
+            _context3.next = 28;
             return _db["default"].query("COMMIT");
 
-          case 23:
+          case 28:
             return _context3.abrupt("return", results.rows);
 
-          case 26:
-            _context3.prev = 26;
+          case 31:
+            _context3.prev = 31;
             _context3.t0 = _context3["catch"](1);
-            _context3.next = 30;
+            _context3.next = 35;
             return _db["default"].query("ROLLBACK");
 
-          case 30:
+          case 35:
             throw _context3.t0;
 
-          case 31:
+          case 36:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[1, 26]]);
+    }, _callee3, null, [[1, 31]]);
   }));
 
   return function update(_x3) {
@@ -201,7 +229,7 @@ exports.update = update;
 
 var delet = /*#__PURE__*/function () {
   var _ref7 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(id) {
-    var results;
+    var pendiente, results;
     return _regenerator["default"].wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
@@ -220,31 +248,46 @@ var delet = /*#__PURE__*/function () {
 
           case 7:
             _context4.next = 9;
-            return _db["default"].query("DELETE FROM actividad WHERE idactividad  = $1", [id]);
+            return _db["default"].query("DELETE FROM actividad_pendiente WHERE idactividad = $1 RETURNING *", [id]);
 
           case 9:
-            results = _context4.sent;
-            _context4.next = 12;
-            return _db["default"].query("COMMIT");
+            pendiente = _context4.sent;
 
-          case 12:
-            return _context4.abrupt("return", results.rows);
+            if (!(pendiente.rows.length > 0)) {
+              _context4.next = 13;
+              break;
+            }
+
+            _context4.next = 13;
+            return _db["default"].query("UPDATE pendiente SET activo = true WHERE idpendiente = $1", [pendiente.rows[0].idpendiente]);
+
+          case 13:
+            _context4.next = 15;
+            return _db["default"].query("DELETE FROM actividad WHERE idactividad  = $1", [id]);
 
           case 15:
-            _context4.prev = 15;
+            results = _context4.sent;
+            _context4.next = 18;
+            return _db["default"].query("COMMIT");
+
+          case 18:
+            return _context4.abrupt("return", results.rows);
+
+          case 21:
+            _context4.prev = 21;
             _context4.t0 = _context4["catch"](0);
-            _context4.next = 19;
+            _context4.next = 25;
             return _db["default"].query("ROLLBACK");
 
-          case 19:
+          case 25:
             throw _context4.t0;
 
-          case 20:
+          case 26:
           case "end":
             return _context4.stop();
         }
       }
-    }, _callee4, null, [[0, 15]]);
+    }, _callee4, null, [[0, 21]]);
   }));
 
   return function delet(_x4) {
