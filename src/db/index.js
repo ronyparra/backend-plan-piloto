@@ -11,3 +11,4 @@ export default {
     return pool.query(text, params, callback);
   },
 };
+

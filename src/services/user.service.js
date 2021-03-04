@@ -54,6 +54,7 @@ const UserService = {
       throw e;
     }
   },
+
   create: async ({
     username,
     password,

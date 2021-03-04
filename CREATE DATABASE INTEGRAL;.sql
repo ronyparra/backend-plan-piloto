@@ -152,10 +152,40 @@ CREATE TABLE actividad_pendiente (
 
 ALTER TABLE pendiente ADD COLUMN activo BOOLEAN NOT NULL DEFAULT true;
 
+
+UPDATE formulario SET 
+permisos = '{"Puede Registrar": false,"Puede Modificar": false,"Puede Eliminar": false,"Puede Listar": false,"Puede Cambiar Estado": false}'
+WHERE idformulario  = 3;
+INSERT INTO formulario(
+	idformulario, descripcion, permisos)
+VALUES 
+(6, 'Analytics', '{"Puede listar": false}');
+
+
+INSERT INTO usuario_rol_permiso(idusuario_rol, idformulario, permisos) VALUES 
+(1, 1, '{"Puede Registrar": true,"Puede Modificar": true,"Puede Eliminar": true,"Puede Listar": true}'),
+(1, 2, '{"Puede Registrar": true,"Puede Modificar": true,"Puede Eliminar": true,"Puede Listar": true}'),
+(1, 3, '{"Puede Registrar": true,"Puede Modificar": true,"Puede Eliminar": true,"Puede Listar": true,"Puede Cambiar Estado": true}'),
+(1, 4, '{"Puede Registrar": true,"Puede Modificar": true,"Puede Eliminar": true,"Puede Listar Presupuesto": true, "Puede Listar Servicios": true, "Puede Listar Compras": true, "Puede Listar Relevamientos": true}'),
+(1, 5, '{"Puede Registrar": true,"Puede Modificar": true,"Puede Eliminar": true,"Puede Listar": true}'),
+(1, 6, '{"Puede listar": true}');
+
+INSERT INTO usuario_rol_permiso(idusuario_rol, idformulario, permisos) VALUES 
+(2, 1, '{"Puede Registrar": true,"Puede Modificar": true,"Puede Eliminar": true,"Puede Listar": true}'),
+(2, 2, '{"Puede Registrar": true,"Puede Modificar": true,"Puede Eliminar": true,"Puede Listar": true}'),
+(2, 3, '{"Puede Registrar": true,"Puede Modificar": true,"Puede Eliminar": true,"Puede Listar": true,"Puede Cambiar Estado": false}'),
+(2, 4, '{"Puede Registrar": true,"Puede Modificar": true,"Puede Eliminar": true,"Puede Listar Presupuesto": false, "Puede Listar Servicios": true, "Puede Listar Compras": false, "Puede Listar Relevamientos": false}'),
+(2, 5, '{"Puede Registrar": true,"Puede Modificar": true,"Puede Eliminar": true,"Puede Listar": true}'),
+(2, 6, '{"Puede listar": false}');
+
+UPDATE formulario
+SET  permisos= '{"Puede Registrar": false,"Puede Modificar": false,"Puede Eliminar": false,"Puede Listar Presupuesto": false, "Puede Listar Servicios": false, "Puede Listar Compras": false, "Puede Listar Relevamientos": false}'
+WHERE idformulario = 4;
+
 CREATE TABLE cliente_cobro (
     idcliente INT NOT NULL REFERENCES cliente (idcliente) ON UPDATE CASCADE,
     fecha DATE NOT NULL,
     idusuario INT NOT NULL REFERENCES usuario (idusuario) ON UPDATE CASCADE,
     comentario TEXT NULL,
     saldocobrado DOUBLE PRECISION NOT NULL
-)
+);
