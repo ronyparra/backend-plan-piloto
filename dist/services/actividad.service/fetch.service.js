@@ -24,7 +24,7 @@ var getAll = /*#__PURE__*/function () {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return _db["default"].query(query + generateFilter(filters));
+            return _db["default"].query(query + generateFilter(filters) + ' ORDER BY idactividad ASC');
 
           case 3:
             results = _context.sent;

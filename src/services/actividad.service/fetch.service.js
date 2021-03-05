@@ -62,7 +62,7 @@ const query = `SELECT
 
 export const getAll = async (filters) => {
   try {
-    const results = await db.query(query + generateFilter(filters));
+    const results = await db.query(query + generateFilter(filters) + ' ORDER BY idactividad ASC');
     return results.rows.map((x) => x.rows);
   } catch (e) {
     throw e;
