@@ -6,6 +6,8 @@ const ActividadController = {
     const params = {
       idcliente:
         req.query.cliente !== "undefined" ? req.query.cliente : undefined,
+      idsucursal:
+        req.query.sucursal !== "undefined" ? req.query.sucursal : undefined,
       desde: parse_date(req.query.desde),
       hasta: parse_date(req.query.hasta),
       idestadocobro:
@@ -44,7 +46,7 @@ const ActividadController = {
         master,
         tecnico,
         detalle,
-        actividad_pendiente
+        actividad_pendiente,
       });
       return res.status(200).json({ status: 200, data: actividad });
     } catch (e) {
@@ -62,7 +64,7 @@ const ActividadController = {
         master,
         tecnico,
         detalle,
-        actividad_pendiente
+        actividad_pendiente,
       });
       return res.status(200).json({ status: 200, data: actividad });
     } catch (e) {

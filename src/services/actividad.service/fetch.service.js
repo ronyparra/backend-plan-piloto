@@ -77,14 +77,25 @@ export const getById = async (id) => {
   }
 };
 
-const generateFilter = ({ idcliente, desde, hasta, idestadocobro }) => {
+const generateFilter = ({
+  idcliente,
+  idsucursal,
+  desde,
+  hasta,
+  idestadocobro,
+}) => {
   const filterCliente = idcliente ? `cliente.idcliente = ${idcliente}` : null;
+  const filterSucursal = idsucursal
+    ? `cli_suc.idcliente_sucursal = ${idsucursal}`
+    : null;
   const filterFecha = `fecha BETWEEN '${desde}'::date AND '${hasta}'::date`;
   const filterEstado = idestadocobro
     ? `idestadocobro = ${idestadocobro}`
     : null;
   const filter = `WHERE ${filterFecha} ${
     filterCliente ? `AND ${filterCliente}` : ""
-  } ${filterEstado ? `AND ${filterEstado}` : ""}`;
+  } ${filterEstado ? `AND ${filterEstado}` : ""} ${
+    filterSucursal ? `AND ${filterSucursal}` : ""
+  }`;
   return filter;
 };

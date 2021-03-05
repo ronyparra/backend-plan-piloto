@@ -89,12 +89,14 @@ exports.getById = getById;
 
 var generateFilter = function generateFilter(_ref3) {
   var idcliente = _ref3.idcliente,
+      idsucursal = _ref3.idsucursal,
       desde = _ref3.desde,
       hasta = _ref3.hasta,
       idestadocobro = _ref3.idestadocobro;
   var filterCliente = idcliente ? "cliente.idcliente = ".concat(idcliente) : null;
+  var filterSucursal = idsucursal ? "cli_suc.idcliente_sucursal = ".concat(idsucursal) : null;
   var filterFecha = "fecha BETWEEN '".concat(desde, "'::date AND '").concat(hasta, "'::date");
   var filterEstado = idestadocobro ? "idestadocobro = ".concat(idestadocobro) : null;
-  var filter = "WHERE ".concat(filterFecha, " ").concat(filterCliente ? "AND ".concat(filterCliente) : "", " ").concat(filterEstado ? "AND ".concat(filterEstado) : "");
+  var filter = "WHERE ".concat(filterFecha, " ").concat(filterCliente ? "AND ".concat(filterCliente) : "", " ").concat(filterEstado ? "AND ".concat(filterEstado) : "", " ").concat(filterSucursal ? "AND ".concat(filterSucursal) : "");
   return filter;
 };

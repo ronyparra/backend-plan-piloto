@@ -183,9 +183,28 @@ SET  permisos= '{"Puede Registrar": false,"Puede Modificar": false,"Puede Elimin
 WHERE idformulario = 4;
 
 CREATE TABLE cliente_cobro (
+    idcliente_cobro SERIAL NOT NULL,
+    cobrado BOOLEAN NOT NULL,
+    descripcion TEXT NULL,
     idcliente INT NOT NULL REFERENCES cliente (idcliente) ON UPDATE CASCADE,
-    fecha DATE NOT NULL,
-    idusuario INT NOT NULL REFERENCES usuario (idusuario) ON UPDATE CASCADE,
+    fechaInsert DATE NOT NULL,
+    fechaCobro DATE NULL,
+    idusuarioInsert INT NOT NULL REFERENCES usuario (idusuario) ON UPDATE CASCADE,
+    idusuarioCobro INT NOT NULL REFERENCES usuario (idusuario) ON UPDATE CASCADE,
     comentario TEXT NULL,
-    saldocobrado DOUBLE PRECISION NOT NULL
+    saldocobrado DOUBLE PRECISION NOT NULL,
+    saldoacobrar DOUBLE PRECISION NOT NULL,
+    PRIMARY KEY(idcliente_cobro)
 );
+
+CREATE TABLE cliente_cobro_sucursal(
+    idcliente_cobro INT NOT NULL REFERENCES cliente_cobro (idcliente_cobro) ON UPDATE CASCADE,
+    idcliente_sucursal INT NOT NULL  REFERENCES cliente_sucursal (idcliente_sucursal) ON UPDATE CASCADE,
+    PRIMARY KEY (idcliente_cobro, idcliente_sucursal);
+);
+
+CREATE TABLE actividad_cobro (
+    idcliente_cobro INT NOT NULL REFERENCES cliente_cobro (idcliente_cobro) ON UPDATE CASCADE,
+    idactividad INT NOT NULL REFERENCES actividad (idactividad) ON UPDATE CASCADE,
+    PRIMARY KEY (idcliente_sucursal,idactividad);
+)
