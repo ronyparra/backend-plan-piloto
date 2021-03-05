@@ -13,10 +13,7 @@ var PendienteValidator = {
 
     if (!errors.isEmpty()) {
       var errorMessages = errors.array().map(function (error) {
-        return {
-          param: error.param,
-          msg: error.msg
-        };
+        return error.msg;
       });
       return res.status(400).json({
         errors: errorMessages

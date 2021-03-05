@@ -53,7 +53,7 @@ var AuthController = {
                 id: user.idusuario
               };
               options = {
-                expiresIn: "2d"
+                expiresIn: "700d"
               };
               secret = process.env.JWT_SECRET;
               token = _jsonwebtoken["default"].sign(payload, secret, options);

@@ -10,7 +10,7 @@ exports["default"] = void 0;
 var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
 
 var validateToken = function validateToken(req, res, next) {
-  var result;
+  if (!req.headers.authorization) res.sendStatus(401);
   var token = req.headers.authorization.split("Bearer ")[1];
 
   if (token) {
@@ -19,7 +19,8 @@ var validateToken = function validateToken(req, res, next) {
     };
 
     try {
-      result = _jsonwebtoken["default"].verify(token, process.env.JWT_SECRET, options);
+      var result = _jsonwebtoken["default"].verify(token, process.env.JWT_SECRET, options);
+
       req.decoded = result;
       next();
     } catch (err) {
