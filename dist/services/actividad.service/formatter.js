@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.formatDetalle = exports.formatTecnico = void 0;
+exports.formatActividadCobro = exports.formatActividadChangeStatus = exports.formatDetalle = exports.formatTecnico = void 0;
 
 var formatTecnico = function formatTecnico(tecnico, id) {
   return [tecnico.reduce(function (acc, curr) {
@@ -22,3 +22,20 @@ var formatDetalle = function formatDetalle(detalle, id) {
 };
 
 exports.formatDetalle = formatDetalle;
+
+var formatActividadChangeStatus = function formatActividadChangeStatus(detalle, id) {
+  return detalle.reduce(function (acc, curr) {
+    return acc = acc + "UPDATE actividad SET  idestadocobro= ".concat(id, "  WHERE idactividad =  ").concat(curr.idactividad, ";\n");
+  }, "");
+};
+
+exports.formatActividadChangeStatus = formatActividadChangeStatus;
+
+var formatActividadCobro = function formatActividadCobro(detalle, id) {
+  return [detalle.reduce(function (acc, curr) {
+    if (acc !== "") acc = acc + ",";
+    return acc = acc + "(".concat(id, ",").concat(curr.idactividad, ")");
+  }, "")];
+};
+
+exports.formatActividadCobro = formatActividadCobro;

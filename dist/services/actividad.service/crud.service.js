@@ -96,28 +96,26 @@ exports.create = create;
 
 var changeStatus = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(_ref3) {
-    var detalle, idestadocobro, query, total;
+    var detalle, idestadocobro, idusuario, descripcion, total, idcliente;
     return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            detalle = _ref3.detalle, idestadocobro = _ref3.idestadocobro;
-            query = detalle.reduce(function (acc, curr) {
-              return acc = acc + "UPDATE actividad SET  idestadocobro= ".concat(idestadocobro, "  WHERE idactividad =  ").concat(curr.idactividad, ";\n");
-            }, "");
+            detalle = _ref3.detalle, idestadocobro = _ref3.idestadocobro, idusuario = _ref3.idusuario, descripcion = _ref3.descripcion;
             total = detalle.reduce(function (acc, curr) {
               var subtotal = curr.detalle.reduce(function (acc1, curr1) {
                 return acc1 = acc1 + curr1.cantidad * curr1.precio;
               }, 0);
               return acc = acc + subtotal;
             }, 0);
+            idcliente = detalle[0].idcliente.idcliente;
             _context2.prev = 3;
             _context2.next = 6;
             return _db["default"].query("BEGIN");
 
           case 6:
             _context2.next = 8;
-            return _db["default"].query(query);
+            return _db["default"].query((0, _formatter.formatActividadChangeStatus)(detalle, idestadocobro));
 
           case 8:
             _context2.next = 10;

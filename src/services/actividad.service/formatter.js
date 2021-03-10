@@ -18,5 +18,19 @@ export const formatDetalle = (detalle, id) => {
   ];
 };
 
+export const formatActividadChangeStatus = (detalle, id) => {
+  return detalle.reduce((acc, curr) => {
+    return (acc =
+      acc +
+      `UPDATE actividad SET  idestadocobro= ${id}  WHERE idactividad =  ${curr.idactividad};\n`);
+  }, "");
+};
 
-
+export const formatActividadCobro = (detalle, id) => {
+  return [
+    detalle.reduce((acc, curr) => {
+      if (acc !== "") acc = acc + ",";
+      return (acc = acc + `(${id},${curr.idactividad})`);
+    }, ""),
+  ];
+};

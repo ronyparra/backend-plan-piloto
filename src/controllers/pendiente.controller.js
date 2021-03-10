@@ -20,7 +20,6 @@ const PendienteController = {
   },
   changeStatus: async (req, res) => {
     try {
-      console.log(req.body)
       const actividad = await PendienteService.changeStatus(req.body);
       return res.status(200).json({ status: 200, data: actividad });
     } catch (e) {

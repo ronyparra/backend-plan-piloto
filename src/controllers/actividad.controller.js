@@ -29,8 +29,9 @@ const ActividadController = {
     }
   },
   changeStatus: async (req, res) => {
+    const idusuario = req.decoded.id;
     try {
-      const actividad = await ActividadService.changeStatus(req.body);
+      const actividad = await ActividadService.changeStatus({...req.body, idusuario});
       return res.status(200).json({ status: 200, data: actividad });
     } catch (e) {
       return res.status(400).json({ status: 400, message: e.message });

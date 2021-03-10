@@ -1,5 +1,10 @@
 import db from "../../db";
-import { formatDetalle, formatTecnico } from "./formatter";
+import {
+  formatDetalle,
+  formatTecnico,
+  formatActividadCobro,
+  formatActividadChangeStatus,
+} from "./formatter";
 import { current_date } from "../../util/date.util";
 
 export const create = async ({
@@ -50,19 +55,23 @@ export const create = async ({
     throw e;
   }
 };
-export const changeStatus = async ({ detalle, idestadocobro }) => {
-  const query = detalle.reduce((acc, curr) => {
-    return (acc =
-      acc +
-      `UPDATE actividad SET  idestadocobro= ${idestadocobro}  WHERE idactividad =  ${curr.idactividad};\n`);
-  }, "");
-  const total = detalle.reduce((acc,curr)=>{
-    const subtotal = curr.detalle.reduce((acc1,curr1)=>(acc1 = acc1 + (curr1.cantidad * curr1.precio )),0);
-    return acc = acc + subtotal;
-  },0);
+export const changeStatus = async ({
+  detalle,
+  idestadocobro,
+  idusuario,
+  descripcion,
+}) => {
+  const total = detalle.reduce((acc, curr) => {
+    const subtotal = curr.detalle.reduce(
+      (acc1, curr1) => (acc1 = acc1 + (curr1.cantidad * curr1.precio)),
+      0
+    );
+    return (acc = acc + subtotal);
+  }, 0);
+  const idcliente = detalle[0].idcliente.idcliente;
   try {
     await db.query("BEGIN");
-    await db.query(query);
+    await db.query(formatActividadChangeStatus(detalle, idestadocobro));
     await db.query(
       `
       INSERT INTO cliente_cobro(

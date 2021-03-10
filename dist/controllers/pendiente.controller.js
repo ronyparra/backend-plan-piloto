@@ -110,31 +110,30 @@ var PendienteController = {
           switch (_context3.prev = _context3.next) {
             case 0:
               _context3.prev = 0;
-              console.log(req.body);
-              _context3.next = 4;
+              _context3.next = 3;
               return _pendiente["default"].changeStatus(req.body);
 
-            case 4:
+            case 3:
               actividad = _context3.sent;
               return _context3.abrupt("return", res.status(200).json({
                 status: 200,
                 data: actividad
               }));
 
-            case 8:
-              _context3.prev = 8;
+            case 7:
+              _context3.prev = 7;
               _context3.t0 = _context3["catch"](0);
               return _context3.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context3.t0.message
               }));
 
-            case 11:
+            case 10:
             case "end":
               return _context3.stop();
           }
         }
-      }, _callee3, null, [[0, 8]]);
+      }, _callee3, null, [[0, 7]]);
     }));
 
     function changeStatus(_x5, _x6) {
