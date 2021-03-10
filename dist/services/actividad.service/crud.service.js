@@ -125,7 +125,7 @@ var changeStatus = /*#__PURE__*/function () {
             results = _context2.sent;
             idcliente_cobro = results.rows[0].idcliente_cobro;
             _context2.next = 14;
-            return _db["default"].query((0, _formatter.formatActividadCobro)(detalle, idcliente_cobro));
+            return _db["default"].query("INSERT INTO actividad_cobro(idcliente_cobro, idactividad) VALUES ".concat((0, _formatter.formatActividadCobro)(detalle, idcliente_cobro)));
 
           case 14:
             _context2.next = 16;

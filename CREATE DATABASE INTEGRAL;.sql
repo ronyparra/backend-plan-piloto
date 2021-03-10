@@ -193,7 +193,7 @@ CREATE TABLE cliente_cobro (
     fechaInsert DATE NOT NULL,
     fechaCobro DATE NULL,
     idusuarioInsert INT NOT NULL REFERENCES usuario (idusuario) ON UPDATE CASCADE,
-    idusuarioCobro INT NOT NULL REFERENCES usuario (idusuario) ON UPDATE CASCADE,
+    idusuarioCobro INT NULL REFERENCES usuario (idusuario) ON UPDATE CASCADE,
     comentario TEXT NULL,
     saldocobrado DOUBLE PRECISION NOT NULL,
     saldoacobrar DOUBLE PRECISION NOT NULL,

@@ -79,7 +79,7 @@ export const changeStatus = async ({
       [descripcion, idcliente, current_date(), idusuario, total]
     );
     const idcliente_cobro = results.rows[0].idcliente_cobro;
-    await db.query(formatActividadCobro(detalle, idcliente_cobro));
+    await db.query(`INSERT INTO actividad_cobro(idcliente_cobro, idactividad) VALUES ${formatActividadCobro(detalle,idcliente_cobro)}`);
     await db.query("COMMIT");
   } catch (e) {
     await db.query("ROLLBACK");
