@@ -15,6 +15,8 @@ var _db = _interopRequireDefault(require("../../db"));
 
 var _formatter = require("./formatter");
 
+var _date = require("../../util/date.util");
+
 var create = /*#__PURE__*/function () {
   var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_ref) {
     var master, tecnico, detalle, actividad_pendiente, results, idactividad, actividad_tecnico, actividad_detalle, resultsTecnico, resultsConcepto;
@@ -94,7 +96,7 @@ exports.create = create;
 
 var changeStatus = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(_ref3) {
-    var detalle, idestadocobro, query;
+    var detalle, idestadocobro, query, total;
     return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
@@ -103,37 +105,47 @@ var changeStatus = /*#__PURE__*/function () {
             query = detalle.reduce(function (acc, curr) {
               return acc = acc + "UPDATE actividad SET  idestadocobro= ".concat(idestadocobro, "  WHERE idactividad =  ").concat(curr.idactividad, ";\n");
             }, "");
-            _context2.prev = 2;
-            _context2.next = 5;
+            total = detalle.reduce(function (acc, curr) {
+              var subtotal = curr.detalle.reduce(function (acc1, curr1) {
+                return acc1 = acc1 + curr1.cantidad * curr1.precio;
+              }, 0);
+              return acc = acc + subtotal;
+            }, 0);
+            _context2.prev = 3;
+            _context2.next = 6;
             return _db["default"].query("BEGIN");
 
-          case 5:
-            _context2.next = 7;
+          case 6:
+            _context2.next = 8;
             return _db["default"].query(query);
 
-          case 7:
-            _context2.next = 9;
+          case 8:
+            _context2.next = 10;
+            return _db["default"].query("\n      INSERT INTO cliente_cobro(\n      cobrado, descripcion, idcliente, fechainsert, fechacobro, idusuarioinsert, idusuariocobro, comentario, saldocobrado, saldoacobrar)\n      VALUES (false, $1, $2, $3, null, $4, null, null, 0, $5)", [descripcion, idcliente, (0, _date.current_date)(), idusuario, total]);
+
+          case 10:
+            _context2.next = 12;
             return _db["default"].query("COMMIT");
 
-          case 9:
-            _context2.next = 16;
+          case 12:
+            _context2.next = 19;
             break;
 
-          case 11:
-            _context2.prev = 11;
-            _context2.t0 = _context2["catch"](2);
-            _context2.next = 15;
+          case 14:
+            _context2.prev = 14;
+            _context2.t0 = _context2["catch"](3);
+            _context2.next = 18;
             return _db["default"].query("ROLLBACK");
 
-          case 15:
+          case 18:
             throw _context2.t0;
 
-          case 16:
+          case 19:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[2, 11]]);
+    }, _callee2, null, [[3, 14]]);
   }));
 
   return function changeStatus(_x2) {

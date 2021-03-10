@@ -1,5 +1,6 @@
 import db from "../../db";
 import { formatDetalle, formatTecnico } from "./formatter";
+import { current_date } from "../../util/date.util";
 
 export const create = async ({
   master,
@@ -55,9 +56,20 @@ export const changeStatus = async ({ detalle, idestadocobro }) => {
       acc +
       `UPDATE actividad SET  idestadocobro= ${idestadocobro}  WHERE idactividad =  ${curr.idactividad};\n`);
   }, "");
+  const total = detalle.reduce((acc,curr)=>{
+    const subtotal = curr.detalle.reduce((acc1,curr1)=>(acc1 = acc1 + (curr1.cantidad * curr1.precio )),0);
+    return acc = acc + subtotal;
+  },0);
   try {
     await db.query("BEGIN");
     await db.query(query);
+    await db.query(
+      `
+      INSERT INTO cliente_cobro(
+      cobrado, descripcion, idcliente, fechainsert, fechacobro, idusuarioinsert, idusuariocobro, comentario, saldocobrado, saldoacobrar)
+      VALUES (false, $1, $2, $3, null, $4, null, null, 0, $5)`,
+      [descripcion, idcliente, current_date(), idusuario, total]
+    );
     await db.query("COMMIT");
   } catch (e) {
     await db.query("ROLLBACK");

@@ -182,6 +182,9 @@ UPDATE formulario
 SET  permisos= '{"Puede Registrar": false,"Puede Modificar": false,"Puede Eliminar": false,"Puede Listar Presupuesto": false, "Puede Listar Servicios": false, "Puede Listar Compras": false, "Puede Listar Relevamientos": false}'
 WHERE idformulario = 4;
 
+UPDATE estadocobro SET descripcion= 'Facturado' WHERE idestadocobro= 2;
+INSERT INTO estadocobro(idestadocobro, descripcion) VALUES (3, 'Cobrado');
+
 CREATE TABLE cliente_cobro (
     idcliente_cobro SERIAL NOT NULL,
     cobrado BOOLEAN NOT NULL,
@@ -197,14 +200,8 @@ CREATE TABLE cliente_cobro (
     PRIMARY KEY(idcliente_cobro)
 );
 
-CREATE TABLE cliente_cobro_sucursal(
-    idcliente_cobro INT NOT NULL REFERENCES cliente_cobro (idcliente_cobro) ON UPDATE CASCADE,
-    idcliente_sucursal INT NOT NULL  REFERENCES cliente_sucursal (idcliente_sucursal) ON UPDATE CASCADE,
-    PRIMARY KEY (idcliente_cobro, idcliente_sucursal);
-);
-
 CREATE TABLE actividad_cobro (
     idcliente_cobro INT NOT NULL REFERENCES cliente_cobro (idcliente_cobro) ON UPDATE CASCADE,
     idactividad INT NOT NULL REFERENCES actividad (idactividad) ON UPDATE CASCADE,
-    PRIMARY KEY (idcliente_sucursal,idactividad);
-)
+    PRIMARY KEY (idcliente_cobro,idactividad)
+);
