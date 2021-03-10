@@ -63,7 +63,7 @@ export const changeStatus = async ({
 }) => {
   const total = detalle.reduce((acc, curr) => {
     const subtotal = curr.detalle.reduce(
-      (acc1, curr1) => (acc1 = acc1 + (curr1.cantidad * curr1.precio)),
+      (acc1, curr1) => (acc1 = acc1 + curr1.cantidad * curr1.precio),
       0
     );
     return (acc = acc + subtotal);
@@ -72,13 +72,14 @@ export const changeStatus = async ({
   try {
     await db.query("BEGIN");
     await db.query(formatActividadChangeStatus(detalle, idestadocobro));
-    await db.query(
-      `
-      INSERT INTO cliente_cobro(
+    const results = await db.query(
+      `INSERT INTO cliente_cobro(
       cobrado, descripcion, idcliente, fechainsert, fechacobro, idusuarioinsert, idusuariocobro, comentario, saldocobrado, saldoacobrar)
-      VALUES (false, $1, $2, $3, null, $4, null, null, 0, $5)`,
+      VALUES (false, $1, $2, $3, null, $4, null, null, 0, $5) RETURNING *`,
       [descripcion, idcliente, current_date(), idusuario, total]
     );
+    const idcliente_cobro = results.rows[0].idcliente_cobro;
+    await db.query(formatActividadCobro(detalle, idcliente_cobro));
     await db.query("COMMIT");
   } catch (e) {
     await db.query("ROLLBACK");

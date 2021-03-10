@@ -96,7 +96,7 @@ exports.create = create;
 
 var changeStatus = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(_ref3) {
-    var detalle, idestadocobro, idusuario, descripcion, total, idcliente;
+    var detalle, idestadocobro, idusuario, descripcion, total, idcliente, results, idcliente_cobro;
     return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
@@ -119,31 +119,37 @@ var changeStatus = /*#__PURE__*/function () {
 
           case 8:
             _context2.next = 10;
-            return _db["default"].query("\n      INSERT INTO cliente_cobro(\n      cobrado, descripcion, idcliente, fechainsert, fechacobro, idusuarioinsert, idusuariocobro, comentario, saldocobrado, saldoacobrar)\n      VALUES (false, $1, $2, $3, null, $4, null, null, 0, $5)", [descripcion, idcliente, (0, _date.current_date)(), idusuario, total]);
+            return _db["default"].query("INSERT INTO cliente_cobro(\n      cobrado, descripcion, idcliente, fechainsert, fechacobro, idusuarioinsert, idusuariocobro, comentario, saldocobrado, saldoacobrar)\n      VALUES (false, $1, $2, $3, null, $4, null, null, 0, $5) RETURNING *", [descripcion, idcliente, (0, _date.current_date)(), idusuario, total]);
 
           case 10:
-            _context2.next = 12;
-            return _db["default"].query("COMMIT");
-
-          case 12:
-            _context2.next = 19;
-            break;
+            results = _context2.sent;
+            idcliente_cobro = results.rows[0].idcliente_cobro;
+            _context2.next = 14;
+            return _db["default"].query((0, _formatter.formatActividadCobro)(detalle, idcliente_cobro));
 
           case 14:
-            _context2.prev = 14;
-            _context2.t0 = _context2["catch"](3);
-            _context2.next = 18;
-            return _db["default"].query("ROLLBACK");
+            _context2.next = 16;
+            return _db["default"].query("COMMIT");
+
+          case 16:
+            _context2.next = 23;
+            break;
 
           case 18:
+            _context2.prev = 18;
+            _context2.t0 = _context2["catch"](3);
+            _context2.next = 22;
+            return _db["default"].query("ROLLBACK");
+
+          case 22:
             throw _context2.t0;
 
-          case 19:
+          case 23:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[3, 14]]);
+    }, _callee2, null, [[3, 18]]);
   }));
 
   return function changeStatus(_x2) {
