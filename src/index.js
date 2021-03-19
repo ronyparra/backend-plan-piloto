@@ -19,6 +19,7 @@ app.use("/pendiente", routes.pendiente);
 app.use("/formulario", routes.formulario);
 app.use("/estadocobro", routes.estadocobro);
 app.use("/usuariorol", routes.usuario_rol);
+app.use("/cobro", routes.cobro);
 app.use("/tipopendiente", routes.tipo_pendiente);
 
 app.listen(8001, () => {

@@ -205,3 +205,8 @@ CREATE TABLE actividad_cobro (
     idactividad INT NOT NULL REFERENCES actividad (idactividad) ON UPDATE CASCADE,
     PRIMARY KEY (idcliente_cobro,idactividad)
 );
+
+ALTER TABLE cliente_cobro ADD COLUMN retencion BOOLEAN NOT NULL DEFAULT false;
+INSERT INTO estadocobro(idestadocobro, descripcion) VALUES (4, 'Entregado');
+ALTER TABLE cliente_cobro ADD COLUMN idestadocobro INT NOT NULL DEFAULT 1 REFERENCES estadocobro (idestadocobro) ON UPDATE CASCADE;
+ALTER TABLE cliente_cobro DROP COLUMN cobrado;

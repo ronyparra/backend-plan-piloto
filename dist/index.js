@@ -29,6 +29,7 @@ app.use("/pendiente", _routes["default"].pendiente);
 app.use("/formulario", _routes["default"].formulario);
 app.use("/estadocobro", _routes["default"].estadocobro);
 app.use("/usuariorol", _routes["default"].usuario_rol);
+app.use("/cobro", _routes["default"].cobro);
 app.use("/tipopendiente", _routes["default"].tipo_pendiente);
 app.listen(8001, function () {
   console.log("server started at http://localhost:8001");

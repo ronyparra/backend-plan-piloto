@@ -7,10 +7,12 @@ import pendiente from './pendiente.router';
 import tipo_pendiente from './tipo_pendiente.router';
 import estadocobro from './estadocobro.router';
 import formulario from './formulario.router';
-import usuario_rol from "./usuario_rol.router"
+import usuario_rol from "./usuario_rol.router";
+import cobro from "./cobro.router";
 
 export default {
   auth,
+  cobro,
   user,
   cliente,
   concepto,

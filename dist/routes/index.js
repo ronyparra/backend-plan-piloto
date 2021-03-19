@@ -27,8 +27,11 @@ var _formulario = _interopRequireDefault(require("./formulario.router"));
 
 var _usuario_rol = _interopRequireDefault(require("./usuario_rol.router"));
 
+var _cobro = _interopRequireDefault(require("./cobro.router"));
+
 var _default = {
   auth: _auth["default"],
+  cobro: _cobro["default"],
   user: _user["default"],
   cliente: _cliente["default"],
   concepto: _concepto["default"],
