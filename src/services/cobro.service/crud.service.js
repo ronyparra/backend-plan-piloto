@@ -1,3 +1,4 @@
+import db from "../../db";
 import { formatUpdateCobro } from "./formatter";
 
  export const update = async ({
@@ -15,12 +16,12 @@ import { formatUpdateCobro } from "./formatter";
       const results = await db.query(
         `UPDATE cliente_cobro
         SET 
-          fechacobro		=$1, 
+          fechacobro		  =$1, 
           idusuariocobro	=$2, 
-          comentario		=$3, 
-          saldocobrado	    =$4, 
+          comentario		  =$3, 
+          saldocobrado	  =$4, 
           retencion		    =$5, 
-          idestadocobro	    =$6
+          idestadocobro	  =$6
         WHERE idcliente_cobro = $7 RETURNING *`,
         [
           fechacobro,

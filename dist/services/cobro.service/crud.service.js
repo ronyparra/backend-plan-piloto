@@ -11,6 +11,8 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
+var _db = _interopRequireDefault(require("../../db"));
+
 var _formatter = require("./formatter");
 
 var update = /*#__PURE__*/function () {
@@ -23,20 +25,20 @@ var update = /*#__PURE__*/function () {
             fechacobro = _ref.fechacobro, idusuariocobro = _ref.idusuariocobro, comentario = _ref.comentario, saldocobrado = _ref.saldocobrado, retencion = _ref.retencion, idestadocobro = _ref.idestadocobro, actividad_cobro = _ref.actividad_cobro, id = _ref.id;
             _context.prev = 1;
             _context.next = 4;
-            return db.query("BEGIN");
+            return _db["default"].query("BEGIN");
 
           case 4:
             _context.next = 6;
-            return db.query("UPDATE cliente_cobro\n        SET \n          fechacobro\t\t=$1, \n          idusuariocobro\t=$2, \n          comentario\t\t=$3, \n          saldocobrado\t    =$4, \n          retencion\t\t    =$5, \n          idestadocobro\t    =$6\n        WHERE idcliente_cobro = $7 RETURNING *", [fechacobro, idusuariocobro, comentario, saldocobrado, retencion, idestadocobro, id]);
+            return _db["default"].query("UPDATE cliente_cobro\n        SET \n          fechacobro\t\t  =$1, \n          idusuariocobro\t=$2, \n          comentario\t\t  =$3, \n          saldocobrado\t  =$4, \n          retencion\t\t    =$5, \n          idestadocobro\t  =$6\n        WHERE idcliente_cobro = $7 RETURNING *", [fechacobro, idusuariocobro, comentario, saldocobrado, retencion, idestadocobro, id]);
 
           case 6:
             results = _context.sent;
             _context.next = 9;
-            return db.query((0, _formatter.formatUpdateCobro)(actividad_cobro, idestadocobro));
+            return _db["default"].query((0, _formatter.formatUpdateCobro)(actividad_cobro, idestadocobro));
 
           case 9:
             _context.next = 11;
-            return db.query("COMMIT");
+            return _db["default"].query("COMMIT");
 
           case 11:
             return _context.abrupt("return", results.rows);
@@ -45,7 +47,7 @@ var update = /*#__PURE__*/function () {
             _context.prev = 14;
             _context.t0 = _context["catch"](1);
             _context.next = 18;
-            return db.query("ROLLBACK");
+            return _db["default"].query("ROLLBACK");
 
           case 18:
             throw _context.t0;
@@ -74,7 +76,7 @@ var delet = /*#__PURE__*/function () {
           case 0:
             _context2.prev = 0;
             _context2.next = 3;
-            return db.query("DELETE FROM concepto WHERE idconcepto  = $1", [id]);
+            return _db["default"].query("DELETE FROM concepto WHERE idconcepto  = $1", [id]);
 
           case 3:
             results = _context2.sent;

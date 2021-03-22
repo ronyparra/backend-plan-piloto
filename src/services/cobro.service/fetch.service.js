@@ -33,13 +33,13 @@ SELECT
  	)	as rows
 FROM public.cliente_cobro
 JOIN cliente USING (idcliente)
-JOIN estadocobro USING (idestadocobro)
+JOIN estadocobro USING (idestadocobro) 
 `;
 
 
-export const  getAll = async () => {
+export const  getAll = async (filters) => {
     try {
-      const results = await db.query(query);
+      const results = await db.query(query + generateFilter(filters) + ' ORDER BY idcliente_cobro ASC');
       return results.rows.map((x) => x.rows);
     } catch (e) {
       throw e;
@@ -57,3 +57,22 @@ export const  getById = async (id) => {
   };
 
 
+
+
+const generateFilter = ({
+	idcliente,
+	desde,
+	hasta,
+	idestadocobro,
+  }) => {
+	const filterCliente = idcliente ? `cliente.idcliente = ${idcliente}` : null;
+	const filterFecha = `fechainsert BETWEEN '${desde}'::date AND '${hasta}'::date`;
+	const filterEstado = idestadocobro
+	  ? `idestadocobro = ${idestadocobro}`
+	  : null;
+	const filter = `WHERE ${filterFecha} ${
+	  filterCliente ? `AND ${filterCliente}` : ""
+	} ${filterEstado ? `AND ${filterEstado}` : ""}`;
+	return filter;
+  };
+  

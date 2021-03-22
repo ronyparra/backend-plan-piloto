@@ -18,36 +18,42 @@ var _date = require("../util/date.util");
 var CobroController = {
   get: function () {
     var _get = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
-      var response;
+      var params, response;
       return _regenerator["default"].wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
-              _context.next = 3;
-              return _cobro["default"].getAll();
+              params = {
+                idcliente: req.query.cliente !== "undefined" ? req.query.cliente : undefined,
+                desde: (0, _date.parse_date)(req.query.desde),
+                hasta: (0, _date.parse_date)(req.query.hasta),
+                idestadocobro: req.query.estado !== "undefined" ? req.query.estado : undefined
+              };
+              _context.prev = 1;
+              _context.next = 4;
+              return _cobro["default"].getAll(params);
 
-            case 3:
+            case 4:
               response = _context.sent;
               return _context.abrupt("return", res.status(200).json({
                 status: 200,
                 data: response
               }));
 
-            case 7:
-              _context.prev = 7;
-              _context.t0 = _context["catch"](0);
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](1);
               return _context.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context.t0.message
               }));
 
-            case 10:
+            case 11:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 7]]);
+      }, _callee, null, [[1, 8]]);
     }));
 
     function get(_x, _x2) {

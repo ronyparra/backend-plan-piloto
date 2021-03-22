@@ -1,9 +1,17 @@
 import CobroService from "../services/cobro.service";
-import { current_date } from "../util/date.util";
+import { current_date,parse_date } from "../util/date.util";
 const CobroController = {
   get: async (req, res) => {
+    const params = {
+      idcliente:
+        req.query.cliente !== "undefined" ? req.query.cliente : undefined,
+      desde: parse_date(req.query.desde),
+      hasta: parse_date(req.query.hasta),
+      idestadocobro:
+        req.query.estado !== "undefined" ? req.query.estado : undefined,
+    };
     try {
-      const response = await CobroService.getAll();
+      const response = await CobroService.getAll(params);
       return res.status(200).json({ status: 200, data: response });
     } catch (e) {
       return res.status(400).json({ status: 400, message: e.message });
