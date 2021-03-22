@@ -1,5 +1,5 @@
 import CobroService from "../services/cobro.service";
-
+import { current_date } from "../util/date.util";
 const CobroController = {
   get: async (req, res) => {
     try {
@@ -33,18 +33,18 @@ const CobroController = {
     }
   },
   update: async (req, res) => {
+    const params = {
+      fechacobro: current_date(),
+      idusuariocobro: req.decoded.id,
+      comentario: req.body.comentario,
+      saldocobrado: req.body.saldocobrado,
+      retencion: req.body.retencion,
+      actividad_cobro: req.body.actividad_cobro,
+      idestadocobro: req.body.idestadocobro.idestadocobro,
+      id: req.params.id,
+    };
     try {
-      if (req.body.sucursal.length === 0) {
-        req.body.sucursal = [
-          {
-            descripcion: "N/A",
-          },
-        ];
-      }
-      const response = await CobroService.update({
-        ...req.body,
-        id: req.params.id,
-      });
+      const response = await CobroService.update(params);
       return res.status(200).json({ status: 200, data: response });
     } catch (e) {
       return res.status(400).json({ status: 400, message: e.message });

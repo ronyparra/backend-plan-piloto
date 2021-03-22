@@ -74,8 +74,8 @@ export const changeStatus = async ({
     await db.query(formatActividadChangeStatus(detalle, idestadocobro));
     const results = await db.query(
       `INSERT INTO cliente_cobro(
-      cobrado, descripcion, idcliente, fechainsert, fechacobro, idusuarioinsert, idusuariocobro, comentario, saldocobrado, saldoacobrar)
-      VALUES (false, $1, $2, $3, null, $4, null, null, 0, $5) RETURNING *`,
+        idestadocobro, descripcion, idcliente, fechainsert, fechacobro, idusuarioinsert, idusuariocobro, comentario, saldocobrado, saldoacobrar, retencion)
+      VALUES (3, $1, $2, $3, null, $4, null, null, 0, $5, false) RETURNING *`,
       [descripcion, idcliente, current_date(), idusuario, total]
     );
     const idcliente_cobro = results.rows[0].idcliente_cobro;

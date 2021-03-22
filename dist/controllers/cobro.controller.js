@@ -7,17 +7,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
-
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
 var _cobro = _interopRequireDefault(require("../services/cobro.service"));
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+var _date = require("../util/date.util");
 
 var CobroController = {
   get: function () {
@@ -149,23 +145,24 @@ var CobroController = {
   }(),
   update: function () {
     var _update = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
-      var response;
+      var params, response;
       return _regenerator["default"].wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              _context4.prev = 0;
-
-              if (req.body.sucursal.length === 0) {
-                req.body.sucursal = [{
-                  descripcion: "N/A"
-                }];
-              }
-
-              _context4.next = 4;
-              return _cobro["default"].update(_objectSpread(_objectSpread({}, req.body), {}, {
+              params = {
+                fechacobro: (0, _date.current_date)(),
+                idusuariocobro: req.decoded.id,
+                comentario: req.body.comentario,
+                saldocobrado: req.body.saldocobrado,
+                retencion: req.body.retencion,
+                actividad_cobro: req.body.actividad_cobro,
+                idestadocobro: req.body.idestadocobro.idestadocobro,
                 id: req.params.id
-              }));
+              };
+              _context4.prev = 1;
+              _context4.next = 4;
+              return _cobro["default"].update(params);
 
             case 4:
               response = _context4.sent;
@@ -176,7 +173,7 @@ var CobroController = {
 
             case 8:
               _context4.prev = 8;
-              _context4.t0 = _context4["catch"](0);
+              _context4.t0 = _context4["catch"](1);
               return _context4.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context4.t0.message
@@ -187,7 +184,7 @@ var CobroController = {
               return _context4.stop();
           }
         }
-      }, _callee4, null, [[0, 8]]);
+      }, _callee4, null, [[1, 8]]);
     }));
 
     function update(_x7, _x8) {

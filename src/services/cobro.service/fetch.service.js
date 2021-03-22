@@ -1,4 +1,4 @@
-import db from "../db";
+import db from "../../db";
 
 const query = `
 SELECT 
@@ -36,45 +36,24 @@ JOIN cliente USING (idcliente)
 JOIN estadocobro USING (idestadocobro)
 `;
 
-const CobroService = {
-  getAll: async () => {
+
+export const  getAll = async () => {
     try {
       const results = await db.query(query);
       return results.rows.map((x) => x.rows);
     } catch (e) {
       throw e;
     }
-  },
-  getById: async (id) => {
+  };
+export const  getById = async (id) => {
     try {
-      const results = await db.query(query+ " WHERE idcliente_cobro = $1",[id]);
+      const results = await db.query(query + " WHERE idcliente_cobro = $1", [
+        id,
+      ]);
       return results.rows[0].rows;
     } catch (e) {
       throw e;
     }
-  },
-  update: async ({ descripcion, precio, id}) => {
-    try {
-      const results = await db.query(
-        "UPDATE concepto SET descripcion = $1, precio = $2 WHERE idconcepto = $3 RETURNING *",
-        [descripcion, precio, id]
-      );
-      return results.rows;
-    } catch (e) {
-      throw e;
-    }
-  },
-  delete: async (id) => {
-    try {
-      const results = await db.query(
-        "DELETE FROM concepto WHERE idconcepto  = $1",
-        [id]
-      );
-      return results.rows;
-    } catch (e) {
-      throw e;
-    }
-  },
-};
+  };
 
-export default CobroService;
+

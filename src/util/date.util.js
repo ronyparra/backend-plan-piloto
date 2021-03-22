@@ -1,5 +1,4 @@
-export const current_date = () =>
-  format_date(new Date().toISOString().substr(0, 10));
+export const current_date = () => new Date().toISOString().substr(0, 10);
 
 export const format_date = (date) => {
   if (!date) return null;

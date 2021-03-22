@@ -10,7 +10,7 @@ exports.parse_date = exports.format_date = exports.current_date = void 0;
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 
 var current_date = function current_date() {
-  return format_date(new Date().toISOString().substr(0, 10));
+  return new Date().toISOString().substr(0, 10);
 };
 
 exports.current_date = current_date;
