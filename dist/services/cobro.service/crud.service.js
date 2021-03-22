@@ -69,30 +69,43 @@ exports.update = update;
 
 var delet = /*#__PURE__*/function () {
   var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(id) {
-    var results;
+    var actividad_cobro, results;
     return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.prev = 0;
             _context2.next = 3;
-            return _db["default"].query("DELETE FROM concepto WHERE idconcepto  = $1", [id]);
+            return _db["default"].query("SELECT idcliente_cobro, idactividad FROM actividad_cobro WHERE idcliente_cobro = $1", [id]);
 
           case 3:
+            actividad_cobro = _context2.sent;
+            _context2.next = 6;
+            return _db["default"].query((0, _formatter.formatUpdateCobro)(actividad_cobro.rows, 1));
+
+          case 6:
+            _context2.next = 8;
+            return _db["default"].query("DELETE FROM actividad_cobro WHERE idcliente_cobro = $1", [id]);
+
+          case 8:
+            _context2.next = 10;
+            return _db["default"].query("DELETE FROM cliente_cobro WHERE idcliente_cobro  = $1", [id]);
+
+          case 10:
             results = _context2.sent;
             return _context2.abrupt("return", results.rows);
 
-          case 7:
-            _context2.prev = 7;
+          case 14:
+            _context2.prev = 14;
             _context2.t0 = _context2["catch"](0);
             throw _context2.t0;
 
-          case 10:
+          case 17:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[0, 7]]);
+    }, _callee2, null, [[0, 14]]);
   }));
 
   return function delet(_x2) {

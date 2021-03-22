@@ -208,7 +208,7 @@ var CobroController = {
             case 0:
               _context5.prev = 0;
               _context5.next = 3;
-              return _cobro["default"]["delete"](req.params.id);
+              return _cobro["default"].delet(req.params.id);
 
             case 3:
               response = _context5.sent;
