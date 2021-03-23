@@ -75,7 +75,7 @@ export const changeStatus = async ({
     const results = await db.query(
       `INSERT INTO cliente_cobro(
         idestadocobro, descripcion, idcliente, fechainsert, fechacobro, idusuarioinsert, idusuariocobro, comentario, saldocobrado, saldoacobrar, retencion)
-      VALUES (3, $1, $2, $3, null, $4, null, null, 0, $5, false) RETURNING *`,
+      VALUES (2, $1, $2, $3, null, $4, null, null, 0, $5, false) RETURNING *`,
       [descripcion, idcliente, current_date(), idusuario, total]
     );
     const idcliente_cobro = results.rows[0].idcliente_cobro;

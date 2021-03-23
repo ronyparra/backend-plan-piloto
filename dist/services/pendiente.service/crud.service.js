@@ -26,7 +26,7 @@ var getAll = /*#__PURE__*/function () {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return _db["default"].query(query + " ORDER BY activo DESC");
+            return _db["default"].query(query + " WHERE activo = true ORDER BY activo DESC");
 
           case 3:
             results = _context.sent;

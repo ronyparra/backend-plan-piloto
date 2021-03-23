@@ -119,7 +119,7 @@ var changeStatus = /*#__PURE__*/function () {
 
           case 8:
             _context2.next = 10;
-            return _db["default"].query("INSERT INTO cliente_cobro(\n        idestadocobro, descripcion, idcliente, fechainsert, fechacobro, idusuarioinsert, idusuariocobro, comentario, saldocobrado, saldoacobrar, retencion)\n      VALUES (3, $1, $2, $3, null, $4, null, null, 0, $5, false) RETURNING *", [descripcion, idcliente, (0, _date.current_date)(), idusuario, total]);
+            return _db["default"].query("INSERT INTO cliente_cobro(\n        idestadocobro, descripcion, idcliente, fechainsert, fechacobro, idusuarioinsert, idusuariocobro, comentario, saldocobrado, saldoacobrar, retencion)\n      VALUES (2, $1, $2, $3, null, $4, null, null, 0, $5, false) RETURNING *", [descripcion, idcliente, (0, _date.current_date)(), idusuario, total]);
 
           case 10:
             results = _context2.sent;
