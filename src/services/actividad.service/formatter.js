@@ -13,7 +13,7 @@ export const formatDetalle = (detalle, id) => {
       if (acc !== "") acc = acc + ",";
       return (acc =
         acc +
-        `(${id},${curr.idconcepto.idconcepto},${curr.precio},${curr.cantidad})`);
+        `(${id},${curr.idconcepto.idconcepto},${curr.precio},${curr.cantidad},${curr.idmoneda.idmoneda})`);
     }, ""),
   ];
 };

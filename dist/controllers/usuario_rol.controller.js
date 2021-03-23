@@ -13,29 +13,29 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
-var _concepto = _interopRequireDefault(require("../services/concepto.service"));
+var _usuario_rol = _interopRequireDefault(require("../services/usuario_rol.service"));
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-var ConceptoController = {
+var GrupoUsuarioController = {
   get: function () {
     var _get = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
-      var users;
+      var result;
       return _regenerator["default"].wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return _concepto["default"].getAll();
+              return _usuario_rol["default"].getAll();
 
             case 3:
-              users = _context.sent;
+              result = _context.sent;
               return _context.abrupt("return", res.status(200).json({
                 status: 200,
-                data: users
+                data: result
               }));
 
             case 7:
@@ -62,20 +62,20 @@ var ConceptoController = {
   }(),
   getById: function () {
     var _getById = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
-      var users;
+      var result;
       return _regenerator["default"].wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.prev = 0;
               _context2.next = 3;
-              return _concepto["default"].getById(req.params.id);
+              return _usuario_rol["default"].getById(req.params.id);
 
             case 3:
-              users = _context2.sent;
+              result = _context2.sent;
               return _context2.abrupt("return", res.status(200).json({
                 status: 200,
-                data: users
+                data: result
               }));
 
             case 7:
@@ -102,41 +102,36 @@ var ConceptoController = {
   }(),
   create: function () {
     var _create = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
-      var params, concepto;
+      var concepto;
       return _regenerator["default"].wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              params = {
-                descripcion: req.body.descripcion,
-                precio: req.body.precio,
-                idmoneda: req.body.idmoneda.idmoneda
-              };
-              _context3.prev = 1;
-              _context3.next = 4;
-              return _concepto["default"].create(params);
+              _context3.prev = 0;
+              _context3.next = 3;
+              return _usuario_rol["default"].create(req.body);
 
-            case 4:
+            case 3:
               concepto = _context3.sent;
               return _context3.abrupt("return", res.status(200).json({
                 status: 200,
                 data: concepto
               }));
 
-            case 8:
-              _context3.prev = 8;
-              _context3.t0 = _context3["catch"](1);
+            case 7:
+              _context3.prev = 7;
+              _context3.t0 = _context3["catch"](0);
               return _context3.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context3.t0.message
               }));
 
-            case 11:
+            case 10:
             case "end":
               return _context3.stop();
           }
         }
-      }, _callee3, null, [[1, 8]]);
+      }, _callee3, null, [[0, 7]]);
     }));
 
     function create(_x5, _x6) {
@@ -147,43 +142,38 @@ var ConceptoController = {
   }(),
   update: function () {
     var _update = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
-      var params, users;
+      var result;
       return _regenerator["default"].wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              params = {
-                descripcion: req.body.descripcion,
-                precio: req.body.precio,
-                idmoneda: req.body.idmoneda.idmoneda
-              };
-              _context4.prev = 1;
-              _context4.next = 4;
-              return _concepto["default"].update(_objectSpread(_objectSpread({}, params), {}, {
+              _context4.prev = 0;
+              _context4.next = 3;
+              return _usuario_rol["default"].update(_objectSpread(_objectSpread({}, req.body), {}, {
                 id: req.params.id
               }));
 
-            case 4:
-              users = _context4.sent;
+            case 3:
+              result = _context4.sent;
               return _context4.abrupt("return", res.status(200).json({
                 status: 200,
-                data: users
+                data: result
               }));
 
-            case 8:
-              _context4.prev = 8;
-              _context4.t0 = _context4["catch"](1);
+            case 7:
+              _context4.prev = 7;
+              _context4.t0 = _context4["catch"](0);
               return _context4.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context4.t0.message
               }));
 
-            case 11:
+            case 10:
             case "end":
               return _context4.stop();
           }
         }
-      }, _callee4, null, [[1, 8]]);
+      }, _callee4, null, [[0, 7]]);
     }));
 
     function update(_x7, _x8) {
@@ -194,20 +184,20 @@ var ConceptoController = {
   }(),
   "delete": function () {
     var _delete2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
-      var users;
+      var result;
       return _regenerator["default"].wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
               _context5.prev = 0;
               _context5.next = 3;
-              return _concepto["default"]["delete"](req.params.id);
+              return _usuario_rol["default"]["delete"](req.params.id);
 
             case 3:
-              users = _context5.sent;
+              result = _context5.sent;
               return _context5.abrupt("return", res.status(200).json({
                 status: 200,
-                data: users
+                data: result
               }));
 
             case 7:
@@ -233,5 +223,5 @@ var ConceptoController = {
     return _delete;
   }()
 };
-var _default = ConceptoController;
+var _default = GrupoUsuarioController;
 exports["default"] = _default;

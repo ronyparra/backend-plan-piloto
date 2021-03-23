@@ -2,12 +2,12 @@ import { body, validationResult } from "express-validator";
 
 const CobroValidator = {
   body: [
-    body("idcliente")
+    body("idcliente.idcliente")
       .not()
       .isEmpty()
       .withMessage("Cliente es obligatorio")
       .bail(),
-    body("idestadocobro")
+    body("idestadocobro.idestadocobro")
       .not()
       .isEmpty()
       .withMessage("Estado es obligatorio")

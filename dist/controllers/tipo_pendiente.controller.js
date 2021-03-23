@@ -13,29 +13,29 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
-var _concepto = _interopRequireDefault(require("../services/concepto.service"));
+var _tipo_pendiente = _interopRequireDefault(require("../services/tipo_pendiente.service"));
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-var ConceptoController = {
+var TipoPendienteController = {
   get: function () {
     var _get = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
-      var users;
+      var tipo_pendiente;
       return _regenerator["default"].wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return _concepto["default"].getAll();
+              return _tipo_pendiente["default"].getAll();
 
             case 3:
-              users = _context.sent;
+              tipo_pendiente = _context.sent;
               return _context.abrupt("return", res.status(200).json({
                 status: 200,
-                data: users
+                data: tipo_pendiente
               }));
 
             case 7:
@@ -62,20 +62,20 @@ var ConceptoController = {
   }(),
   getById: function () {
     var _getById = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
-      var users;
+      var tipo_pendiente;
       return _regenerator["default"].wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.prev = 0;
               _context2.next = 3;
-              return _concepto["default"].getById(req.params.id);
+              return _tipo_pendiente["default"].getById(req.params.id);
 
             case 3:
-              users = _context2.sent;
+              tipo_pendiente = _context2.sent;
               return _context2.abrupt("return", res.status(200).json({
                 status: 200,
-                data: users
+                data: tipo_pendiente
               }));
 
             case 7:
@@ -102,25 +102,24 @@ var ConceptoController = {
   }(),
   create: function () {
     var _create = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
-      var params, concepto;
+      var insert, tipo_pendiente;
       return _regenerator["default"].wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              params = {
+              insert = {
                 descripcion: req.body.descripcion,
-                precio: req.body.precio,
-                idmoneda: req.body.idmoneda.idmoneda
+                color: req.body.color
               };
               _context3.prev = 1;
               _context3.next = 4;
-              return _concepto["default"].create(params);
+              return _tipo_pendiente["default"].create(insert);
 
             case 4:
-              concepto = _context3.sent;
+              tipo_pendiente = _context3.sent;
               return _context3.abrupt("return", res.status(200).json({
                 status: 200,
-                data: concepto
+                data: tipo_pendiente
               }));
 
             case 8:
@@ -147,27 +146,26 @@ var ConceptoController = {
   }(),
   update: function () {
     var _update = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
-      var params, users;
+      var update, tipo_pendiente;
       return _regenerator["default"].wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              params = {
+              update = {
                 descripcion: req.body.descripcion,
-                precio: req.body.precio,
-                idmoneda: req.body.idmoneda.idmoneda
+                color: req.body.color
               };
               _context4.prev = 1;
               _context4.next = 4;
-              return _concepto["default"].update(_objectSpread(_objectSpread({}, params), {}, {
+              return _tipo_pendiente["default"].update(_objectSpread(_objectSpread({}, update), {}, {
                 id: req.params.id
               }));
 
             case 4:
-              users = _context4.sent;
+              tipo_pendiente = _context4.sent;
               return _context4.abrupt("return", res.status(200).json({
                 status: 200,
-                data: users
+                data: tipo_pendiente
               }));
 
             case 8:
@@ -194,20 +192,20 @@ var ConceptoController = {
   }(),
   "delete": function () {
     var _delete2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
-      var users;
+      var tipo_pendiente;
       return _regenerator["default"].wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
               _context5.prev = 0;
               _context5.next = 3;
-              return _concepto["default"]["delete"](req.params.id);
+              return _tipo_pendiente["default"]["delete"](req.params.id);
 
             case 3:
-              users = _context5.sent;
+              tipo_pendiente = _context5.sent;
               return _context5.abrupt("return", res.status(200).json({
                 status: 200,
-                data: users
+                data: tipo_pendiente
               }));
 
             case 7:
@@ -233,5 +231,5 @@ var ConceptoController = {
     return _delete;
   }()
 };
-var _default = ConceptoController;
+var _default = TipoPendienteController;
 exports["default"] = _default;

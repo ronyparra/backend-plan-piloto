@@ -43,12 +43,18 @@ const query = `SELECT
                         'idconcepto', conc.idconcepto,
                         'descripcion', conc.descripcion
                     ), 
+                    'idmoneda', json_build_object(
+                      'idmoneda', mon.idmoneda,
+                      'descripcion',	mon.idmoneda,
+                      'abreviatura', mon.abreviatura
+                    ),
                     'precio', det.precio, 
                     'cantidad', det.cantidad
                 )
             )
             FROM    actividad_concepto_detalle AS det
             JOIN    concepto as conc ON det.idconcepto = conc.idconcepto
+            JOIN    moneda as mon ON det.idmoneda 		= mon.idmoneda
             WHERE   idactividad = actividad.idactividad
 
           )) as rows

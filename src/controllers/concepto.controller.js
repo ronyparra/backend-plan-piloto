@@ -18,17 +18,27 @@ const ConceptoController = {
     }
   },
   create: async (req, res) => {
+    const params = {
+      descripcion: req.body.descripcion, 
+      precio: req.body.precio,
+      idmoneda: req.body.idmoneda.idmoneda
+    }
     try {
-      const concepto = await ConceptoService.create(req.body);
+      const concepto = await ConceptoService.create(params);
       return res.status(200).json({ status: 200, data: concepto });
     } catch (e) {
       return res.status(400).json({ status: 400, message: e.message });
     }
   },
   update: async (req, res) => {
+    const params = {
+      descripcion: req.body.descripcion, 
+      precio: req.body.precio,
+      idmoneda: req.body.idmoneda.idmoneda
+    }
     try {
       const users = await ConceptoService.update({
-        ...req.body,
+        ...params,
         id: req.params.id,
       });
       return res.status(200).json({ status: 200, data: users });

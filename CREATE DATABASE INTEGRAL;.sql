@@ -219,3 +219,6 @@ CREATE TABLE moneda (
 );
 INSERT INTO moneda(idmoneda, descripcion, abreviatura) VALUES (1, 'Guarani', 'GS');
 INSERT INTO moneda(idmoneda, descripcion, abreviatura) VALUES (2, 'Dolar', 'USD');
+
+ALTER TABLE concepto ADD COLUMN idmoneda INT NOT NULL DEFAULT 1 REFERENCES moneda (idmoneda) ON UPDATE CASCADE;
+ALTER TABLE actividad_concepto_detalle ADD COLUMN idmoneda INT NOT NULL DEFAULT 1 REFERENCES moneda (idmoneda) ON UPDATE CASCADE;

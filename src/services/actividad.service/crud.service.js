@@ -34,7 +34,7 @@ export const create = async ({
       `INSERT INTO actividad_tecnico_detalle(idactividad, idusuario) VALUES ${actividad_tecnico} RETURNING *`
     );
     const resultsConcepto = await db.query(
-      `INSERT INTO actividad_concepto_detalle(idactividad, idconcepto, precio, cantidad)VALUES ${actividad_detalle} RETURNING *`
+      `INSERT INTO actividad_concepto_detalle(idactividad, idconcepto, precio, cantidad, idmoneda)VALUES ${actividad_detalle} RETURNING *`
     );
     if (actividad_pendiente.length > 0) {
       await db.query(
@@ -126,7 +126,7 @@ export const update = async ({
       `INSERT INTO actividad_tecnico_detalle(idactividad, idusuario) VALUES ${actividad_tecnico} RETURNING *`
     );
     const resultsConcepto = await db.query(
-      `INSERT INTO actividad_concepto_detalle(idactividad, idconcepto, precio, cantidad)VALUES ${actividad_detalle} RETURNING *`
+      `INSERT INTO actividad_concepto_detalle(idactividad, idconcepto, precio, cantidad, idmoneda)VALUES ${actividad_detalle} RETURNING *`
     );
 
     if (actividad_pendiente.length > 0)
