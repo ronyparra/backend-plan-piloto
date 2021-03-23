@@ -210,3 +210,12 @@ ALTER TABLE cliente_cobro ADD COLUMN retencion BOOLEAN NOT NULL DEFAULT false;
 INSERT INTO estadocobro(idestadocobro, descripcion) VALUES (4, 'Entregado');
 ALTER TABLE cliente_cobro ADD COLUMN idestadocobro INT NOT NULL DEFAULT 1 REFERENCES estadocobro (idestadocobro) ON UPDATE CASCADE;
 ALTER TABLE cliente_cobro DROP COLUMN cobrado;
+
+CREATE TABLE moneda (
+    idmoneda SERIAL NOT NULL,
+    descripcion TEXT NOT NULL,
+    abreviatura  TEXT NOT NULL,
+    PRIMARY KEY (idmoneda)
+);
+INSERT INTO moneda(idmoneda, descripcion, abreviatura) VALUES (1, 'Guarani', 'GS');
+INSERT INTO moneda(idmoneda, descripcion, abreviatura) VALUES (2, 'Dolar', 'USD');
