@@ -12,14 +12,15 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/auth", routes.auth);
 app.use("/user", routes.user);
+app.use("/cobro", routes.cobro);
+app.use("/moneda", routes.moneda);
 app.use("/cliente", routes.cliente);
 app.use("/concepto", routes.concepto);
 app.use("/actividad", routes.actividad);
 app.use("/pendiente", routes.pendiente);
+app.use("/usuariorol", routes.usuario_rol);
 app.use("/formulario", routes.formulario);
 app.use("/estadocobro", routes.estadocobro);
-app.use("/usuariorol", routes.usuario_rol);
-app.use("/cobro", routes.cobro);
 app.use("/tipopendiente", routes.tipo_pendiente);
 
 app.listen(8001, () => {
