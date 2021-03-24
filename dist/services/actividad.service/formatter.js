@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.formatActividadCobro = exports.formatActividadChangeStatus = exports.formatDetalle = exports.formatTecnico = void 0;
+exports.calcularTotal = exports.formatActividadCobro = exports.formatActividadChangeStatus = exports.formatDetalle = exports.formatTecnico = void 0;
 
 var formatTecnico = function formatTecnico(tecnico, id) {
   return [tecnico.reduce(function (acc, curr) {
@@ -39,3 +39,14 @@ var formatActividadCobro = function formatActividadCobro(detalle, id) {
 };
 
 exports.formatActividadCobro = formatActividadCobro;
+
+var calcularTotal = function calcularTotal(detalle) {
+  return detalle.reduce(function (acc, curr) {
+    var subtotal = curr.detalle.reduce(function (acc1, curr1) {
+      return acc1 = acc1 + curr1.cantidad * curr1.precio;
+    }, 0);
+    return acc = acc + subtotal;
+  }, 0);
+};
+
+exports.calcularTotal = calcularTotal;

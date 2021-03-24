@@ -96,36 +96,31 @@ exports.create = create;
 
 var changeStatus = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(_ref3) {
-    var detalle, idestadocobro, idusuario, descripcion, total, idcliente, results, idcliente_cobro;
+    var detalle, idestadocobro, idusuario, descripcion, total, idcliente, results;
     return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             detalle = _ref3.detalle, idestadocobro = _ref3.idestadocobro, idusuario = _ref3.idusuario, descripcion = _ref3.descripcion;
-            total = detalle.reduce(function (acc, curr) {
-              var subtotal = curr.detalle.reduce(function (acc1, curr1) {
-                return acc1 = acc1 + curr1.cantidad * curr1.precio;
-              }, 0);
-              return acc = acc + subtotal;
-            }, 0);
+            total = (0, _formatter.calcularTotal)(detalle);
             idcliente = detalle[0].idcliente.idcliente;
-            _context2.prev = 3;
-            _context2.next = 6;
+            console.log(detalle);
+            _context2.prev = 4;
+            _context2.next = 7;
             return _db["default"].query("BEGIN");
 
-          case 6:
-            _context2.next = 8;
+          case 7:
+            _context2.next = 9;
             return _db["default"].query((0, _formatter.formatActividadChangeStatus)(detalle, idestadocobro));
 
-          case 8:
-            _context2.next = 10;
-            return _db["default"].query("INSERT INTO cliente_cobro(\n        idestadocobro, descripcion, idcliente, fechainsert, fechacobro, idusuarioinsert, idusuariocobro, comentario, saldocobrado, saldoacobrar, retencion)\n      VALUES (2, $1, $2, $3, null, $4, null, null, 0, $5, false) RETURNING *", [descripcion, idcliente, (0, _date.current_date)(), idusuario, total]);
+          case 9:
+            _context2.next = 11;
+            return _db["default"].query("INSERT INTO cliente_cobro(\n        idestadocobro, descripcion, idcliente, fechainsert, fechacobro, idusuarioinsert, idusuariocobro, comentario, saldocobrado, saldoacobrar, retencion, idmoneda)\n      VALUES (2, $1, $2, $3, null, $4, null, null, 0, $5, false, $6) RETURNING *", [descripcion, idcliente, (0, _date.current_date)(), idusuario, total, 1]);
 
-          case 10:
+          case 11:
             results = _context2.sent;
-            idcliente_cobro = results.rows[0].idcliente_cobro;
             _context2.next = 14;
-            return _db["default"].query("INSERT INTO actividad_cobro(idcliente_cobro, idactividad) VALUES ".concat((0, _formatter.formatActividadCobro)(detalle, idcliente_cobro)));
+            return _db["default"].query("INSERT INTO actividad_cobro(idcliente_cobro, idactividad) VALUES ".concat((0, _formatter.formatActividadCobro)(detalle, results.rows[0].idcliente_cobro)));
 
           case 14:
             _context2.next = 16;
@@ -137,7 +132,7 @@ var changeStatus = /*#__PURE__*/function () {
 
           case 18:
             _context2.prev = 18;
-            _context2.t0 = _context2["catch"](3);
+            _context2.t0 = _context2["catch"](4);
             _context2.next = 22;
             return _db["default"].query("ROLLBACK");
 
@@ -149,7 +144,7 @@ var changeStatus = /*#__PURE__*/function () {
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[3, 18]]);
+    }, _callee2, null, [[4, 18]]);
   }));
 
   return function changeStatus(_x2) {

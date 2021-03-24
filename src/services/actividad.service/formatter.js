@@ -34,3 +34,12 @@ export const formatActividadCobro = (detalle, id) => {
     }, ""),
   ];
 };
+
+export const calcularTotal = (detalle) =>
+  detalle.reduce((acc, curr) => {
+    const subtotal = curr.detalle.reduce(
+      (acc1, curr1) => (acc1 = acc1 + curr1.cantidad * curr1.precio),
+      0
+    );
+    return (acc = acc + subtotal);
+  }, 0);

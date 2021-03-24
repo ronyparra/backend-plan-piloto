@@ -1,5 +1,6 @@
 import db from "../../db";
 import {
+  calcularTotal,
   formatDetalle,
   formatTecnico,
   formatActividadCobro,
@@ -61,25 +62,22 @@ export const changeStatus = async ({
   idusuario,
   descripcion,
 }) => {
-  const total = detalle.reduce((acc, curr) => {
-    const subtotal = curr.detalle.reduce(
-      (acc1, curr1) => (acc1 = acc1 + curr1.cantidad * curr1.precio),
-      0
-    );
-    return (acc = acc + subtotal);
-  }, 0);
+
+  const total = calcularTotal(detalle);
   const idcliente = detalle[0].idcliente.idcliente;
+
+  console.log(detalle)
+
   try {
     await db.query("BEGIN");
     await db.query(formatActividadChangeStatus(detalle, idestadocobro));
     const results = await db.query(
       `INSERT INTO cliente_cobro(
-        idestadocobro, descripcion, idcliente, fechainsert, fechacobro, idusuarioinsert, idusuariocobro, comentario, saldocobrado, saldoacobrar, retencion)
-      VALUES (2, $1, $2, $3, null, $4, null, null, 0, $5, false) RETURNING *`,
-      [descripcion, idcliente, current_date(), idusuario, total]
+        idestadocobro, descripcion, idcliente, fechainsert, fechacobro, idusuarioinsert, idusuariocobro, comentario, saldocobrado, saldoacobrar, retencion, idmoneda)
+      VALUES (2, $1, $2, $3, null, $4, null, null, 0, $5, false, $6) RETURNING *`,
+      [descripcion, idcliente, current_date(), idusuario, total, 1]
     );
-    const idcliente_cobro = results.rows[0].idcliente_cobro;
-    await db.query(`INSERT INTO actividad_cobro(idcliente_cobro, idactividad) VALUES ${formatActividadCobro(detalle,idcliente_cobro)}`);
+    await db.query(`INSERT INTO actividad_cobro(idcliente_cobro, idactividad) VALUES ${formatActividadCobro(detalle,results.rows[0].idcliente_cobro)}`);
     await db.query("COMMIT");
   } catch (e) {
     await db.query("ROLLBACK");
