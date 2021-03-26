@@ -1,11 +1,23 @@
 import db from "../../db";
+import { getById } from "./fetch.service";
 import {
   calcularTotal,
-  formatDetalle,
-  formatTecnico,
-  formatActividadCobro,
-  formatActividadChangeStatus,
+  formatMaster,
+  CHANGE_ACTIVIDAD_STATUS,
+  INSERT_CLIENTE_COBRO,
+  INSERT_ACTIVIDAD,
+  INSERT_DET_ACT_COBRO,
+  INSERT_DET_TECNICO,
+  INSERT_DET_PENDIENTE,
+  INSERT_DET_CONCEPTO,
+  UPDATE_ACTIVIDAD,
+  UPDATE_PENDIENTE,
+  DELETE_ACTIVIDAD,
+  DELETE_DET_CONCEPTO,
+  DELETE_DET_TECNICO,
+  DELETE_DET_PENDIENTE,
 } from "./formatter";
+
 import { current_date } from "../../util/date.util";
 
 export const create = async ({
@@ -17,35 +29,27 @@ export const create = async ({
   try {
     await db.query("BEGIN");
     const results = await db.query(
-      "INSERT INTO actividad( idcliente,idcliente_sucursal, idusuario, idestadocobro, solicitante, comentario, fecha) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-      [
+      INSERT_ACTIVIDAD(
         master.idcliente,
         master.idcliente_sucursal,
         master.idusuario,
         master.idestadocobro,
         master.solicitante,
         master.comentario,
-        master.fecha,
-      ]
+        master.fecha
+      )
     );
     const idactividad = results.rows[0].idactividad;
-    const actividad_tecnico = formatTecnico(tecnico, idactividad);
-    const actividad_detalle = formatDetalle(detalle, idactividad);
     const resultsTecnico = await db.query(
-      `INSERT INTO actividad_tecnico_detalle(idactividad, idusuario) VALUES ${actividad_tecnico} RETURNING *`
+      INSERT_DET_TECNICO(tecnico, idactividad)
     );
     const resultsConcepto = await db.query(
-      `INSERT INTO actividad_concepto_detalle(idactividad, idconcepto, precio, cantidad, idmoneda)VALUES ${actividad_detalle} RETURNING *`
+      INSERT_DET_CONCEPTO(detalle, idactividad)
     );
+
     if (actividad_pendiente.length > 0) {
-      await db.query(
-        "INSERT INTO actividad_pendiente(idactividad, idpendiente)VALUES ($1, $2)",
-        [idactividad, actividad_pendiente[0]]
-      );
-      await db.query(
-        "UPDATE pendiente SET activo = false WHERE idpendiente = $1",
-        [actividad_pendiente[0]]
-      );
+      await db.query(INSERT_DET_PENDIENTE(idactividad, actividad_pendiente[0]));
+      await db.query(UPDATE_PENDIENTE(actividad_pendiente[0], false));
     }
     results.rows[0].tecnico = resultsTecnico.rows;
     results.rows[0].detalle = resultsConcepto.rows;
@@ -62,26 +66,58 @@ export const changeStatus = async ({
   idusuario,
   descripcion,
 }) => {
-
-  const total = calcularTotal(detalle);
-  const idcliente = detalle[0].idcliente.idcliente;
-
-  console.log(detalle)
+  const actividadesSinOrden = [];
 
   try {
     await db.query("BEGIN");
-    await db.query(formatActividadChangeStatus(detalle, idestadocobro));
-    const results = await db.query(
-      `INSERT INTO cliente_cobro(
-        idestadocobro, descripcion, idcliente, fechainsert, fechacobro, idusuarioinsert, idusuariocobro, comentario, saldocobrado, saldoacobrar, retencion, idmoneda)
-      VALUES (2, $1, $2, $3, null, $4, null, null, 0, $5, false, $6) RETURNING *`,
-      [descripcion, idcliente, current_date(), idusuario, total, 1]
-    );
-    await db.query(`INSERT INTO actividad_cobro(idcliente_cobro, idactividad) VALUES ${formatActividadCobro(detalle,results.rows[0].idcliente_cobro)}`);
+    for (const actividad of detalle) {
+      const detActividadMoneda = ordenarDetActividadPorMoneda(
+        actividad.detalle
+      );
+      if (detActividadMoneda.length > 1) {
+        for (const [index, detConcepto] of detActividadMoneda.entries()) {
+          if (index === 0) {
+            const execute = `${DELETE_DET_CONCEPTO(actividad.idactividad)} 
+              ${INSERT_DET_CONCEPTO(detConcepto, actividad.idactividad)}`;
+            await db.query(execute);
+            actividad.detalle = JSON.parse(JSON.stringify(detConcepto));
+          } else {
+            const results = await create({
+              master: formatMaster(actividad),
+              tecnico: actividad.tecnico,
+              detalle: detConcepto,
+              actividad_pendiente: actividad.actividad_pendiente,
+            });
+            const newActividad = await getById(results[0].idactividad);
+            actividadesSinOrden.push({...newActividad,moneda: detConcepto[0].moneda});
+          }
+        }
+      }
+      actividadesSinOrden.push(actividad);
+    }
+    const actividadesConOrden = ordenarActividadPorMoneda(actividadesSinOrden);
+
+    for (const actividad of actividadesConOrden) {
+      const saldoacobrar = calcularTotal(actividad);
+      await db.query(CHANGE_ACTIVIDAD_STATUS(actividad, idestadocobro));
+      const results = await db.query(
+        INSERT_CLIENTE_COBRO(
+          descripcion,
+          actividad[0].idcliente.idcliente,
+          current_date(),
+          idusuario,
+          saldoacobrar,
+          actividad[0].moneda
+        )
+      );
+      await db.query(
+        INSERT_DET_ACT_COBRO(actividad, results.rows[0].idcliente_cobro)
+      );
+    }
     await db.query("COMMIT");
-  } catch (e) {
-    await db.query("ROLLBACK");
-    throw e;
+  } catch (error) {
+    db.query("ROLLBACK");
+    throw error;
   }
 };
 export const update = async ({
@@ -94,8 +130,7 @@ export const update = async ({
   try {
     await db.query("BEGIN");
     const results = await db.query(
-      "UPDATE actividad SET idcliente=$2, idcliente_sucursal=$3, idusuario=$4, idestadocobro=$5, solicitante=$6, comentario=$7, fecha=$8 WHERE idactividad = $1 RETURNING *",
-      [
+      UPDATE_ACTIVIDAD(
         id,
         master.idcliente,
         master.idcliente_sucursal,
@@ -103,35 +138,18 @@ export const update = async ({
         master.idestadocobro,
         master.solicitante,
         master.comentario,
-        master.fecha,
-      ]
+        master.fecha
+      )
     );
-    await db.query(
-      "DELETE FROM actividad_tecnico_detalle WHERE idactividad  = $1",
-      [id]
-    );
-    await db.query(
-      "DELETE FROM actividad_concepto_detalle WHERE idactividad  = $1",
-      [id]
-    );
-    await db.query("DELETE FROM actividad_pendiente WHERE idactividad = $1", [
-      id,
-    ]);
-    const actividad_tecnico = formatTecnico(tecnico, id);
-    const actividad_detalle = formatDetalle(detalle, id);
+    await db.query(DELETE_DET_TECNICO(id));
+    await db.query(DELETE_DET_CONCEPTO(id));
+    await db.query(DELETE_DET_PENDIENTE(id));
 
-    const resultsTecnico = await db.query(
-      `INSERT INTO actividad_tecnico_detalle(idactividad, idusuario) VALUES ${actividad_tecnico} RETURNING *`
-    );
-    const resultsConcepto = await db.query(
-      `INSERT INTO actividad_concepto_detalle(idactividad, idconcepto, precio, cantidad, idmoneda)VALUES ${actividad_detalle} RETURNING *`
-    );
+    const resultsTecnico = await db.query(INSERT_DET_TECNICO(tecnico, id));
+    const resultsConcepto = await db.query(INSERT_DET_CONCEPTO(detalle, id));
 
     if (actividad_pendiente.length > 0)
-      await db.query(
-        "INSERT INTO actividad_pendiente(idactividad, idpendiente)VALUES ($1, $2)",
-        [id, actividad_pendiente[0]]
-      );
+      await db.query(INSERT_DET_PENDIENTE(id, actividad_pendiente[0]));
 
     results.rows[0].tecnico = resultsTecnico.rows;
     results.rows[0].detalle = resultsConcepto.rows;
@@ -145,27 +163,12 @@ export const update = async ({
 export const delet = async (id) => {
   try {
     await db.query("BEGIN");
-    await db.query(
-      "DELETE FROM actividad_tecnico_detalle WHERE idactividad  = $1",
-      [id]
-    );
-    await db.query(
-      "DELETE FROM actividad_concepto_detalle WHERE idactividad  = $1",
-      [id]
-    );
-    const pendiente = await db.query(
-      "DELETE FROM actividad_pendiente WHERE idactividad = $1 RETURNING *",
-      [id]
-    );
+    await db.query(DELETE_DET_TECNICO(id));
+    await db.query(DELETE_DET_CONCEPTO(id));
+    const pendiente = await db.query(DELETE_DET_PENDIENTE(id));
     if (pendiente.rows.length > 0)
-      await db.query(
-        "UPDATE pendiente SET activo = true WHERE idpendiente = $1",
-        [pendiente.rows[0].idpendiente]
-      );
-    const results = await db.query(
-      "DELETE FROM actividad WHERE idactividad  = $1",
-      [id]
-    );
+      await db.query(UPDATE_PENDIENTE(pendiente.rows[0].idpendiente, true));
+    const results = await db.query(DELETE_ACTIVIDAD(id));
     await db.query("COMMIT");
     return results.rows;
   } catch (e) {
@@ -173,3 +176,28 @@ export const delet = async (id) => {
     throw e;
   }
 };
+
+const ordenarDetActividadPorMoneda = (detalle) => {
+  detalle.map((concepto) => {
+    concepto.moneda = concepto.idmoneda.idmoneda;
+  });
+  const detReordenado = orderByKey(detalle, "moneda");
+  return Object.entries(detReordenado).map((entry) => entry[1]);
+};
+
+const ordenarActividadPorMoneda = (actividades) => {
+  actividades.map((actividad) => {
+    actividad.moneda = actividad.moneda ? actividad.moneda : actividad.detalle[0].moneda;
+  });
+  const actividadReordenado = orderByKey(actividades, "moneda");
+  return Object.entries(actividadReordenado).map((entry) => entry[1]);
+};
+
+const orderByKey = (list, key) =>
+  list.reduce(
+    (hash, { [key]: value, ...rest }) => ({
+      ...hash,
+      [value]: (hash[value] || []).concat({ [key]: value, ...rest }),
+    }),
+    {}
+  );

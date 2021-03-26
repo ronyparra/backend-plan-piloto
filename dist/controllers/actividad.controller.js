@@ -17,6 +17,8 @@ var _actividad = _interopRequireDefault(require("../services/actividad.service")
 
 var _date = require("../util/date.util");
 
+var _formatter = require("../services/actividad.service/formatter");
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -159,7 +161,7 @@ var ActividadController = {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              master = formatMaster(req.body);
+              master = (0, _formatter.formatMaster)(req.body);
               tecnico = req.body.tecnico;
               detalle = req.body.detalle;
               actividad_pendiente = req.body.actividad_pendiente;
@@ -208,7 +210,7 @@ var ActividadController = {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
-              master = formatMaster(req.body);
+              master = (0, _formatter.formatMaster)(req.body);
               tecnico = req.body.tecnico;
               detalle = req.body.detalle;
               actividad_pendiente = req.body.actividad_pendiente;
@@ -294,16 +296,3 @@ var ActividadController = {
 };
 var _default = ActividadController;
 exports["default"] = _default;
-
-var formatMaster = function formatMaster(body) {
-  body.fecha = (0, _date.parse_date)(body.fecha);
-  return {
-    idcliente: body.idcliente.idcliente,
-    idcliente_sucursal: body.idcliente_sucursal.idcliente_sucursal,
-    idusuario: body.idusuario.idusuario,
-    idestadocobro: 1,
-    solicitante: body.solicitante,
-    comentario: body.comentario,
-    fecha: body.fecha
-  };
-};

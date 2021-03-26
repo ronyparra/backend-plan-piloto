@@ -13,6 +13,11 @@ SELECT
 			'idcliente', cliente.idcliente,
 			'razonsocial', cliente.razonsocial
 		),
+		'idmoneda', json_build_object(
+			'idmoneda', moneda.idmoneda,
+			'descripcion', moneda.descripcion,
+			'abreviatura', moneda.abreviatura
+		),
 		'fechainsert', to_char(fechainsert, 'DD-MM-YYYY'),
 		'fechacobro', to_char(fechacobro, 'DD-MM-YYYY'),
 		'idusuarioinsert', idusuarioinsert,
@@ -34,6 +39,7 @@ SELECT
 FROM public.cliente_cobro
 JOIN cliente USING (idcliente)
 JOIN estadocobro USING (idestadocobro) 
+JOIN moneda USING (idmoneda)
 `;
 
 

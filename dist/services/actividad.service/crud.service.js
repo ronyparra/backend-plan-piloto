@@ -2,10 +2,18 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+var _typeof = require("@babel/runtime/helpers/typeof");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.delet = exports.update = exports.changeStatus = exports.create = void 0;
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
+var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -13,13 +21,29 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _db = _interopRequireDefault(require("../../db"));
 
+var _fetch = require("./fetch.service");
+
 var _formatter = require("./formatter");
 
 var _date = require("../../util/date.util");
 
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 var create = /*#__PURE__*/function () {
   var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_ref) {
-    var master, tecnico, detalle, actividad_pendiente, results, idactividad, actividad_tecnico, actividad_detalle, resultsTecnico, resultsConcepto;
+    var master, tecnico, detalle, actividad_pendiente, results, idactividad, resultsTecnico, resultsConcepto;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -31,60 +55,58 @@ var create = /*#__PURE__*/function () {
 
           case 4:
             _context.next = 6;
-            return _db["default"].query("INSERT INTO actividad( idcliente,idcliente_sucursal, idusuario, idestadocobro, solicitante, comentario, fecha) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *", [master.idcliente, master.idcliente_sucursal, master.idusuario, master.idestadocobro, master.solicitante, master.comentario, master.fecha]);
+            return _db["default"].query((0, _formatter.INSERT_ACTIVIDAD)(master.idcliente, master.idcliente_sucursal, master.idusuario, master.idestadocobro, master.solicitante, master.comentario, master.fecha));
 
           case 6:
             results = _context.sent;
             idactividad = results.rows[0].idactividad;
-            actividad_tecnico = (0, _formatter.formatTecnico)(tecnico, idactividad);
-            actividad_detalle = (0, _formatter.formatDetalle)(detalle, idactividad);
-            _context.next = 12;
-            return _db["default"].query("INSERT INTO actividad_tecnico_detalle(idactividad, idusuario) VALUES ".concat(actividad_tecnico, " RETURNING *"));
+            _context.next = 10;
+            return _db["default"].query((0, _formatter.INSERT_DET_TECNICO)(tecnico, idactividad));
 
-          case 12:
+          case 10:
             resultsTecnico = _context.sent;
-            _context.next = 15;
-            return _db["default"].query("INSERT INTO actividad_concepto_detalle(idactividad, idconcepto, precio, cantidad, idmoneda)VALUES ".concat(actividad_detalle, " RETURNING *"));
+            _context.next = 13;
+            return _db["default"].query((0, _formatter.INSERT_DET_CONCEPTO)(detalle, idactividad));
 
-          case 15:
+          case 13:
             resultsConcepto = _context.sent;
 
             if (!(actividad_pendiente.length > 0)) {
-              _context.next = 21;
+              _context.next = 19;
               break;
             }
 
+            _context.next = 17;
+            return _db["default"].query((0, _formatter.INSERT_DET_PENDIENTE)(idactividad, actividad_pendiente[0]));
+
+          case 17:
             _context.next = 19;
-            return _db["default"].query("INSERT INTO actividad_pendiente(idactividad, idpendiente)VALUES ($1, $2)", [idactividad, actividad_pendiente[0]]);
+            return _db["default"].query((0, _formatter.UPDATE_PENDIENTE)(actividad_pendiente[0], false));
 
           case 19:
-            _context.next = 21;
-            return _db["default"].query("UPDATE pendiente SET activo = false WHERE idpendiente = $1", [actividad_pendiente[0]]);
-
-          case 21:
             results.rows[0].tecnico = resultsTecnico.rows;
             results.rows[0].detalle = resultsConcepto.rows;
-            _context.next = 25;
+            _context.next = 23;
             return _db["default"].query("COMMIT");
 
-          case 25:
+          case 23:
             return _context.abrupt("return", results.rows);
 
-          case 28:
-            _context.prev = 28;
+          case 26:
+            _context.prev = 26;
             _context.t0 = _context["catch"](1);
-            _context.next = 32;
+            _context.next = 30;
             return _db["default"].query("ROLLBACK");
 
-          case 32:
+          case 30:
             throw _context.t0;
 
-          case 33:
+          case 31:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[1, 28]]);
+    }, _callee, null, [[1, 26]]);
   }));
 
   return function create(_x) {
@@ -96,55 +118,200 @@ exports.create = create;
 
 var changeStatus = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(_ref3) {
-    var detalle, idestadocobro, idusuario, descripcion, total, idcliente, results;
+    var detalle, idestadocobro, idusuario, descripcion, actividadesSinOrden, _iterator, _step, actividad, detActividadMoneda, _iterator3, _step3, _step3$value, index, detConcepto, execute, results, newActividad, actividadesConOrden, _iterator2, _step2, _actividad, saldoacobrar, _results;
+
     return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             detalle = _ref3.detalle, idestadocobro = _ref3.idestadocobro, idusuario = _ref3.idusuario, descripcion = _ref3.descripcion;
-            total = (0, _formatter.calcularTotal)(detalle);
-            idcliente = detalle[0].idcliente.idcliente;
-            console.log(detalle);
-            _context2.prev = 4;
-            _context2.next = 7;
+            actividadesSinOrden = [];
+            _context2.prev = 2;
+            _context2.next = 5;
             return _db["default"].query("BEGIN");
 
-          case 7:
-            _context2.next = 9;
-            return _db["default"].query((0, _formatter.formatActividadChangeStatus)(detalle, idestadocobro));
+          case 5:
+            _iterator = _createForOfIteratorHelper(detalle);
+            _context2.prev = 6;
 
-          case 9:
-            _context2.next = 11;
-            return _db["default"].query("INSERT INTO cliente_cobro(\n        idestadocobro, descripcion, idcliente, fechainsert, fechacobro, idusuarioinsert, idusuariocobro, comentario, saldocobrado, saldoacobrar, retencion, idmoneda)\n      VALUES (2, $1, $2, $3, null, $4, null, null, 0, $5, false, $6) RETURNING *", [descripcion, idcliente, (0, _date.current_date)(), idusuario, total, 1]);
+            _iterator.s();
 
-          case 11:
-            results = _context2.sent;
-            _context2.next = 14;
-            return _db["default"].query("INSERT INTO actividad_cobro(idcliente_cobro, idactividad) VALUES ".concat((0, _formatter.formatActividadCobro)(detalle, results.rows[0].idcliente_cobro)));
+          case 8:
+            if ((_step = _iterator.n()).done) {
+              _context2.next = 44;
+              break;
+            }
 
-          case 14:
-            _context2.next = 16;
-            return _db["default"].query("COMMIT");
+            actividad = _step.value;
+            detActividadMoneda = ordenarDetActividadPorMoneda(actividad.detalle);
 
-          case 16:
-            _context2.next = 23;
+            if (!(detActividadMoneda.length > 1)) {
+              _context2.next = 41;
+              break;
+            }
+
+            _iterator3 = _createForOfIteratorHelper(detActividadMoneda.entries());
+            _context2.prev = 13;
+
+            _iterator3.s();
+
+          case 15:
+            if ((_step3 = _iterator3.n()).done) {
+              _context2.next = 33;
+              break;
+            }
+
+            _step3$value = (0, _slicedToArray2["default"])(_step3.value, 2), index = _step3$value[0], detConcepto = _step3$value[1];
+
+            if (!(index === 0)) {
+              _context2.next = 24;
+              break;
+            }
+
+            execute = "".concat((0, _formatter.DELETE_DET_CONCEPTO)(actividad.idactividad), " \n              ").concat((0, _formatter.INSERT_DET_CONCEPTO)(detConcepto, actividad.idactividad));
+            _context2.next = 21;
+            return _db["default"].query(execute);
+
+          case 21:
+            actividad.detalle = JSON.parse(JSON.stringify(detConcepto));
+            _context2.next = 31;
             break;
 
-          case 18:
-            _context2.prev = 18;
-            _context2.t0 = _context2["catch"](4);
-            _context2.next = 22;
-            return _db["default"].query("ROLLBACK");
+          case 24:
+            _context2.next = 26;
+            return create({
+              master: (0, _formatter.formatMaster)(actividad),
+              tecnico: actividad.tecnico,
+              detalle: detConcepto,
+              actividad_pendiente: actividad.actividad_pendiente
+            });
 
-          case 22:
-            throw _context2.t0;
+          case 26:
+            results = _context2.sent;
+            _context2.next = 29;
+            return (0, _fetch.getById)(results[0].idactividad);
 
-          case 23:
+          case 29:
+            newActividad = _context2.sent;
+            actividadesSinOrden.push(_objectSpread(_objectSpread({}, newActividad), {}, {
+              moneda: detConcepto[0].moneda
+            }));
+
+          case 31:
+            _context2.next = 15;
+            break;
+
+          case 33:
+            _context2.next = 38;
+            break;
+
+          case 35:
+            _context2.prev = 35;
+            _context2.t0 = _context2["catch"](13);
+
+            _iterator3.e(_context2.t0);
+
+          case 38:
+            _context2.prev = 38;
+
+            _iterator3.f();
+
+            return _context2.finish(38);
+
+          case 41:
+            actividadesSinOrden.push(actividad);
+
+          case 42:
+            _context2.next = 8;
+            break;
+
+          case 44:
+            _context2.next = 49;
+            break;
+
+          case 46:
+            _context2.prev = 46;
+            _context2.t1 = _context2["catch"](6);
+
+            _iterator.e(_context2.t1);
+
+          case 49:
+            _context2.prev = 49;
+
+            _iterator.f();
+
+            return _context2.finish(49);
+
+          case 52:
+            actividadesConOrden = ordenarActividadPorMoneda(actividadesSinOrden);
+            _iterator2 = _createForOfIteratorHelper(actividadesConOrden);
+            _context2.prev = 54;
+
+            _iterator2.s();
+
+          case 56:
+            if ((_step2 = _iterator2.n()).done) {
+              _context2.next = 68;
+              break;
+            }
+
+            _actividad = _step2.value;
+            saldoacobrar = (0, _formatter.calcularTotal)(_actividad);
+            _context2.next = 61;
+            return _db["default"].query((0, _formatter.CHANGE_ACTIVIDAD_STATUS)(_actividad, idestadocobro));
+
+          case 61:
+            _context2.next = 63;
+            return _db["default"].query((0, _formatter.INSERT_CLIENTE_COBRO)(descripcion, _actividad[0].idcliente.idcliente, (0, _date.current_date)(), idusuario, saldoacobrar, _actividad[0].moneda));
+
+          case 63:
+            _results = _context2.sent;
+            _context2.next = 66;
+            return _db["default"].query((0, _formatter.INSERT_DET_ACT_COBRO)(_actividad, _results.rows[0].idcliente_cobro));
+
+          case 66:
+            _context2.next = 56;
+            break;
+
+          case 68:
+            _context2.next = 73;
+            break;
+
+          case 70:
+            _context2.prev = 70;
+            _context2.t2 = _context2["catch"](54);
+
+            _iterator2.e(_context2.t2);
+
+          case 73:
+            _context2.prev = 73;
+
+            _iterator2.f();
+
+            return _context2.finish(73);
+
+          case 76:
+            _context2.next = 78;
+            return _db["default"].query("COMMIT");
+
+          case 78:
+            _context2.next = 84;
+            break;
+
+          case 80:
+            _context2.prev = 80;
+            _context2.t3 = _context2["catch"](2);
+
+            _db["default"].query("ROLLBACK");
+
+            throw _context2.t3;
+
+          case 84:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[4, 18]]);
+    }, _callee2, null, [[2, 80], [6, 46, 49, 52], [13, 35, 38, 41], [54, 70, 73, 76]]);
   }));
 
   return function changeStatus(_x2) {
@@ -156,7 +323,7 @@ exports.changeStatus = changeStatus;
 
 var update = /*#__PURE__*/function () {
   var _ref6 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(_ref5) {
-    var id, master, tecnico, detalle, actividad_pendiente, results, actividad_tecnico, actividad_detalle, resultsTecnico, resultsConcepto;
+    var id, master, tecnico, detalle, actividad_pendiente, results, resultsTecnico, resultsConcepto;
     return _regenerator["default"].wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
@@ -168,67 +335,65 @@ var update = /*#__PURE__*/function () {
 
           case 4:
             _context3.next = 6;
-            return _db["default"].query("UPDATE actividad SET idcliente=$2, idcliente_sucursal=$3, idusuario=$4, idestadocobro=$5, solicitante=$6, comentario=$7, fecha=$8 WHERE idactividad = $1 RETURNING *", [id, master.idcliente, master.idcliente_sucursal, master.idusuario, master.idestadocobro, master.solicitante, master.comentario, master.fecha]);
+            return _db["default"].query((0, _formatter.UPDATE_ACTIVIDAD)(id, master.idcliente, master.idcliente_sucursal, master.idusuario, master.idestadocobro, master.solicitante, master.comentario, master.fecha));
 
           case 6:
             results = _context3.sent;
             _context3.next = 9;
-            return _db["default"].query("DELETE FROM actividad_tecnico_detalle WHERE idactividad  = $1", [id]);
+            return _db["default"].query((0, _formatter.DELETE_DET_TECNICO)(id));
 
           case 9:
             _context3.next = 11;
-            return _db["default"].query("DELETE FROM actividad_concepto_detalle WHERE idactividad  = $1", [id]);
+            return _db["default"].query((0, _formatter.DELETE_DET_CONCEPTO)(id));
 
           case 11:
             _context3.next = 13;
-            return _db["default"].query("DELETE FROM actividad_pendiente WHERE idactividad = $1", [id]);
+            return _db["default"].query((0, _formatter.DELETE_DET_PENDIENTE)(id));
 
           case 13:
-            actividad_tecnico = (0, _formatter.formatTecnico)(tecnico, id);
-            actividad_detalle = (0, _formatter.formatDetalle)(detalle, id);
-            _context3.next = 17;
-            return _db["default"].query("INSERT INTO actividad_tecnico_detalle(idactividad, idusuario) VALUES ".concat(actividad_tecnico, " RETURNING *"));
+            _context3.next = 15;
+            return _db["default"].query((0, _formatter.INSERT_DET_TECNICO)(tecnico, id));
 
-          case 17:
+          case 15:
             resultsTecnico = _context3.sent;
-            _context3.next = 20;
-            return _db["default"].query("INSERT INTO actividad_concepto_detalle(idactividad, idconcepto, precio, cantidad, idmoneda)VALUES ".concat(actividad_detalle, " RETURNING *"));
+            _context3.next = 18;
+            return _db["default"].query((0, _formatter.INSERT_DET_CONCEPTO)(detalle, id));
 
-          case 20:
+          case 18:
             resultsConcepto = _context3.sent;
 
             if (!(actividad_pendiente.length > 0)) {
-              _context3.next = 24;
+              _context3.next = 22;
               break;
             }
 
-            _context3.next = 24;
-            return _db["default"].query("INSERT INTO actividad_pendiente(idactividad, idpendiente)VALUES ($1, $2)", [id, actividad_pendiente[0]]);
+            _context3.next = 22;
+            return _db["default"].query((0, _formatter.INSERT_DET_PENDIENTE)(id, actividad_pendiente[0]));
 
-          case 24:
+          case 22:
             results.rows[0].tecnico = resultsTecnico.rows;
             results.rows[0].detalle = resultsConcepto.rows;
-            _context3.next = 28;
+            _context3.next = 26;
             return _db["default"].query("COMMIT");
 
-          case 28:
+          case 26:
             return _context3.abrupt("return", results.rows);
 
-          case 31:
-            _context3.prev = 31;
+          case 29:
+            _context3.prev = 29;
             _context3.t0 = _context3["catch"](1);
-            _context3.next = 35;
+            _context3.next = 33;
             return _db["default"].query("ROLLBACK");
 
-          case 35:
+          case 33:
             throw _context3.t0;
 
-          case 36:
+          case 34:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[1, 31]]);
+    }, _callee3, null, [[1, 29]]);
   }));
 
   return function update(_x3) {
@@ -251,15 +416,15 @@ var delet = /*#__PURE__*/function () {
 
           case 3:
             _context4.next = 5;
-            return _db["default"].query("DELETE FROM actividad_tecnico_detalle WHERE idactividad  = $1", [id]);
+            return _db["default"].query((0, _formatter.DELETE_DET_TECNICO)(id));
 
           case 5:
             _context4.next = 7;
-            return _db["default"].query("DELETE FROM actividad_concepto_detalle WHERE idactividad  = $1", [id]);
+            return _db["default"].query((0, _formatter.DELETE_DET_CONCEPTO)(id));
 
           case 7:
             _context4.next = 9;
-            return _db["default"].query("DELETE FROM actividad_pendiente WHERE idactividad = $1 RETURNING *", [id]);
+            return _db["default"].query((0, _formatter.DELETE_DET_PENDIENTE)(id));
 
           case 9:
             pendiente = _context4.sent;
@@ -270,11 +435,11 @@ var delet = /*#__PURE__*/function () {
             }
 
             _context4.next = 13;
-            return _db["default"].query("UPDATE pendiente SET activo = true WHERE idpendiente = $1", [pendiente.rows[0].idpendiente]);
+            return _db["default"].query((0, _formatter.UPDATE_PENDIENTE)(pendiente.rows[0].idpendiente, true));
 
           case 13:
             _context4.next = 15;
-            return _db["default"].query("DELETE FROM actividad WHERE idactividad  = $1", [id]);
+            return _db["default"].query((0, _formatter.DELETE_ACTIVIDAD)(id));
 
           case 15:
             results = _context4.sent;
@@ -307,3 +472,31 @@ var delet = /*#__PURE__*/function () {
 }();
 
 exports.delet = delet;
+
+var ordenarDetActividadPorMoneda = function ordenarDetActividadPorMoneda(detalle) {
+  detalle.map(function (concepto) {
+    concepto.moneda = concepto.idmoneda.idmoneda;
+  });
+  var detReordenado = orderByKey(detalle, "moneda");
+  return Object.entries(detReordenado).map(function (entry) {
+    return entry[1];
+  });
+};
+
+var ordenarActividadPorMoneda = function ordenarActividadPorMoneda(actividades) {
+  actividades.map(function (actividad) {
+    actividad.moneda = actividad.moneda ? actividad.moneda : actividad.detalle[0].moneda;
+  });
+  var actividadReordenado = orderByKey(actividades, "moneda");
+  return Object.entries(actividadReordenado).map(function (entry) {
+    return entry[1];
+  });
+};
+
+var orderByKey = function orderByKey(list, key) {
+  return list.reduce(function (hash, _ref8) {
+    var value = _ref8[key],
+        rest = (0, _objectWithoutProperties2["default"])(_ref8, [key].map(_toPropertyKey));
+    return _objectSpread(_objectSpread({}, hash), {}, (0, _defineProperty2["default"])({}, value, (hash[value] || []).concat(_objectSpread((0, _defineProperty2["default"])({}, key, value), rest))));
+  }, {});
+};

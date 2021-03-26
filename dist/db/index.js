@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _pg = require("pg");
+var Pool = require('pg')["native"].Pool;
 
-var pool = new _pg.Pool({
+var pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'integral',

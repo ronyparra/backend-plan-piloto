@@ -1,5 +1,6 @@
 import ActividadService from "../services/actividad.service";
 import { parse_date } from "../util/date.util";
+import { formatMaster } from '../services/actividad.service/formatter';
 
 const ActividadController = {
   get: async (req, res) => {
@@ -84,15 +85,4 @@ const ActividadController = {
 
 export default ActividadController;
 
-const formatMaster = (body) => {
-  body.fecha = parse_date(body.fecha);
-  return {
-    idcliente: body.idcliente.idcliente,
-    idcliente_sucursal: body.idcliente_sucursal.idcliente_sucursal,
-    idusuario: body.idusuario.idusuario,
-    idestadocobro: 1,
-    solicitante: body.solicitante,
-    comentario: body.comentario,
-    fecha: body.fecha,
-  };
-};
+
