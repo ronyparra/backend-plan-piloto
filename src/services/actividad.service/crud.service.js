@@ -20,14 +20,12 @@ import {
 
 import { current_date } from "../../util/date.util";
 
-export const create = async ({
-  master,
-  tecnico,
-  detalle,
-  actividad_pendiente,
-}) => {
+export const create = async (
+  { master, tecnico, detalle, actividad_pendiente },
+  disabledTransaction
+) => {
   try {
-    await db.query("BEGIN");
+    if (!disabledTransaction) await db.query("BEGIN");
     const results = await db.query(
       INSERT_ACTIVIDAD(
         master.idcliente,
@@ -53,10 +51,10 @@ export const create = async ({
     }
     results.rows[0].tecnico = resultsTecnico.rows;
     results.rows[0].detalle = resultsConcepto.rows;
-    await db.query("COMMIT");
+    if (!disabledTransaction) await db.query("COMMIT");
     return results.rows;
   } catch (e) {
-    await db.query("ROLLBACK");
+    if (!disabledTransaction) await db.query("ROLLBACK");
     throw e;
   }
 };
@@ -82,14 +80,21 @@ export const changeStatus = async ({
             await db.query(execute);
             actividad.detalle = JSON.parse(JSON.stringify(detConcepto));
           } else {
-            const results = await create({
-              master: formatMaster(actividad),
-              tecnico: actividad.tecnico,
-              detalle: detConcepto,
-              actividad_pendiente: actividad.actividad_pendiente,
-            });
+            const results = await create(
+              {
+                master: formatMaster(actividad),
+                tecnico: actividad.tecnico,
+                detalle: detConcepto,
+                actividad_pendiente: actividad.actividad_pendiente,
+              },
+              true
+            );
+            
             const newActividad = await getById(results[0].idactividad);
-            actividadesSinOrden.push({...newActividad,moneda: detConcepto[0].moneda});
+            actividadesSinOrden.push({
+              ...newActividad,
+              moneda: detConcepto[0].moneda,
+            });
           }
         }
       }
@@ -187,7 +192,9 @@ const ordenarDetActividadPorMoneda = (detalle) => {
 
 const ordenarActividadPorMoneda = (actividades) => {
   actividades.map((actividad) => {
-    actividad.moneda = actividad.moneda ? actividad.moneda : actividad.detalle[0].moneda;
+    actividad.moneda = actividad.moneda
+      ? actividad.moneda
+      : actividad.detalle[0].moneda;
   });
   const actividadReordenado = orderByKey(actividades, "moneda");
   return Object.entries(actividadReordenado).map((entry) => entry[1]);

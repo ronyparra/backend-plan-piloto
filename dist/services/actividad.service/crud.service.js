@@ -42,7 +42,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 var create = /*#__PURE__*/function () {
-  var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_ref) {
+  var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_ref, disabledTransaction) {
     var master, tecnico, detalle, actividad_pendiente, results, idactividad, resultsTecnico, resultsConcepto;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
@@ -50,66 +50,84 @@ var create = /*#__PURE__*/function () {
           case 0:
             master = _ref.master, tecnico = _ref.tecnico, detalle = _ref.detalle, actividad_pendiente = _ref.actividad_pendiente;
             _context.prev = 1;
-            _context.next = 4;
-            return _db["default"].query("BEGIN");
 
-          case 4:
-            _context.next = 6;
-            return _db["default"].query((0, _formatter.INSERT_ACTIVIDAD)(master.idcliente, master.idcliente_sucursal, master.idusuario, master.idestadocobro, master.solicitante, master.comentario, master.fecha));
-
-          case 6:
-            results = _context.sent;
-            idactividad = results.rows[0].idactividad;
-            _context.next = 10;
-            return _db["default"].query((0, _formatter.INSERT_DET_TECNICO)(tecnico, idactividad));
-
-          case 10:
-            resultsTecnico = _context.sent;
-            _context.next = 13;
-            return _db["default"].query((0, _formatter.INSERT_DET_CONCEPTO)(detalle, idactividad));
-
-          case 13:
-            resultsConcepto = _context.sent;
-
-            if (!(actividad_pendiente.length > 0)) {
-              _context.next = 19;
+            if (disabledTransaction) {
+              _context.next = 5;
               break;
             }
 
-            _context.next = 17;
+            _context.next = 5;
+            return _db["default"].query("BEGIN");
+
+          case 5:
+            _context.next = 7;
+            return _db["default"].query((0, _formatter.INSERT_ACTIVIDAD)(master.idcliente, master.idcliente_sucursal, master.idusuario, master.idestadocobro, master.solicitante, master.comentario, master.fecha));
+
+          case 7:
+            results = _context.sent;
+            idactividad = results.rows[0].idactividad;
+            _context.next = 11;
+            return _db["default"].query((0, _formatter.INSERT_DET_TECNICO)(tecnico, idactividad));
+
+          case 11:
+            resultsTecnico = _context.sent;
+            _context.next = 14;
+            return _db["default"].query((0, _formatter.INSERT_DET_CONCEPTO)(detalle, idactividad));
+
+          case 14:
+            resultsConcepto = _context.sent;
+
+            if (!(actividad_pendiente.length > 0)) {
+              _context.next = 20;
+              break;
+            }
+
+            _context.next = 18;
             return _db["default"].query((0, _formatter.INSERT_DET_PENDIENTE)(idactividad, actividad_pendiente[0]));
 
-          case 17:
-            _context.next = 19;
+          case 18:
+            _context.next = 20;
             return _db["default"].query((0, _formatter.UPDATE_PENDIENTE)(actividad_pendiente[0], false));
 
-          case 19:
+          case 20:
             results.rows[0].tecnico = resultsTecnico.rows;
             results.rows[0].detalle = resultsConcepto.rows;
-            _context.next = 23;
+
+            if (disabledTransaction) {
+              _context.next = 25;
+              break;
+            }
+
+            _context.next = 25;
             return _db["default"].query("COMMIT");
 
-          case 23:
+          case 25:
             return _context.abrupt("return", results.rows);
 
-          case 26:
-            _context.prev = 26;
+          case 28:
+            _context.prev = 28;
             _context.t0 = _context["catch"](1);
-            _context.next = 30;
+
+            if (disabledTransaction) {
+              _context.next = 33;
+              break;
+            }
+
+            _context.next = 33;
             return _db["default"].query("ROLLBACK");
 
-          case 30:
+          case 33:
             throw _context.t0;
 
-          case 31:
+          case 34:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[1, 26]]);
+    }, _callee, null, [[1, 28]]);
   }));
 
-  return function create(_x) {
+  return function create(_x, _x2) {
     return _ref2.apply(this, arguments);
   };
 }();
@@ -184,7 +202,7 @@ var changeStatus = /*#__PURE__*/function () {
               tecnico: actividad.tecnico,
               detalle: detConcepto,
               actividad_pendiente: actividad.actividad_pendiente
-            });
+            }, true);
 
           case 26:
             results = _context2.sent;
@@ -314,7 +332,7 @@ var changeStatus = /*#__PURE__*/function () {
     }, _callee2, null, [[2, 80], [6, 46, 49, 52], [13, 35, 38, 41], [54, 70, 73, 76]]);
   }));
 
-  return function changeStatus(_x2) {
+  return function changeStatus(_x3) {
     return _ref4.apply(this, arguments);
   };
 }();
@@ -396,7 +414,7 @@ var update = /*#__PURE__*/function () {
     }, _callee3, null, [[1, 29]]);
   }));
 
-  return function update(_x3) {
+  return function update(_x4) {
     return _ref6.apply(this, arguments);
   };
 }();
@@ -466,7 +484,7 @@ var delet = /*#__PURE__*/function () {
     }, _callee4, null, [[0, 21]]);
   }));
 
-  return function delet(_x4) {
+  return function delet(_x5) {
     return _ref7.apply(this, arguments);
   };
 }();
