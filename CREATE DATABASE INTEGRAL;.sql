@@ -224,3 +224,15 @@ ALTER TABLE concepto ADD COLUMN idmoneda INT NOT NULL DEFAULT 1 REFERENCES moned
 ALTER TABLE actividad_concepto_detalle ADD COLUMN idmoneda INT NOT NULL DEFAULT 1 REFERENCES moneda (idmoneda) ON UPDATE CASCADE;
 
 ALTER TABLE cliente_cobro ADD COLUMN idmoneda INT NOT NULL DEFAULT 1 REFERENCES moneda (idmoneda) ON UPDATE CASCADE;
+
+
+INSERT INTO formulario(
+	idformulario, descripcion, permisos)
+VALUES 
+(7, 'Cobro', '{"Puede Registrar": false,"Puede Modificar": false,"Puede Eliminar": false,"Puede Listar": false}'); 
+
+
+INSERT INTO usuario_rol_permiso(idusuario_rol, idformulario, permisos) VALUES 
+(1, 7, '{"Puede Registrar": true,"Puede Modificar": true,"Puede Eliminar": true,"Puede Listar": true}');
+INSERT INTO usuario_rol_permiso(idusuario_rol, idformulario, permisos) VALUES 
+(2, 7, '{"Puede Registrar": false,"Puede Modificar": false,"Puede Eliminar": false,"Puede Listar": false}');
