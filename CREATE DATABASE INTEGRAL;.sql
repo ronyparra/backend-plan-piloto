@@ -236,3 +236,16 @@ INSERT INTO usuario_rol_permiso(idusuario_rol, idformulario, permisos) VALUES
 (1, 7, '{"Puede Registrar": true,"Puede Modificar": true,"Puede Eliminar": true,"Puede Listar": true}');
 INSERT INTO usuario_rol_permiso(idusuario_rol, idformulario, permisos) VALUES 
 (2, 7, '{"Puede Registrar": false,"Puede Modificar": false,"Puede Eliminar": false,"Puede Listar": false}');
+
+
+CREATE OR REPLACE FUNCTION calcularRetencion(retencion BOOLEAN, saldo DOUBLE PRECISION)
+	RETURNS DOUBLE PRECISION
+	LANGUAGE plpgsql
+	AS $$
+BEGIN
+	 RETURN (SELECT CASE WHEN retencion = true 
+		 	THEN (((saldo / 11) * 30) / 100)
+			ELSE 0 
+		END);
+END;
+$$;

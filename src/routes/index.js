@@ -10,6 +10,7 @@ import formulario from "./formulario.router";
 import usuario_rol from "./usuario_rol.router";
 import cobro from "./cobro.router";
 import moneda from "./moneda.router";
+import analytics from "./analytics.router";
 
 export default {
   auth,
@@ -18,6 +19,7 @@ export default {
   moneda,
   cliente,
   concepto,
+  analytics,
   pendiente,
   actividad,
   formulario,

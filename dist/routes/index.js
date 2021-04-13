@@ -31,6 +31,8 @@ var _cobro = _interopRequireDefault(require("./cobro.router"));
 
 var _moneda = _interopRequireDefault(require("./moneda.router"));
 
+var _analytics = _interopRequireDefault(require("./analytics.router"));
+
 var _default = {
   auth: _auth["default"],
   user: _user["default"],
@@ -38,6 +40,7 @@ var _default = {
   moneda: _moneda["default"],
   cliente: _cliente["default"],
   concepto: _concepto["default"],
+  analytics: _analytics["default"],
   pendiente: _pendiente["default"],
   actividad: _actividad["default"],
   formulario: _formulario["default"],

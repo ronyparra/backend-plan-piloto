@@ -28,6 +28,7 @@ app.use("/cliente", _routes["default"].cliente);
 app.use("/concepto", _routes["default"].concepto);
 app.use("/actividad", _routes["default"].actividad);
 app.use("/pendiente", _routes["default"].pendiente);
+app.use("/analytics", _routes["default"].analytics);
 app.use("/usuariorol", _routes["default"].usuario_rol);
 app.use("/formulario", _routes["default"].formulario);
 app.use("/estadocobro", _routes["default"].estadocobro);

@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.parse_date = exports.format_date = exports.current_date = void 0;
+exports.substract_days = exports.parse_date = exports.format_date = exports.current_date = void 0;
 
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 
@@ -42,3 +42,11 @@ var parse_date = function parse_date(date) {
 };
 
 exports.parse_date = parse_date;
+
+var substract_days = function substract_days(date, dias) {
+  var fecha = new Date(date);
+  fecha.setDate(fecha.getDate() - dias);
+  return fecha.toISOString().substr(0, 10);
+};
+
+exports.substract_days = substract_days;

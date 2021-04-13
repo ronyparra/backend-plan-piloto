@@ -18,6 +18,7 @@ app.use("/cliente", routes.cliente);
 app.use("/concepto", routes.concepto);
 app.use("/actividad", routes.actividad);
 app.use("/pendiente", routes.pendiente);
+app.use("/analytics", routes.analytics);
 app.use("/usuariorol", routes.usuario_rol);
 app.use("/formulario", routes.formulario);
 app.use("/estadocobro", routes.estadocobro);
