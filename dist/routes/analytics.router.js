@@ -17,5 +17,6 @@ var router = (0, _express.Router)();
 router.get("/actividad", _auth["default"], _analytics["default"].getActividad);
 router.get("/pendiente", _auth["default"], _analytics["default"].getPendientes);
 router.get("/cliente", _auth["default"], _analytics["default"].getCliente);
+router.get("/concepto", _auth["default"], _analytics["default"].getConcepto);
 var _default = router;
 exports["default"] = _default;

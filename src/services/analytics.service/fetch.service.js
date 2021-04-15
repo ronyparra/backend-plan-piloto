@@ -41,3 +41,13 @@ export const getCliente= async ( desde, hasta ) => {
     throw e;
   }
 };
+
+export const getConcepto= async ( desde, hasta ) => {
+  try {
+    return await db
+      .query(query.concepto, [desde, hasta])
+      .then((r) => r.rows.map((x) => x.rows));
+  } catch (e) {
+    throw e;
+  }
+};

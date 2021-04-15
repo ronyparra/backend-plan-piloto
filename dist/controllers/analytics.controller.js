@@ -194,6 +194,48 @@ var analyticsController = {
     }
 
     return getCliente;
+  }(),
+  getConcepto: function () {
+    var _getConcepto = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
+      var desde, hasta, data;
+      return _regenerator["default"].wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              desde = (0, _date.parse_date)(req.query.desde);
+              hasta = (0, _date.parse_date)(req.query.hasta);
+              _context4.prev = 2;
+              _context4.next = 5;
+              return _analytics["default"].getConcepto(desde, hasta);
+
+            case 5:
+              data = _context4.sent;
+              return _context4.abrupt("return", res.status(200).json({
+                status: 200,
+                data: data
+              }));
+
+            case 9:
+              _context4.prev = 9;
+              _context4.t0 = _context4["catch"](2);
+              return _context4.abrupt("return", res.status(400).json({
+                status: 400,
+                message: _context4.t0.message
+              }));
+
+            case 12:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4, null, [[2, 9]]);
+    }));
+
+    function getConcepto(_x7, _x8) {
+      return _getConcepto.apply(this, arguments);
+    }
+
+    return getConcepto;
   }()
 };
 var _default = analyticsController;
