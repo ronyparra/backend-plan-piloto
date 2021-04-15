@@ -26,91 +26,40 @@ const query = {
 	json_build_object(
 		'tipo',tp.descripcion,
 		'registrado', COUNT(idpendiente) FILTER (WHERE 	fecha BETWEEN $1::date AND  $2::date),
-		'terminado', COUNT(idpendiente) FILTER (WHERE activo = true AND fecha BETWEEN $1::date AND  $2::date)
+		'terminado', COUNT(idpendiente) FILTER (WHERE activo = false AND fecha BETWEEN $1::date AND  $2::date)
 	) as rows
   FROM 		pendiente 
   FULL JOIN	tipo_pendiente AS tp USING(idtipo_pendiente)
   GROUP BY 	tp.descripcion`,
-  cliente: `WITH cliente_por_moneda AS (
-    SELECT 
-      idcliente,
-      razonsocial,
-      moneda.abreviatura as moneda,
-      moneda.idmoneda as id,
-      SUM(precio*cantidad) as saldo
-    FROM actividad
+  cliente: `SELECT 
+  json_build_object(
+    'idcliente',idcliente,
+    'cliente', razonsocial,
+    'cantidad',(SELECT COUNT(a.idactividad) FROM actividad AS a WHERE a.idcliente =  actividad.idcliente),
+    'guarani',  SUM(precio*cantidad) FILTER (WHERE (moneda.idmoneda = 1)) ,
+    'dolar',SUM(precio*cantidad)  FILTER (WHERE (moneda.idmoneda = 2))
+  ) as rows
+  FROM actividad
     JOIN cliente USING (idcliente)
     JOIN actividad_concepto_detalle USING (idactividad)
     JOIN moneda USING (idmoneda)
     WHERE 	fecha BETWEEN $1::date AND  $2::date
-    GROUP BY idcliente, razonsocial, moneda.abreviatura, moneda.idmoneda
-  ),
-   count_actividad_moneda AS (
-    SELECT 
-       idcliente,
-      COUNT(idactividad) AS cantidad
-    FROM actividad
-    WHERE 	fecha BETWEEN $1::date AND  $2::date
-    GROUP BY idcliente
-  )
-  SELECT 
-    json_build_object(
-      'idcliente', idcliente,
-      'cliente', razonsocial,
-      'cant_actividad', (
-          SELECT 	cantidad 
-          FROM 	count_actividad_moneda as ca  
-          WHERE 	ca.idcliente = cliente_por_moneda.idcliente),
-      'detalle',
-      (SELECT 
-      json_agg(
-        json_build_object(
-          'idmoneda', cm.id,
-          'moneda', cm.moneda,
-          'saldo', cm.saldo
-        )
-      )
-      FROM cliente_por_moneda as cm
-      WHERE cm.idcliente = cliente_por_moneda.idcliente
-      )
-    ) AS rows
-  FROM cliente_por_moneda 
   GROUP BY idcliente, razonsocial
   `,
-  concepto: `WITH concepto_por_moneda AS (
-    SELECT 
-      concepto.idconcepto as idconcepto,
-      moneda.abreviatura as moneda,
-      moneda.idmoneda as id,
-      concepto.descripcion as concepto,
-      SUM(acd.cantidad) as cantidad,
-      SUM(acd.precio*acd.cantidad) as saldo
-    FROM actividad
-    JOIN actividad_concepto_detalle AS acd USING (idactividad)
-    JOIN concepto ON concepto.idconcepto = acd.idconcepto
-    JOIN moneda ON moneda.idmoneda = acd.idmoneda
-    WHERE 	fecha BETWEEN $1::date AND  $2::date
-    GROUP BY concepto.idconcepto, concepto.descripcion, moneda.abreviatura, moneda.idmoneda
-  )
-  SELECT 
-    json_build_object(
-      'idconcepto', idconcepto,
-      'concepto', concepto,
-      'cant_concepto', SUM(cantidad),
-      'detalle',
-      (SELECT 
-      json_agg(
-        json_build_object(
-          'idmoneda', cm.id,
-          'moneda', cm.moneda,
-          'saldo', cm.saldo
-        )
-      )
-      FROM concepto_por_moneda as cm
-      WHERE cm.idconcepto = concepto_por_moneda.idconcepto
-      )
-    ) AS rows
-  FROM concepto_por_moneda 
-  GROUP BY idconcepto, concepto`,
+  concepto: `SELECT
+  json_build_object(
+      'idconcepto',concepto.idconcepto,
+        'concepto',concepto.descripcion,
+        'cantidad',SUM(acd.cantidad),
+        'guarani',SUM(acd.precio*acd.cantidad) FILTER (WHERE (moneda.idmoneda = 1)),
+      'dolar',SUM(acd.precio*acd.cantidad) FILTER (WHERE (moneda.idmoneda = 2))
+  ) as rows
+  FROM actividad
+  JOIN actividad_concepto_detalle AS acd USING (idactividad)
+  JOIN concepto ON concepto.idconcepto = acd.idconcepto
+  JOIN moneda ON moneda.idmoneda = acd.idmoneda
+  WHERE 	fecha BETWEEN $1::date AND  $2::date
+  GROUP BY concepto.idconcepto, concepto.descripcion`,
 };
 export default query;
+

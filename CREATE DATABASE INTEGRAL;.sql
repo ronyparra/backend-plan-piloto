@@ -143,7 +143,7 @@ CREATE TABLE pendiente_tecnico (
     PRIMARY KEY (idpendiente, idusuario)
 );
 
-----
+
 CREATE TABLE actividad_pendiente (
     idactividad INT NOT NULL REFERENCES actividad (idactividad) ON UPDATE CASCADE,
     idpendiente INT NOT NULL REFERENCES pendiente (idpendiente) ON UPDATE CASCADE,
@@ -152,7 +152,7 @@ CREATE TABLE actividad_pendiente (
 
 ALTER TABLE pendiente ADD COLUMN activo BOOLEAN NOT NULL DEFAULT true;
 
-
+----
 UPDATE formulario SET 
 permisos = '{"Puede Registrar": false,"Puede Modificar": false,"Puede Eliminar": false,"Puede Listar": false,"Puede Cambiar Estado": false}'
 WHERE idformulario  = 3;
@@ -185,6 +185,8 @@ WHERE idformulario = 4;
 UPDATE estadocobro SET descripcion= 'Facturado' WHERE idestadocobro= 2;
 INSERT INTO estadocobro(idestadocobro, descripcion) VALUES (3, 'Cobrado');
 
+
+-- DROP TABLE cliente_cobro;
 CREATE TABLE cliente_cobro (
     idcliente_cobro SERIAL NOT NULL,
     cobrado BOOLEAN NOT NULL,
@@ -237,8 +239,11 @@ INSERT INTO usuario_rol_permiso(idusuario_rol, idformulario, permisos) VALUES
 INSERT INTO usuario_rol_permiso(idusuario_rol, idformulario, permisos) VALUES 
 (2, 7, '{"Puede Registrar": false,"Puede Modificar": false,"Puede Eliminar": false,"Puede Listar": false}');
 
+INSERT INTO usuario_rol_detalle(
+	idusuario, idusuario_rol)
+VALUES (1, 1);
 
-CREATE OR REPLACE FUNCTION calcularRetencion(retencion BOOLEAN, saldo DOUBLE PRECISION)
+/* CREATE OR REPLACE FUNCTION calcularRetencion(retencion BOOLEAN, saldo DOUBLE PRECISION)
 	RETURNS DOUBLE PRECISION
 	LANGUAGE plpgsql
 	AS $$
@@ -248,4 +253,9 @@ BEGIN
 			ELSE 0 
 		END);
 END;
-$$;
+$$; */
+
+UPDATE actividad_concepto_detalle
+SET idmoneda = 2
+WHERE (idconcepto, idactividad) IN  
+(SELECT  idconcepto, idactividad FROM actividad_concepto_detalle WHERE precio < 1500);
