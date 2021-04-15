@@ -21,3 +21,23 @@ export const getSaldoGeneral= async ( desde, hasta ) => {
     throw e;
   }
 };
+
+export const getPendientes= async ( desde, hasta ) => {
+  try {
+    return await db
+      .query(query.pendiente, [desde, hasta])
+      .then((r) => r.rows.map((x) => x.rows));
+  } catch (e) {
+    throw e;
+  }
+};
+
+export const getCliente= async ( desde, hasta ) => {
+  try {
+    return await db
+      .query(query.cliente, [desde, hasta])
+      .then((r) => r.rows.map((x) => x.rows));
+  } catch (e) {
+    throw e;
+  }
+};

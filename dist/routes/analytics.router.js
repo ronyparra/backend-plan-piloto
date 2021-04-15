@@ -15,5 +15,7 @@ var _auth = _interopRequireDefault(require("../middlewares/auth"));
 
 var router = (0, _express.Router)();
 router.get("/actividad", _auth["default"], _analytics["default"].getActividad);
+router.get("/pendiente", _auth["default"], _analytics["default"].getPendientes);
+router.get("/cliente", _auth["default"], _analytics["default"].getCliente);
 var _default = router;
 exports["default"] = _default;

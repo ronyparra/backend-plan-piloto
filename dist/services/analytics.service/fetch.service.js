@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getSaldoGeneral = exports.getSaldoPorEstado = void 0;
+exports.getCliente = exports.getPendientes = exports.getSaldoGeneral = exports.getSaldoPorEstado = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -89,3 +89,77 @@ var getSaldoGeneral = /*#__PURE__*/function () {
 }();
 
 exports.getSaldoGeneral = getSaldoGeneral;
+
+var getPendientes = /*#__PURE__*/function () {
+  var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(desde, hasta) {
+    return _regenerator["default"].wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            _context3.next = 3;
+            return _db["default"].query(_query["default"].pendiente, [desde, hasta]).then(function (r) {
+              return r.rows.map(function (x) {
+                return x.rows;
+              });
+            });
+
+          case 3:
+            return _context3.abrupt("return", _context3.sent);
+
+          case 6:
+            _context3.prev = 6;
+            _context3.t0 = _context3["catch"](0);
+            throw _context3.t0;
+
+          case 9:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, null, [[0, 6]]);
+  }));
+
+  return function getPendientes(_x7, _x8) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+exports.getPendientes = getPendientes;
+
+var getCliente = /*#__PURE__*/function () {
+  var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(desde, hasta) {
+    return _regenerator["default"].wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.prev = 0;
+            _context4.next = 3;
+            return _db["default"].query(_query["default"].cliente, [desde, hasta]).then(function (r) {
+              return r.rows.map(function (x) {
+                return x.rows;
+              });
+            });
+
+          case 3:
+            return _context4.abrupt("return", _context4.sent);
+
+          case 6:
+            _context4.prev = 6;
+            _context4.t0 = _context4["catch"](0);
+            throw _context4.t0;
+
+          case 9:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4, null, [[0, 6]]);
+  }));
+
+  return function getCliente(_x9, _x10) {
+    return _ref4.apply(this, arguments);
+  };
+}();
+
+exports.getCliente = getCliente;

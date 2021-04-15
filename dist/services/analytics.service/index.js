@@ -9,6 +9,8 @@ var _fetch = require("./fetch.service");
 
 var _default = {
   getSaldoPorEstado: _fetch.getSaldoPorEstado,
-  getSaldoGeneral: _fetch.getSaldoGeneral
+  getSaldoGeneral: _fetch.getSaldoGeneral,
+  getPendientes: _fetch.getPendientes,
+  getCliente: _fetch.getCliente
 };
 exports["default"] = _default;
