@@ -8,4 +8,5 @@ router.get("/actividad", Auth, AnalyticsController.getActividad);
 router.get("/pendiente", Auth, AnalyticsController.getPendientes);
 router.get("/cliente", Auth, AnalyticsController.getCliente);
 router.get("/concepto", Auth, AnalyticsController.getConcepto);
+router.get("/tecnico", Auth, AnalyticsController.getTecnico);
 export default router;

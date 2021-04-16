@@ -12,6 +12,7 @@ var _default = {
   getSaldoGeneral: _fetch.getSaldoGeneral,
   getPendientes: _fetch.getPendientes,
   getConcepto: _fetch.getConcepto,
+  getTecnico: _fetch.getTecnico,
   getCliente: _fetch.getCliente
 };
 exports["default"] = _default;

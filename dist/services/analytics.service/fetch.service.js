@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getConcepto = exports.getCliente = exports.getPendientes = exports.getSaldoGeneral = exports.getSaldoPorEstado = void 0;
+exports.getTecnico = exports.getConcepto = exports.getCliente = exports.getPendientes = exports.getSaldoGeneral = exports.getSaldoPorEstado = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -200,3 +200,40 @@ var getConcepto = /*#__PURE__*/function () {
 }();
 
 exports.getConcepto = getConcepto;
+
+var getTecnico = /*#__PURE__*/function () {
+  var _ref6 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(desde, hasta) {
+    return _regenerator["default"].wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            _context6.prev = 0;
+            _context6.next = 3;
+            return _db["default"].query(_query["default"].tecnico, [desde, hasta]).then(function (r) {
+              return r.rows.map(function (x) {
+                return x.rows;
+              });
+            });
+
+          case 3:
+            return _context6.abrupt("return", _context6.sent);
+
+          case 6:
+            _context6.prev = 6;
+            _context6.t0 = _context6["catch"](0);
+            throw _context6.t0;
+
+          case 9:
+          case "end":
+            return _context6.stop();
+        }
+      }
+    }, _callee6, null, [[0, 6]]);
+  }));
+
+  return function getTecnico(_x13, _x14) {
+    return _ref6.apply(this, arguments);
+  };
+}();
+
+exports.getTecnico = getTecnico;

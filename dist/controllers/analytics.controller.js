@@ -236,6 +236,48 @@ var analyticsController = {
     }
 
     return getConcepto;
+  }(),
+  getTecnico: function () {
+    var _getTecnico = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
+      var desde, hasta, data;
+      return _regenerator["default"].wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              desde = (0, _date.parse_date)(req.query.desde);
+              hasta = (0, _date.parse_date)(req.query.hasta);
+              _context5.prev = 2;
+              _context5.next = 5;
+              return _analytics["default"].getTecnico(desde, hasta);
+
+            case 5:
+              data = _context5.sent;
+              return _context5.abrupt("return", res.status(200).json({
+                status: 200,
+                data: data
+              }));
+
+            case 9:
+              _context5.prev = 9;
+              _context5.t0 = _context5["catch"](2);
+              return _context5.abrupt("return", res.status(400).json({
+                status: 400,
+                message: _context5.t0.message
+              }));
+
+            case 12:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5, null, [[2, 9]]);
+    }));
+
+    function getTecnico(_x9, _x10) {
+      return _getTecnico.apply(this, arguments);
+    }
+
+    return getTecnico;
   }()
 };
 var _default = analyticsController;
