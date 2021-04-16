@@ -2,7 +2,7 @@ const { Pool } = require('pg').native
 const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
-    database: 'integralTest',
+    database: 'integralV2',
     password: 'secreto',
     port: 5432,
 });
