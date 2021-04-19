@@ -8,7 +8,7 @@ exports["default"] = void 0;
 var _expressValidator = require("express-validator");
 
 var ConceptoValidator = {
-  body: [(0, _expressValidator.body)("descripcion").not().isEmpty().withMessage("Descripcion es obligatorio").bail(), (0, _expressValidator.body)("idmoneda.idmoneda").not().isEmpty().withMessage("Moneda es obligatorio").bail(), (0, _expressValidator.body)("precio").not().isEmpty().withMessage("Precio es obligatorio").bail(), function (req, res, next) {
+  body: [(0, _expressValidator.body)("descripcion").not().isEmpty().withMessage("Descripcion es obligatorio").bail(), (0, _expressValidator.body)("idmoneda.idmoneda").not().isEmpty().withMessage("Moneda es obligatorio").bail(), (0, _expressValidator.body)("idcategoria.idcategoria").not().isEmpty().withMessage("Categoria es obligatorio").bail(), (0, _expressValidator.body)("precio").not().isEmpty().withMessage("Precio es obligatorio").bail(), function (req, res, next) {
     var errors = (0, _expressValidator.validationResult)(req);
 
     if (!errors.isEmpty()) {

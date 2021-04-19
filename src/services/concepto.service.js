@@ -36,22 +36,22 @@ const ConceptoService = {
       throw e;
     }
   },
-  create: async ({ descripcion, precio, idmoneda }) => {
+  create: async ({ descripcion, precio, idmoneda, idcategoria }) => {
     try {
       const results = await db.query(
-        "INSERT INTO concepto(descripcion, precio, idmoneda) VALUES ($1, $2, $3) RETURNING *",
-        [descripcion, precio, idmoneda]
+        "INSERT INTO concepto(descripcion, precio, idmoneda, idcategoria) VALUES ($1, $2, $3, $4) RETURNING *",
+        [descripcion, precio, idmoneda, idcategoria]
       );
       return results.rows;
     } catch (e) {
       throw e;
     }
   },
-  update: async ({ descripcion, precio, idmoneda, id }) => {
+  update: async ({ descripcion, precio, idmoneda, idcategoria, id }) => {
     try {
       const results = await db.query(
-        "UPDATE concepto SET descripcion = $1, precio = $2, idmoneda = $3 WHERE idconcepto = $4 RETURNING *",
-        [descripcion, precio, idmoneda, id]
+        "UPDATE concepto SET descripcion = $1, precio = $2, idmoneda = $3, idcategoria = $4 WHERE idconcepto = $5 RETURNING *",
+        [descripcion, precio, idmoneda, idcategoria, id]
       );
       return results.rows;
     } catch (e) {

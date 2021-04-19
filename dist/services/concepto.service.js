@@ -87,15 +87,15 @@ var ConceptoService = {
   }(),
   create: function () {
     var _create = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(_ref) {
-      var descripcion, precio, idmoneda, results;
+      var descripcion, precio, idmoneda, idcategoria, results;
       return _regenerator["default"].wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              descripcion = _ref.descripcion, precio = _ref.precio, idmoneda = _ref.idmoneda;
+              descripcion = _ref.descripcion, precio = _ref.precio, idmoneda = _ref.idmoneda, idcategoria = _ref.idcategoria;
               _context3.prev = 1;
               _context3.next = 4;
-              return _db["default"].query("INSERT INTO concepto(descripcion, precio, idmoneda) VALUES ($1, $2, $3) RETURNING *", [descripcion, precio, idmoneda]);
+              return _db["default"].query("INSERT INTO concepto(descripcion, precio, idmoneda, idcategoria) VALUES ($1, $2, $3, $4) RETURNING *", [descripcion, precio, idmoneda, idcategoria]);
 
             case 4:
               results = _context3.sent;
@@ -122,15 +122,15 @@ var ConceptoService = {
   }(),
   update: function () {
     var _update = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(_ref2) {
-      var descripcion, precio, idmoneda, id, results;
+      var descripcion, precio, idmoneda, idcategoria, id, results;
       return _regenerator["default"].wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              descripcion = _ref2.descripcion, precio = _ref2.precio, idmoneda = _ref2.idmoneda, id = _ref2.id;
+              descripcion = _ref2.descripcion, precio = _ref2.precio, idmoneda = _ref2.idmoneda, idcategoria = _ref2.idcategoria, id = _ref2.id;
               _context4.prev = 1;
               _context4.next = 4;
-              return _db["default"].query("UPDATE concepto SET descripcion = $1, precio = $2, idmoneda = $3 WHERE idconcepto = $4 RETURNING *", [descripcion, precio, idmoneda, id]);
+              return _db["default"].query("UPDATE concepto SET descripcion = $1, precio = $2, idmoneda = $3, idcategoria = $4 WHERE idconcepto = $5 RETURNING *", [descripcion, precio, idmoneda, idcategoria, id]);
 
             case 4:
               results = _context4.sent;

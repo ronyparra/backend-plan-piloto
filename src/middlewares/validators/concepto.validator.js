@@ -12,6 +12,11 @@ const ConceptoValidator = {
       .isEmpty()
       .withMessage("Moneda es obligatorio")
       .bail(),
+    body("idcategoria.idcategoria")
+      .not()
+      .isEmpty()
+      .withMessage("Categoria es obligatorio")
+      .bail(),
     body("precio").not().isEmpty().withMessage("Precio es obligatorio").bail(),
 
     (req, res, next) => {

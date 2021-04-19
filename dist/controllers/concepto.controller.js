@@ -110,7 +110,8 @@ var ConceptoController = {
               params = {
                 descripcion: req.body.descripcion,
                 precio: req.body.precio,
-                idmoneda: req.body.idmoneda.idmoneda
+                idmoneda: req.body.idmoneda.idmoneda,
+                idcategoria: req.body.idcategoria.idcategoria
               };
               _context3.prev = 1;
               _context3.next = 4;
@@ -155,7 +156,8 @@ var ConceptoController = {
               params = {
                 descripcion: req.body.descripcion,
                 precio: req.body.precio,
-                idmoneda: req.body.idmoneda.idmoneda
+                idmoneda: req.body.idmoneda.idmoneda,
+                idcategoria: req.body.idcategoria.idcategoria
               };
               _context4.prev = 1;
               _context4.next = 4;

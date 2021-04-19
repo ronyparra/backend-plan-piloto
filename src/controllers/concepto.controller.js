@@ -21,7 +21,8 @@ const ConceptoController = {
     const params = {
       descripcion: req.body.descripcion, 
       precio: req.body.precio,
-      idmoneda: req.body.idmoneda.idmoneda
+      idmoneda: req.body.idmoneda.idmoneda,
+      idcategoria: req.body.idcategoria.idcategoria
     }
     try {
       const concepto = await ConceptoService.create(params);
@@ -34,7 +35,8 @@ const ConceptoController = {
     const params = {
       descripcion: req.body.descripcion, 
       precio: req.body.precio,
-      idmoneda: req.body.idmoneda.idmoneda
+      idmoneda: req.body.idmoneda.idmoneda,
+      idcategoria: req.body.idcategoria.idcategoria
     }
     try {
       const users = await ConceptoService.update({
