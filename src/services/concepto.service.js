@@ -9,10 +9,15 @@ SELECT
 			'idmoneda', moneda.idmoneda,
 			'descripcion', moneda.descripcion,
 			'abreviatura', moneda.abreviatura
-		)
+		),
+    'idcategoria', json_build_object(
+      'idcategoria', categoria.idcategoria,
+      'descripcion', categoria.descripcion
+    )
 	) as rows
 FROM concepto
 JOIN moneda USING (idmoneda)
+JOIN categoria USING (idcategoria)
 `;
 const ConceptoService = {
   getAll: async () => {

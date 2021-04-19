@@ -152,7 +152,7 @@ CREATE TABLE actividad_pendiente (
 
 ALTER TABLE pendiente ADD COLUMN activo BOOLEAN NOT NULL DEFAULT true;
 
-----
+
 UPDATE formulario SET 
 permisos = '{"Puede Registrar": false,"Puede Modificar": false,"Puede Eliminar": false,"Puede Listar": false,"Puede Cambiar Estado": false}'
 WHERE idformulario  = 3;
@@ -185,8 +185,6 @@ WHERE idformulario = 4;
 UPDATE estadocobro SET descripcion= 'Facturado' WHERE idestadocobro= 2;
 INSERT INTO estadocobro(idestadocobro, descripcion) VALUES (3, 'Cobrado');
 
-
--- DROP TABLE cliente_cobro;
 CREATE TABLE cliente_cobro (
     idcliente_cobro SERIAL NOT NULL,
     cobrado BOOLEAN NOT NULL,
@@ -255,7 +253,35 @@ BEGIN
 END;
 $$; */
 
+--DROP FUNCTION calcularRetencion(BOOLEAN,DOUBLE PRECISION);
+
 UPDATE actividad_concepto_detalle
 SET idmoneda = 2
 WHERE (idconcepto, idactividad) IN  
 (SELECT  idconcepto, idactividad FROM actividad_concepto_detalle WHERE precio < 1500);
+
+-----------------------------------
+
+CREATE TABLE categoria (
+	idcategoria SERIAL NOT NULL,
+	descripcion TEXT NOT NULL,
+	PRIMARY KEY (idcategoria)
+);
+
+INSERT INTO categoria(
+	idcategoria, descripcion)
+VALUES (1, 'Servicio');
+
+ALTER TABLE concepto 
+ADD COLUMN idcategoria INT NOT NULL DEFAULT 1 
+REFERENCES categoria (idcategoria) ON UPDATE CASCADE;
+
+
+INSERT INTO formulario(
+	idformulario, descripcion, permisos)
+VALUES 
+(8, 'Categoria', '{"Puede Registrar": false,"Puede Modificar": false,"Puede Eliminar": false,"Puede Listar": false}'); 
+INSERT INTO usuario_rol_permiso(idusuario_rol, idformulario, permisos) VALUES 
+(1, 8, '{"Puede Registrar": true,"Puede Modificar": true,"Puede Eliminar": true,"Puede Listar": true}');
+INSERT INTO usuario_rol_permiso(idusuario_rol, idformulario, permisos) VALUES 
+(2, 8, '{"Puede Registrar": false,"Puede Modificar": false,"Puede Eliminar": false,"Puede Listar": false}');

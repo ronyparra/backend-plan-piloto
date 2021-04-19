@@ -17,6 +17,7 @@ app.use("/moneda", routes.moneda);
 app.use("/cliente", routes.cliente);
 app.use("/concepto", routes.concepto);
 app.use("/actividad", routes.actividad);
+app.use("/categoria", routes.categoria);
 app.use("/pendiente", routes.pendiente);
 app.use("/analytics", routes.analytics);
 app.use("/usuariorol", routes.usuario_rol);

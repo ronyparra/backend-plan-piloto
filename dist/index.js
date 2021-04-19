@@ -27,6 +27,7 @@ app.use("/moneda", _routes["default"].moneda);
 app.use("/cliente", _routes["default"].cliente);
 app.use("/concepto", _routes["default"].concepto);
 app.use("/actividad", _routes["default"].actividad);
+app.use("/categoria", _routes["default"].categoria);
 app.use("/pendiente", _routes["default"].pendiente);
 app.use("/analytics", _routes["default"].analytics);
 app.use("/usuariorol", _routes["default"].usuario_rol);

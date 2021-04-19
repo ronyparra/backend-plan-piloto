@@ -15,6 +15,8 @@ var _cliente = _interopRequireDefault(require("./cliente.router"));
 
 var _concepto = _interopRequireDefault(require("./concepto.router"));
 
+var _categoria = _interopRequireDefault(require("./categoria.router"));
+
 var _actividad = _interopRequireDefault(require("./actividad.router"));
 
 var _pendiente = _interopRequireDefault(require("./pendiente.router"));
@@ -40,6 +42,7 @@ var _default = {
   moneda: _moneda["default"],
   cliente: _cliente["default"],
   concepto: _concepto["default"],
+  categoria: _categoria["default"],
   analytics: _analytics["default"],
   pendiente: _pendiente["default"],
   actividad: _actividad["default"],

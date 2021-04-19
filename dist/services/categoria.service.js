@@ -13,8 +13,8 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _db = _interopRequireDefault(require("../db"));
 
-var query = "\nSELECT \n\tjson_build_object(\n\t\t'idconcepto', idconcepto,\n\t\t'descripcion', concepto.descripcion,\n\t\t'precio', precio,\n\t\t'idmoneda', json_build_object(\n\t\t\t'idmoneda', moneda.idmoneda,\n\t\t\t'descripcion', moneda.descripcion,\n\t\t\t'abreviatura', moneda.abreviatura\n\t\t),\n    'idcategoria', json_build_object(\n      'idcategoria', categoria.idcategoria,\n      'descripcion', categoria.descripcion\n    )\n\t) as rows\nFROM concepto\nJOIN moneda USING (idmoneda)\nJOIN categoria USING (idcategoria)\n";
-var ConceptoService = {
+var query = "\nSELECT \n\tjson_build_object(\n\t\t'idcategoria', idcategoria,\n\t\t'descripcion', descripcion\n\t) as rows\nFROM categoria\n";
+var CategoriaService = {
   getAll: function () {
     var _getAll = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
       var results;
@@ -60,7 +60,7 @@ var ConceptoService = {
             case 0:
               _context2.prev = 0;
               _context2.next = 3;
-              return _db["default"].query(query + " WHERE idconcepto  = $1", [id]);
+              return _db["default"].query(query + " WHERE idcategoria  = $1", [id]);
 
             case 3:
               results = _context2.sent;
@@ -87,15 +87,15 @@ var ConceptoService = {
   }(),
   create: function () {
     var _create = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(_ref) {
-      var descripcion, precio, idmoneda, results;
+      var descripcion, results;
       return _regenerator["default"].wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              descripcion = _ref.descripcion, precio = _ref.precio, idmoneda = _ref.idmoneda;
+              descripcion = _ref.descripcion;
               _context3.prev = 1;
               _context3.next = 4;
-              return _db["default"].query("INSERT INTO concepto(descripcion, precio, idmoneda) VALUES ($1, $2, $3) RETURNING *", [descripcion, precio, idmoneda]);
+              return _db["default"].query("INSERT INTO categoria(descripcion) VALUES ($1) RETURNING *", [descripcion]);
 
             case 4:
               results = _context3.sent;
@@ -122,15 +122,15 @@ var ConceptoService = {
   }(),
   update: function () {
     var _update = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(_ref2) {
-      var descripcion, precio, idmoneda, id, results;
+      var descripcion, id, results;
       return _regenerator["default"].wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              descripcion = _ref2.descripcion, precio = _ref2.precio, idmoneda = _ref2.idmoneda, id = _ref2.id;
+              descripcion = _ref2.descripcion, id = _ref2.id;
               _context4.prev = 1;
               _context4.next = 4;
-              return _db["default"].query("UPDATE concepto SET descripcion = $1, precio = $2, idmoneda = $3 WHERE idconcepto = $4 RETURNING *", [descripcion, precio, idmoneda, id]);
+              return _db["default"].query("UPDATE categoria SET descripcion = $1 WHERE idcategoria = $2 RETURNING *", [descripcion, id]);
 
             case 4:
               results = _context4.sent;
@@ -164,7 +164,7 @@ var ConceptoService = {
             case 0:
               _context5.prev = 0;
               _context5.next = 3;
-              return _db["default"].query("DELETE FROM concepto WHERE idconcepto  = $1", [id]);
+              return _db["default"].query("DELETE FROM categoria WHERE idcategoria  = $1", [id]);
 
             case 3:
               results = _context5.sent;
@@ -190,5 +190,5 @@ var ConceptoService = {
     return _delete;
   }()
 };
-var _default = ConceptoService;
+var _default = CategoriaService;
 exports["default"] = _default;
