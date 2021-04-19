@@ -270,7 +270,7 @@ CREATE TABLE categoria (
 
 INSERT INTO categoria(
 	idcategoria, descripcion)
-VALUES (1, 'Servicios/Instalaciones');
+VALUES (1, 'Servicios');
 
 ALTER TABLE concepto 
 ADD COLUMN idcategoria INT NOT NULL DEFAULT 1 
