@@ -67,19 +67,23 @@ const query = {
       FROM actividad_tecnico_detalle 
       GROUP BY idactividad
       ), saldo_guarani (saldo) AS(
-      SELECT 
-        SUM(precio * cantidad) as saldo,
+		SELECT 
+        SUM(acd.precio * cantidad) as saldo,
         idactividad
-      FROM actividad_concepto_detalle  
-      WHERE idmoneda = 1
-      GROUP BY idactividad
+      	FROM actividad_concepto_detalle AS acd 
+	  	JOIN concepto USING (idconcepto)
+      	WHERE acd.idmoneda = 1
+	  	AND idcategoria = 1
+      	GROUP BY idactividad
       ), saldo_dolar (saldo) AS(
-      SELECT 
-        SUM(precio * cantidad) as saldo,
-        idactividad
-      FROM actividad_concepto_detalle  
-      WHERE idmoneda = 2
-      GROUP BY idactividad
+		SELECT 
+ 		SUM(acd.precio * cantidad) as saldo,
+  		idactividad
+		FROM actividad_concepto_detalle AS acd
+		JOIN concepto USING (idconcepto)
+		WHERE acd.idmoneda = 2
+		AND	concepto.idcategoria = 1
+		GROUP BY idactividad
       )
       SELECT 
       atd.idusuario,
