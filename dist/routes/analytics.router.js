@@ -19,5 +19,6 @@ router.get("/pendiente", _auth["default"], _analytics["default"].getPendientes);
 router.get("/cliente", _auth["default"], _analytics["default"].getCliente);
 router.get("/concepto", _auth["default"], _analytics["default"].getConcepto);
 router.get("/tecnico", _auth["default"], _analytics["default"].getTecnico);
+router.get("/categoria", _auth["default"], _analytics["default"].getCategoria);
 var _default = router;
 exports["default"] = _default;

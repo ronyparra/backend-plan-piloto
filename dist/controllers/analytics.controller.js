@@ -278,6 +278,48 @@ var analyticsController = {
     }
 
     return getTecnico;
+  }(),
+  getCategoria: function () {
+    var _getCategoria = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(req, res) {
+      var desde, hasta, data;
+      return _regenerator["default"].wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              desde = (0, _date.parse_date)(req.query.desde);
+              hasta = (0, _date.parse_date)(req.query.hasta);
+              _context6.prev = 2;
+              _context6.next = 5;
+              return _analytics["default"].getCategoria(desde, hasta);
+
+            case 5:
+              data = _context6.sent;
+              return _context6.abrupt("return", res.status(200).json({
+                status: 200,
+                data: data
+              }));
+
+            case 9:
+              _context6.prev = 9;
+              _context6.t0 = _context6["catch"](2);
+              return _context6.abrupt("return", res.status(400).json({
+                status: 400,
+                message: _context6.t0.message
+              }));
+
+            case 12:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6, null, [[2, 9]]);
+    }));
+
+    function getCategoria(_x11, _x12) {
+      return _getCategoria.apply(this, arguments);
+    }
+
+    return getCategoria;
   }()
 };
 var _default = analyticsController;

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CHANGE_ACTIVIDAD_STATUS = exports.UPDATE_ACTIVIDAD = exports.UPDATE_PENDIENTE = exports.DELETE_ACTIVIDAD = exports.DELETE_DET_PENDIENTE = exports.DELETE_DET_TECNICO = exports.DELETE_DET_CONCEPTO = exports.INSERT_DET_ACT_COBRO = exports.INSERT_CLIENTE_COBRO = exports.INSERT_DET_PENDIENTE = exports.INSERT_DET_CONCEPTO = exports.INSERT_DET_TECNICO = exports.INSERT_ACTIVIDAD = exports.calcularTotal = exports.formatMaster = void 0;
+exports.CHANGE_ACTIVIDAD_STATUS = exports.UPDATE_ACTIVIDAD = exports.UPDATE_PENDIENTE = exports.DELETE_ACTIVIDAD = exports.DELETE_DET_PENDIENTE = exports.DELETE_DET_TECNICO = exports.DELETE_DET_CONCEPTO = exports.INSERT_DET_ACT_COBRO = exports.INSERT_CLIENTE_COBRO = exports.INSERT_DET_PENDIENTE = exports.INSERT_DET_CONCEPTO = exports.INSERT_DET_PENDIENTE_TECNICO = exports.INSERT_DET_TECNICO = exports.INSERT_ACTIVIDAD = exports.calcularTotal = exports.formatMaster = void 0;
 
 var _date = require("../../util/date.util");
 
@@ -48,6 +48,16 @@ var INSERT_DET_TECNICO = function INSERT_DET_TECNICO(detalle, id) {
 };
 
 exports.INSERT_DET_TECNICO = INSERT_DET_TECNICO;
+
+var INSERT_DET_PENDIENTE_TECNICO = function INSERT_DET_PENDIENTE_TECNICO(detalle, id) {
+  var tecnico = [detalle.reduce(function (acc, curr) {
+    if (acc !== "") acc = acc + ",";
+    return acc = acc + "(".concat(id, ",").concat(curr.idusuario, ")");
+  }, "")];
+  return "INSERT INTO pendiente_tecnico(idpendiente, idusuario) VALUES ".concat(tecnico, " RETURNING * ;");
+};
+
+exports.INSERT_DET_PENDIENTE_TECNICO = INSERT_DET_PENDIENTE_TECNICO;
 
 var INSERT_DET_CONCEPTO = function INSERT_DET_CONCEPTO(detalle, id) {
   var conceptos = [detalle.reduce(function (acc, curr) {

@@ -60,3 +60,12 @@ export const getTecnico= async ( desde, hasta ) => {
     throw e;
   }
 };
+export const getCategoria= async ( desde, hasta ) => {
+  try {
+    return await db
+      .query(query.categoria, [desde, hasta])
+      .then((r) => r.rows.map((x) => x.rows));
+  } catch (e) {
+    throw e;
+  }
+};

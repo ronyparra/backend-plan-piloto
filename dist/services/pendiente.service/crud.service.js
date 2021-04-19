@@ -91,7 +91,7 @@ exports.getById = getById;
 
 var create = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(_ref3) {
-    var idtipo_pendiente, fecha, descripcion, pendiente_tecnico, results, idpendiente, tecnicos, resultsTecnico;
+    var idtipo_pendiente, fecha, descripcion, pendiente_tecnico, results, idpendiente, resultsTecnico;
     return _regenerator["default"].wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
@@ -109,41 +109,40 @@ var create = /*#__PURE__*/function () {
             results = _context3.sent;
 
             if (!(pendiente_tecnico.length > 0)) {
-              _context3.next = 14;
+              _context3.next = 13;
               break;
             }
 
             idpendiente = results.rows[0].idpendiente;
-            tecnicos = (0, _formatter.formatTecnico)(pendiente_tecnico, idpendiente);
-            _context3.next = 12;
-            return _db["default"].query("INSERT INTO pendiente_tecnico(idpendiente, idusuario)VALUES ".concat(tecnicos, " RETURNING *"));
+            _context3.next = 11;
+            return _db["default"].query((0, _formatter.INSERT_DET_PENDIENTE_TECNICO)(pendiente_tecnico, idpendiente));
 
-          case 12:
+          case 11:
             resultsTecnico = _context3.sent;
             results.rows[0].pendiente_tecnico = resultsTecnico.rows;
 
-          case 14:
-            _context3.next = 16;
+          case 13:
+            _context3.next = 15;
             return _db["default"].query("COMMIT");
 
-          case 16:
+          case 15:
             return _context3.abrupt("return", results.rows);
 
-          case 19:
-            _context3.prev = 19;
+          case 18:
+            _context3.prev = 18;
             _context3.t0 = _context3["catch"](1);
-            _context3.next = 23;
+            _context3.next = 22;
             return _db["default"].query("ROLLBACK");
 
-          case 23:
+          case 22:
             throw _context3.t0;
 
-          case 24:
+          case 23:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[1, 19]]);
+    }, _callee3, null, [[1, 18]]);
   }));
 
   return function create(_x2) {
@@ -192,7 +191,7 @@ exports.changeStatus = changeStatus;
 
 var update = /*#__PURE__*/function () {
   var _ref8 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(_ref7) {
-    var idtipo_pendiente, fecha, descripcion, pendiente_tecnico, id, results, tecnicos, resultsTecnico;
+    var idtipo_pendiente, fecha, descripcion, pendiente_tecnico, id, results, resultsTecnico;
     return _regenerator["default"].wrap(function _callee5$(_context5) {
       while (1) {
         switch (_context5.prev = _context5.next) {
@@ -213,40 +212,39 @@ var update = /*#__PURE__*/function () {
 
           case 9:
             if (!(pendiente_tecnico.length > 0)) {
-              _context5.next = 15;
+              _context5.next = 14;
               break;
             }
 
-            tecnicos = (0, _formatter.formatTecnico)(pendiente_tecnico, id);
-            _context5.next = 13;
-            return _db["default"].query("INSERT INTO pendiente_tecnico(idpendiente, idusuario)VALUES ".concat(tecnicos, " RETURNING *"));
+            _context5.next = 12;
+            return _db["default"].query((0, _formatter.INSERT_DET_PENDIENTE_TECNICO)(pendiente_tecnico, id));
 
-          case 13:
+          case 12:
             resultsTecnico = _context5.sent;
             results.rows[0].pendiente_tecnico = resultsTecnico.rows;
 
-          case 15:
-            _context5.next = 17;
+          case 14:
+            _context5.next = 16;
             return _db["default"].query("COMMIT");
 
-          case 17:
+          case 16:
             return _context5.abrupt("return", results.rows);
 
-          case 20:
-            _context5.prev = 20;
+          case 19:
+            _context5.prev = 19;
             _context5.t0 = _context5["catch"](1);
-            _context5.next = 24;
+            _context5.next = 23;
             return _db["default"].query("ROLLBACK");
 
-          case 24:
+          case 23:
             throw _context5.t0;
 
-          case 25:
+          case 24:
           case "end":
             return _context5.stop();
         }
       }
-    }, _callee5, null, [[1, 20]]);
+    }, _callee5, null, [[1, 19]]);
   }));
 
   return function update(_x4) {

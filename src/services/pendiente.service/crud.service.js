@@ -1,5 +1,5 @@
 import db from "../../db";
-import { formatTecnico } from "../actividad.service/formatter";
+import { INSERT_DET_PENDIENTE_TECNICO } from "../actividad.service/formatter";
 const query = `
   SELECT 
 	  json_build_object(
@@ -57,10 +57,7 @@ export const create = async ({
     );
     if (pendiente_tecnico.length > 0) {
       const idpendiente = results.rows[0].idpendiente;
-      const tecnicos = formatTecnico(pendiente_tecnico, idpendiente);
-      const resultsTecnico = await db.query(
-        `INSERT INTO pendiente_tecnico(idpendiente, idusuario)VALUES ${tecnicos} RETURNING *`
-      );
+      const resultsTecnico = await db.query(INSERT_DET_PENDIENTE_TECNICO(pendiente_tecnico, idpendiente));
       results.rows[0].pendiente_tecnico = resultsTecnico.rows;
     }
     await db.query("COMMIT");
@@ -100,10 +97,7 @@ export const update = async ({
       id,
     ]);
     if (pendiente_tecnico.length > 0) {
-      const tecnicos = formatTecnico(pendiente_tecnico, id);
-      const resultsTecnico = await db.query(
-        `INSERT INTO pendiente_tecnico(idpendiente, idusuario)VALUES ${tecnicos} RETURNING *`
-      );
+      const resultsTecnico = await db.query(INSERT_DET_PENDIENTE_TECNICO(pendiente_tecnico, id));
       results.rows[0].pendiente_tecnico = resultsTecnico.rows;
     }
     await db.query("COMMIT");

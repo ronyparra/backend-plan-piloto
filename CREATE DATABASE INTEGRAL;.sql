@@ -270,7 +270,7 @@ CREATE TABLE categoria (
 
 INSERT INTO categoria(
 	idcategoria, descripcion)
-VALUES (1, 'Servicio');
+VALUES (1, 'Servicios/Instalaciones');
 
 ALTER TABLE concepto 
 ADD COLUMN idcategoria INT NOT NULL DEFAULT 1 
@@ -285,3 +285,8 @@ INSERT INTO usuario_rol_permiso(idusuario_rol, idformulario, permisos) VALUES
 (1, 8, '{"Puede Registrar": true,"Puede Modificar": true,"Puede Eliminar": true,"Puede Listar": true}');
 INSERT INTO usuario_rol_permiso(idusuario_rol, idformulario, permisos) VALUES 
 (2, 8, '{"Puede Registrar": false,"Puede Modificar": false,"Puede Eliminar": false,"Puede Listar": false}');
+
+
+INSERT INTO categoria(
+	idcategoria, descripcion)
+VALUES (2, 'Camaras'),(3, 'Alarmas'),(4,'Telefonia'),(5,'Licencias Software'),(6,'Accesorios Computadoras'),(7,'Redes');

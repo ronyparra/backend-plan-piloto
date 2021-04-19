@@ -110,6 +110,22 @@ const query = {
           'dolar',(SELECT SUM(dolar) FROM saldo_usuario WHERE idusuario = usuario.idusuario)
         ) AS rows
       FROM usuario    
+  `,
+  categoria: `
+  SELECT 
+	json_build_object(
+		'id',categoria.idcategoria,
+		'descripcion',categoria.descripcion,
+		'cantidad',COUNT(acd.idconcepto),
+		'guarani',SUM(acd.precio * acd.cantidad) FILTER (WHERE acd.idmoneda = 1),
+		'dolar',SUM(acd.precio * acd.cantidad) FILTER (WHERE acd.idmoneda = 2)
+	) AS rows
+  FROM actividad
+  JOIN actividad_concepto_detalle AS acd USING(idactividad)
+  JOIN concepto USING (idconcepto)
+  JOIN categoria USING (idcategoria)
+  WHERE 	fecha BETWEEN $1::date AND  $2::date
+  GROUP BY categoria.idcategoria,categoria.descripcion
   `
 };
 

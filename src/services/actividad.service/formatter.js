@@ -22,7 +22,6 @@ export const calcularTotal = (detalle) =>
     return (acc = acc + subtotal);
   }, 0);
 
-
 export const INSERT_ACTIVIDAD = (
   idcliente,
   idcliente_sucursal,
@@ -42,6 +41,16 @@ export const INSERT_DET_TECNICO = (detalle, id) => {
     }, ""),
   ];
   return `INSERT INTO actividad_tecnico_detalle(idactividad, idusuario) VALUES ${tecnico} RETURNING * ;`;
+};
+
+export const INSERT_DET_PENDIENTE_TECNICO = (detalle, id) => {
+  const tecnico = [
+    detalle.reduce((acc, curr) => {
+      if (acc !== "") acc = acc + ",";
+      return (acc = acc + `(${id},${curr.idusuario})`);
+    }, ""),
+  ];
+  return `INSERT INTO pendiente_tecnico(idpendiente, idusuario) VALUES ${tecnico} RETURNING * ;`;
 };
 
 export const INSERT_DET_CONCEPTO = (detalle, id) => {
@@ -69,7 +78,7 @@ export const INSERT_CLIENTE_COBRO = (
 ) => `INSERT INTO cliente_cobro(
       idestadocobro, descripcion, idcliente, fechainsert, fechacobro, idusuarioinsert, idusuariocobro, comentario, saldocobrado, saldoacobrar, retencion, idmoneda)
     VALUES (2, '${descripcion}', ${idcliente}, '${fecha}', null, ${idusuario}, null, null, 0, ${total}, false, ${idmoneda}) RETURNING *`;
-    
+
 export const INSERT_DET_ACT_COBRO = (detalle, id) => {
   const actividad = [
     detalle.reduce((acc, curr) => {

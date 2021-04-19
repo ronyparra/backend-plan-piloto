@@ -9,4 +9,5 @@ router.get("/pendiente", Auth, AnalyticsController.getPendientes);
 router.get("/cliente", Auth, AnalyticsController.getCliente);
 router.get("/concepto", Auth, AnalyticsController.getConcepto);
 router.get("/tecnico", Auth, AnalyticsController.getTecnico);
+router.get("/categoria", Auth, AnalyticsController.getCategoria);
 export default router;
