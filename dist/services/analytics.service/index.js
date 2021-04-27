@@ -13,6 +13,7 @@ var _default = {
   getPendientes: _fetch.getPendientes,
   getCategoria: _fetch.getCategoria,
   getConcepto: _fetch.getConcepto,
+  getEstados: _fetch.getEstados,
   getTecnico: _fetch.getTecnico,
   getCliente: _fetch.getCliente
 };

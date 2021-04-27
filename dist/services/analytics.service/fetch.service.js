@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getCategoria = exports.getTecnico = exports.getConcepto = exports.getCliente = exports.getPendientes = exports.getSaldoGeneral = exports.getSaldoPorEstado = void 0;
+exports.getEstados = exports.getCategoria = exports.getTecnico = exports.getConcepto = exports.getCliente = exports.getPendientes = exports.getSaldoGeneral = exports.getSaldoPorEstado = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -274,3 +274,40 @@ var getCategoria = /*#__PURE__*/function () {
 }();
 
 exports.getCategoria = getCategoria;
+
+var getEstados = /*#__PURE__*/function () {
+  var _ref8 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee8(desde, hasta, old) {
+    return _regenerator["default"].wrap(function _callee8$(_context8) {
+      while (1) {
+        switch (_context8.prev = _context8.next) {
+          case 0:
+            _context8.prev = 0;
+            _context8.next = 3;
+            return _db["default"].query(_query["default"].estados(old), [desde, hasta]).then(function (r) {
+              return r.rows.map(function (x) {
+                return x.rows;
+              });
+            });
+
+          case 3:
+            return _context8.abrupt("return", _context8.sent);
+
+          case 6:
+            _context8.prev = 6;
+            _context8.t0 = _context8["catch"](0);
+            throw _context8.t0;
+
+          case 9:
+          case "end":
+            return _context8.stop();
+        }
+      }
+    }, _callee8, null, [[0, 6]]);
+  }));
+
+  return function getEstados(_x17, _x18, _x19) {
+    return _ref8.apply(this, arguments);
+  };
+}();
+
+exports.getEstados = getEstados;

@@ -69,3 +69,12 @@ export const getCategoria= async ( desde, hasta ) => {
     throw e;
   }
 };
+export const getEstados = async ( desde, hasta, old) => {
+  try {
+    return await db
+      .query(query.estados(old), [desde, hasta])
+      .then((r) => r.rows.map((x) => x.rows));
+  } catch (e) {
+    throw e;
+  }
+};

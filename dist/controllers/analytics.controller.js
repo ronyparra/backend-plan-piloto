@@ -320,6 +320,49 @@ var analyticsController = {
     }
 
     return getCategoria;
+  }(),
+  getEstados: function () {
+    var _getEstados = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee7(req, res) {
+      var desde, hasta, old, data;
+      return _regenerator["default"].wrap(function _callee7$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
+              desde = (0, _date.parse_date)(req.query.desde);
+              hasta = (0, _date.parse_date)(req.query.hasta);
+              old = req.query.old === 'true' ? true : false;
+              _context7.prev = 3;
+              _context7.next = 6;
+              return _analytics["default"].getEstados(desde, hasta, old);
+
+            case 6:
+              data = _context7.sent;
+              return _context7.abrupt("return", res.status(200).json({
+                status: 200,
+                data: data
+              }));
+
+            case 10:
+              _context7.prev = 10;
+              _context7.t0 = _context7["catch"](3);
+              return _context7.abrupt("return", res.status(400).json({
+                status: 400,
+                message: _context7.t0.message
+              }));
+
+            case 13:
+            case "end":
+              return _context7.stop();
+          }
+        }
+      }, _callee7, null, [[3, 10]]);
+    }));
+
+    function getEstados(_x13, _x14) {
+      return _getEstados.apply(this, arguments);
+    }
+
+    return getEstados;
   }()
 };
 var _default = analyticsController;

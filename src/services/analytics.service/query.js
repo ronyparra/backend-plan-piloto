@@ -58,7 +58,7 @@ const query = {
   JOIN concepto ON concepto.idconcepto = acd.idconcepto
   WHERE 	fecha BETWEEN $1::date AND  $2::date
   GROUP BY concepto.idconcepto, concepto.descripcion`,
-  tecnico:`
+  tecnico: `
   WITH saldo_usuario AS (
     WITH count_usuario(cantidad) AS (
       SELECT 
@@ -130,8 +130,61 @@ const query = {
   JOIN categoria USING (idcategoria)
   WHERE 	fecha BETWEEN $1::date AND  $2::date
   GROUP BY categoria.idcategoria,categoria.descripcion
-  `
+  `,
+  estados:(old)=> `
+  WITH saldoestado  AS (
+	  SELECT 
+		  	idestadocobro,
+			  moneda.idmoneda,
+			  SUM(precio*cantidad) AS saldo
+	  FROM 	actividad
+	  JOIN 	actividad_concepto_detalle USING (idactividad)
+	  JOIN 	moneda USING (idmoneda)
+    ${old ? 'WHERE 	fecha <  $2::date' : 'WHERE 	fecha BETWEEN $1::date AND  $2::date'}
+  	GROUP BY moneda.abreviatura, moneda.idmoneda, idestadocobro
+  ), saldocobrado  AS (
+	  SELECT 
+			idestadocobro,
+			moneda.idmoneda,
+			SUM(precio*cantidad) AS saldo
+	FROM 	actividad
+	JOIN 	actividad_concepto_detalle USING (idactividad)
+	JOIN 	moneda USING (idmoneda)
+	WHERE 	fecha BETWEEN $1::date AND  $2::date
+	GROUP BY moneda.abreviatura, moneda.idmoneda, idestadocobro
+  )
+  SELECT * FROM (
+	SELECT 
+		json_build_object(
+        ${old ? "'mensaje', '(Con Anteriores)',": ""}
+  			'descripcion', 		estadocobro.descripcion,
+  			'guarani',	(SELECT 	saldo 
+		 			FROM 		saldoestado 
+		 			WHERE 		idestadocobro = estadocobro.idestadocobro 
+		 			AND 		idmoneda = 1),
+  			'dolar',	(SELECT 	saldo 
+			 		FROM 		saldoestado 
+		 			WHERE 		idestadocobro = estadocobro.idestadocobro 
+		 			AND 		idmoneda = 2)
+		) AS rows
+	FROM estadocobro WHERE idestadocobro != 3
+	UNION ALL
+	SELECT 
+		json_build_object(
+        ${old ? "'mensaje', '(Actual)',": ""}
+  			'descripcion',  	estadocobro.descripcion,
+  			'guarani',	(SELECT 	saldo 
+					FROM 		saldocobrado 
+					WHERE 		idestadocobro = estadocobro.idestadocobro 
+					AND 		idmoneda = 1),
+  			'dolar',	(SELECT 	saldo 
+		 			FROM 		saldocobrado 
+		 			WHERE 		idestadocobro = estadocobro.idestadocobro 
+		 			AND 		idmoneda = 2)
+		) AS rows
+	FROM estadocobro WHERE idestadocobro = 3
+  ) AS estados
+  `,
 };
 
 export default query;
-
