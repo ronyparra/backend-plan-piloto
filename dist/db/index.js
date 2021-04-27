@@ -10,7 +10,7 @@ var Pool = require('pg')["native"].Pool;
 var pool = new Pool({
   user: 'postgres',
   host: 'localhost',
-  database: 'integralV2Backup',
+  database: 'integralV2',
   password: 'secreto',
   port: 5432
 });
