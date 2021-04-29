@@ -146,6 +146,7 @@ const query = {
   JOIN moneda USING (idmoneda)
   JOIN usuario ON usuario.idusuario = idusuariocobro
   AND fechacobro BETWEEN $1::date AND $2::date
+  WHERE idestadocobro = 3
   GROUP BY usuario.nombre, usuario.apellido, idusuariocobro;
   `,
   estados:(old)=> `
