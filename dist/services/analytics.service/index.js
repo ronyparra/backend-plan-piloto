@@ -10,6 +10,7 @@ var _fetch = require("./fetch.service");
 var _default = {
   getSaldoPorEstado: _fetch.getSaldoPorEstado,
   getSaldoGeneral: _fetch.getSaldoGeneral,
+  getCobroTecnico: _fetch.getCobroTecnico,
   getPendientes: _fetch.getPendientes,
   getCategoria: _fetch.getCategoria,
   getConcepto: _fetch.getConcepto,

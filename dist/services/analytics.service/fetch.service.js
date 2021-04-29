@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getEstados = exports.getCategoria = exports.getTecnico = exports.getConcepto = exports.getCliente = exports.getPendientes = exports.getSaldoGeneral = exports.getSaldoPorEstado = void 0;
+exports.getCobroTecnico = exports.getEstados = exports.getCategoria = exports.getTecnico = exports.getConcepto = exports.getCliente = exports.getPendientes = exports.getSaldoGeneral = exports.getSaldoPorEstado = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -311,3 +311,40 @@ var getEstados = /*#__PURE__*/function () {
 }();
 
 exports.getEstados = getEstados;
+
+var getCobroTecnico = /*#__PURE__*/function () {
+  var _ref9 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee9(desde, hasta) {
+    return _regenerator["default"].wrap(function _callee9$(_context9) {
+      while (1) {
+        switch (_context9.prev = _context9.next) {
+          case 0:
+            _context9.prev = 0;
+            _context9.next = 3;
+            return _db["default"].query(_query["default"].cobro, [desde, hasta]).then(function (r) {
+              return r.rows.map(function (x) {
+                return x.rows;
+              });
+            });
+
+          case 3:
+            return _context9.abrupt("return", _context9.sent);
+
+          case 6:
+            _context9.prev = 6;
+            _context9.t0 = _context9["catch"](0);
+            throw _context9.t0;
+
+          case 9:
+          case "end":
+            return _context9.stop();
+        }
+      }
+    }, _callee9, null, [[0, 6]]);
+  }));
+
+  return function getCobroTecnico(_x20, _x21) {
+    return _ref9.apply(this, arguments);
+  };
+}();
+
+exports.getCobroTecnico = getCobroTecnico;

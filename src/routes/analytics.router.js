@@ -11,4 +11,6 @@ router.get("/concepto", Auth, AnalyticsController.getConcepto);
 router.get("/tecnico", Auth, AnalyticsController.getTecnico);
 router.get("/categoria", Auth, AnalyticsController.getCategoria);
 router.get("/estado", Auth, AnalyticsController.getEstados);
+router.get("/cobrotecnico", Auth, AnalyticsController.getCobroTecnico);
+
 export default router;

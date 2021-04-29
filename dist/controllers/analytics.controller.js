@@ -363,6 +363,48 @@ var analyticsController = {
     }
 
     return getEstados;
+  }(),
+  getCobroTecnico: function () {
+    var _getCobroTecnico = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee8(req, res) {
+      var desde, hasta, data;
+      return _regenerator["default"].wrap(function _callee8$(_context8) {
+        while (1) {
+          switch (_context8.prev = _context8.next) {
+            case 0:
+              desde = (0, _date.parse_date)(req.query.desde);
+              hasta = (0, _date.parse_date)(req.query.hasta);
+              _context8.prev = 2;
+              _context8.next = 5;
+              return _analytics["default"].getCobroTecnico(desde, hasta);
+
+            case 5:
+              data = _context8.sent;
+              return _context8.abrupt("return", res.status(200).json({
+                status: 200,
+                data: data
+              }));
+
+            case 9:
+              _context8.prev = 9;
+              _context8.t0 = _context8["catch"](2);
+              return _context8.abrupt("return", res.status(400).json({
+                status: 400,
+                message: _context8.t0.message
+              }));
+
+            case 12:
+            case "end":
+              return _context8.stop();
+          }
+        }
+      }, _callee8, null, [[2, 9]]);
+    }));
+
+    function getCobroTecnico(_x15, _x16) {
+      return _getCobroTecnico.apply(this, arguments);
+    }
+
+    return getCobroTecnico;
   }()
 };
 var _default = analyticsController;

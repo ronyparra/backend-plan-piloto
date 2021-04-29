@@ -1,6 +1,7 @@
 import {
   getSaldoPorEstado,
   getSaldoGeneral,
+  getCobroTecnico,
   getPendientes,
   getConcepto,
   getCategoria,
@@ -11,6 +12,7 @@ import {
 export default {
   getSaldoPorEstado,
   getSaldoGeneral,
+  getCobroTecnico,
   getPendientes,
   getCategoria,
   getConcepto,

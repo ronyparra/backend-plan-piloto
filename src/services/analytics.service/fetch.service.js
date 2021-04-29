@@ -78,3 +78,12 @@ export const getEstados = async ( desde, hasta, old) => {
     throw e;
   }
 };
+export const getCobroTecnico= async ( desde, hasta ) => {
+  try {
+    return await db
+      .query(query.cobro, [desde, hasta])
+      .then((r) => r.rows.map((x) => x.rows));
+  } catch (e) {
+    throw e;
+  }
+};

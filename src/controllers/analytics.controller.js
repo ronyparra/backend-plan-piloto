@@ -124,6 +124,16 @@ const analyticsController = {
       return res.status(400).json({ status: 400, message: e.message });
     }
   },
+  getCobroTecnico: async (req, res) => {
+    const desde = parse_date(req.query.desde);
+    const hasta = parse_date(req.query.hasta);
+    try {
+      const data = await AnalyticsService.getCobroTecnico(desde, hasta);
+      return res.status(200).json({ status: 200, data: data });
+    } catch (e) {
+      return res.status(400).json({ status: 400, message: e.message });
+    }
+  },
 };
 
 export default analyticsController;

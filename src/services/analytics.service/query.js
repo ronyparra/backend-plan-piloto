@@ -131,6 +131,24 @@ const query = {
   WHERE 	fecha BETWEEN $1::date AND  $2::date
   GROUP BY categoria.idcategoria,categoria.descripcion
   `,
+  cobro: `
+  SELECT 	
+	json_build_object(
+		'id', 			idusuariocobro,
+    'cantidad',		COUNT(idcliente_cobro),
+		'descripcion', 	CONCAT(usuario.nombre,' ',usuario.apellido),
+		'guarani',		SUM(saldocobrado) FILTER (WHERE idmoneda = 1),
+		'rguarani',		SUM((SELECT * FROM calcularRetencion(retencion,saldoacobrar) WHERE idmoneda =1)),
+		'dolar',		SUM(saldocobrado) FILTER (WHERE idmoneda = 2),
+		'rdolar', 		SUM((SELECT * FROM calcularRetencion(retencion,saldoacobrar)WHERE idmoneda =2))
+	) as rows
+  FROM cliente_cobro 
+  JOIN moneda USING (idmoneda)
+  JOIN usuario ON usuario.idusuario = idusuariocobro
+  WHERE idusuariocobro = 1 
+  AND fechacobro BETWEEN $1::date AND $2::date
+  GROUP BY moneda.abreviatura,usuario.nombre, usuario.apellido, idusuariocobro;
+  `,
   estados:(old)=> `
   WITH saldoestado  AS (
 	  SELECT 
@@ -157,6 +175,7 @@ const query = {
 	SELECT 
 		json_build_object(
         ${old ? "'mensaje', '(Con Anteriores)',": ""}
+        'id', estadocobro.idestadocobro,
   			'descripcion', 		estadocobro.descripcion,
   			'guarani',	(SELECT 	saldo 
 		 			FROM 		saldoestado 
@@ -172,6 +191,7 @@ const query = {
 	SELECT 
 		json_build_object(
         ${old ? "'mensaje', '(Actual)',": ""}
+        'id', estadocobro.idestadocobro,
   			'descripcion',  	estadocobro.descripcion,
   			'guarani',	(SELECT 	saldo 
 					FROM 		saldocobrado 

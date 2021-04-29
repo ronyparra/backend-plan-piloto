@@ -21,5 +21,6 @@ router.get("/concepto", _auth["default"], _analytics["default"].getConcepto);
 router.get("/tecnico", _auth["default"], _analytics["default"].getTecnico);
 router.get("/categoria", _auth["default"], _analytics["default"].getCategoria);
 router.get("/estado", _auth["default"], _analytics["default"].getEstados);
+router.get("/cobrotecnico", _auth["default"], _analytics["default"].getCobroTecnico);
 var _default = router;
 exports["default"] = _default;
