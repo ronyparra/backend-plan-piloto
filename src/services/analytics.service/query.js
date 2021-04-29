@@ -145,7 +145,6 @@ const query = {
   FROM cliente_cobro 
   JOIN moneda USING (idmoneda)
   JOIN usuario ON usuario.idusuario = idusuariocobro
-  WHERE idusuariocobro = 1 
   AND fechacobro BETWEEN $1::date AND $2::date
   GROUP BY usuario.nombre, usuario.apellido, idusuariocobro;
   `,
