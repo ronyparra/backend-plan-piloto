@@ -147,7 +147,7 @@ const query = {
   JOIN usuario ON usuario.idusuario = idusuariocobro
   WHERE idusuariocobro = 1 
   AND fechacobro BETWEEN $1::date AND $2::date
-  GROUP BY moneda.abreviatura,usuario.nombre, usuario.apellido, idusuariocobro;
+  GROUP BY usuario.nombre, usuario.apellido, idusuariocobro;
   `,
   estados:(old)=> `
   WITH saldoestado  AS (
