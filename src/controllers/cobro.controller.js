@@ -5,6 +5,8 @@ const CobroController = {
     const params = {
       idcliente:
         req.query.cliente !== "undefined" ? req.query.cliente : undefined,
+      idusuario: 
+        req.query.idusuario !== "undefined" ? req.query.idusuario : undefined,
       desde: parse_date(req.query.desde),
       hasta: parse_date(req.query.hasta),
       idestadocobro:

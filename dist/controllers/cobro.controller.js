@@ -25,6 +25,7 @@ var CobroController = {
             case 0:
               params = {
                 idcliente: req.query.cliente !== "undefined" ? req.query.cliente : undefined,
+                idusuario: req.query.idusuario !== "undefined" ? req.query.idusuario : undefined,
                 desde: (0, _date.parse_date)(req.query.desde),
                 hasta: (0, _date.parse_date)(req.query.hasta),
                 idestadocobro: req.query.estado !== "undefined" ? req.query.estado : undefined

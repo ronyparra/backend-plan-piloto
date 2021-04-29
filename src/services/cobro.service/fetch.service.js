@@ -42,43 +42,42 @@ JOIN estadocobro USING (idestadocobro)
 JOIN moneda USING (idmoneda)
 `;
 
-
-export const  getAll = async (filters) => {
-    try {
-      const results = await db.query(query + generateFilter(filters) + ' ORDER BY idcliente_cobro ASC');
-      return results.rows.map((x) => x.rows);
-    } catch (e) {
-      throw e;
-    }
-  };
-export const  getById = async (id) => {
-    try {
-      const results = await db.query(query + " WHERE idcliente_cobro = $1", [
-        id,
-      ]);
-      return results.rows[0].rows;
-    } catch (e) {
-      throw e;
-    }
-  };
-
-
-
+export const getAll = async (filters) => {
+  try {
+    const results = await db.query(
+      query + generateFilter(filters) + " ORDER BY idcliente_cobro ASC"
+    );
+    return results.rows.map((x) => x.rows);
+  } catch (e) {
+    throw e;
+  }
+};
+export const getById = async (id) => {
+  try {
+    const results = await db.query(query + " WHERE idcliente_cobro = $1", [id]);
+    return results.rows[0].rows;
+  } catch (e) {
+    throw e;
+  }
+};
 
 const generateFilter = ({
-	idcliente,
-	desde,
-	hasta,
-	idestadocobro,
-  }) => {
-	const filterCliente = idcliente ? `cliente.idcliente = ${idcliente}` : null;
-	const filterFecha = `fechainsert BETWEEN '${desde}'::date AND '${hasta}'::date`;
-	const filterEstado = idestadocobro
-	  ? `idestadocobro = ${idestadocobro}`
-	  : null;
-	const filter = `WHERE ${filterFecha} ${
-	  filterCliente ? `AND ${filterCliente}` : ""
-	} ${filterEstado ? `AND ${filterEstado}` : ""}`;
-	return filter;
-  };
-  
+  idcliente,
+  idusuario,
+  desde,
+  hasta,
+  idestadocobro,
+}) => {
+  const filterCliente = idcliente ? `cliente.idcliente = ${idcliente}` : null;
+  const filterUsuario = idusuario ? `idusuariocobro = ${idusuario}` : null;
+  const filterFecha = `fechainsert BETWEEN '${desde}'::date AND '${hasta}'::date`;
+  const filterEstado = idestadocobro
+    ? `idestadocobro = ${idestadocobro}`
+    : null;
+  const filter = `WHERE ${filterFecha} ${
+    filterCliente ? `AND ${filterCliente}` : ""
+  } ${filterEstado ? `AND ${filterEstado}` : ""} ${
+    filterUsuario ? `AND ${filterUsuario}` : ""
+  } `;
+  return filter;
+};
