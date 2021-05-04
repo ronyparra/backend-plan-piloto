@@ -31,7 +31,7 @@ afterAll(done => {
 })
 
 describe("User", () => {
-  describe("Crud and Authentication", () => {
+  describe("Crud ", () => {
     it("Create new user",  (done) => {
       request(app)
         .post("/user")

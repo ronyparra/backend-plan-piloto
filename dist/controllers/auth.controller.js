@@ -115,7 +115,6 @@ var AuthController = {
 };
 
 var formatPermissions = function formatPermissions(permissionsRaw) {
-  console.log(permissionsRaw);
   var permissionFormat = [];
   permissionsRaw.map(function (form) {
     var exist = permissionFormat.find(function (x) {

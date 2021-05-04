@@ -9,8 +9,9 @@
     "restart": "rimraf dist && npm run start",
     "dev": "nodemon --exec npm run restart",
     "unit": "jest unit",
-    "int": "jest int",
-    "test": "jest"
+    "int": "jest int --detectOpenHandles",
+    "test": "jest",
+    "cover": "jest --coverage"
   },
   "keywords": [],
   "author": "",

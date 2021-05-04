@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1620131068046" clover="3.2.0">
-  <project timestamp="1620131068046" name="All files">
-    <metrics statements="1057" coveredstatements="297" conditionals="146" coveredconditionals="17" methods="233" coveredmethods="22" elements="1436" coveredelements="336" complexity="0" loc="1057" ncloc="1057" packages="14" files="69" classes="69"/>
+<coverage generated="1620154064662" clover="3.2.0">
+  <project timestamp="1620154064662" name="All files">
+    <metrics statements="1057" coveredstatements="419" conditionals="146" coveredconditionals="32" methods="233" coveredmethods="54" elements="1436" coveredelements="505" complexity="0" loc="1057" ncloc="1057" packages="14" files="69" classes="69"/>
     <package name="src">
       <metrics statements="20" coveredstatements="20" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="server.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/server.js">
         <metrics statements="20" coveredstatements="20" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="7" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
-        <line num="14" count="2" type="stmt"/>
-        <line num="15" count="2" type="stmt"/>
-        <line num="16" count="2" type="stmt"/>
-        <line num="17" count="2" type="stmt"/>
-        <line num="18" count="2" type="stmt"/>
-        <line num="19" count="2" type="stmt"/>
-        <line num="20" count="2" type="stmt"/>
-        <line num="21" count="2" type="stmt"/>
-        <line num="22" count="2" type="stmt"/>
-        <line num="23" count="2" type="stmt"/>
-        <line num="24" count="2" type="stmt"/>
-        <line num="25" count="2" type="stmt"/>
-        <line num="26" count="2" type="stmt"/>
-        <line num="27" count="2" type="stmt"/>
-        <line num="30" count="2" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="14" count="4" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="17" count="4" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="19" count="4" type="stmt"/>
+        <line num="20" count="4" type="stmt"/>
+        <line num="21" count="4" type="stmt"/>
+        <line num="22" count="4" type="stmt"/>
+        <line num="23" count="4" type="stmt"/>
+        <line num="24" count="4" type="stmt"/>
+        <line num="25" count="4" type="stmt"/>
+        <line num="26" count="4" type="stmt"/>
+        <line num="27" count="4" type="stmt"/>
+        <line num="30" count="4" type="stmt"/>
       </file>
     </package>
     <package name="src.controllers">
-      <metrics statements="334" coveredstatements="56" conditionals="34" coveredconditionals="10" methods="65" coveredmethods="9"/>
+      <metrics statements="334" coveredstatements="102" conditionals="34" coveredconditionals="17" methods="65" coveredmethods="19"/>
       <file name="actividad.controller.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/controllers/actividad.controller.js">
         <metrics statements="35" coveredstatements="1" conditionals="6" coveredconditionals="0" methods="6" coveredmethods="0"/>
-        <line num="5" count="2" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
@@ -70,7 +70,7 @@
       </file>
       <file name="analytics.controller.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/controllers/analytics.controller.js">
         <metrics statements="56" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="8" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
@@ -128,44 +128,44 @@
         <line num="134" count="0" type="stmt"/>
       </file>
       <file name="auth.controller.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/controllers/auth.controller.js">
-        <metrics statements="33" coveredstatements="31" conditionals="12" coveredconditionals="9" methods="6" coveredmethods="6"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="8" count="3" type="stmt"/>
-        <line num="9" count="3" type="stmt"/>
-        <line num="10" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="12" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="13" count="2" type="stmt"/>
-        <line num="16" count="2" type="stmt"/>
-        <line num="17" count="2" type="stmt"/>
-        <line num="18" count="2" type="stmt"/>
-        <line num="19" count="2" type="stmt"/>
-        <line num="21" count="2" type="stmt"/>
-        <line num="22" count="2" type="stmt"/>
-        <line num="27" count="1" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="36" count="2" type="stmt"/>
-        <line num="37" count="3" type="stmt"/>
-        <line num="38" count="3" type="stmt"/>
-        <line num="39" count="35" type="stmt"/>
-        <line num="40" count="130" type="stmt"/>
-        <line num="42" count="35" type="cond" truecount="2" falsecount="0"/>
-        <line num="43" count="18" type="stmt"/>
-        <line num="45" count="17" type="stmt"/>
-        <line num="46" count="17" type="stmt"/>
-        <line num="47" count="17" type="stmt"/>
-        <line num="48" count="67" type="stmt"/>
-        <line num="49" count="67" type="stmt"/>
-        <line num="50" count="311" type="cond" truecount="2" falsecount="0"/>
-        <line num="51" count="50" type="stmt"/>
-        <line num="53" count="261" type="cond" truecount="2" falsecount="2"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="59" count="17" type="stmt"/>
-        <line num="62" count="3" type="stmt"/>
+        <metrics statements="33" coveredstatements="33" conditionals="12" coveredconditionals="12" methods="6" coveredmethods="6"/>
+        <line num="6" count="5" type="stmt"/>
+        <line num="8" count="7" type="stmt"/>
+        <line num="9" count="7" type="stmt"/>
+        <line num="10" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="6" type="stmt"/>
+        <line num="12" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="13" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="17" count="4" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="19" count="4" type="stmt"/>
+        <line num="21" count="4" type="stmt"/>
+        <line num="22" count="4" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="36" count="5" type="stmt"/>
+        <line num="37" count="7" type="stmt"/>
+        <line num="38" count="7" type="stmt"/>
+        <line num="39" count="69" type="stmt"/>
+        <line num="40" count="259" type="stmt"/>
+        <line num="42" count="69" type="cond" truecount="2" falsecount="0"/>
+        <line num="43" count="36" type="stmt"/>
+        <line num="45" count="33" type="stmt"/>
+        <line num="46" count="33" type="stmt"/>
+        <line num="47" count="33" type="stmt"/>
+        <line num="48" count="133" type="stmt"/>
+        <line num="49" count="133" type="stmt"/>
+        <line num="50" count="622" type="cond" truecount="2" falsecount="0"/>
+        <line num="51" count="101" type="stmt"/>
+        <line num="53" count="521" type="cond" truecount="4" falsecount="0"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="59" count="33" type="stmt"/>
+        <line num="62" count="7" type="stmt"/>
       </file>
       <file name="categoria.controller.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/controllers/categoria.controller.js">
         <metrics statements="23" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
@@ -190,36 +190,36 @@
         <line num="48" count="0" type="stmt"/>
       </file>
       <file name="cliente.controller.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/controllers/cliente.controller.js">
-        <metrics statements="25" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="5" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
+        <metrics statements="25" coveredstatements="24" conditionals="4" coveredconditionals="4" methods="5" coveredmethods="5"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="22" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="37" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="50" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="56" count="0" type="stmt"/>
-        <line num="58" count="0" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="22" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="37" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="44" count="3" type="stmt"/>
+        <line num="48" count="2" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="54" count="3" type="stmt"/>
+        <line num="55" count="3" type="stmt"/>
+        <line num="56" count="2" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
       </file>
       <file name="cobro.controller.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/controllers/cobro.controller.js">
         <metrics statements="25" coveredstatements="1" conditionals="8" coveredconditionals="0" methods="5" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
@@ -246,34 +246,34 @@
         <line num="68" count="0" type="stmt"/>
       </file>
       <file name="concepto.controller.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/controllers/concepto.controller.js">
-        <metrics statements="23" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
+        <metrics statements="23" coveredstatements="22" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="42" count="0" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="53" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="56" count="0" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="41" count="2" type="stmt"/>
+        <line num="42" count="2" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="52" count="2" type="stmt"/>
+        <line num="53" count="2" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
       </file>
       <file name="estadocobro.controller.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/controllers/estadocobro.controller.js">
         <metrics statements="5" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
@@ -281,7 +281,7 @@
       </file>
       <file name="formulario.controller.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/controllers/formulario.controller.js">
         <metrics statements="5" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
@@ -289,7 +289,7 @@
       </file>
       <file name="moneda.controller.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/controllers/moneda.controller.js">
         <metrics statements="5" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
@@ -297,7 +297,7 @@
       </file>
       <file name="pendiente.controller.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/controllers/pendiente.controller.js">
         <metrics statements="31" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="0"/>
-        <line num="4" count="2" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
@@ -331,7 +331,7 @@
       </file>
       <file name="tipo_pendiente.controller.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/controllers/tipo_pendiente.controller.js">
         <metrics statements="23" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
@@ -357,7 +357,7 @@
       </file>
       <file name="user.controller.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/controllers/user.controller.js">
         <metrics statements="24" coveredstatements="13" conditionals="2" coveredconditionals="1" methods="5" coveredmethods="3"/>
-        <line num="4" count="2" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
@@ -384,7 +384,7 @@
       </file>
       <file name="usuario_rol.controller.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/controllers/usuario_rol.controller.js">
         <metrics statements="21" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
@@ -411,33 +411,33 @@
       <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="index.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/db/index.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="2" count="2" type="stmt"/>
-        <line num="11" count="19" type="stmt"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="2" count="5" type="stmt"/>
+        <line num="11" count="74" type="stmt"/>
       </file>
     </package>
     <package name="src.middlewares">
       <metrics statements="11" coveredstatements="9" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
       <file name="auth.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/middlewares/auth.js">
         <metrics statements="11" coveredstatements="9" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="4" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="5" count="3" type="stmt"/>
-        <line num="6" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="7" count="3" type="stmt"/>
-        <line num="10" count="3" type="stmt"/>
-        <line num="11" count="3" type="stmt"/>
-        <line num="12" count="3" type="stmt"/>
-        <line num="13" count="3" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="4" count="24" type="cond" truecount="1" falsecount="1"/>
+        <line num="5" count="24" type="stmt"/>
+        <line num="6" count="24" type="cond" truecount="1" falsecount="1"/>
+        <line num="7" count="24" type="stmt"/>
+        <line num="10" count="24" type="stmt"/>
+        <line num="11" count="24" type="stmt"/>
+        <line num="12" count="24" type="stmt"/>
+        <line num="13" count="24" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.middlewares.validators">
-      <metrics statements="76" coveredstatements="19" conditionals="22" coveredconditionals="3" methods="22" coveredmethods="3"/>
+      <metrics statements="76" coveredstatements="25" conditionals="22" coveredconditionals="5" methods="22" coveredmethods="5"/>
       <file name="actividad.validator.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/middlewares/validators/actividad.validator.js">
         <metrics statements="7" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
         <line num="20" count="0" type="stmt"/>
         <line num="21" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="22" count="0" type="stmt"/>
@@ -447,17 +447,17 @@
       </file>
       <file name="auth.validator.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/middlewares/validators/auth.validator.js">
         <metrics statements="7" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="16" count="3" type="stmt"/>
-        <line num="17" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="16" count="7" type="stmt"/>
+        <line num="17" count="7" type="cond" truecount="1" falsecount="1"/>
         <line num="18" count="0" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
         <line num="21" count="0" type="stmt"/>
-        <line num="25" count="3" type="stmt"/>
+        <line num="25" count="7" type="stmt"/>
       </file>
       <file name="categoria.validator.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/middlewares/validators/categoria.validator.js">
         <metrics statements="7" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
         <line num="13" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="14" count="0" type="stmt"/>
@@ -466,18 +466,18 @@
         <line num="21" count="0" type="stmt"/>
       </file>
       <file name="cliente.validator.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/middlewares/validators/cliente.validator.js">
-        <metrics statements="7" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="14" count="0" type="cond" truecount="0" falsecount="2"/>
+        <metrics statements="7" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="13" count="6" type="stmt"/>
+        <line num="14" count="6" type="cond" truecount="1" falsecount="1"/>
         <line num="15" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
+        <line num="22" count="6" type="stmt"/>
       </file>
       <file name="cobro.validator.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/middlewares/validators/cobro.validator.js">
         <metrics statements="7" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
         <line num="22" count="0" type="stmt"/>
         <line num="23" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="24" count="0" type="stmt"/>
@@ -486,18 +486,18 @@
         <line num="31" count="0" type="stmt"/>
       </file>
       <file name="concepto.validator.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/middlewares/validators/concepto.validator.js">
-        <metrics statements="7" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="24" count="0" type="cond" truecount="0" falsecount="2"/>
+        <metrics statements="7" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="23" count="4" type="stmt"/>
+        <line num="24" count="4" type="cond" truecount="1" falsecount="1"/>
         <line num="25" count="0" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
+        <line num="32" count="4" type="stmt"/>
       </file>
       <file name="pendiente.validator.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/middlewares/validators/pendiente.validator.js">
         <metrics statements="7" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
         <line num="15" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="16" count="0" type="stmt"/>
@@ -507,7 +507,7 @@
       </file>
       <file name="tipo_pendiente.validator.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/middlewares/validators/tipo_pendiente.validator.js">
         <metrics statements="7" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
         <line num="14" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="15" count="0" type="stmt"/>
@@ -517,7 +517,7 @@
       </file>
       <file name="user.validator.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/middlewares/validators/user.validator.js">
         <metrics statements="13" coveredstatements="7" conditionals="4" coveredconditionals="2" methods="4" coveredmethods="2"/>
-        <line num="3" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
         <line num="28" count="1" type="stmt"/>
         <line num="29" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="30" count="0" type="stmt"/>
@@ -533,7 +533,7 @@
       </file>
       <file name="usuaro_rol.validator.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/middlewares/validators/usuaro_rol.validator.js">
         <metrics statements="7" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
         <line num="13" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="14" count="0" type="stmt"/>
@@ -546,130 +546,130 @@
       <metrics statements="74" coveredstatements="74" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="actividad.router.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/routes/actividad.router.js">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
-        <line num="13" count="2" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="13" count="4" type="stmt"/>
       </file>
       <file name="analytics.router.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/routes/analytics.router.js">
         <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="7" count="2" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
-        <line num="13" count="2" type="stmt"/>
-        <line num="14" count="2" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="13" count="4" type="stmt"/>
+        <line num="14" count="4" type="stmt"/>
       </file>
       <file name="auth.router.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/routes/auth.router.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="7" count="2" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
       </file>
       <file name="categoria.router.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/routes/categoria.router.js">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
       </file>
       <file name="cliente.router.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/routes/cliente.router.js">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
       </file>
       <file name="cobro.router.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/routes/cobro.router.js">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
       </file>
       <file name="concepto.router.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/routes/concepto.router.js">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
       </file>
       <file name="estadocobro.router.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/routes/estadocobro.router.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="7" count="2" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
       </file>
       <file name="formulario.router.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/routes/formulario.router.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="7" count="2" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
       </file>
       <file name="index.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/routes/index.js">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
       <file name="moneda.router.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/routes/moneda.router.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="7" count="2" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
       </file>
       <file name="pendiente.router.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/routes/pendiente.router.js">
         <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
-        <line num="13" count="2" type="stmt"/>
-        <line num="14" count="2" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="13" count="4" type="stmt"/>
+        <line num="14" count="4" type="stmt"/>
       </file>
       <file name="tipo_pendiente.router.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/routes/tipo_pendiente.router.js">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
       </file>
       <file name="user.router.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/routes/user.router.js">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
       </file>
       <file name="usuario_rol.router.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/routes/usuario_rol.router.js">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
       </file>
     </package>
     <package name="src.services">
-      <metrics statements="218" coveredstatements="50" conditionals="20" coveredconditionals="2" methods="51" coveredmethods="6"/>
+      <metrics statements="218" coveredstatements="120" conditionals="20" coveredconditionals="8" methods="51" coveredmethods="26"/>
       <file name="categoria.service.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/services/categoria.service.js">
         <metrics statements="22" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="0"/>
-        <line num="2" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
@@ -692,100 +692,100 @@
         <line num="57" count="0" type="stmt"/>
       </file>
       <file name="cliente.service.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/services/cliente.service.js">
-        <metrics statements="63" coveredstatements="5" conditionals="16" coveredconditionals="0" methods="17" coveredmethods="0"/>
-        <line num="2" count="2" type="stmt"/>
-        <line num="23" count="2" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="31" count="2" type="stmt"/>
+        <metrics statements="63" coveredstatements="56" conditionals="16" coveredconditionals="6" methods="17" coveredmethods="14"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="23" count="4" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="31" count="4" type="stmt"/>
         <line num="32" count="0" type="stmt"/>
         <line num="33" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="34" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="35" count="0" type="stmt"/>
-        <line num="41" count="2" type="stmt"/>
-        <line num="42" count="0" type="stmt"/>
-        <line num="43" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="44" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="45" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="51" count="2" type="stmt"/>
-        <line num="53" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="59" count="0" type="stmt"/>
+        <line num="41" count="4" type="stmt"/>
+        <line num="42" count="5" type="stmt"/>
+        <line num="43" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="44" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="45" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="46" count="4" type="stmt"/>
+        <line num="48" count="4" type="stmt"/>
+        <line num="51" count="4" type="stmt"/>
+        <line num="53" count="3" type="stmt"/>
+        <line num="54" count="3" type="stmt"/>
+        <line num="59" count="3" type="stmt"/>
         <line num="61" count="0" type="stmt"/>
-        <line num="65" count="0" type="stmt"/>
-        <line num="66" count="0" type="stmt"/>
-        <line num="67" count="0" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="67" count="68" type="stmt"/>
         <line num="69" count="0" type="stmt"/>
-        <line num="73" count="0" type="stmt"/>
-        <line num="74" count="0" type="stmt"/>
-        <line num="75" count="0" type="stmt"/>
-        <line num="77" count="0" type="stmt"/>
-        <line num="81" count="0" type="stmt"/>
-        <line num="82" count="0" type="stmt"/>
-        <line num="83" count="0" type="stmt"/>
-        <line num="87" count="0" type="stmt"/>
-        <line num="88" count="0" type="stmt"/>
-        <line num="89" count="0" type="stmt"/>
-        <line num="90" count="0" type="stmt"/>
-        <line num="91" count="0" type="stmt"/>
-        <line num="93" count="0" type="stmt"/>
-        <line num="94" count="0" type="stmt"/>
-        <line num="99" count="0" type="stmt"/>
-        <line num="100" count="0" type="stmt"/>
-        <line num="101" count="0" type="stmt"/>
-        <line num="102" count="0" type="stmt"/>
-        <line num="103" count="0" type="stmt"/>
-        <line num="104" count="0" type="stmt"/>
-        <line num="106" count="0" type="stmt"/>
+        <line num="73" count="2" type="stmt"/>
+        <line num="74" count="2" type="stmt"/>
+        <line num="75" count="2" type="stmt"/>
+        <line num="77" count="1" type="stmt"/>
+        <line num="81" count="3" type="stmt"/>
+        <line num="82" count="3" type="stmt"/>
+        <line num="83" count="3" type="stmt"/>
+        <line num="87" count="3" type="stmt"/>
+        <line num="88" count="3" type="stmt"/>
+        <line num="89" count="2" type="stmt"/>
+        <line num="90" count="2" type="stmt"/>
+        <line num="91" count="2" type="stmt"/>
+        <line num="93" count="1" type="stmt"/>
+        <line num="94" count="1" type="stmt"/>
+        <line num="99" count="3" type="stmt"/>
+        <line num="100" count="3" type="stmt"/>
+        <line num="101" count="3" type="stmt"/>
+        <line num="102" count="3" type="stmt"/>
+        <line num="103" count="2" type="stmt"/>
+        <line num="104" count="2" type="stmt"/>
+        <line num="106" count="2" type="stmt"/>
         <line num="108" count="0" type="stmt"/>
-        <line num="111" count="0" type="stmt"/>
-        <line num="116" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="117" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="118" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="119" count="0" type="stmt"/>
-        <line num="120" count="0" type="stmt"/>
-        <line num="122" count="0" type="stmt"/>
-        <line num="123" count="0" type="stmt"/>
-        <line num="127" count="0" type="stmt"/>
-        <line num="128" count="0" type="stmt"/>
-        <line num="129" count="0" type="stmt"/>
-        <line num="132" count="0" type="stmt"/>
-        <line num="136" count="0" type="stmt"/>
-        <line num="137" count="0" type="stmt"/>
-        <line num="139" count="0" type="stmt"/>
-        <line num="140" count="0" type="stmt"/>
+        <line num="111" count="2" type="stmt"/>
+        <line num="116" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="117" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="118" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="119" count="2" type="stmt"/>
+        <line num="120" count="2" type="stmt"/>
+        <line num="122" count="1" type="stmt"/>
+        <line num="123" count="1" type="stmt"/>
+        <line num="127" count="3" type="stmt"/>
+        <line num="128" count="3" type="stmt"/>
+        <line num="129" count="3" type="stmt"/>
+        <line num="132" count="2" type="stmt"/>
+        <line num="136" count="2" type="stmt"/>
+        <line num="137" count="2" type="stmt"/>
+        <line num="139" count="1" type="stmt"/>
+        <line num="140" count="1" type="stmt"/>
       </file>
       <file name="concepto.service.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/services/concepto.service.js">
-        <metrics statements="22" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="0"/>
-        <line num="2" count="2" type="stmt"/>
-        <line num="22" count="2" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
+        <metrics statements="22" coveredstatements="21" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="22" count="4" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="102" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="51" count="0" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="56" count="0" type="stmt"/>
-        <line num="58" count="0" type="stmt"/>
-        <line num="62" count="0" type="stmt"/>
-        <line num="63" count="0" type="stmt"/>
-        <line num="67" count="0" type="stmt"/>
-        <line num="69" count="0" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="40" count="2" type="stmt"/>
+        <line num="41" count="2" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="51" count="2" type="stmt"/>
+        <line num="52" count="2" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="62" count="2" type="stmt"/>
+        <line num="63" count="2" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="69" count="1" type="stmt"/>
       </file>
       <file name="estadocobro.service.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/services/estadocobro.service.js">
         <metrics statements="6" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="5" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
@@ -793,8 +793,8 @@
       </file>
       <file name="formulario.service.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/services/formulario.service.js">
         <metrics statements="6" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="5" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
@@ -802,8 +802,8 @@
       </file>
       <file name="moneda.service.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/services/moneda.service.js">
         <metrics statements="6" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="5" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
@@ -811,8 +811,8 @@
       </file>
       <file name="tipo_pendiente.service.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/services/tipo_pendiente.service.js">
         <metrics statements="22" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="5" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
@@ -836,13 +836,13 @@
       </file>
       <file name="user.service.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/services/user.service.js">
         <metrics statements="47" coveredstatements="32" conditionals="4" coveredconditionals="2" methods="9" coveredmethods="6"/>
-        <line num="2" count="2" type="stmt"/>
-        <line num="21" count="2" type="stmt"/>
+        <line num="2" count="5" type="stmt"/>
+        <line num="21" count="5" type="stmt"/>
         <line num="22" count="2" type="stmt"/>
         <line num="23" count="2" type="cond" truecount="1" falsecount="1"/>
         <line num="24" count="2" type="stmt"/>
         <line num="26" count="2" type="stmt"/>
-        <line num="29" count="2" type="stmt"/>
+        <line num="29" count="5" type="stmt"/>
         <line num="31" count="0" type="stmt"/>
         <line num="32" count="0" type="stmt"/>
         <line num="33" count="0" type="stmt"/>
@@ -851,9 +851,9 @@
         <line num="40" count="0" type="stmt"/>
         <line num="41" count="0" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
-        <line num="47" count="3" type="stmt"/>
-        <line num="48" count="3" type="stmt"/>
-        <line num="52" count="3" type="stmt"/>
+        <line num="47" count="7" type="stmt"/>
+        <line num="48" count="7" type="stmt"/>
+        <line num="52" count="7" type="stmt"/>
         <line num="54" count="0" type="stmt"/>
         <line num="65" count="1" type="stmt"/>
         <line num="66" count="1" type="stmt"/>
@@ -886,7 +886,7 @@
       </file>
       <file name="usuario_rol.service.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/services/usuario_rol.service.js">
         <metrics statements="24" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
@@ -916,7 +916,7 @@
       <metrics statements="151" coveredstatements="27" conditionals="40" coveredconditionals="0" methods="39" coveredmethods="0"/>
       <file name="crud.service.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/services/actividad.service/crud.service.js">
         <metrics statements="84" coveredstatements="7" conditionals="20" coveredconditionals="0" methods="12" coveredmethods="0"/>
-        <line num="23" count="2" type="stmt"/>
+        <line num="23" count="4" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
         <line num="28" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="29" count="0" type="stmt"/>
@@ -932,7 +932,7 @@
         <line num="55" count="0" type="stmt"/>
         <line num="57" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="58" count="0" type="stmt"/>
-        <line num="61" count="2" type="stmt"/>
+        <line num="61" count="4" type="stmt"/>
         <line num="67" count="0" type="stmt"/>
         <line num="69" count="0" type="stmt"/>
         <line num="70" count="0" type="stmt"/>
@@ -957,7 +957,7 @@
         <line num="122" count="0" type="stmt"/>
         <line num="124" count="0" type="stmt"/>
         <line num="125" count="0" type="stmt"/>
-        <line num="128" count="2" type="stmt"/>
+        <line num="128" count="4" type="stmt"/>
         <line num="135" count="0" type="stmt"/>
         <line num="136" count="0" type="stmt"/>
         <line num="137" count="0" type="stmt"/>
@@ -974,7 +974,7 @@
         <line num="162" count="0" type="stmt"/>
         <line num="164" count="0" type="stmt"/>
         <line num="165" count="0" type="stmt"/>
-        <line num="168" count="2" type="stmt"/>
+        <line num="168" count="4" type="stmt"/>
         <line num="169" count="0" type="stmt"/>
         <line num="170" count="0" type="stmt"/>
         <line num="171" count="0" type="stmt"/>
@@ -987,34 +987,34 @@
         <line num="178" count="0" type="stmt"/>
         <line num="180" count="0" type="stmt"/>
         <line num="181" count="0" type="stmt"/>
-        <line num="185" count="2" type="stmt"/>
+        <line num="185" count="4" type="stmt"/>
         <line num="186" count="0" type="stmt"/>
         <line num="187" count="0" type="stmt"/>
         <line num="189" count="0" type="stmt"/>
         <line num="190" count="0" type="stmt"/>
-        <line num="193" count="2" type="stmt"/>
+        <line num="193" count="4" type="stmt"/>
         <line num="194" count="0" type="stmt"/>
         <line num="195" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="199" count="0" type="stmt"/>
         <line num="200" count="0" type="stmt"/>
-        <line num="203" count="2" type="stmt"/>
+        <line num="203" count="4" type="stmt"/>
         <line num="204" count="0" type="stmt"/>
         <line num="205" count="0" type="stmt"/>
       </file>
       <file name="fetch.service.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/services/actividad.service/fetch.service.js">
         <metrics statements="18" coveredstatements="4" conditionals="12" coveredconditionals="0" methods="4" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="69" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="69" count="4" type="stmt"/>
         <line num="70" count="0" type="stmt"/>
         <line num="71" count="0" type="stmt"/>
         <line num="72" count="0" type="stmt"/>
         <line num="74" count="0" type="stmt"/>
-        <line num="77" count="2" type="stmt"/>
+        <line num="77" count="4" type="stmt"/>
         <line num="78" count="0" type="stmt"/>
         <line num="79" count="0" type="stmt"/>
         <line num="80" count="0" type="stmt"/>
         <line num="82" count="0" type="stmt"/>
-        <line num="86" count="2" type="stmt"/>
+        <line num="86" count="4" type="stmt"/>
         <line num="93" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="94" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="97" count="0" type="stmt"/>
@@ -1024,53 +1024,53 @@
       </file>
       <file name="formatter.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/services/actividad.service/formatter.js">
         <metrics statements="49" coveredstatements="16" conditionals="8" coveredconditionals="0" methods="23" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
-        <line num="16" count="2" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
         <line num="22" count="0" type="stmt"/>
-        <line num="25" count="2" type="stmt"/>
+        <line num="25" count="4" type="stmt"/>
         <line num="34" count="0" type="stmt"/>
-        <line num="36" count="2" type="stmt"/>
+        <line num="36" count="4" type="stmt"/>
         <line num="37" count="0" type="stmt"/>
         <line num="39" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="40" count="0" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
-        <line num="46" count="2" type="stmt"/>
+        <line num="46" count="4" type="stmt"/>
         <line num="47" count="0" type="stmt"/>
         <line num="49" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="50" count="0" type="stmt"/>
         <line num="53" count="0" type="stmt"/>
-        <line num="56" count="2" type="stmt"/>
+        <line num="56" count="4" type="stmt"/>
         <line num="57" count="0" type="stmt"/>
         <line num="59" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="60" count="0" type="stmt"/>
         <line num="65" count="0" type="stmt"/>
-        <line num="68" count="2" type="stmt"/>
+        <line num="68" count="4" type="stmt"/>
         <line num="69" count="0" type="stmt"/>
-        <line num="71" count="2" type="stmt"/>
+        <line num="71" count="4" type="stmt"/>
         <line num="78" count="0" type="stmt"/>
-        <line num="82" count="2" type="stmt"/>
+        <line num="82" count="4" type="stmt"/>
         <line num="83" count="0" type="stmt"/>
         <line num="85" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="86" count="0" type="stmt"/>
         <line num="89" count="0" type="stmt"/>
-        <line num="92" count="2" type="stmt"/>
+        <line num="92" count="4" type="stmt"/>
         <line num="93" count="0" type="stmt"/>
-        <line num="95" count="2" type="stmt"/>
+        <line num="95" count="4" type="stmt"/>
         <line num="96" count="0" type="stmt"/>
-        <line num="98" count="2" type="stmt"/>
+        <line num="98" count="4" type="stmt"/>
         <line num="99" count="0" type="stmt"/>
-        <line num="101" count="2" type="stmt"/>
+        <line num="101" count="4" type="stmt"/>
         <line num="102" count="0" type="stmt"/>
-        <line num="104" count="2" type="stmt"/>
+        <line num="104" count="4" type="stmt"/>
         <line num="105" count="0" type="stmt"/>
-        <line num="106" count="2" type="stmt"/>
+        <line num="106" count="4" type="stmt"/>
         <line num="116" count="0" type="stmt"/>
-        <line num="118" count="2" type="stmt"/>
+        <line num="118" count="4" type="stmt"/>
         <line num="119" count="0" type="stmt"/>
         <line num="120" count="0" type="stmt"/>
       </file>
@@ -1082,48 +1082,48 @@
       <metrics statements="49" coveredstatements="10" conditionals="6" coveredconditionals="0" methods="29" coveredmethods="0"/>
       <file name="fetch.service.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/services/analytics.service/fetch.service.js">
         <metrics statements="46" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="27" coveredmethods="0"/>
-        <line num="4" count="2" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
         <line num="10" count="0" type="stmt"/>
         <line num="11" count="0" type="stmt"/>
-        <line num="15" count="2" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
         <line num="21" count="0" type="stmt"/>
-        <line num="25" count="2" type="stmt"/>
+        <line num="25" count="4" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
         <line num="29" count="0" type="stmt"/>
         <line num="31" count="0" type="stmt"/>
-        <line num="35" count="2" type="stmt"/>
+        <line num="35" count="4" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
         <line num="37" count="0" type="stmt"/>
         <line num="39" count="0" type="stmt"/>
         <line num="41" count="0" type="stmt"/>
-        <line num="45" count="2" type="stmt"/>
+        <line num="45" count="4" type="stmt"/>
         <line num="46" count="0" type="stmt"/>
         <line num="47" count="0" type="stmt"/>
         <line num="49" count="0" type="stmt"/>
         <line num="51" count="0" type="stmt"/>
-        <line num="54" count="2" type="stmt"/>
+        <line num="54" count="4" type="stmt"/>
         <line num="55" count="0" type="stmt"/>
         <line num="56" count="0" type="stmt"/>
         <line num="58" count="0" type="stmt"/>
         <line num="60" count="0" type="stmt"/>
-        <line num="63" count="2" type="stmt"/>
+        <line num="63" count="4" type="stmt"/>
         <line num="64" count="0" type="stmt"/>
         <line num="65" count="0" type="stmt"/>
         <line num="67" count="0" type="stmt"/>
         <line num="69" count="0" type="stmt"/>
-        <line num="72" count="2" type="stmt"/>
+        <line num="72" count="4" type="stmt"/>
         <line num="73" count="0" type="stmt"/>
         <line num="74" count="0" type="stmt"/>
         <line num="76" count="0" type="stmt"/>
         <line num="78" count="0" type="stmt"/>
-        <line num="81" count="2" type="stmt"/>
+        <line num="81" count="4" type="stmt"/>
         <line num="82" count="0" type="stmt"/>
         <line num="83" count="0" type="stmt"/>
         <line num="85" count="0" type="stmt"/>
@@ -1134,7 +1134,7 @@
       </file>
       <file name="query.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/services/analytics.service/query.js">
         <metrics statements="3" coveredstatements="1" conditionals="6" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="1" count="2" type="stmt"/>
+        <line num="1" count="4" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
         <line num="152" count="0" type="stmt"/>
       </file>
@@ -1143,14 +1143,14 @@
       <metrics statements="12" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
       <file name="fetch.service.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/services/auth.service/fetch.service.js">
         <metrics statements="12" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="16" count="2" type="stmt"/>
-        <line num="17" count="2" type="stmt"/>
-        <line num="18" count="2" type="stmt"/>
-        <line num="19" count="32" type="stmt"/>
-        <line num="20" count="2" type="stmt"/>
+        <line num="3" count="5" type="stmt"/>
+        <line num="16" count="5" type="stmt"/>
+        <line num="17" count="4" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="19" count="64" type="stmt"/>
+        <line num="20" count="4" type="stmt"/>
         <line num="22" count="0" type="stmt"/>
-        <line num="25" count="2" type="stmt"/>
+        <line num="25" count="5" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
@@ -1164,7 +1164,7 @@
       <metrics statements="38" coveredstatements="7" conditionals="12" coveredconditionals="0" methods="8" coveredmethods="0"/>
       <file name="crud.service.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/services/cobro.service/crud.service.js">
         <metrics statements="17" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="4" count="2" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
@@ -1173,7 +1173,7 @@
         <line num="38" count="0" type="stmt"/>
         <line num="40" count="0" type="stmt"/>
         <line num="41" count="0" type="stmt"/>
-        <line num="44" count="2" type="stmt"/>
+        <line num="44" count="4" type="stmt"/>
         <line num="45" count="0" type="stmt"/>
         <line num="46" count="0" type="stmt"/>
         <line num="50" count="0" type="stmt"/>
@@ -1184,18 +1184,18 @@
       </file>
       <file name="fetch.service.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/services/cobro.service/fetch.service.js">
         <metrics statements="18" coveredstatements="4" conditionals="12" coveredconditionals="0" methods="4" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="45" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="45" count="4" type="stmt"/>
         <line num="46" count="0" type="stmt"/>
         <line num="47" count="0" type="stmt"/>
         <line num="50" count="0" type="stmt"/>
         <line num="52" count="0" type="stmt"/>
-        <line num="55" count="2" type="stmt"/>
+        <line num="55" count="4" type="stmt"/>
         <line num="56" count="0" type="stmt"/>
         <line num="57" count="0" type="stmt"/>
         <line num="58" count="0" type="stmt"/>
         <line num="60" count="0" type="stmt"/>
-        <line num="64" count="2" type="stmt"/>
+        <line num="64" count="4" type="stmt"/>
         <line num="71" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="72" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="73" count="0" type="stmt"/>
@@ -1205,7 +1205,7 @@
       </file>
       <file name="formatter.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/services/cobro.service/formatter.js">
         <metrics statements="3" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="1" count="2" type="stmt"/>
+        <line num="1" count="4" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
       </file>
@@ -1217,18 +1217,18 @@
       <metrics statements="51" coveredstatements="9" conditionals="4" coveredconditionals="0" methods="9" coveredmethods="0"/>
       <file name="crud.service.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/services/pendiente.service/crud.service.js">
         <metrics statements="45" coveredstatements="7" conditionals="4" coveredconditionals="0" methods="7" coveredmethods="0"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="30" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="30" count="4" type="stmt"/>
         <line num="31" count="0" type="stmt"/>
         <line num="32" count="0" type="stmt"/>
         <line num="33" count="0" type="stmt"/>
         <line num="35" count="0" type="stmt"/>
-        <line num="38" count="2" type="stmt"/>
+        <line num="38" count="4" type="stmt"/>
         <line num="39" count="0" type="stmt"/>
         <line num="40" count="0" type="stmt"/>
         <line num="41" count="0" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
-        <line num="46" count="2" type="stmt"/>
+        <line num="46" count="4" type="stmt"/>
         <line num="52" count="0" type="stmt"/>
         <line num="53" count="0" type="stmt"/>
         <line num="54" count="0" type="stmt"/>
@@ -1240,11 +1240,11 @@
         <line num="64" count="0" type="stmt"/>
         <line num="66" count="0" type="stmt"/>
         <line num="67" count="0" type="stmt"/>
-        <line num="71" count="2" type="stmt"/>
+        <line num="71" count="4" type="stmt"/>
         <line num="72" count="0" type="stmt"/>
         <line num="73" count="0" type="stmt"/>
         <line num="78" count="0" type="stmt"/>
-        <line num="82" count="2" type="stmt"/>
+        <line num="82" count="4" type="stmt"/>
         <line num="89" count="0" type="stmt"/>
         <line num="90" count="0" type="stmt"/>
         <line num="91" count="0" type="stmt"/>
@@ -1256,7 +1256,7 @@
         <line num="104" count="0" type="stmt"/>
         <line num="106" count="0" type="stmt"/>
         <line num="107" count="0" type="stmt"/>
-        <line num="110" count="2" type="stmt"/>
+        <line num="110" count="4" type="stmt"/>
         <line num="111" count="0" type="stmt"/>
         <line num="112" count="0" type="stmt"/>
         <line num="115" count="0" type="stmt"/>
@@ -1265,8 +1265,8 @@
       </file>
       <file name="dashboard.service.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/services/pendiente.service/dashboard.service.js">
         <metrics statements="6" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="2" count="2" type="stmt"/>
-        <line num="46" count="2" type="stmt"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="46" count="4" type="stmt"/>
         <line num="47" count="0" type="stmt"/>
         <line num="48" count="0" type="stmt"/>
         <line num="49" count="0" type="stmt"/>
@@ -1280,20 +1280,20 @@
       <metrics statements="19" coveredstatements="5" conditionals="4" coveredconditionals="0" methods="5" coveredmethods="0"/>
       <file name="date.util.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/util/date.util.js">
         <metrics statements="19" coveredstatements="5" conditionals="4" coveredconditionals="0" methods="5" coveredmethods="0"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="3" count="2" type="stmt"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
         <line num="4" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
         <line num="9" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="10" count="0" type="stmt"/>
         <line num="11" count="0" type="stmt"/>
-        <line num="14" count="2" type="stmt"/>
+        <line num="14" count="4" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
-        <line num="20" count="2" type="stmt"/>
+        <line num="20" count="4" type="stmt"/>
         <line num="21" count="0" type="stmt"/>
         <line num="22" count="0" type="stmt"/>
         <line num="23" count="0" type="stmt"/>
@@ -1301,11 +1301,11 @@
         <line num="25" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="test">
+    <package name="test.integration">
       <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="user.testing.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/test/user.testing.js">
+      <file name="user.admin.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/test/integration/user.admin.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="2" type="stmt"/>
+        <line num="1" count="4" type="stmt"/>
       </file>
     </package>
   </project>
