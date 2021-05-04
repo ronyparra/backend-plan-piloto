@@ -1,6 +1,6 @@
 import app from "../../src/server";
 import request from "supertest";
-import user from "./user.int.testing";
+import user from "./user.admin";
 
 describe("Authentication", () => {
     it("Login Success", (done) => {

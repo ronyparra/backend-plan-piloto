@@ -1,6 +1,6 @@
 import app from "../../src/server";
 import request from "supertest";
-import useradmin from "./user.int.testing";
+import useradmin from "./user.admin";
 
 var token = null;
 var idusuario = null;

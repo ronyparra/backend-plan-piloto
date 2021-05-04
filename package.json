@@ -8,8 +8,9 @@
     "start": "npm run build && node dist/index.js",
     "restart": "rimraf dist && npm run start",
     "dev": "nodemon --exec npm run restart",
-    "test": "jest unit --detectOpenHandles",
-    "integration": "jest int --detectOpenHandles"
+    "unit": "jest unit",
+    "int": "jest int",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
