@@ -18,7 +18,7 @@ SELECT
 FROM usuario
 `;
 
-const formatRolUsuarioInsert = (usuario_rol_detalle, id) => {
+export const formatRolUsuarioInsert = (usuario_rol_detalle, id) => {
   const detalle = usuario_rol_detalle.reduce((acc, curr) => {
     if (acc !== "") acc = acc + ", \n";
     return (acc = acc + `(${id},${curr})`);
@@ -28,31 +28,19 @@ const formatRolUsuarioInsert = (usuario_rol_detalle, id) => {
 
 const UserService = {
   getAll: async () => {
-    try {
-      const results = await db.query(query);
-      return results.rows.map((x) => x.rows);
-    } catch (e) {
-      throw e;
-    }
+    const results = await db.query(query);
+    return results.rows.map((x) => x.rows);
   },
   getById: async (id) => {
-    try {
-      const results = await db.query(query + " WHERE idusuario  = $1", [id]);
-      return results.rows[0].rows;
-    } catch (e) {
-      throw e;
-    }
+    const results = await db.query(query + " WHERE idusuario  = $1", [id]);
+    return results.rows[0].rows;
   },
   getByUsername: async ({ username }) => {
-    try {
-      const results = await db.query(
-        "SELECT idusuario, username, password, nombre, apellido, precio FROM usuario WHERE username  LIKE $1",
-        [username]
-      );
-      return results.rows[0];
-    } catch (e) {
-      throw e;
-    }
+    const results = await db.query(
+      "SELECT idusuario, username, password, nombre, apellido, precio FROM usuario WHERE username  LIKE $1",
+      [username]
+    );
+    return results.rows[0];
   },
 
   create: async ({

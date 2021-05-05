@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = void 0;
+exports["default"] = exports.formatSucursalUpdate = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -28,6 +28,8 @@ var formatSucursalUpdate = function formatSucursalUpdate(sucursal, id) {
     return acc = acc + "UPDATE cliente_sucursal SET descripcion = '".concat(curr.descripcion, "', latitud = ").concat(latitud, ", longitud = ").concat(longitud, " WHERE idcliente = ").concat(id, " AND idcliente_sucursal = ").concat(curr.idcliente_sucursal, "; \n");
   }, "");
 };
+
+exports.formatSucursalUpdate = formatSucursalUpdate;
 
 var formatSucursalInsert = function formatSucursalInsert(sucursal, id) {
   var detalle = sucursal.reduce(function (acc, curr) {

@@ -21,53 +21,33 @@ JOIN categoria USING (idcategoria)
 `;
 const ConceptoService = {
   getAll: async () => {
-    try {
-      const results = await db.query(query);
-      return results.rows.map((x) => x.rows);
-    } catch (e) {
-      throw e;
-    }
+    const results = await db.query(query);
+    return results.rows.map((x) => x.rows);
   },
   getById: async (id) => {
-    try {
-      const results = await db.query(query + " WHERE idconcepto  = $1", [id]);
-      return results.rows[0].rows;
-    } catch (e) {
-      throw e;
-    }
+    const results = await db.query(query + " WHERE idconcepto  = $1", [id]);
+    return results.rows[0].rows;
   },
   create: async ({ descripcion, precio, idmoneda, idcategoria }) => {
-    try {
-      const results = await db.query(
-        "INSERT INTO concepto(descripcion, precio, idmoneda, idcategoria) VALUES ($1, $2, $3, $4) RETURNING *",
-        [descripcion, precio, idmoneda, idcategoria]
-      );
-      return results.rows;
-    } catch (e) {
-      throw e;
-    }
+    const results = await db.query(
+      "INSERT INTO concepto(descripcion, precio, idmoneda, idcategoria) VALUES ($1, $2, $3, $4) RETURNING *",
+      [descripcion, precio, idmoneda, idcategoria]
+    );
+    return results.rows;
   },
   update: async ({ descripcion, precio, idmoneda, idcategoria, id }) => {
-    try {
-      const results = await db.query(
-        "UPDATE concepto SET descripcion = $1, precio = $2, idmoneda = $3, idcategoria = $4 WHERE idconcepto = $5 RETURNING *",
-        [descripcion, precio, idmoneda, idcategoria, id]
-      );
-      return results.rows;
-    } catch (e) {
-      throw e;
-    }
+    const results = await db.query(
+      "UPDATE concepto SET descripcion = $1, precio = $2, idmoneda = $3, idcategoria = $4 WHERE idconcepto = $5 RETURNING *",
+      [descripcion, precio, idmoneda, idcategoria, id]
+    );
+    return results.rows;
   },
   delete: async (id) => {
-    try {
-      const results = await db.query(
-        "DELETE FROM concepto WHERE idconcepto  = $1",
-        [id]
-      );
-      return results.rows;
-    } catch (e) {
-      throw e;
-    }
+    const results = await db.query(
+      "DELETE FROM concepto WHERE idconcepto  = $1",
+      [id]
+    );
+    return results.rows;
   },
 };
 

@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">93.88% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>46/49</span>
+                <span class='fraction'>43/43</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.74% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>45/47</span>
+                <span class='fraction'>41/41</span>
             </div>
         
             
@@ -174,20 +174,8 @@
 <a name='L115'></a><a href='#L115'>115</a>
 <a name='L116'></a><a href='#L116'>116</a>
 <a name='L117'></a><a href='#L117'>117</a>
-<a name='L118'></a><a href='#L118'>118</a>
-<a name='L119'></a><a href='#L119'>119</a>
-<a name='L120'></a><a href='#L120'>120</a>
-<a name='L121'></a><a href='#L121'>121</a>
-<a name='L122'></a><a href='#L122'>122</a>
-<a name='L123'></a><a href='#L123'>123</a>
-<a name='L124'></a><a href='#L124'>124</a>
-<a name='L125'></a><a href='#L125'>125</a>
-<a name='L126'></a><a href='#L126'>126</a>
-<a name='L127'></a><a href='#L127'>127</a>
-<a name='L128'></a><a href='#L128'>128</a>
-<a name='L129'></a><a href='#L129'>129</a>
-<a name='L130'></a><a href='#L130'>130</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">14x</span>
+<a name='L118'></a><a href='#L118'>118</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -206,41 +194,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">16x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -335,9 +311,9 @@ SELECT
 FROM usuario
 `;
 &nbsp;
-const formatRolUsuarioInsert = (usuario_rol_detalle, id) =&gt; {
+export const formatRolUsuarioInsert = (usuario_rol_detalle, id) =&gt; {
   const detalle = usuario_rol_detalle.reduce((acc, curr) =&gt; {
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (acc !== "") <span class="cstat-no" title="statement not covered" >acc = acc + ", \n";</span>
+    if (acc !== "") acc = acc + ", \n";
     return (acc = acc + `(${id},${curr})`);
   }, "");
   return `INSERT INTO usuario_rol_detalle(idusuario, idusuario_rol) VALUES \n${detalle};`;
@@ -345,31 +321,19 @@ const formatRolUsuarioInsert = (usuario_rol_detalle, id) =&gt; {
 &nbsp;
 const UserService = {
   getAll: async () =&gt; {
-    try {
-      const results = await db.query(query);
-      return results.rows.map((x) =&gt; x.rows);
-    } catch (e) {
-<span class="cstat-no" title="statement not covered" >      throw e;</span>
-    }
+    const results = await db.query(query);
+    return results.rows.map((x) =&gt; x.rows);
   },
   getById: async (id) =&gt; {
-    try {
-      const results = await db.query(query + " WHERE idusuario  = $1", [id]);
-      return results.rows[0].rows;
-    } catch (e) {
-      throw e;
-    }
+    const results = await db.query(query + " WHERE idusuario  = $1", [id]);
+    return results.rows[0].rows;
   },
   getByUsername: async ({ username }) =&gt; {
-    try {
-      const results = await db.query(
-        "SELECT idusuario, username, password, nombre, apellido, precio FROM usuario WHERE username  LIKE $1",
-        [username]
-      );
-      return results.rows[0];
-    } catch (e) {
-<span class="cstat-no" title="statement not covered" >      throw e;</span>
-    }
+    const results = await db.query(
+      "SELECT idusuario, username, password, nombre, apellido, precio FROM usuario WHERE username  LIKE $1",
+      [username]
+    );
+    return results.rows[0];
   },
 &nbsp;
   create: async ({
@@ -451,7 +415,7 @@ export default UserService;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed May 05 2021 15:03:29 GMT-0400 (Paraguay Standard Time)
+                at Wed May 05 2021 17:09:39 GMT-0400 (Paraguay Standard Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

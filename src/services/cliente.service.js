@@ -28,7 +28,7 @@ const formatSucursalDelete = (sucursal, id) => {
   }, "");
 };
 
-const formatSucursalUpdate = (sucursal, id) => {
+export const formatSucursalUpdate = (sucursal, id) => {
   return sucursal.reduce((acc, curr) => {
     const latitud = curr.latitud ? `'${curr.latitud}'` : null;
     const longitud = curr.longitud ? `'${curr.longitud}'` : null;
@@ -38,7 +38,7 @@ const formatSucursalUpdate = (sucursal, id) => {
   }, "");
 };
 
-const formatSucursalInsert = (sucursal, id) => {
+export const formatSucursalInsert = (sucursal, id) => {
   const detalle = sucursal.reduce((acc, curr) => {
     if (acc !== "") acc = acc + ", \n";
     const latitud = curr.latitud ? `'${curr.latitud}'` : null;
@@ -50,32 +50,20 @@ const formatSucursalInsert = (sucursal, id) => {
 
 const ClienteService = {
   getSucursalByCliente: async (idcliente) => {
-    try {
-      const results = await db.query(
-        `SELECT idcliente, idcliente_sucursal, descripcion, latitud, longitud
+    const results = await db.query(
+      `SELECT idcliente, idcliente_sucursal, descripcion, latitud, longitud
         FROM cliente_sucursal WHERE idcliente = $1`,
-        [idcliente]
-      );
-      return results.rows;
-    } catch (e) {
-      throw e;
-    }
+      [idcliente]
+    );
+    return results.rows;
   },
   getAll: async () => {
-    try {
-      const results = await db.query(query);
-      return results.rows.map((x) => x.rows);
-    } catch (e) {
-      throw e;
-    }
+    const results = await db.query(query);
+    return results.rows.map((x) => x.rows);
   },
   getById: async (id) => {
-    try {
-      const results = await db.query(query + " WHERE idcliente  = $1", [id]);
-      return results.rows[0].rows;
-    } catch (e) {
-      throw e;
-    }
+    const results = await db.query(query + " WHERE idcliente  = $1", [id]);
+    return results.rows[0].rows;
   },
   create: async ({ razonsocial, ruc, sucursal }) => {
     try {
@@ -85,7 +73,9 @@ const ClienteService = {
         [razonsocial, ruc]
       );
       const idcliente = results.rows[0].idcliente;
-      const resultsDetail = await db.query(formatSucursalInsert(sucursal, idcliente));
+      const resultsDetail = await db.query(
+        formatSucursalInsert(sucursal, idcliente)
+      );
       results.rows[0].sucursal = resultsDetail.rows;
       await db.query("COMMIT");
       return results.rows;
@@ -95,7 +85,6 @@ const ClienteService = {
     }
   },
   update: async ({ razonsocial, ruc, sucursal, id }) => {
-
     try {
       await db.query("BEGIN");
       const oldSucursal = await ClienteService.getSucursalByCliente(id);
@@ -112,7 +101,7 @@ const ClienteService = {
         "UPDATE cliente SET razonsocial = $1, ruc = $2 WHERE idcliente = $3 RETURNING *",
         [razonsocial, ruc, id]
       );
-      
+
       if (inserts.length > 0) await db.query(formatSucursalInsert(inserts, id));
       if (updates.length > 0) await db.query(formatSucursalUpdate(updates, id));
       if (deletes.length > 0) await db.query(formatSucursalDelete(deletes, id));

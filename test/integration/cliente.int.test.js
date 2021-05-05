@@ -22,6 +22,7 @@ afterAll((done) => {
 describe("Crud Cliente", () => {
   var idcliente = null;
   var idcliente_suc = null;
+  var cliente_inserted = null;
   const cliente = {
     razonsocial: "Cliente de Testing",
     ruc: "n/a",
@@ -51,14 +52,14 @@ describe("Crud Cliente", () => {
   it("Validator descripcion", (done) => {
     request(app)
       .post("/cliente")
-      .send({...cliente, razonsocial: null})
+      .send({ ...cliente, razonsocial: null })
       .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res.statusCode).toEqual(400);
         done();
       });
   });
-  
+
   it("Create new client with intentionally failed", (done) => {
     request(app)
       .post("/cliente")
@@ -85,6 +86,7 @@ describe("Crud Cliente", () => {
       .get("/cliente/" + idcliente)
       .set("Authorization", "Bearer " + token)
       .end((err, res) => {
+        cliente_inserted = res.body.data;
         expect(res.statusCode).toEqual(200);
         done();
       });
@@ -98,10 +100,20 @@ describe("Crud Cliente", () => {
         done();
       });
   });
-  it("Update client", (done) => {
+  it("Update client with new sucursal", (done) => {
     request(app)
       .put("/cliente/" + idcliente)
       .send({ ...cliente, razonsocial: "Cliente de Testing Update" })
+      .set("Authorization", "Bearer " + token)
+      .end((err, res) => {
+        expect(res.statusCode).toEqual(200);
+        done();
+      });
+  });
+  it("Update client inserted", (done) => {
+    request(app)
+      .put("/cliente/" + idcliente)
+      .send(cliente_inserted)
       .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res.statusCode).toEqual(200);
