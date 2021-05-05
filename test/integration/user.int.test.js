@@ -84,10 +84,23 @@ describe("User", () => {
         });
     });
 
-    it("Update user", (done) => {
+    it("Update user with password", (done) => {
       request(app)
         .put("/user/" + idusuario)
         .send({ ...user, username: usernameUpdate })
+        .set("Authorization", "Bearer " + token)
+        .end( (err, res) => {
+          expect(res.statusCode).toEqual(200);
+          done();
+        });
+    });
+
+    it("Update user not password", (done) => {
+      let update = user;
+      delete update.password;
+      request(app)
+        .put("/user/" + idusuario)
+        .send(update)
         .set("Authorization", "Bearer " + token)
         .end( (err, res) => {
           expect(res.statusCode).toEqual(200);
