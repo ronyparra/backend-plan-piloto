@@ -42,7 +42,7 @@ const actividad = {
       cantidad: 1,
     },
   ],
-  actividad_pendiente: [],
+  actividad_pendiente: [1],
 };
 
 var actividadChangeStatus = {

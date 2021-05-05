@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">69.7% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>33/33</span>
+                <span class='fraction'>23/33</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">69.7% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>33/33</span>
+                <span class='fraction'>23/33</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -169,34 +169,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -210,10 +194,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -255,7 +255,7 @@ const ActividadController = {
   getById: async (req, res) =&gt; {
     try {
       const actividad = await ActividadService.getById(req.params.id);
-      return res.status(200).json({ status: 200, data: actividad });
+<span class="cstat-no" title="statement not covered" >      return res.status(200).json({ status: 200, data: actividad });</span>
     } catch (e) {
       return res.status(400).json({ status: 400, message: e.message });
     }
@@ -264,7 +264,7 @@ const ActividadController = {
     const idusuario = req.decoded.id;
     try {
       const actividad = await ActividadService.changeStatus({...req.body, idusuario});
-      return res.status(200).json({ status: 200, data: actividad });
+<span class="cstat-no" title="statement not covered" >      return res.status(200).json({ status: 200, data: actividad });</span>
     } catch (e) {
       return res.status(400).json({ status: 400, message: e.message });
     }
@@ -280,26 +280,26 @@ const ActividadController = {
         detalle,
         actividad_pendiente,
       });
-      return res.status(200).json({ status: 200, data: actividad });
+<span class="cstat-no" title="statement not covered" >      return res.status(200).json({ status: 200, data: actividad });</span>
     } catch (e) {
       return res.status(400).json({ status: 400, message: e.message });
     }
   },
-  update: async (req, res) =&gt; {
-    const tecnico = req.body.tecnico;
-    const detalle = req.body.detalle;
-    const actividad_pendiente = req.body.actividad_pendiente;
-    try {
-      const actividad = await ActividadService.update({
+  update: <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
+    const tecnico = <span class="cstat-no" title="statement not covered" >req.body.tecnico;</span>
+    const detalle = <span class="cstat-no" title="statement not covered" >req.body.detalle;</span>
+    const actividad_pendiente = <span class="cstat-no" title="statement not covered" >req.body.actividad_pendiente;</span>
+<span class="cstat-no" title="statement not covered" >    try {</span>
+      const actividad = <span class="cstat-no" title="statement not covered" >await ActividadService.update({</span>
         id: req.params.id,
         master: formatMaster(req.body),
         tecnico,
         detalle,
         actividad_pendiente,
       });
-      return res.status(200).json({ status: 200, data: actividad });
+<span class="cstat-no" title="statement not covered" >      return res.status(200).json({ status: 200, data: actividad });</span>
     } catch (e) {
-      return res.status(400).json({ status: 400, message: e.message });
+<span class="cstat-no" title="statement not covered" >      return res.status(400).json({ status: 400, message: e.message });</span>
     }
   },
   delete: async (req, res) =&gt; {
@@ -322,7 +322,7 @@ export default ActividadController;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed May 05 2021 17:09:39 GMT-0400 (Paraguay Standard Time)
+                at Wed May 05 2021 17:18:51 GMT-0400 (Paraguay Standard Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

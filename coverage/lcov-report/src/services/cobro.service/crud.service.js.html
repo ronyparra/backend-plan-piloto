@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">29.41% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/17</span>
+                <span class='fraction'>5/17</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">29.41% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/17</span>
+                <span class='fraction'>5/17</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -132,9 +132,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -154,12 +154,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">13x</span>
@@ -168,23 +168,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import db from "../../db";
 import { formatUpdateCobro } from "./formatter";
 &nbsp;
-export const update = async ({
+export const update = <span class="fstat-no" title="function not covered" >as</span>ync ({
   fechacobro,
   idusuariocobro,
   comentario,
@@ -194,9 +194,9 @@ export const update = async ({
   actividad_cobro,
   id,
 }) =&gt; {
-  try {
-    await db.query("BEGIN");
-    const results = await db.query(
+<span class="cstat-no" title="statement not covered" >  try {</span>
+<span class="cstat-no" title="statement not covered" >    await db.query("BEGIN");</span>
+    const results = <span class="cstat-no" title="statement not covered" >await db.query(</span>
       `UPDATE cliente_cobro
         SET 
           fechacobro		  =$1, 
@@ -216,12 +216,12 @@ export const update = async ({
         id,
       ]
     );
-    await db.query(formatUpdateCobro(actividad_cobro, idestadocobro));
-    await db.query("COMMIT");
-    return results.rows;
+<span class="cstat-no" title="statement not covered" >    await db.query(formatUpdateCobro(actividad_cobro, idestadocobro));</span>
+<span class="cstat-no" title="statement not covered" >    await db.query("COMMIT");</span>
+<span class="cstat-no" title="statement not covered" >    return results.rows;</span>
   } catch (e) {
-    await db.query("ROLLBACK");
-    throw e;
+<span class="cstat-no" title="statement not covered" >    await db.query("ROLLBACK");</span>
+<span class="cstat-no" title="statement not covered" >    throw e;</span>
   }
 };
 export const delet = async (id) =&gt; {
@@ -230,15 +230,15 @@ export const delet = async (id) =&gt; {
       "SELECT idcliente_cobro, idactividad FROM actividad_cobro WHERE idcliente_cobro = $1",
       [id]
     );
-    await db.query(formatUpdateCobro(actividad_cobro.rows, 1));
-    await db.query("DELETE FROM actividad_cobro WHERE idcliente_cobro = $1", [
+<span class="cstat-no" title="statement not covered" >    await db.query(formatUpdateCobro(actividad_cobro.rows, 1));</span>
+<span class="cstat-no" title="statement not covered" >    await db.query("DELETE FROM actividad_cobro WHERE idcliente_cobro = $1", [</span>
       id,
     ]);
-    const results = await db.query(
+    const results = <span class="cstat-no" title="statement not covered" >await db.query(</span>
       "DELETE FROM cliente_cobro WHERE idcliente_cobro  = $1",
       [id]
     );
-    return results.rows;
+<span class="cstat-no" title="statement not covered" >    return results.rows;</span>
   } catch (e) {
     throw e;
   }
@@ -250,7 +250,7 @@ export const delet = async (id) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed May 05 2021 17:09:39 GMT-0400 (Paraguay Standard Time)
+                at Wed May 05 2021 17:18:51 GMT-0400 (Paraguay Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
