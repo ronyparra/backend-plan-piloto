@@ -7,7 +7,6 @@ const router = Router();
 
 router.get("/", Auth, CobroController.get);
 router.get("/:id", Auth, CobroController.getById);
-router.post("/", Auth, CobroValidator.body, CobroController.create);
 router.put("/:id", Auth, CobroValidator.body, CobroController.update);
 router.delete("/:id", Auth, CobroController.delete);
 export default router;

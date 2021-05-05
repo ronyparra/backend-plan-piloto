@@ -2,13 +2,13 @@ import AnalyticsService from "../services/analytics.service";
 import { parse_date, substract_days, calc_diff_days } from "../util/date.util";
 const analyticsController = {
   getActividad: async (req, res) => {
-    const desde = parse_date(req.query.desde);
-    const hasta = parse_date(req.query.hasta);
-    const diffDesdeHasta = calc_diff_days(hasta,desde);
-
-    const hastaAnterior = substract_days(desde, 1);
-    const desdeAnterior = substract_days(hastaAnterior, diffDesdeHasta);
     try {
+      const desde = parse_date(req.query.desde);
+      const hasta = parse_date(req.query.hasta);
+      const diffDesdeHasta = calc_diff_days(hasta, desde);
+      const hastaAnterior = substract_days(desde, 1);
+      const desdeAnterior = substract_days(hastaAnterior, diffDesdeHasta);
+
       const data = [
         {
           title: "Periodo Anterior",
@@ -48,12 +48,13 @@ const analyticsController = {
     }
   },
   getPendientes: async (req, res) => {
-    const desde = parse_date(req.query.desde);
-    const hasta = parse_date(req.query.hasta);
-    const diffDesdeHasta = calc_diff_days(hasta,desde);
-    const hastaAnterior = substract_days(desde, 1);
-    const desdeAnterior = substract_days(hastaAnterior, diffDesdeHasta);
     try {
+      const desde = parse_date(req.query.desde);
+      const hasta = parse_date(req.query.hasta);
+      const diffDesdeHasta = calc_diff_days(hasta, desde);
+      const hastaAnterior = substract_days(desde, 1);
+      const desdeAnterior = substract_days(hastaAnterior, diffDesdeHasta);
+
       const data = [
         {
           title: "Periodo Anterior",
@@ -65,7 +66,7 @@ const analyticsController = {
         {
           title: "Periodo Actual",
           data: await AnalyticsService.getPendientes(desde, hasta),
-        }
+        },
       ];
 
       return res.status(200).json({ status: 200, data: data });
@@ -74,9 +75,9 @@ const analyticsController = {
     }
   },
   getCliente: async (req, res) => {
-    const desde = parse_date(req.query.desde);
-    const hasta = parse_date(req.query.hasta);
     try {
+      const desde = parse_date(req.query.desde);
+      const hasta = parse_date(req.query.hasta);
       const data = await AnalyticsService.getCliente(desde, hasta);
       return res.status(200).json({ status: 200, data: data });
     } catch (e) {
@@ -84,9 +85,9 @@ const analyticsController = {
     }
   },
   getConcepto: async (req, res) => {
-    const desde = parse_date(req.query.desde);
-    const hasta = parse_date(req.query.hasta);
     try {
+      const desde = parse_date(req.query.desde);
+      const hasta = parse_date(req.query.hasta);
       const data = await AnalyticsService.getConcepto(desde, hasta);
       return res.status(200).json({ status: 200, data: data });
     } catch (e) {
@@ -94,9 +95,9 @@ const analyticsController = {
     }
   },
   getTecnico: async (req, res) => {
-    const desde = parse_date(req.query.desde);
-    const hasta = parse_date(req.query.hasta);
     try {
+      const desde = parse_date(req.query.desde);
+      const hasta = parse_date(req.query.hasta);
       const data = await AnalyticsService.getTecnico(desde, hasta);
       return res.status(200).json({ status: 200, data: data });
     } catch (e) {
@@ -104,9 +105,9 @@ const analyticsController = {
     }
   },
   getCategoria: async (req, res) => {
-    const desde = parse_date(req.query.desde);
-    const hasta = parse_date(req.query.hasta);
     try {
+      const desde = parse_date(req.query.desde);
+      const hasta = parse_date(req.query.hasta);
       const data = await AnalyticsService.getCategoria(desde, hasta);
       return res.status(200).json({ status: 200, data: data });
     } catch (e) {
@@ -114,10 +115,10 @@ const analyticsController = {
     }
   },
   getEstados: async (req, res) => {
-    const desde = parse_date(req.query.desde);
-    const hasta = parse_date(req.query.hasta);
-    const old = req.query.old === 'true' ? true : false;
     try {
+      const desde = parse_date(req.query.desde);
+      const hasta = parse_date(req.query.hasta);
+      const old = req.query.old === "true" ? true : false;
       const data = await AnalyticsService.getEstados(desde, hasta, old);
       return res.status(200).json({ status: 200, data: data });
     } catch (e) {
@@ -125,9 +126,9 @@ const analyticsController = {
     }
   },
   getCobroTecnico: async (req, res) => {
-    const desde = parse_date(req.query.desde);
-    const hasta = parse_date(req.query.hasta);
     try {
+      const desde = parse_date(req.query.desde);
+      const hasta = parse_date(req.query.hasta);
       const data = await AnalyticsService.getCobroTecnico(desde, hasta);
       return res.status(200).json({ status: 200, data: data });
     } catch (e) {

@@ -156,45 +156,44 @@ var ActividadController = {
   }(),
   create: function () {
     var _create = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
-      var master, tecnico, detalle, actividad_pendiente, actividad;
+      var tecnico, detalle, actividad_pendiente, actividad;
       return _regenerator["default"].wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              master = (0, _formatter.formatMaster)(req.body);
               tecnico = req.body.tecnico;
               detalle = req.body.detalle;
               actividad_pendiente = req.body.actividad_pendiente;
-              _context4.prev = 4;
-              _context4.next = 7;
+              _context4.prev = 3;
+              _context4.next = 6;
               return _actividad["default"].create({
-                master: master,
+                master: (0, _formatter.formatMaster)(req.body),
                 tecnico: tecnico,
                 detalle: detalle,
                 actividad_pendiente: actividad_pendiente
               });
 
-            case 7:
+            case 6:
               actividad = _context4.sent;
               return _context4.abrupt("return", res.status(200).json({
                 status: 200,
                 data: actividad
               }));
 
-            case 11:
-              _context4.prev = 11;
-              _context4.t0 = _context4["catch"](4);
+            case 10:
+              _context4.prev = 10;
+              _context4.t0 = _context4["catch"](3);
               return _context4.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context4.t0.message
               }));
 
-            case 14:
+            case 13:
             case "end":
               return _context4.stop();
           }
         }
-      }, _callee4, null, [[4, 11]]);
+      }, _callee4, null, [[3, 10]]);
     }));
 
     function create(_x7, _x8) {
@@ -205,46 +204,45 @@ var ActividadController = {
   }(),
   update: function () {
     var _update = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
-      var master, tecnico, detalle, actividad_pendiente, actividad;
+      var tecnico, detalle, actividad_pendiente, actividad;
       return _regenerator["default"].wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
-              master = (0, _formatter.formatMaster)(req.body);
               tecnico = req.body.tecnico;
               detalle = req.body.detalle;
               actividad_pendiente = req.body.actividad_pendiente;
-              _context5.prev = 4;
-              _context5.next = 7;
+              _context5.prev = 3;
+              _context5.next = 6;
               return _actividad["default"].update({
                 id: req.params.id,
-                master: master,
+                master: (0, _formatter.formatMaster)(req.body),
                 tecnico: tecnico,
                 detalle: detalle,
                 actividad_pendiente: actividad_pendiente
               });
 
-            case 7:
+            case 6:
               actividad = _context5.sent;
               return _context5.abrupt("return", res.status(200).json({
                 status: 200,
                 data: actividad
               }));
 
-            case 11:
-              _context5.prev = 11;
-              _context5.t0 = _context5["catch"](4);
+            case 10:
+              _context5.prev = 10;
+              _context5.t0 = _context5["catch"](3);
               return _context5.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context5.t0.message
               }));
 
-            case 14:
+            case 13:
             case "end":
               return _context5.stop();
           }
         }
-      }, _callee5, null, [[4, 11]]);
+      }, _callee5, null, [[3, 10]]);
     }));
 
     function update(_x9, _x10) {

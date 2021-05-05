@@ -43,6 +43,47 @@ describe("User", () => {
           done();
         });
     });
+    it("Create new user with failed intentionally",  (done) => {
+      request(app)
+        .post("/user")
+        .send({...user, usuario_rol_detalle: ['undefined']})
+        .set("Authorization", "Bearer " + token)
+        .end((err, res) => {
+          expect(res.statusCode).toEqual(400);
+          done();
+        });
+    });
+
+    it("Fetch user",  (done) => {
+      request(app)
+        .get("/user")
+        .set("Authorization", "Bearer " + token)
+        .end((err, res) => {
+          expect(res.statusCode).toEqual(200);
+          done();
+        });
+    });
+
+    it("Fetch user by id",  (done) => {
+      request(app)
+        .get("/user/"+idusuario)
+        .set("Authorization", "Bearer " + token)
+        .end((err, res) => {
+          expect(res.statusCode).toEqual(200);
+          done();
+        });
+    });
+
+    it("Fetch user by id  with failed intentionally",  (done) => {
+      request(app)
+        .get("/user/"+ 'undefined')
+        .set("Authorization", "Bearer " + token)
+        .end((err, res) => {
+          expect(res.statusCode).toEqual(400);
+          done();
+        });
+    });
+
     it("Update user", (done) => {
       request(app)
         .put("/user/" + idusuario)
@@ -53,12 +94,34 @@ describe("User", () => {
           done();
         });
     });
-    it("Delete User", (done) => {
+
+    it("Update user with failed intentionally", (done) => {
+      request(app)
+        .put("/user/" + idusuario)
+        .send({ ...user, username: 'UPDATE FAILED', usuario_rol_detalle: ['undefined'] })
+        .set("Authorization", "Bearer " + token)
+        .end( (err, res) => {
+          expect(res.statusCode).toEqual(400);
+          done();
+        });
+    });
+
+    it("Delete User ", (done) => {
       request(app)
         .delete("/user/" + idusuario)
         .set("Authorization", "Bearer " + token)
         .end( (err, res) => {
           expect(res.statusCode).toEqual(200);
+          done();
+        });
+    });
+
+    it("Delete User with failed intentionally", (done) => {
+      request(app)
+        .delete("/user/" + 'undefined')
+        .set("Authorization", "Bearer " + token)
+        .end( (err, res) => {
+          expect(res.statusCode).toEqual(400);
           done();
         });
     });

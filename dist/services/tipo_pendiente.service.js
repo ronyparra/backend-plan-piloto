@@ -128,7 +128,7 @@ var PendienteService = {
               descripcion = _ref2.descripcion, color = _ref2.color, id = _ref2.id;
               _context4.prev = 1;
               _context4.next = 4;
-              return _db["default"].query("UPDATE tipo_pendiente SET descripcion = $1, color = $2 WHERE tipo_pendiente = $3 RETURNING *", [descripcion, color, id]);
+              return _db["default"].query("UPDATE tipo_pendiente SET descripcion = $1, color = $2 WHERE idtipo_pendiente = $3 RETURNING *", [descripcion, color, id]);
 
             case 4:
               results = _context4.sent;

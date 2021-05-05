@@ -22,5 +22,4 @@ export const calc_diff_days = (date1, date2) => {
   let day = 1000 * 60 * 60 * 24;
   let days = Math.floor(diff / day);
   return days;
-  l;
 };

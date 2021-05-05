@@ -189,13 +189,13 @@ var PendienteController = {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
+              _context5.prev = 0;
               insert = {
                 idtipo_pendiente: req.body.idtipo_pendiente.idtipo_pendiente,
                 fecha: (0, _date.parse_date)(req.body.fecha),
                 descripcion: req.body.descripcion,
                 pendiente_tecnico: req.body.pendiente_tecnico
               };
-              _context5.prev = 1;
               _context5.next = 4;
               return _pendiente["default"].create(_objectSpread({}, insert));
 
@@ -208,7 +208,7 @@ var PendienteController = {
 
             case 8:
               _context5.prev = 8;
-              _context5.t0 = _context5["catch"](1);
+              _context5.t0 = _context5["catch"](0);
               return _context5.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context5.t0.message
@@ -219,7 +219,7 @@ var PendienteController = {
               return _context5.stop();
           }
         }
-      }, _callee5, null, [[1, 8]]);
+      }, _callee5, null, [[0, 8]]);
     }));
 
     function create(_x9, _x10) {
@@ -230,20 +230,21 @@ var PendienteController = {
   }(),
   update: function () {
     var _update = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(req, res) {
-      var update, pendiente;
+      var _update2, pendiente;
+
       return _regenerator["default"].wrap(function _callee6$(_context6) {
         while (1) {
           switch (_context6.prev = _context6.next) {
             case 0:
-              update = {
+              _context6.prev = 0;
+              _update2 = {
                 idtipo_pendiente: req.body.idtipo_pendiente.idtipo_pendiente,
                 fecha: (0, _date.parse_date)(req.body.fecha),
                 descripcion: req.body.descripcion,
                 pendiente_tecnico: req.body.pendiente_tecnico
               };
-              _context6.prev = 1;
               _context6.next = 4;
-              return _pendiente["default"].update(_objectSpread(_objectSpread({}, update), {}, {
+              return _pendiente["default"].update(_objectSpread(_objectSpread({}, _update2), {}, {
                 id: req.params.id
               }));
 
@@ -256,7 +257,7 @@ var PendienteController = {
 
             case 8:
               _context6.prev = 8;
-              _context6.t0 = _context6["catch"](1);
+              _context6.t0 = _context6["catch"](0);
               return _context6.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context6.t0.message
@@ -267,7 +268,7 @@ var PendienteController = {
               return _context6.stop();
           }
         }
-      }, _callee6, null, [[1, 8]]);
+      }, _callee6, null, [[0, 8]]);
     }));
 
     function update(_x11, _x12) {

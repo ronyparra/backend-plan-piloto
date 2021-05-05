@@ -56,7 +56,6 @@ var calc_diff_days = function calc_diff_days(date1, date2) {
   var day = 1000 * 60 * 60 * 24;
   var days = Math.floor(diff / day);
   return days;
-  l;
 };
 
 exports.calc_diff_days = calc_diff_days;

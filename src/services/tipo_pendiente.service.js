@@ -33,7 +33,7 @@ const PendienteService = {
   update: async ({ descripcion, color, id }) => {
     try {
       const results = await db.query(
-        "UPDATE tipo_pendiente SET descripcion = $1, color = $2 WHERE tipo_pendiente = $3 RETURNING *",
+        "UPDATE tipo_pendiente SET descripcion = $1, color = $2 WHERE idtipo_pendiente = $3 RETURNING *",
         [descripcion, color, id]
       );
       return results.rows;

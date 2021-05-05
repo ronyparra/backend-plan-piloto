@@ -136,7 +136,7 @@ exports.create = create;
 
 var changeStatus = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(_ref3) {
-    var detalle, idestadocobro, idusuario, descripcion, actividadesSinOrden, _iterator, _step, actividad, detActividadMoneda, _iterator3, _step3, _step3$value, index, detConcepto, execute, results, newActividad, actividadesConOrden, _iterator2, _step2, _actividad, saldoacobrar, _results;
+    var detalle, idestadocobro, idusuario, descripcion, actividadesSinOrden, _iterator, _step, actividad, detActividadMoneda, _iterator3, _step3, _step3$value, index, detConcepto, execute, results, newActividad, actividadesConOrden, cobrosGenerados, _iterator2, _step2, _actividad, saldoacobrar, _results;
 
     return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
@@ -262,74 +262,75 @@ var changeStatus = /*#__PURE__*/function () {
 
           case 52:
             actividadesConOrden = ordenarActividadPorMoneda(actividadesSinOrden);
+            cobrosGenerados = [];
             _iterator2 = _createForOfIteratorHelper(actividadesConOrden);
-            _context2.prev = 54;
+            _context2.prev = 55;
 
             _iterator2.s();
 
-          case 56:
+          case 57:
             if ((_step2 = _iterator2.n()).done) {
-              _context2.next = 68;
+              _context2.next = 70;
               break;
             }
 
             _actividad = _step2.value;
             saldoacobrar = (0, _formatter.calcularTotal)(_actividad);
-            _context2.next = 61;
+            _context2.next = 62;
             return _db["default"].query((0, _formatter.CHANGE_ACTIVIDAD_STATUS)(_actividad, idestadocobro));
 
-          case 61:
-            _context2.next = 63;
+          case 62:
+            _context2.next = 64;
             return _db["default"].query((0, _formatter.INSERT_CLIENTE_COBRO)(descripcion, _actividad[0].idcliente.idcliente, (0, _date.current_date)(), idusuario, saldoacobrar, _actividad[0].moneda));
 
-          case 63:
+          case 64:
             _results = _context2.sent;
-            _context2.next = 66;
+            cobrosGenerados.push(_results.rows[0]);
+            _context2.next = 68;
             return _db["default"].query((0, _formatter.INSERT_DET_ACT_COBRO)(_actividad, _results.rows[0].idcliente_cobro));
 
-          case 66:
-            _context2.next = 56;
-            break;
-
           case 68:
-            _context2.next = 73;
+            _context2.next = 57;
             break;
 
           case 70:
-            _context2.prev = 70;
-            _context2.t2 = _context2["catch"](54);
+            _context2.next = 75;
+            break;
+
+          case 72:
+            _context2.prev = 72;
+            _context2.t2 = _context2["catch"](55);
 
             _iterator2.e(_context2.t2);
 
-          case 73:
-            _context2.prev = 73;
+          case 75:
+            _context2.prev = 75;
 
             _iterator2.f();
 
-            return _context2.finish(73);
-
-          case 76:
-            _context2.next = 78;
-            return _db["default"].query("COMMIT");
+            return _context2.finish(75);
 
           case 78:
-            _context2.next = 84;
-            break;
+            _context2.next = 80;
+            return _db["default"].query("COMMIT");
 
           case 80:
-            _context2.prev = 80;
+            return _context2.abrupt("return", cobrosGenerados);
+
+          case 83:
+            _context2.prev = 83;
             _context2.t3 = _context2["catch"](2);
 
             _db["default"].query("ROLLBACK");
 
             throw _context2.t3;
 
-          case 84:
+          case 87:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[2, 80], [6, 46, 49, 52], [13, 35, 38, 41], [54, 70, 73, 76]]);
+    }, _callee2, null, [[2, 83], [6, 46, 49, 52], [13, 35, 38, 41], [55, 72, 75, 78]]);
   }));
 
   return function changeStatus(_x3) {

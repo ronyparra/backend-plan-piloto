@@ -23,12 +23,12 @@ var analyticsController = {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              _context.prev = 0;
               desde = (0, _date.parse_date)(req.query.desde);
               hasta = (0, _date.parse_date)(req.query.hasta);
               diffDesdeHasta = (0, _date.calc_diff_days)(hasta, desde);
               hastaAnterior = (0, _date.substract_days)(desde, 1);
               desdeAnterior = (0, _date.substract_days)(hastaAnterior, diffDesdeHasta);
-              _context.prev = 5;
               _context.next = 8;
               return _analytics["default"].getSaldoGeneral(desdeAnterior, hastaAnterior);
 
@@ -74,7 +74,7 @@ var analyticsController = {
 
             case 26:
               _context.prev = 26;
-              _context.t8 = _context["catch"](5);
+              _context.t8 = _context["catch"](0);
               return _context.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context.t8.message
@@ -85,7 +85,7 @@ var analyticsController = {
               return _context.stop();
           }
         }
-      }, _callee, null, [[5, 26]]);
+      }, _callee, null, [[0, 26]]);
     }));
 
     function getActividad(_x, _x2) {
@@ -101,12 +101,12 @@ var analyticsController = {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
+              _context2.prev = 0;
               desde = (0, _date.parse_date)(req.query.desde);
               hasta = (0, _date.parse_date)(req.query.hasta);
               diffDesdeHasta = (0, _date.calc_diff_days)(hasta, desde);
               hastaAnterior = (0, _date.substract_days)(desde, 1);
               desdeAnterior = (0, _date.substract_days)(hastaAnterior, diffDesdeHasta);
-              _context2.prev = 5;
               _context2.next = 8;
               return _analytics["default"].getPendientes(desdeAnterior, hastaAnterior);
 
@@ -133,7 +133,7 @@ var analyticsController = {
 
             case 18:
               _context2.prev = 18;
-              _context2.t4 = _context2["catch"](5);
+              _context2.t4 = _context2["catch"](0);
               return _context2.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context2.t4.message
@@ -144,7 +144,7 @@ var analyticsController = {
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[5, 18]]);
+      }, _callee2, null, [[0, 18]]);
     }));
 
     function getPendientes(_x3, _x4) {
@@ -160,9 +160,9 @@ var analyticsController = {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
+              _context3.prev = 0;
               desde = (0, _date.parse_date)(req.query.desde);
               hasta = (0, _date.parse_date)(req.query.hasta);
-              _context3.prev = 2;
               _context3.next = 5;
               return _analytics["default"].getCliente(desde, hasta);
 
@@ -175,7 +175,7 @@ var analyticsController = {
 
             case 9:
               _context3.prev = 9;
-              _context3.t0 = _context3["catch"](2);
+              _context3.t0 = _context3["catch"](0);
               return _context3.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context3.t0.message
@@ -186,7 +186,7 @@ var analyticsController = {
               return _context3.stop();
           }
         }
-      }, _callee3, null, [[2, 9]]);
+      }, _callee3, null, [[0, 9]]);
     }));
 
     function getCliente(_x5, _x6) {
@@ -202,9 +202,9 @@ var analyticsController = {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
+              _context4.prev = 0;
               desde = (0, _date.parse_date)(req.query.desde);
               hasta = (0, _date.parse_date)(req.query.hasta);
-              _context4.prev = 2;
               _context4.next = 5;
               return _analytics["default"].getConcepto(desde, hasta);
 
@@ -217,7 +217,7 @@ var analyticsController = {
 
             case 9:
               _context4.prev = 9;
-              _context4.t0 = _context4["catch"](2);
+              _context4.t0 = _context4["catch"](0);
               return _context4.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context4.t0.message
@@ -228,7 +228,7 @@ var analyticsController = {
               return _context4.stop();
           }
         }
-      }, _callee4, null, [[2, 9]]);
+      }, _callee4, null, [[0, 9]]);
     }));
 
     function getConcepto(_x7, _x8) {
@@ -244,9 +244,9 @@ var analyticsController = {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
+              _context5.prev = 0;
               desde = (0, _date.parse_date)(req.query.desde);
               hasta = (0, _date.parse_date)(req.query.hasta);
-              _context5.prev = 2;
               _context5.next = 5;
               return _analytics["default"].getTecnico(desde, hasta);
 
@@ -259,7 +259,7 @@ var analyticsController = {
 
             case 9:
               _context5.prev = 9;
-              _context5.t0 = _context5["catch"](2);
+              _context5.t0 = _context5["catch"](0);
               return _context5.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context5.t0.message
@@ -270,7 +270,7 @@ var analyticsController = {
               return _context5.stop();
           }
         }
-      }, _callee5, null, [[2, 9]]);
+      }, _callee5, null, [[0, 9]]);
     }));
 
     function getTecnico(_x9, _x10) {
@@ -286,9 +286,9 @@ var analyticsController = {
         while (1) {
           switch (_context6.prev = _context6.next) {
             case 0:
+              _context6.prev = 0;
               desde = (0, _date.parse_date)(req.query.desde);
               hasta = (0, _date.parse_date)(req.query.hasta);
-              _context6.prev = 2;
               _context6.next = 5;
               return _analytics["default"].getCategoria(desde, hasta);
 
@@ -301,7 +301,7 @@ var analyticsController = {
 
             case 9:
               _context6.prev = 9;
-              _context6.t0 = _context6["catch"](2);
+              _context6.t0 = _context6["catch"](0);
               return _context6.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context6.t0.message
@@ -312,7 +312,7 @@ var analyticsController = {
               return _context6.stop();
           }
         }
-      }, _callee6, null, [[2, 9]]);
+      }, _callee6, null, [[0, 9]]);
     }));
 
     function getCategoria(_x11, _x12) {
@@ -328,10 +328,10 @@ var analyticsController = {
         while (1) {
           switch (_context7.prev = _context7.next) {
             case 0:
+              _context7.prev = 0;
               desde = (0, _date.parse_date)(req.query.desde);
               hasta = (0, _date.parse_date)(req.query.hasta);
-              old = req.query.old === 'true' ? true : false;
-              _context7.prev = 3;
+              old = req.query.old === "true" ? true : false;
               _context7.next = 6;
               return _analytics["default"].getEstados(desde, hasta, old);
 
@@ -344,7 +344,7 @@ var analyticsController = {
 
             case 10:
               _context7.prev = 10;
-              _context7.t0 = _context7["catch"](3);
+              _context7.t0 = _context7["catch"](0);
               return _context7.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context7.t0.message
@@ -355,7 +355,7 @@ var analyticsController = {
               return _context7.stop();
           }
         }
-      }, _callee7, null, [[3, 10]]);
+      }, _callee7, null, [[0, 10]]);
     }));
 
     function getEstados(_x13, _x14) {
@@ -371,9 +371,9 @@ var analyticsController = {
         while (1) {
           switch (_context8.prev = _context8.next) {
             case 0:
+              _context8.prev = 0;
               desde = (0, _date.parse_date)(req.query.desde);
               hasta = (0, _date.parse_date)(req.query.hasta);
-              _context8.prev = 2;
               _context8.next = 5;
               return _analytics["default"].getCobroTecnico(desde, hasta);
 
@@ -386,7 +386,7 @@ var analyticsController = {
 
             case 9:
               _context8.prev = 9;
-              _context8.t0 = _context8["catch"](2);
+              _context8.t0 = _context8["catch"](0);
               return _context8.abrupt("return", res.status(400).json({
                 status: 400,
                 message: _context8.t0.message
@@ -397,7 +397,7 @@ var analyticsController = {
               return _context8.stop();
           }
         }
-      }, _callee8, null, [[2, 9]]);
+      }, _callee8, null, [[0, 9]]);
     }));
 
     function getCobroTecnico(_x15, _x16) {

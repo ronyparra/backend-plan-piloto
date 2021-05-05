@@ -101,7 +101,7 @@ export const changeStatus = async ({
       actividadesSinOrden.push(actividad);
     }
     const actividadesConOrden = ordenarActividadPorMoneda(actividadesSinOrden);
-
+    const cobrosGenerados = [];
     for (const actividad of actividadesConOrden) {
       const saldoacobrar = calcularTotal(actividad);
       await db.query(CHANGE_ACTIVIDAD_STATUS(actividad, idestadocobro));
@@ -115,11 +115,14 @@ export const changeStatus = async ({
           actividad[0].moneda
         )
       );
+      cobrosGenerados.push(results.rows[0])
       await db.query(
         INSERT_DET_ACT_COBRO(actividad, results.rows[0].idcliente_cobro)
       );
+      
     }
     await db.query("COMMIT");
+    return cobrosGenerados
   } catch (error) {
     db.query("ROLLBACK");
     throw error;

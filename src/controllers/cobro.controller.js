@@ -1,18 +1,18 @@
 import CobroService from "../services/cobro.service";
-import { current_date,parse_date } from "../util/date.util";
+import { current_date, parse_date } from "../util/date.util";
 const CobroController = {
   get: async (req, res) => {
-    const params = {
-      idcliente:
-        req.query.cliente !== "undefined" ? req.query.cliente : undefined,
-      idusuario: 
-        req.query.idusuario !== "undefined" ? req.query.idusuario : undefined,
-      desde: parse_date(req.query.desde),
-      hasta: parse_date(req.query.hasta),
-      idestadocobro:
-        req.query.estado !== "undefined" ? req.query.estado : undefined,
-    };
     try {
+      const params = {
+        idcliente:
+          req.query.cliente !== "undefined" ? req.query.cliente : undefined,
+        idusuario:
+          req.query.idusuario !== "undefined" ? req.query.idusuario : undefined,
+        desde: parse_date(req.query.desde),
+        hasta: parse_date(req.query.hasta),
+        idestadocobro:
+          req.query.estado !== "undefined" ? req.query.estado : undefined,
+      };
       const response = await CobroService.getAll(params);
       return res.status(200).json({ status: 200, data: response });
     } catch (e) {
@@ -27,21 +27,7 @@ const CobroController = {
       return res.status(400).json({ status: 400, message: e.message });
     }
   },
-  create: async (req, res) => {
-    try {
-      if (req.body.sucursal.length === 0) {
-        req.body.sucursal = [
-          {
-            descripcion: "N/A",
-          },
-        ];
-      }
-      const response = await CobroService.create(req.body);
-      return res.status(200).json({ status: 200, data: response });
-    } catch (e) {
-      return res.status(400).json({ status: 400, message: e.message });
-    }
-  },
+
   update: async (req, res) => {
     const params = {
       fechacobro: current_date(),

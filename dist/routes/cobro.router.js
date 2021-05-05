@@ -18,7 +18,6 @@ var _auth = _interopRequireDefault(require("../middlewares/auth"));
 var router = (0, _express.Router)();
 router.get("/", _auth["default"], _cobro["default"].get);
 router.get("/:id", _auth["default"], _cobro["default"].getById);
-router.post("/", _auth["default"], _cobro2["default"].body, _cobro["default"].create);
 router.put("/:id", _auth["default"], _cobro2["default"].body, _cobro["default"].update);
 router["delete"]("/:id", _auth["default"], _cobro["default"]["delete"]);
 var _default = router;

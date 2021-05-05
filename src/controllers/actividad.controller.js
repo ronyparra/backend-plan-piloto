@@ -39,13 +39,12 @@ const ActividadController = {
     }
   },
   create: async (req, res) => {
-    const master = formatMaster(req.body);
     const tecnico = req.body.tecnico;
     const detalle = req.body.detalle;
     const actividad_pendiente = req.body.actividad_pendiente;
     try {
       const actividad = await ActividadService.create({
-        master,
+        master: formatMaster(req.body),
         tecnico,
         detalle,
         actividad_pendiente,
@@ -56,14 +55,13 @@ const ActividadController = {
     }
   },
   update: async (req, res) => {
-    const master = formatMaster(req.body);
     const tecnico = req.body.tecnico;
     const detalle = req.body.detalle;
     const actividad_pendiente = req.body.actividad_pendiente;
     try {
       const actividad = await ActividadService.update({
         id: req.params.id,
-        master,
+        master: formatMaster(req.body),
         tecnico,
         detalle,
         actividad_pendiente,

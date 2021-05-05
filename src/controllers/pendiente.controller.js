@@ -1,5 +1,5 @@
 import PendienteService from "../services/pendiente.service";
-import {parse_date} from '../util/date.util';
+import { parse_date } from "../util/date.util";
 
 const PendienteController = {
   getDashboard: async (req, res) => {
@@ -35,13 +35,13 @@ const PendienteController = {
     }
   },
   create: async (req, res) => {
-    const insert = {
-      idtipo_pendiente: req.body.idtipo_pendiente.idtipo_pendiente,
-      fecha: parse_date(req.body.fecha), 
-      descripcion: req.body.descripcion,
-      pendiente_tecnico: req.body.pendiente_tecnico
-    };
     try {
+      const insert = {
+        idtipo_pendiente: req.body.idtipo_pendiente.idtipo_pendiente,
+        fecha: parse_date(req.body.fecha),
+        descripcion: req.body.descripcion,
+        pendiente_tecnico: req.body.pendiente_tecnico,
+      };
       const pendiente = await PendienteService.create({ ...insert });
       return res.status(200).json({ status: 200, data: pendiente });
     } catch (e) {
@@ -49,13 +49,13 @@ const PendienteController = {
     }
   },
   update: async (req, res) => {
-    const update = {
-      idtipo_pendiente: req.body.idtipo_pendiente.idtipo_pendiente,
-      fecha: parse_date(req.body.fecha),
-      descripcion: req.body.descripcion,
-      pendiente_tecnico: req.body.pendiente_tecnico
-    };
     try {
+      const update = {
+        idtipo_pendiente: req.body.idtipo_pendiente.idtipo_pendiente,
+        fecha: parse_date(req.body.fecha),
+        descripcion: req.body.descripcion,
+        pendiente_tecnico: req.body.pendiente_tecnico,
+      };
       const pendiente = await PendienteService.update({
         ...update,
         id: req.params.id,
