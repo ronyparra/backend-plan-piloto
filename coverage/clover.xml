@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1620239319029" clover="3.2.0">
-  <project timestamp="1620239319029" name="All files">
-    <metrics statements="1050" coveredstatements="956" conditionals="144" coveredconditionals="99" methods="232" coveredmethods="215" elements="1426" coveredelements="1270" complexity="0" loc="1050" ncloc="1050" packages="14" files="69" classes="69"/>
+<coverage generated="1620241409295" clover="3.2.0">
+  <project timestamp="1620241409295" name="All files">
+    <metrics statements="1050" coveredstatements="989" conditionals="144" coveredconditionals="110" methods="232" coveredmethods="226" elements="1426" coveredelements="1325" complexity="0" loc="1050" ncloc="1050" packages="14" files="69" classes="69"/>
     <package name="src">
       <metrics statements="20" coveredstatements="20" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="server.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/server.js">
@@ -413,124 +413,124 @@
       <file name="auth.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/middlewares/auth.js">
         <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
         <line num="3" count="13" type="stmt"/>
-        <line num="4" count="112" type="cond" truecount="2" falsecount="0"/>
-        <line num="5" count="112" type="stmt"/>
-        <line num="6" count="111" type="cond" truecount="2" falsecount="0"/>
-        <line num="7" count="110" type="stmt"/>
-        <line num="10" count="110" type="stmt"/>
-        <line num="11" count="110" type="stmt"/>
-        <line num="12" count="109" type="stmt"/>
-        <line num="13" count="109" type="stmt"/>
+        <line num="4" count="122" type="cond" truecount="2" falsecount="0"/>
+        <line num="5" count="122" type="stmt"/>
+        <line num="6" count="121" type="cond" truecount="2" falsecount="0"/>
+        <line num="7" count="120" type="stmt"/>
+        <line num="10" count="120" type="stmt"/>
+        <line num="11" count="120" type="stmt"/>
+        <line num="12" count="119" type="stmt"/>
+        <line num="13" count="119" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
         <line num="18" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.middlewares.validators">
-      <metrics statements="76" coveredstatements="43" conditionals="22" coveredconditionals="11" methods="22" coveredmethods="11"/>
+      <metrics statements="76" coveredstatements="76" conditionals="22" coveredconditionals="22" methods="22" coveredmethods="22"/>
       <file name="actividad.validator.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/middlewares/validators/actividad.validator.js">
-        <metrics statements="7" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="3" count="13" type="stmt"/>
-        <line num="20" count="4" type="stmt"/>
-        <line num="21" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
+        <line num="20" count="5" type="stmt"/>
+        <line num="21" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
         <line num="29" count="4" type="stmt"/>
       </file>
       <file name="auth.validator.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/middlewares/validators/auth.validator.js">
-        <metrics statements="7" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="3" count="13" type="stmt"/>
-        <line num="16" count="16" type="stmt"/>
-        <line num="17" count="16" type="cond" truecount="1" falsecount="1"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
+        <line num="16" count="17" type="stmt"/>
+        <line num="17" count="17" type="cond" truecount="2" falsecount="0"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
         <line num="25" count="16" type="stmt"/>
       </file>
       <file name="categoria.validator.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/middlewares/validators/categoria.validator.js">
-        <metrics statements="7" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="3" count="13" type="stmt"/>
-        <line num="12" count="3" type="stmt"/>
-        <line num="13" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="13" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
         <line num="21" count="3" type="stmt"/>
       </file>
       <file name="cliente.validator.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/middlewares/validators/cliente.validator.js">
-        <metrics statements="7" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="3" count="13" type="stmt"/>
-        <line num="13" count="6" type="stmt"/>
-        <line num="14" count="6" type="cond" truecount="1" falsecount="1"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
+        <line num="13" count="7" type="stmt"/>
+        <line num="14" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
         <line num="22" count="6" type="stmt"/>
       </file>
       <file name="cobro.validator.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/middlewares/validators/cobro.validator.js">
-        <metrics statements="7" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="3" count="13" type="stmt"/>
-        <line num="22" count="2" type="stmt"/>
-        <line num="23" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="23" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
         <line num="31" count="2" type="stmt"/>
       </file>
       <file name="concepto.validator.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/middlewares/validators/concepto.validator.js">
-        <metrics statements="7" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="3" count="13" type="stmt"/>
-        <line num="23" count="4" type="stmt"/>
-        <line num="24" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
+        <line num="23" count="5" type="stmt"/>
+        <line num="24" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
         <line num="32" count="4" type="stmt"/>
       </file>
       <file name="pendiente.validator.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/middlewares/validators/pendiente.validator.js">
-        <metrics statements="7" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="3" count="13" type="stmt"/>
-        <line num="14" count="4" type="stmt"/>
-        <line num="15" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
+        <line num="14" count="5" type="stmt"/>
+        <line num="15" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
         <line num="23" count="4" type="stmt"/>
       </file>
       <file name="tipo_pendiente.validator.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/middlewares/validators/tipo_pendiente.validator.js">
-        <metrics statements="7" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="3" count="13" type="stmt"/>
-        <line num="13" count="3" type="stmt"/>
-        <line num="14" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
+        <line num="13" count="4" type="stmt"/>
+        <line num="14" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
         <line num="22" count="3" type="stmt"/>
       </file>
       <file name="user.validator.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/middlewares/validators/user.validator.js">
-        <metrics statements="13" coveredstatements="7" conditionals="4" coveredconditionals="2" methods="4" coveredmethods="2"/>
+        <metrics statements="13" coveredstatements="13" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
         <line num="3" count="13" type="stmt"/>
-        <line num="28" count="2" type="stmt"/>
-        <line num="29" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
+        <line num="28" count="3" type="stmt"/>
+        <line num="29" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
         <line num="37" count="2" type="stmt"/>
-        <line num="59" count="3" type="stmt"/>
-        <line num="60" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="61" count="0" type="stmt"/>
-        <line num="62" count="0" type="stmt"/>
-        <line num="64" count="0" type="stmt"/>
+        <line num="59" count="4" type="stmt"/>
+        <line num="60" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="62" count="1" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
         <line num="68" count="3" type="stmt"/>
       </file>
       <file name="usuaro_rol.validator.js" path="/Users/ronyparra/Rony Developer/capacitor/backend/src/middlewares/validators/usuaro_rol.validator.js">
-        <metrics statements="7" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="3" count="13" type="stmt"/>
-        <line num="12" count="3" type="stmt"/>
-        <line num="13" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="13" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
         <line num="21" count="3" type="stmt"/>
       </file>
     </package>
@@ -836,7 +836,7 @@
         <line num="29" count="14" type="stmt"/>
         <line num="31" count="2" type="stmt"/>
         <line num="32" count="2" type="stmt"/>
-        <line num="33" count="16" type="stmt"/>
+        <line num="33" count="15" type="stmt"/>
         <line num="35" count="0" type="stmt"/>
         <line num="39" count="2" type="stmt"/>
         <line num="40" count="2" type="stmt"/>

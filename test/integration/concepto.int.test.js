@@ -47,6 +47,18 @@ describe("Crud Concepto", () => {
         done();
       });
   });
+
+  it("Validator descripcion", (done) => {
+    request(app)
+      .post("/concepto")
+      .send({...concepto, descripcion: null})
+      .set("Authorization", "Bearer " + token)
+      .end((err, res) => {
+        expect(res.statusCode).toEqual(400);
+        done();
+      });
+  });
+
   it("Create new concepto with intentionally failed", (done) => {
     request(app)
       .post("/concepto")

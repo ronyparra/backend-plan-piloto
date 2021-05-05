@@ -46,6 +46,17 @@ describe("Crud Categoria", () => {
       });
   });
 
+  it("Validator descripcion", (done) => {
+    request(app)
+      .post("/categoria")
+      .send({...data, descripcion: null})
+      .set("Authorization", "Bearer " + token)
+      .end((err, res) => {
+        expect(res.statusCode).toEqual(400);
+        done();
+      });
+  });
+
   it("Get categoria by id", (done) => {
     request(app)
       .get("/categoria/" + id)

@@ -46,6 +46,17 @@ describe("Crud Tipo Pendiente", () => {
       });
   });
 
+  it("Validator descripcion", (done) => {
+    request(app)
+      .post("/tipopendiente")
+      .send({...data, descripcion: null})
+      .set("Authorization", "Bearer " + token)
+      .end((err, res) => {
+        expect(res.statusCode).toEqual(400);
+        done();
+      });
+  });
+
   it("Get tipo pendiente by id", (done) => {
     request(app)
       .get("/tipopendiente/" + id)

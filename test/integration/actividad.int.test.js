@@ -98,6 +98,16 @@ describe("Crud Actividad", () => {
         done();
       });
   });
+  it("Testing validator", (done) => {
+    request(app)
+      .post("/actividad")
+      .send({ ...actividad, idcliente: null })
+      .set("Authorization", "Bearer " + token)
+      .end((err, res) => {
+        expect(res.statusCode).toEqual(400);
+        done();
+      });
+  });
   it("Fetch actividad by Id", (done) => {
     request(app)
       .get("/actividad/" + idactividad)
@@ -145,7 +155,8 @@ describe("Crud Actividad", () => {
         });
     });
     it("Fetch Cobro with error", (done) => {
-      request(app).get("/cobro")
+      request(app)
+        .get("/cobro")
         .set("Authorization", "Bearer " + token)
         .end((err, res) => {
           expect(res.statusCode).toEqual(400);
@@ -164,7 +175,7 @@ describe("Crud Actividad", () => {
     });
     it("Fetch Cobro by id with error", (done) => {
       request(app)
-        .get("/cobro/" + 'undefined')
+        .get("/cobro/" + "undefined")
         .set("Authorization", "Bearer " + token)
         .end((err, res) => {
           expect(res.statusCode).toEqual(400);
@@ -185,9 +196,20 @@ describe("Crud Actividad", () => {
         });
     });
 
+    it("Validator descripcion", (done) => {
+      request(app)
+        .put("/cobro/"+ idcobro_cliente)
+        .send({ ...cobro, idcliente: null })
+        .set("Authorization", "Bearer " + token)
+        .end((err, res) => {
+          expect(res.statusCode).toEqual(400);
+          done();
+        });
+    });
+
     it("Update cobro with error", (done) => {
       request(app)
-        .put("/cobro/" + 'undefined')
+        .put("/cobro/" + "undefined")
         .send({
           ...cobro,
           comentario: "UPDATE FAILED",
@@ -198,7 +220,7 @@ describe("Crud Actividad", () => {
           done();
         });
     });
-  
+
     it("Delete generated invoice", (done) => {
       request(app)
         .delete("/cobro/" + idcobro_cliente)
@@ -210,7 +232,7 @@ describe("Crud Actividad", () => {
     });
     it("Delete generated invoice with error", (done) => {
       request(app)
-        .delete("/cobro/" + 'undefined')
+        .delete("/cobro/" + "undefined")
         .set("Authorization", "Bearer " + token)
         .end((err, res) => {
           expect(res.statusCode).toEqual(400);

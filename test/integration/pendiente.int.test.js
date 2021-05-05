@@ -57,6 +57,18 @@ describe("Crud Pendiente", () => {
         done();
       });
   });
+
+  it("Validator descripcion", (done) => {
+    request(app)
+      .post("/pendiente")
+      .send({...data, descripcion: null})
+      .set("Authorization", "Bearer " + token)
+      .end((err, res) => {
+        expect(res.statusCode).toEqual(400);
+        done();
+      });
+  });
+
   it("Create new Pendiente intencionally failed", (done) => {
     request(app)
       .post("/pendiente")

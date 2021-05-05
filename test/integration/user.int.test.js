@@ -54,6 +54,28 @@ describe("User", () => {
         });
     });
 
+    it("Validator username in post", (done) => {
+      request(app)
+        .post("/user")
+        .send({...user, username: null})
+        .set("Authorization", "Bearer " + token)
+        .end((err, res) => {
+          expect(res.statusCode).toEqual(400);
+          done();
+        });
+    });
+
+    it("Validator username in put", (done) => {
+      request(app)
+        .put("/user/"+idusuario)
+        .send({...user, username: null})
+        .set("Authorization", "Bearer " + token)
+        .end((err, res) => {
+          expect(res.statusCode).toEqual(400);
+          done();
+        });
+    });
+
     it("Fetch user",  (done) => {
       request(app)
         .get("/user")

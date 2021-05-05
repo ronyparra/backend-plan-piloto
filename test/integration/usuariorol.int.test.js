@@ -46,6 +46,19 @@ describe("Crud Usuario Rol", () => {
       });
   });
 
+
+  it("Validator descripcion", (done) => {
+    request(app)
+      .post("/usuariorol")
+      .send({...data, descripcion: null})
+      .set("Authorization", "Bearer " + token)
+      .end((err, res) => {
+        expect(res.statusCode).toEqual(400);
+        done();
+      });
+  });
+
+
   it("Get usuario rol by id", (done) => {
     request(app)
       .get("/usuariorol/" + id)

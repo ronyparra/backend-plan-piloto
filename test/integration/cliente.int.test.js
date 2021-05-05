@@ -47,6 +47,18 @@ describe("Crud Cliente", () => {
         done();
       });
   });
+
+  it("Validator descripcion", (done) => {
+    request(app)
+      .post("/cliente")
+      .send({...cliente, razonsocial: null})
+      .set("Authorization", "Bearer " + token)
+      .end((err, res) => {
+        expect(res.statusCode).toEqual(400);
+        done();
+      });
+  });
+  
   it("Create new client with intentionally failed", (done) => {
     request(app)
       .post("/cliente")

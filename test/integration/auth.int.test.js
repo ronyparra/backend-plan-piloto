@@ -15,6 +15,16 @@ describe("Authentication", () => {
       });
   });
 
+  it("Validator username", (done) => {
+    request(app)
+      .post("/auth")
+      .send({...user, username: null})
+      .end((err, res) => {
+        expect(res.statusCode).toEqual(400);
+        done();
+      });
+  });
+
   it("Auth middleware with token", (done) => {
     request(app)
       .get("/user")
