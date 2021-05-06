@@ -53,7 +53,7 @@ var pendiente = {
         cantidad: 1,
       },
     ],
-    actividad_pendiente: [44],
+    actividad_pendiente: [13],
   },
   result: null,
 };

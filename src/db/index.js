@@ -2,7 +2,7 @@ const { Pool } = require('pg').native
 export const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
-    database: 'integralV3Backup',
+    database: 'integralV2Backup',
     password: 'secreto',
     port: 5432,
 });

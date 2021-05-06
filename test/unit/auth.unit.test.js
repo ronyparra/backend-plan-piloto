@@ -9,6 +9,7 @@ describe("Authentication", () => {
         permisos: { "Puede listar": true, "Puede eliminar": false },
       },
       { formulario: "Cobro", permisos: { "Puede Registrar": true } },
+      { formulario: "Cobro", permisos: { "Puede Registrar": true } },
     ];
     const expected = [
       {
