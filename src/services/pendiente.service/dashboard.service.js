@@ -44,10 +44,6 @@ SELECT rows FROM (
 ) AS pendientes`;
 
 export const getDashboard = async (idusuario) => {
-  try {
-    const results = await db.query(query,[idusuario]);
-    return results.rows.map((x) => x.rows);
-  } catch (e) {
-    throw e;
-  }
+  const results = await db.query(query, [idusuario]);
+  return results.rows.map((x) => x.rows);
 };

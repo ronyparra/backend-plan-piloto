@@ -14,20 +14,16 @@ WHERE idusuario 			=	$1
 `;
 
 export const getPermissionByIdUser = async (iduser) => {
-  try {
-    const results = await db.query(query, [iduser]);
-    const permissions = JSON.parse(JSON.stringify(results.rows.map((x) => x.rows)));
-    return permissions;
-  } catch (e) {
-    throw e;
-  }
+  const results = await db.query(query, [iduser]);
+  const permissions = JSON.parse(
+    JSON.stringify(results.rows.map((x) => x.rows))
+  );
+  return permissions;
 };
-export const getPermissionByForm = async (iduser, form) => {
-  try {
-    const results = await db.query(query + " formulario.descripcion = $2", [ iduser, form ]); 
-    return results.rows[0].rows;
-  } catch (e) {
-    throw e;
-  }
-};
-
+/* export const getPermissionByForm = async (iduser, form) => {
+  const results = await db.query(query + " formulario.descripcion = $2", [
+    iduser,
+    form,
+  ]);
+  return results.rows[0].rows;
+}; */

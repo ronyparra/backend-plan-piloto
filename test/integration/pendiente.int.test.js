@@ -21,11 +21,12 @@ afterAll((done) => {
 
 describe("Crud Pendiente", () => {
   var id = null;
+  var idNotTecnico = null;
   const data = {
-    idtipo_pendiente: {idtipo_pendiente: 1},
+    idtipo_pendiente: { idtipo_pendiente: 1 },
     fecha: "01-01-2021",
     descripcion: "INSERT TEST",
-    pendiente_tecnico: [{idusuario: 1}]
+    pendiente_tecnico: [{ idusuario: 1 }],
   };
   it("Fetch Pendiente", (done) => {
     request(app)
@@ -58,10 +59,43 @@ describe("Crud Pendiente", () => {
       });
   });
 
+  it("Create new Pendiente not tecnico", (done) => {
+    request(app)
+      .post("/pendiente")
+      .send({ ...data, pendiente_tecnico: [] })
+      .set("Authorization", "Bearer " + token)
+      .end((err, res) => {
+        idNotTecnico = res.body.data[0].idpendiente;
+        expect(res.statusCode).toEqual(200);
+        done();
+      });
+  });
+
+  it("Update pendiente not tecnico", (done) => {
+    request(app)
+      .put("/pendiente/" + idNotTecnico)
+      .send({ ...data, pendiente_tecnico: [] })
+      .set("Authorization", "Bearer " + token)
+      .end((err, res) => {
+        expect(res.statusCode).toEqual(200);
+        done();
+      });
+  });
+
+  it("Delete pendiente not tecnico", (done) => {
+    request(app)
+      .delete("/pendiente/" + idNotTecnico)
+      .set("Authorization", "Bearer " + token)
+      .end((err, res) => {
+        expect(res.statusCode).toEqual(200);
+        done();
+      });
+  });
+
   it("Validator descripcion", (done) => {
     request(app)
       .post("/pendiente")
-      .send({...data, descripcion: null})
+      .send({ ...data, descripcion: null })
       .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res.statusCode).toEqual(400);
@@ -72,7 +106,7 @@ describe("Crud Pendiente", () => {
   it("Create new Pendiente intencionally failed", (done) => {
     request(app)
       .post("/pendiente")
-      .send({...data, fecha: 'n-n-n'})
+      .send({ ...data, fecha: "n-n-n" })
       .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res.statusCode).toEqual(400);
@@ -82,7 +116,7 @@ describe("Crud Pendiente", () => {
   it("Change status", (done) => {
     request(app)
       .post("/pendiente/status")
-      .send({activo: true, idpendiente: id})
+      .send({ activo: true, idpendiente: id })
       .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res.statusCode).toEqual(200);
@@ -92,7 +126,7 @@ describe("Crud Pendiente", () => {
   it("Change status intencionally failed", (done) => {
     request(app)
       .post("/pendiente/status")
-      .send({activo: undefined, idpendiente: id})
+      .send({ activo: undefined, idpendiente: id })
       .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res.statusCode).toEqual(400);
@@ -110,7 +144,7 @@ describe("Crud Pendiente", () => {
   });
   it("Get pendiente by id invalid", (done) => {
     request(app)
-      .get("/pendiente/" + 'undefined')
+      .get("/pendiente/" + "undefined")
       .set("Authorization", "Bearer " + token)
       .end((err, res) => {
         expect(res.statusCode).toEqual(400);
@@ -129,7 +163,7 @@ describe("Crud Pendiente", () => {
   });
   it("Update pendiente with intentionally failed", (done) => {
     request(app)
-      .put("/pendiente/" + 'undefined')
+      .put("/pendiente/" + "undefined")
       .send(data)
       .set("Authorization", "Bearer " + token)
       .end((err, res) => {

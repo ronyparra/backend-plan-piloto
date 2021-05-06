@@ -19,7 +19,6 @@ afterAll((done) => {
   done();
 });
 
-var idactividad = null;
 
 var pendiente = {
   id: null,
@@ -145,48 +144,6 @@ var invoice = {
   },
 };
 
-var idcobro_cliente = null;
-const actividad = {
-  fecha: "01-01-2000",
-  idestadocobro: { idestadocobro: 1 },
-  idcliente: { idcliente: 1 },
-  idcliente_sucursal: { idcliente_sucursal: 1 },
-  idusuario: { idusuario: 1 },
-  solicitante: "",
-  comentario: "INSERT TESTING",
-  tecnico: [{ idusuario: 1 }],
-  detalle: [
-    {
-      idconcepto: {
-        idconcepto: 1,
-      },
-      idmoneda: {
-        idmoneda: 1,
-      },
-      precio: 150000,
-      cantidad: 1,
-    },
-    {
-      idconcepto: {
-        idconcepto: 2,
-      },
-      idmoneda: {
-        idmoneda: 2,
-      },
-      precio: 150000,
-      cantidad: 1,
-    },
-  ],
-  actividad_pendiente: [44],
-};
-
-var actividadChangeStatus = {
-  descripcion: "Change Actividad Testing",
-  idestadocobro: 2,
-  detalle: [],
-};
-
-var cobro = null;
 
 describe("Crud Actividad", () => {
   describe("Intentially failed", () => {
@@ -258,20 +215,7 @@ describe("Crud Actividad", () => {
           done();
         });
     });
-    it("Update cobro with error", (done) => {
-      request(app)
-        .put("/cobro/" + "undefined")
-        .send({
-          ...invoice.oneCurrency.data,
-          detalle: ["testing"],
-          comentario: "UPDATE FAILED",
-        })
-        .set("Authorization", "Bearer " + token)
-        .end((err, res) => {
-          expect(res.statusCode).toEqual(400);
-          done();
-        });
-    });
+
     it("Delete generated invoice with error", (done) => {
       request(app)
         .delete("/cobro/" + "undefined")
@@ -348,6 +292,17 @@ describe("Crud Actividad", () => {
       request(app)
         .get(
           "/cobro/?desde=01-04-2021&hasta=30-04-2021&cliente=undefined&idusuario=undefined&estado=undefined"
+        )
+        .set("Authorization", "Bearer " + token)
+        .end((err, res) => {
+          expect(res.statusCode).toEqual(200);
+          done();
+        });
+    });
+    it("Fetch Cobro not params", (done) => {
+      request(app)
+        .get(
+          "/cobro/?desde=01-04-2021&hasta=30-04-2021&cliente=1&idusuario=1&estado=1"
         )
         .set("Authorization", "Bearer " + token)
         .end((err, res) => {
@@ -493,6 +448,19 @@ describe("Crud Actividad", () => {
           .end((err, res) => {
             invoice.twoCurrency.result = res.body.data;
             expect(res.statusCode).toEqual(200);
+            done();
+          });
+      });
+      it("Update cobro with error", (done) => {
+        request(app)
+          .put("/cobro/" + "undefined")
+          .send({
+            ...invoice.twoCurrency.result,
+            comentario: "UPDATE ONE CURRENCY TESTING",
+          })
+          .set("Authorization", "Bearer " + token)
+          .end((err, res) => {
+            expect(res.statusCode).toEqual(400);
             done();
           });
       });

@@ -28,14 +28,10 @@ const query = `
   JOIN tipo_pendiente as tp USING (idtipo_pendiente)`;
 
 export const getAll = async () => {
-  try {
     const results = await db.query(
       query + " WHERE activo = true ORDER BY activo DESC"
     );
     return results.rows.map((x) => x.rows);
-  } catch (e) {
-    throw e;
-  }
 };
 export const getById = async (id) => {
   try {

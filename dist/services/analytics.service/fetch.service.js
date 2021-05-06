@@ -21,29 +21,22 @@ var getSaldoPorEstado = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.prev = 0;
-            _context.next = 3;
+            _context.next = 2;
             return _db["default"].query(_query["default"].estado(condicion), [desde, hasta, idestado]).then(function (r) {
               return r.rows.map(function (x) {
                 return x.rows;
               });
             });
 
-          case 3:
+          case 2:
             return _context.abrupt("return", _context.sent);
 
-          case 6:
-            _context.prev = 6;
-            _context.t0 = _context["catch"](0);
-            console.log(_context.t0);
-            throw _context.t0;
-
-          case 10:
+          case 3:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 6]]);
+    }, _callee);
   }));
 
   return function getSaldoPorEstado(_x, _x2, _x3, _x4) {
@@ -59,28 +52,22 @@ var getSaldoGeneral = /*#__PURE__*/function () {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            _context2.prev = 0;
-            _context2.next = 3;
+            _context2.next = 2;
             return _db["default"].query(_query["default"].general, [desde, hasta]).then(function (r) {
               return r.rows.map(function (x) {
                 return x.rows;
               });
             });
 
-          case 3:
+          case 2:
             return _context2.abrupt("return", _context2.sent);
 
-          case 6:
-            _context2.prev = 6;
-            _context2.t0 = _context2["catch"](0);
-            throw _context2.t0;
-
-          case 9:
+          case 3:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[0, 6]]);
+    }, _callee2);
   }));
 
   return function getSaldoGeneral(_x5, _x6) {
@@ -96,28 +83,22 @@ var getPendientes = /*#__PURE__*/function () {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            _context3.prev = 0;
-            _context3.next = 3;
+            _context3.next = 2;
             return _db["default"].query(_query["default"].pendiente, [desde, hasta]).then(function (r) {
               return r.rows.map(function (x) {
                 return x.rows;
               });
             });
 
-          case 3:
+          case 2:
             return _context3.abrupt("return", _context3.sent);
 
-          case 6:
-            _context3.prev = 6;
-            _context3.t0 = _context3["catch"](0);
-            throw _context3.t0;
-
-          case 9:
+          case 3:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[0, 6]]);
+    }, _callee3);
   }));
 
   return function getPendientes(_x7, _x8) {
@@ -133,28 +114,22 @@ var getCliente = /*#__PURE__*/function () {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            _context4.prev = 0;
-            _context4.next = 3;
+            _context4.next = 2;
             return _db["default"].query(_query["default"].cliente, [desde, hasta]).then(function (r) {
               return r.rows.map(function (x) {
                 return x.rows;
               });
             });
 
-          case 3:
+          case 2:
             return _context4.abrupt("return", _context4.sent);
 
-          case 6:
-            _context4.prev = 6;
-            _context4.t0 = _context4["catch"](0);
-            throw _context4.t0;
-
-          case 9:
+          case 3:
           case "end":
             return _context4.stop();
         }
       }
-    }, _callee4, null, [[0, 6]]);
+    }, _callee4);
   }));
 
   return function getCliente(_x9, _x10) {
@@ -170,28 +145,22 @@ var getConcepto = /*#__PURE__*/function () {
       while (1) {
         switch (_context5.prev = _context5.next) {
           case 0:
-            _context5.prev = 0;
-            _context5.next = 3;
+            _context5.next = 2;
             return _db["default"].query(_query["default"].concepto, [desde, hasta]).then(function (r) {
               return r.rows.map(function (x) {
                 return x.rows;
               });
             });
 
-          case 3:
+          case 2:
             return _context5.abrupt("return", _context5.sent);
 
-          case 6:
-            _context5.prev = 6;
-            _context5.t0 = _context5["catch"](0);
-            throw _context5.t0;
-
-          case 9:
+          case 3:
           case "end":
             return _context5.stop();
         }
       }
-    }, _callee5, null, [[0, 6]]);
+    }, _callee5);
   }));
 
   return function getConcepto(_x11, _x12) {
@@ -207,28 +176,22 @@ var getTecnico = /*#__PURE__*/function () {
       while (1) {
         switch (_context6.prev = _context6.next) {
           case 0:
-            _context6.prev = 0;
-            _context6.next = 3;
+            _context6.next = 2;
             return _db["default"].query(_query["default"].tecnico, [desde, hasta]).then(function (r) {
               return r.rows.map(function (x) {
                 return x.rows;
               });
             });
 
-          case 3:
+          case 2:
             return _context6.abrupt("return", _context6.sent);
 
-          case 6:
-            _context6.prev = 6;
-            _context6.t0 = _context6["catch"](0);
-            throw _context6.t0;
-
-          case 9:
+          case 3:
           case "end":
             return _context6.stop();
         }
       }
-    }, _callee6, null, [[0, 6]]);
+    }, _callee6);
   }));
 
   return function getTecnico(_x13, _x14) {
@@ -244,28 +207,22 @@ var getCategoria = /*#__PURE__*/function () {
       while (1) {
         switch (_context7.prev = _context7.next) {
           case 0:
-            _context7.prev = 0;
-            _context7.next = 3;
+            _context7.next = 2;
             return _db["default"].query(_query["default"].categoria, [desde, hasta]).then(function (r) {
               return r.rows.map(function (x) {
                 return x.rows;
               });
             });
 
-          case 3:
+          case 2:
             return _context7.abrupt("return", _context7.sent);
 
-          case 6:
-            _context7.prev = 6;
-            _context7.t0 = _context7["catch"](0);
-            throw _context7.t0;
-
-          case 9:
+          case 3:
           case "end":
             return _context7.stop();
         }
       }
-    }, _callee7, null, [[0, 6]]);
+    }, _callee7);
   }));
 
   return function getCategoria(_x15, _x16) {
@@ -281,28 +238,22 @@ var getEstados = /*#__PURE__*/function () {
       while (1) {
         switch (_context8.prev = _context8.next) {
           case 0:
-            _context8.prev = 0;
-            _context8.next = 3;
+            _context8.next = 2;
             return _db["default"].query(_query["default"].estados(old), [desde, hasta]).then(function (r) {
               return r.rows.map(function (x) {
                 return x.rows;
               });
             });
 
-          case 3:
+          case 2:
             return _context8.abrupt("return", _context8.sent);
 
-          case 6:
-            _context8.prev = 6;
-            _context8.t0 = _context8["catch"](0);
-            throw _context8.t0;
-
-          case 9:
+          case 3:
           case "end":
             return _context8.stop();
         }
       }
-    }, _callee8, null, [[0, 6]]);
+    }, _callee8);
   }));
 
   return function getEstados(_x17, _x18, _x19) {
@@ -318,28 +269,22 @@ var getCobroTecnico = /*#__PURE__*/function () {
       while (1) {
         switch (_context9.prev = _context9.next) {
           case 0:
-            _context9.prev = 0;
-            _context9.next = 3;
+            _context9.next = 2;
             return _db["default"].query(_query["default"].cobro, [desde, hasta]).then(function (r) {
               return r.rows.map(function (x) {
                 return x.rows;
               });
             });
 
-          case 3:
+          case 2:
             return _context9.abrupt("return", _context9.sent);
 
-          case 6:
-            _context9.prev = 6;
-            _context9.t0 = _context9["catch"](0);
-            throw _context9.t0;
-
-          case 9:
+          case 3:
           case "end":
             return _context9.stop();
         }
       }
-    }, _callee9, null, [[0, 6]]);
+    }, _callee9);
   }));
 
   return function getCobroTecnico(_x20, _x21) {
