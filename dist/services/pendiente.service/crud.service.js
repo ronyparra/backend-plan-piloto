@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
@@ -11,7 +13,7 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
-var _db = _interopRequireDefault(require("../../db"));
+var _db = _interopRequireWildcard(require("../../db"));
 
 var _formatter = require("../actividad.service/formatter");
 
@@ -91,58 +93,68 @@ exports.getById = getById;
 
 var create = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(_ref3) {
-    var idtipo_pendiente, fecha, descripcion, pendiente_tecnico, results, idpendiente, resultsTecnico;
+    var idtipo_pendiente, fecha, descripcion, pendiente_tecnico, client, results, idpendiente, resultsTecnico;
     return _regenerator["default"].wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             idtipo_pendiente = _ref3.idtipo_pendiente, fecha = _ref3.fecha, descripcion = _ref3.descripcion, pendiente_tecnico = _ref3.pendiente_tecnico;
-            _context3.prev = 1;
-            _context3.next = 4;
-            return _db["default"].query("BEGIN");
+            _context3.next = 3;
+            return _db.pool.connect();
 
-          case 4:
-            _context3.next = 6;
-            return _db["default"].query("INSERT INTO pendiente(idtipo_pendiente, fecha, descripcion) VALUES ($1, $2, $3) RETURNING *", [idtipo_pendiente, fecha, descripcion]);
+          case 3:
+            client = _context3.sent;
+            _context3.prev = 4;
+            _context3.next = 7;
+            return client.query("BEGIN");
 
-          case 6:
+          case 7:
+            _context3.next = 9;
+            return client.query("INSERT INTO pendiente(idtipo_pendiente, fecha, descripcion) VALUES ($1, $2, $3) RETURNING *", [idtipo_pendiente, fecha, descripcion]);
+
+          case 9:
             results = _context3.sent;
 
             if (!(pendiente_tecnico.length > 0)) {
-              _context3.next = 13;
+              _context3.next = 16;
               break;
             }
 
             idpendiente = results.rows[0].idpendiente;
-            _context3.next = 11;
-            return _db["default"].query((0, _formatter.INSERT_DET_PENDIENTE_TECNICO)(pendiente_tecnico, idpendiente));
+            _context3.next = 14;
+            return client.query((0, _formatter.INSERT_DET_PENDIENTE_TECNICO)(pendiente_tecnico, idpendiente));
 
-          case 11:
+          case 14:
             resultsTecnico = _context3.sent;
             results.rows[0].pendiente_tecnico = resultsTecnico.rows;
 
-          case 13:
-            _context3.next = 15;
-            return _db["default"].query("COMMIT");
-
-          case 15:
-            return _context3.abrupt("return", results.rows);
+          case 16:
+            _context3.next = 18;
+            return client.query("COMMIT");
 
           case 18:
-            _context3.prev = 18;
-            _context3.t0 = _context3["catch"](1);
-            _context3.next = 22;
-            return _db["default"].query("ROLLBACK");
+            return _context3.abrupt("return", results.rows);
 
-          case 22:
+          case 21:
+            _context3.prev = 21;
+            _context3.t0 = _context3["catch"](4);
+            _context3.next = 25;
+            return client.query("ROLLBACK");
+
+          case 25:
             throw _context3.t0;
 
-          case 23:
+          case 26:
+            _context3.prev = 26;
+            client.release();
+            return _context3.finish(26);
+
+          case 29:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[1, 18]]);
+    }, _callee3, null, [[4, 21, 26, 29]]);
   }));
 
   return function create(_x2) {
@@ -191,60 +203,70 @@ exports.changeStatus = changeStatus;
 
 var update = /*#__PURE__*/function () {
   var _ref8 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(_ref7) {
-    var idtipo_pendiente, fecha, descripcion, pendiente_tecnico, id, results, resultsTecnico;
+    var idtipo_pendiente, fecha, descripcion, pendiente_tecnico, id, client, results, resultsTecnico;
     return _regenerator["default"].wrap(function _callee5$(_context5) {
       while (1) {
         switch (_context5.prev = _context5.next) {
           case 0:
             idtipo_pendiente = _ref7.idtipo_pendiente, fecha = _ref7.fecha, descripcion = _ref7.descripcion, pendiente_tecnico = _ref7.pendiente_tecnico, id = _ref7.id;
-            _context5.prev = 1;
-            _context5.next = 4;
-            return _db["default"].query("BEGIN");
+            _context5.next = 3;
+            return _db.pool.connect();
 
-          case 4:
-            _context5.next = 6;
-            return _db["default"].query("UPDATE pendiente SET idtipo_pendiente = $1, fecha = $2, descripcion = $3 WHERE idpendiente = $4 RETURNING *", [idtipo_pendiente, fecha, descripcion, id]);
+          case 3:
+            client = _context5.sent;
+            _context5.prev = 4;
+            _context5.next = 7;
+            return client.query("BEGIN");
 
-          case 6:
-            results = _context5.sent;
+          case 7:
             _context5.next = 9;
-            return _db["default"].query("DELETE FROM pendiente_tecnico WHERE idpendiente = $1", [id]);
+            return client.query("UPDATE pendiente SET idtipo_pendiente = $1, fecha = $2, descripcion = $3 WHERE idpendiente = $4 RETURNING *", [idtipo_pendiente, fecha, descripcion, id]);
 
           case 9:
+            results = _context5.sent;
+            _context5.next = 12;
+            return client.query("DELETE FROM pendiente_tecnico WHERE idpendiente = $1", [id]);
+
+          case 12:
             if (!(pendiente_tecnico.length > 0)) {
-              _context5.next = 14;
+              _context5.next = 17;
               break;
             }
 
-            _context5.next = 12;
-            return _db["default"].query((0, _formatter.INSERT_DET_PENDIENTE_TECNICO)(pendiente_tecnico, id));
+            _context5.next = 15;
+            return client.query((0, _formatter.INSERT_DET_PENDIENTE_TECNICO)(pendiente_tecnico, id));
 
-          case 12:
+          case 15:
             resultsTecnico = _context5.sent;
             results.rows[0].pendiente_tecnico = resultsTecnico.rows;
 
-          case 14:
-            _context5.next = 16;
-            return _db["default"].query("COMMIT");
-
-          case 16:
-            return _context5.abrupt("return", results.rows);
+          case 17:
+            _context5.next = 19;
+            return client.query("COMMIT");
 
           case 19:
-            _context5.prev = 19;
-            _context5.t0 = _context5["catch"](1);
-            _context5.next = 23;
-            return _db["default"].query("ROLLBACK");
+            return _context5.abrupt("return", results.rows);
 
-          case 23:
+          case 22:
+            _context5.prev = 22;
+            _context5.t0 = _context5["catch"](4);
+            _context5.next = 26;
+            return client.query("ROLLBACK");
+
+          case 26:
             throw _context5.t0;
 
-          case 24:
+          case 27:
+            _context5.prev = 27;
+            client.release();
+            return _context5.finish(27);
+
+          case 30:
           case "end":
             return _context5.stop();
         }
       }
-    }, _callee5, null, [[1, 19]]);
+    }, _callee5, null, [[4, 22, 27, 30]]);
   }));
 
   return function update(_x4) {
@@ -256,34 +278,56 @@ exports.update = update;
 
 var delet = /*#__PURE__*/function () {
   var _ref9 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(id) {
-    var results;
+    var client, results;
     return _regenerator["default"].wrap(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
           case 0:
-            _context6.prev = 0;
-            _context6.next = 3;
-            return _db["default"].query("DELETE FROM pendiente_tecnico WHERE idpendiente = $1", [id]);
+            _context6.next = 2;
+            return _db.pool.connect();
 
-          case 3:
-            _context6.next = 5;
-            return _db["default"].query("DELETE FROM pendiente WHERE idpendiente  = $1", [id]);
+          case 2:
+            client = _context6.sent;
+            _context6.prev = 3;
+            _context6.next = 6;
+            return client.query("BEGIN");
 
-          case 5:
+          case 6:
+            _context6.next = 8;
+            return client.query("DELETE FROM pendiente_tecnico WHERE idpendiente = $1", [id]);
+
+          case 8:
+            _context6.next = 10;
+            return client.query("DELETE FROM pendiente WHERE idpendiente  = $1", [id]);
+
+          case 10:
             results = _context6.sent;
+            _context6.next = 13;
+            return client.query("COMMIT");
+
+          case 13:
             return _context6.abrupt("return", results.rows);
 
-          case 9:
-            _context6.prev = 9;
-            _context6.t0 = _context6["catch"](0);
+          case 16:
+            _context6.prev = 16;
+            _context6.t0 = _context6["catch"](3);
+            _context6.next = 20;
+            return client.query("ROLLBACK");
+
+          case 20:
             throw _context6.t0;
 
-          case 12:
+          case 21:
+            _context6.prev = 21;
+            client.release();
+            return _context6.finish(21);
+
+          case 24:
           case "end":
             return _context6.stop();
         }
       }
-    }, _callee6, null, [[0, 9]]);
+    }, _callee6, null, [[3, 16, 21, 24]]);
   }));
 
   return function delet(_x5) {

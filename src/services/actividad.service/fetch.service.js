@@ -68,15 +68,22 @@ const query = `SELECT
 
 export const getAll = async (filters) => {
   try {
-    const results = await db.query(query + generateFilter(filters) + ' ORDER BY idactividad ASC');
+    const results = await db.query(
+      query + generateFilter(filters) + " ORDER BY idactividad ASC"
+    );
     return results.rows.map((x) => x.rows);
   } catch (e) {
     throw e;
   }
 };
-export const getById = async (id) => {
+export const getById = async (id, dbInstance) => {
   try {
-    const results = await db.query(query + "WHERE idactividad  = $1", [id]);
+    let results;
+    if (dbInstance) {
+      results = await dbInstance.query(query + "WHERE idactividad  = $1", [id]);
+    } else {
+      results = await db.query(query + "WHERE idactividad  = $1", [id]);
+    }
     return results.rows[0].rows;
   } catch (e) {
     throw e;

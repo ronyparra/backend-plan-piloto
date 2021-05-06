@@ -1,4 +1,4 @@
-import db from "../db";
+import db, { pool } from "../db";
 const query = `
 SELECT 
 	json_build_object(
@@ -50,19 +50,24 @@ const UserService = {
     apellido,
     usuario_rol_detalle,
   }) => {
+    const client = await pool.connect();
     try {
-      await db.query("BEGIN");
+      await client.query("BEGIN");
       const results = await db.query(
         "INSERT INTO usuario (username,password,nombre,apellido) VALUES ($1, $2,$3,$4) RETURNING *",
         [username, password, nombre, apellido]
       );
       const idusuario = results.rows[0].idusuario;
-      await db.query(formatRolUsuarioInsert(usuario_rol_detalle, idusuario));
-      await db.query("COMMIT");
+      await client.query(
+        formatRolUsuarioInsert(usuario_rol_detalle, idusuario)
+      );
+      await client.query("COMMIT");
       return results.rows;
     } catch (e) {
-      await db.query("ROLLBACK");
+      await client.query("ROLLBACK");
       throw e;
+    } finally {
+      client.release();
     }
   },
   update: async ({
@@ -73,43 +78,51 @@ const UserService = {
     usuario_rol_detalle,
     id,
   }) => {
+    const client = await pool.connect();
     try {
-      await db.query("BEGIN");
-      const results = await db.query(
+      await client.query("BEGIN");
+      const results = await client.query(
         "UPDATE usuario SET username = $1,nombre = $2,apellido = $3 WHERE idusuario = $4 RETURNING *",
         [username, nombre, apellido, id]
       );
       if (password)
-        await db.query(
+        await client.query(
           "UPDATE usuario SET password = $1 WHERE idusuario = $2 RETURNING *",
           [password, id]
         );
-      await db.query("DELETE FROM usuario_rol_detalle WHERE idusuario = $1", [
-        id,
-      ]);
-      await db.query(formatRolUsuarioInsert(usuario_rol_detalle, id));
-      await db.query("COMMIT");
+      await client.query(
+        "DELETE FROM usuario_rol_detalle WHERE idusuario = $1",
+        [id]
+      );
+      await client.query(formatRolUsuarioInsert(usuario_rol_detalle, id));
+      await client.query("COMMIT");
       return results.rows;
     } catch (e) {
-      await db.query("ROLLBACK");
+      await client.query("ROLLBACK");
       throw e;
+    } finally {
+      client.release();
     }
   },
   delete: async (id) => {
+    const client = await pool.connect();
     try {
-      await db.query("BEGIN");
-      await db.query("DELETE FROM usuario_rol_detalle WHERE idusuario = $1", [
-        id,
-      ]);
-      const results = await db.query(
+      await client.query("BEGIN");
+      await client.query(
+        "DELETE FROM usuario_rol_detalle WHERE idusuario = $1",
+        [id]
+      );
+      const results = await client.query(
         "DELETE FROM usuario WHERE idusuario  = $1",
         [id]
       );
-      await db.query("COMMIT");
+      await client.query("COMMIT");
       return results.rows;
     } catch (e) {
-      await db.query("ROLLBACK");
+      await client.query("ROLLBACK");
       throw e;
+    } finally {
+      client.release();
     }
   },
 };

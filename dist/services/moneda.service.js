@@ -22,25 +22,19 @@ var MonedaService = {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
-              _context.next = 3;
+              _context.next = 2;
               return _db["default"].query(query);
 
-            case 3:
+            case 2:
               results = _context.sent;
               return _context.abrupt("return", results.rows);
 
-            case 7:
-              _context.prev = 7;
-              _context.t0 = _context["catch"](0);
-              throw _context.t0;
-
-            case 10:
+            case 4:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 7]]);
+      }, _callee);
     }));
 
     function getAll() {

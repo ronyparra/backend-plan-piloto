@@ -19,7 +19,7 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
-var _db = _interopRequireDefault(require("../../db"));
+var _db = require("../../db");
 
 var _fetch = require("./fetch.service");
 
@@ -42,71 +42,75 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 var create = /*#__PURE__*/function () {
-  var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_ref, disabledTransaction) {
-    var master, tecnico, detalle, actividad_pendiente, results, idactividad, resultsTecnico, resultsConcepto;
+  var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_ref, disabledTransaction, dbInstance) {
+    var master, tecnico, detalle, actividad_pendiente, client, results, idactividad, resultsTecnico, resultsConcepto;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             master = _ref.master, tecnico = _ref.tecnico, detalle = _ref.detalle, actividad_pendiente = _ref.actividad_pendiente;
-            _context.prev = 1;
 
             if (disabledTransaction) {
-              _context.next = 5;
+              _context.next = 7;
               break;
             }
 
-            _context.next = 5;
-            return _db["default"].query("BEGIN");
+            _context.next = 4;
+            return _db.pool.connect();
 
-          case 5:
-            _context.next = 7;
-            return _db["default"].query((0, _formatter.INSERT_ACTIVIDAD)(master.idcliente, master.idcliente_sucursal, master.idusuario, master.idestadocobro, master.solicitante, master.comentario, master.fecha));
+          case 4:
+            _context.t0 = _context.sent;
+            _context.next = 8;
+            break;
 
           case 7:
+            _context.t0 = dbInstance;
+
+          case 8:
+            client = _context.t0;
+            _context.prev = 9;
+
+            if (disabledTransaction) {
+              _context.next = 13;
+              break;
+            }
+
+            _context.next = 13;
+            return client.query("BEGIN");
+
+          case 13:
+            _context.next = 15;
+            return client.query((0, _formatter.INSERT_ACTIVIDAD)(master.idcliente, master.idcliente_sucursal, master.idusuario, master.idestadocobro, master.solicitante, master.comentario, master.fecha));
+
+          case 15:
             results = _context.sent;
             idactividad = results.rows[0].idactividad;
-            _context.next = 11;
-            return _db["default"].query((0, _formatter.INSERT_DET_TECNICO)(tecnico, idactividad));
+            _context.next = 19;
+            return client.query((0, _formatter.INSERT_DET_TECNICO)(tecnico, idactividad));
 
-          case 11:
+          case 19:
             resultsTecnico = _context.sent;
-            _context.next = 14;
-            return _db["default"].query((0, _formatter.INSERT_DET_CONCEPTO)(detalle, idactividad));
+            _context.next = 22;
+            return client.query((0, _formatter.INSERT_DET_CONCEPTO)(detalle, idactividad));
 
-          case 14:
+          case 22:
             resultsConcepto = _context.sent;
 
             if (!(actividad_pendiente.length > 0)) {
-              _context.next = 20;
+              _context.next = 28;
               break;
             }
 
-            _context.next = 18;
-            return _db["default"].query((0, _formatter.INSERT_DET_PENDIENTE)(idactividad, actividad_pendiente[0]));
+            _context.next = 26;
+            return client.query((0, _formatter.INSERT_DET_PENDIENTE)(idactividad, actividad_pendiente[0]));
 
-          case 18:
-            _context.next = 20;
-            return _db["default"].query((0, _formatter.UPDATE_PENDIENTE)(actividad_pendiente[0], false));
-
-          case 20:
-            results.rows[0].tecnico = resultsTecnico.rows;
-            results.rows[0].detalle = resultsConcepto.rows;
-
-            if (disabledTransaction) {
-              _context.next = 25;
-              break;
-            }
-
-            _context.next = 25;
-            return _db["default"].query("COMMIT");
-
-          case 25:
-            return _context.abrupt("return", results.rows);
+          case 26:
+            _context.next = 28;
+            return client.query((0, _formatter.UPDATE_PENDIENTE)(actividad_pendiente[0], false));
 
           case 28:
-            _context.prev = 28;
-            _context.t0 = _context["catch"](1);
+            results.rows[0].tecnico = resultsTecnico.rows;
+            results.rows[0].detalle = resultsConcepto.rows;
 
             if (disabledTransaction) {
               _context.next = 33;
@@ -114,20 +118,49 @@ var create = /*#__PURE__*/function () {
             }
 
             _context.next = 33;
-            return _db["default"].query("ROLLBACK");
+            return client.query("COMMIT");
 
           case 33:
-            throw _context.t0;
+            return _context.abrupt("return", results.rows);
 
-          case 34:
+          case 36:
+            _context.prev = 36;
+            _context.t1 = _context["catch"](9);
+
+            if (disabledTransaction) {
+              _context.next = 41;
+              break;
+            }
+
+            _context.next = 41;
+            return client.query("ROLLBACK");
+
+          case 41:
+            throw _context.t1;
+
+          case 42:
+            _context.prev = 42;
+
+            if (disabledTransaction) {
+              _context.next = 46;
+              break;
+            }
+
+            _context.next = 46;
+            return client.release();
+
+          case 46:
+            return _context.finish(42);
+
+          case 47:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[1, 28]]);
+    }, _callee, null, [[9, 36, 42, 47]]);
   }));
 
-  return function create(_x, _x2) {
+  return function create(_x, _x2, _x3) {
     return _ref2.apply(this, arguments);
   };
 }();
@@ -136,27 +169,32 @@ exports.create = create;
 
 var changeStatus = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(_ref3) {
-    var detalle, idestadocobro, idusuario, descripcion, actividadesSinOrden, _iterator, _step, actividad, detActividadMoneda, _iterator3, _step3, _step3$value, index, detConcepto, execute, results, newActividad, actividadesConOrden, cobrosGenerados, _iterator2, _step2, _actividad, saldoacobrar, _results;
+    var detalle, idestadocobro, idusuario, descripcion, client, actividadesSinOrden, _iterator, _step, actividad, detActividadMoneda, _iterator3, _step3, _step3$value, index, detConcepto, execute, results, newActividad, actividadesConOrden, cobrosGenerados, _iterator2, _step2, _actividad, saldoacobrar, _results;
 
     return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             detalle = _ref3.detalle, idestadocobro = _ref3.idestadocobro, idusuario = _ref3.idusuario, descripcion = _ref3.descripcion;
-            actividadesSinOrden = [];
-            _context2.prev = 2;
-            _context2.next = 5;
-            return _db["default"].query("BEGIN");
+            _context2.next = 3;
+            return _db.pool.connect();
 
-          case 5:
+          case 3:
+            client = _context2.sent;
+            actividadesSinOrden = [];
+            _context2.prev = 5;
+            _context2.next = 8;
+            return client.query("BEGIN");
+
+          case 8:
             _iterator = _createForOfIteratorHelper(detalle);
-            _context2.prev = 6;
+            _context2.prev = 9;
 
             _iterator.s();
 
-          case 8:
+          case 11:
             if ((_step = _iterator.n()).done) {
-              _context2.next = 44;
+              _context2.next = 47;
               break;
             }
 
@@ -164,176 +202,182 @@ var changeStatus = /*#__PURE__*/function () {
             detActividadMoneda = ordenarDetActividadPorMoneda(actividad.detalle);
 
             if (!(detActividadMoneda.length > 1)) {
-              _context2.next = 41;
+              _context2.next = 44;
               break;
             }
 
             _iterator3 = _createForOfIteratorHelper(detActividadMoneda.entries());
-            _context2.prev = 13;
+            _context2.prev = 16;
 
             _iterator3.s();
 
-          case 15:
+          case 18:
             if ((_step3 = _iterator3.n()).done) {
-              _context2.next = 33;
+              _context2.next = 36;
               break;
             }
 
             _step3$value = (0, _slicedToArray2["default"])(_step3.value, 2), index = _step3$value[0], detConcepto = _step3$value[1];
 
             if (!(index === 0)) {
-              _context2.next = 24;
+              _context2.next = 27;
               break;
             }
 
             execute = "".concat((0, _formatter.DELETE_DET_CONCEPTO)(actividad.idactividad), " \n              ").concat((0, _formatter.INSERT_DET_CONCEPTO)(detConcepto, actividad.idactividad));
-            _context2.next = 21;
-            return _db["default"].query(execute);
-
-          case 21:
-            actividad.detalle = JSON.parse(JSON.stringify(detConcepto));
-            _context2.next = 31;
-            break;
+            _context2.next = 24;
+            return client.query(execute);
 
           case 24:
-            _context2.next = 26;
+            actividad.detalle = JSON.parse(JSON.stringify(detConcepto));
+            _context2.next = 34;
+            break;
+
+          case 27:
+            _context2.next = 29;
             return create({
               master: (0, _formatter.formatMaster)(actividad),
               tecnico: actividad.tecnico,
               detalle: detConcepto,
               actividad_pendiente: actividad.actividad_pendiente
-            }, true);
-
-          case 26:
-            results = _context2.sent;
-            _context2.next = 29;
-            return (0, _fetch.getById)(results[0].idactividad);
+            }, true, client);
 
           case 29:
+            results = _context2.sent;
+            _context2.next = 32;
+            return (0, _fetch.getById)(results[0].idactividad, client);
+
+          case 32:
             newActividad = _context2.sent;
             actividadesSinOrden.push(_objectSpread(_objectSpread({}, newActividad), {}, {
               moneda: detConcepto[0].moneda
             }));
 
-          case 31:
-            _context2.next = 15;
+          case 34:
+            _context2.next = 18;
             break;
 
-          case 33:
-            _context2.next = 38;
+          case 36:
+            _context2.next = 41;
             break;
-
-          case 35:
-            _context2.prev = 35;
-            _context2.t0 = _context2["catch"](13);
-
-            _iterator3.e(_context2.t0);
 
           case 38:
             _context2.prev = 38;
+            _context2.t0 = _context2["catch"](16);
+
+            _iterator3.e(_context2.t0);
+
+          case 41:
+            _context2.prev = 41;
 
             _iterator3.f();
 
-            return _context2.finish(38);
-
-          case 41:
-            actividadesSinOrden.push(actividad);
-
-          case 42:
-            _context2.next = 8;
-            break;
+            return _context2.finish(41);
 
           case 44:
-            _context2.next = 49;
+            actividadesSinOrden.push(actividad);
+
+          case 45:
+            _context2.next = 11;
             break;
 
-          case 46:
-            _context2.prev = 46;
-            _context2.t1 = _context2["catch"](6);
-
-            _iterator.e(_context2.t1);
+          case 47:
+            _context2.next = 52;
+            break;
 
           case 49:
             _context2.prev = 49;
+            _context2.t1 = _context2["catch"](9);
+
+            _iterator.e(_context2.t1);
+
+          case 52:
+            _context2.prev = 52;
 
             _iterator.f();
 
-            return _context2.finish(49);
+            return _context2.finish(52);
 
-          case 52:
+          case 55:
             actividadesConOrden = ordenarActividadPorMoneda(actividadesSinOrden);
             cobrosGenerados = [];
             _iterator2 = _createForOfIteratorHelper(actividadesConOrden);
-            _context2.prev = 55;
+            _context2.prev = 58;
 
             _iterator2.s();
 
-          case 57:
+          case 60:
             if ((_step2 = _iterator2.n()).done) {
-              _context2.next = 70;
+              _context2.next = 73;
               break;
             }
 
             _actividad = _step2.value;
             saldoacobrar = (0, _formatter.calcularTotal)(_actividad);
-            _context2.next = 62;
-            return _db["default"].query((0, _formatter.CHANGE_ACTIVIDAD_STATUS)(_actividad, idestadocobro));
+            _context2.next = 65;
+            return client.query((0, _formatter.CHANGE_ACTIVIDAD_STATUS)(_actividad, idestadocobro));
 
-          case 62:
-            _context2.next = 64;
-            return _db["default"].query((0, _formatter.INSERT_CLIENTE_COBRO)(descripcion, _actividad[0].idcliente.idcliente, (0, _date.current_date)(), idusuario, saldoacobrar, _actividad[0].moneda));
+          case 65:
+            _context2.next = 67;
+            return client.query((0, _formatter.INSERT_CLIENTE_COBRO)(descripcion, _actividad[0].idcliente.idcliente, (0, _date.current_date)(), idusuario, saldoacobrar, _actividad[0].moneda));
 
-          case 64:
+          case 67:
             _results = _context2.sent;
             cobrosGenerados.push(_results.rows[0]);
-            _context2.next = 68;
-            return _db["default"].query((0, _formatter.INSERT_DET_ACT_COBRO)(_actividad, _results.rows[0].idcliente_cobro));
+            _context2.next = 71;
+            return client.query((0, _formatter.INSERT_DET_ACT_COBRO)(_actividad, _results.rows[0].idcliente_cobro));
 
-          case 68:
-            _context2.next = 57;
+          case 71:
+            _context2.next = 60;
             break;
 
-          case 70:
-            _context2.next = 75;
+          case 73:
+            _context2.next = 78;
             break;
-
-          case 72:
-            _context2.prev = 72;
-            _context2.t2 = _context2["catch"](55);
-
-            _iterator2.e(_context2.t2);
 
           case 75:
             _context2.prev = 75;
+            _context2.t2 = _context2["catch"](58);
+
+            _iterator2.e(_context2.t2);
+
+          case 78:
+            _context2.prev = 78;
 
             _iterator2.f();
 
-            return _context2.finish(75);
+            return _context2.finish(78);
 
-          case 78:
-            _context2.next = 80;
-            return _db["default"].query("COMMIT");
-
-          case 80:
-            return _context2.abrupt("return", cobrosGenerados);
+          case 81:
+            _context2.next = 83;
+            return client.query("COMMIT");
 
           case 83:
-            _context2.prev = 83;
-            _context2.t3 = _context2["catch"](2);
+            return _context2.abrupt("return", cobrosGenerados);
 
-            _db["default"].query("ROLLBACK");
+          case 86:
+            _context2.prev = 86;
+            _context2.t3 = _context2["catch"](5);
+            _context2.next = 90;
+            return client.query("ROLLBACK");
 
-            throw _context2.t3;
+          case 90:
+            throw _context2.t3.stack;
 
-          case 87:
+          case 91:
+            _context2.prev = 91;
+            client.release();
+            return _context2.finish(91);
+
+          case 94:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[2, 83], [6, 46, 49, 52], [13, 35, 38, 41], [55, 72, 75, 78]]);
+    }, _callee2, null, [[5, 86, 91, 94], [9, 49, 52, 55], [16, 38, 41, 44], [58, 75, 78, 81]]);
   }));
 
-  return function changeStatus(_x3) {
+  return function changeStatus(_x4) {
     return _ref4.apply(this, arguments);
   };
 }();
@@ -342,80 +386,90 @@ exports.changeStatus = changeStatus;
 
 var update = /*#__PURE__*/function () {
   var _ref6 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(_ref5) {
-    var id, master, tecnico, detalle, actividad_pendiente, results, resultsTecnico, resultsConcepto;
+    var id, master, tecnico, detalle, actividad_pendiente, client, results, resultsTecnico, resultsConcepto;
     return _regenerator["default"].wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             id = _ref5.id, master = _ref5.master, tecnico = _ref5.tecnico, detalle = _ref5.detalle, actividad_pendiente = _ref5.actividad_pendiente;
-            _context3.prev = 1;
-            _context3.next = 4;
-            return _db["default"].query("BEGIN");
+            _context3.next = 3;
+            return _db.pool.connect();
 
-          case 4:
-            _context3.next = 6;
-            return _db["default"].query((0, _formatter.UPDATE_ACTIVIDAD)(id, master.idcliente, master.idcliente_sucursal, master.idusuario, master.idestadocobro, master.solicitante, master.comentario, master.fecha));
+          case 3:
+            client = _context3.sent;
+            _context3.prev = 4;
+            _context3.next = 7;
+            return client.query("BEGIN");
 
-          case 6:
-            results = _context3.sent;
+          case 7:
             _context3.next = 9;
-            return _db["default"].query((0, _formatter.DELETE_DET_TECNICO)(id));
+            return client.query((0, _formatter.UPDATE_ACTIVIDAD)(id, master.idcliente, master.idcliente_sucursal, master.idusuario, master.idestadocobro, master.solicitante, master.comentario, master.fecha));
 
           case 9:
-            _context3.next = 11;
-            return _db["default"].query((0, _formatter.DELETE_DET_CONCEPTO)(id));
+            results = _context3.sent;
+            _context3.next = 12;
+            return client.query((0, _formatter.DELETE_DET_TECNICO)(id));
 
-          case 11:
-            _context3.next = 13;
-            return _db["default"].query((0, _formatter.DELETE_DET_PENDIENTE)(id));
+          case 12:
+            _context3.next = 14;
+            return client.query((0, _formatter.DELETE_DET_CONCEPTO)(id));
 
-          case 13:
-            _context3.next = 15;
-            return _db["default"].query((0, _formatter.INSERT_DET_TECNICO)(tecnico, id));
+          case 14:
+            _context3.next = 16;
+            return client.query((0, _formatter.DELETE_DET_PENDIENTE)(id));
 
-          case 15:
-            resultsTecnico = _context3.sent;
+          case 16:
             _context3.next = 18;
-            return _db["default"].query((0, _formatter.INSERT_DET_CONCEPTO)(detalle, id));
+            return client.query((0, _formatter.INSERT_DET_TECNICO)(tecnico, id));
 
           case 18:
+            resultsTecnico = _context3.sent;
+            _context3.next = 21;
+            return client.query((0, _formatter.INSERT_DET_CONCEPTO)(detalle, id));
+
+          case 21:
             resultsConcepto = _context3.sent;
 
             if (!(actividad_pendiente.length > 0)) {
-              _context3.next = 22;
+              _context3.next = 25;
               break;
             }
 
-            _context3.next = 22;
-            return _db["default"].query((0, _formatter.INSERT_DET_PENDIENTE)(id, actividad_pendiente[0]));
+            _context3.next = 25;
+            return client.query((0, _formatter.INSERT_DET_PENDIENTE)(id, actividad_pendiente[0]));
 
-          case 22:
+          case 25:
             results.rows[0].tecnico = resultsTecnico.rows;
             results.rows[0].detalle = resultsConcepto.rows;
-            _context3.next = 26;
-            return _db["default"].query("COMMIT");
-
-          case 26:
-            return _context3.abrupt("return", results.rows);
+            _context3.next = 29;
+            return client.query("COMMIT");
 
           case 29:
-            _context3.prev = 29;
-            _context3.t0 = _context3["catch"](1);
-            _context3.next = 33;
-            return _db["default"].query("ROLLBACK");
+            return _context3.abrupt("return", results.rows);
 
-          case 33:
+          case 32:
+            _context3.prev = 32;
+            _context3.t0 = _context3["catch"](4);
+            _context3.next = 36;
+            return client.query("ROLLBACK");
+
+          case 36:
             throw _context3.t0;
 
-          case 34:
+          case 37:
+            _context3.prev = 37;
+            client.release();
+            return _context3.finish(37);
+
+          case 40:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[1, 29]]);
+    }, _callee3, null, [[4, 32, 37, 40]]);
   }));
 
-  return function update(_x4) {
+  return function update(_x5) {
     return _ref6.apply(this, arguments);
   };
 }();
@@ -424,68 +478,78 @@ exports.update = update;
 
 var delet = /*#__PURE__*/function () {
   var _ref7 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(id) {
-    var pendiente, results;
+    var client, pendiente, results;
     return _regenerator["default"].wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            _context4.prev = 0;
-            _context4.next = 3;
-            return _db["default"].query("BEGIN");
+            _context4.next = 2;
+            return _db.pool.connect();
 
-          case 3:
-            _context4.next = 5;
-            return _db["default"].query((0, _formatter.DELETE_DET_TECNICO)(id));
+          case 2:
+            client = _context4.sent;
+            _context4.prev = 3;
+            _context4.next = 6;
+            return client.query("BEGIN");
 
-          case 5:
-            _context4.next = 7;
-            return _db["default"].query((0, _formatter.DELETE_DET_CONCEPTO)(id));
+          case 6:
+            _context4.next = 8;
+            return client.query((0, _formatter.DELETE_DET_TECNICO)(id));
 
-          case 7:
-            _context4.next = 9;
-            return _db["default"].query((0, _formatter.DELETE_DET_PENDIENTE)(id));
+          case 8:
+            _context4.next = 10;
+            return client.query((0, _formatter.DELETE_DET_CONCEPTO)(id));
 
-          case 9:
+          case 10:
+            _context4.next = 12;
+            return client.query((0, _formatter.DELETE_DET_PENDIENTE)(id));
+
+          case 12:
             pendiente = _context4.sent;
 
             if (!(pendiente.rows.length > 0)) {
-              _context4.next = 13;
+              _context4.next = 16;
               break;
             }
 
-            _context4.next = 13;
-            return _db["default"].query((0, _formatter.UPDATE_PENDIENTE)(pendiente.rows[0].idpendiente, true));
+            _context4.next = 16;
+            return client.query((0, _formatter.UPDATE_PENDIENTE)(pendiente.rows[0].idpendiente, true));
 
-          case 13:
-            _context4.next = 15;
-            return _db["default"].query((0, _formatter.DELETE_ACTIVIDAD)(id));
-
-          case 15:
-            results = _context4.sent;
+          case 16:
             _context4.next = 18;
-            return _db["default"].query("COMMIT");
+            return client.query((0, _formatter.DELETE_ACTIVIDAD)(id));
 
           case 18:
-            return _context4.abrupt("return", results.rows);
+            results = _context4.sent;
+            _context4.next = 21;
+            return client.query("COMMIT");
 
           case 21:
-            _context4.prev = 21;
-            _context4.t0 = _context4["catch"](0);
-            _context4.next = 25;
-            return _db["default"].query("ROLLBACK");
+            return _context4.abrupt("return", results.rows);
 
-          case 25:
+          case 24:
+            _context4.prev = 24;
+            _context4.t0 = _context4["catch"](3);
+            _context4.next = 28;
+            return client.query("ROLLBACK");
+
+          case 28:
             throw _context4.t0;
 
-          case 26:
+          case 29:
+            _context4.prev = 29;
+            client.release();
+            return _context4.finish(29);
+
+          case 32:
           case "end":
             return _context4.stop();
         }
       }
-    }, _callee4, null, [[0, 21]]);
+    }, _callee4, null, [[3, 24, 29, 32]]);
   }));
 
-  return function delet(_x5) {
+  return function delet(_x6) {
     return _ref7.apply(this, arguments);
   };
 }();

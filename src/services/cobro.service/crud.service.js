@@ -1,4 +1,4 @@
-import db from "../../db";
+import { pool } from "../../db";
 import { formatUpdateCobro } from "./formatter";
 
 export const update = async ({
@@ -11,9 +11,10 @@ export const update = async ({
   actividad_cobro,
   id,
 }) => {
+  const client = await pool.connect();
   try {
-    await db.query("BEGIN");
-    const results = await db.query(
+    await client.query("BEGIN");
+    const results = await client.query(
       `UPDATE cliente_cobro
         SET 
           fechacobro		  =$1, 
@@ -33,30 +34,38 @@ export const update = async ({
         id,
       ]
     );
-    await db.query(formatUpdateCobro(actividad_cobro, idestadocobro));
-    await db.query("COMMIT");
+    await client.query(formatUpdateCobro(actividad_cobro, idestadocobro));
+    await client.query("COMMIT");
     return results.rows;
   } catch (e) {
-    await db.query("ROLLBACK");
+    await client.query("ROLLBACK");
     throw e;
+  } finally {
+    client.release();
   }
 };
 export const delet = async (id) => {
+  const client = await pool.connect();
   try {
-    const actividad_cobro = await db.query(
+    await client.query("BEGIN");
+    const actividad_cobro = await client.query(
       "SELECT idcliente_cobro, idactividad FROM actividad_cobro WHERE idcliente_cobro = $1",
       [id]
     );
-    await db.query(formatUpdateCobro(actividad_cobro.rows, 1));
-    await db.query("DELETE FROM actividad_cobro WHERE idcliente_cobro = $1", [
+    await client.query(formatUpdateCobro(actividad_cobro.rows, 1));
+    await client.query("DELETE FROM actividad_cobro WHERE idcliente_cobro = $1", [
       id,
     ]);
-    const results = await db.query(
+    const results = await client.query(
       "DELETE FROM cliente_cobro WHERE idcliente_cobro  = $1",
       [id]
     );
+    await client.query("COMMIT");
     return results.rows;
   } catch (e) {
+    await client.query("ROLLBACK");
     throw e;
+  }finally {
+    client.release();
   }
 };

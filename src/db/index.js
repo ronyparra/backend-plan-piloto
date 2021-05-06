@@ -1,5 +1,5 @@
 const { Pool } = require('pg').native
-const pool = new Pool({
+export const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
     database: 'integralV3Backup',

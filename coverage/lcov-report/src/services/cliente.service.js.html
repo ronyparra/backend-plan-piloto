@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>64/64</span>
+                <span class='fraction'>70/70</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>57/57</span>
+                <span class='fraction'>66/66</span>
             </div>
         
             
@@ -191,7 +191,19 @@
 <a name='L132'></a><a href='#L132'>132</a>
 <a name='L133'></a><a href='#L133'>133</a>
 <a name='L134'></a><a href='#L134'>134</a>
-<a name='L135'></a><a href='#L135'>135</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -262,6 +274,7 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -275,6 +288,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -282,6 +297,7 @@
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -296,16 +312,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -321,11 +343,13 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import db from "../db";
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import db, { pool } from "../db";
 const query = `SELECT 
 	    json_build_object(
 		  'idcliente', idcliente,
@@ -393,27 +417,31 @@ const ClienteService = {
     return results.rows[0].rows;
   },
   create: async ({ razonsocial, ruc, sucursal }) =&gt; {
+    const client = await pool.connect();
     try {
-      await db.query("BEGIN");
-      const results = await db.query(
+      await client.query("BEGIN");
+      const results = await client.query(
         "INSERT INTO cliente(razonsocial, ruc) VALUES ($1, $2) RETURNING *",
         [razonsocial, ruc]
       );
       const idcliente = results.rows[0].idcliente;
-      const resultsDetail = await db.query(
+      const resultsDetail = await client.query(
         formatSucursalInsert(sucursal, idcliente)
       );
       results.rows[0].sucursal = resultsDetail.rows;
-      await db.query("COMMIT");
+      await client.query("COMMIT");
       return results.rows;
     } catch (e) {
-      await db.query("ROLLBACK");
+      await client.query("ROLLBACK");
       throw e;
+    } finally {
+      client.release();
     }
   },
   update: async ({ razonsocial, ruc, sucursal, id }) =&gt; {
+    const client = await pool.connect();
     try {
-      await db.query("BEGIN");
+      await client.query("BEGIN");
       const oldSucursal = await ClienteService.getSucursalByCliente(id);
       const inserts = sucursal.filter((suc_new) =&gt; !suc_new.idcliente_sucursal);
       const updates = sucursal.filter((suc_new) =&gt; suc_new.idcliente_sucursal);
@@ -424,36 +452,44 @@ const ClienteService = {
               suc_old.idcliente_sucursal === idcliente_sucursal
           )
       );
-      const results = await db.query(
+      const results = await client.query(
         "UPDATE cliente SET razonsocial = $1, ruc = $2 WHERE idcliente = $3 RETURNING *",
         [razonsocial, ruc, id]
       );
 &nbsp;
-      if (inserts.length &gt; 0) await db.query(formatSucursalInsert(inserts, id));
-      if (updates.length &gt; 0) await db.query(formatSucursalUpdate(updates, id));
-      if (deletes.length &gt; 0) await db.query(formatSucursalDelete(deletes, id));
-      await db.query("COMMIT");
+      if (inserts.length &gt; 0)
+        await client.query(formatSucursalInsert(inserts, id));
+      if (updates.length &gt; 0)
+        await client.query(formatSucursalUpdate(updates, id));
+      if (deletes.length &gt; 0)
+        await client.query(formatSucursalDelete(deletes, id));
+      await client.query("COMMIT");
       return results.rows;
     } catch (e) {
-      await db.query("ROLLBACK");
+      await client.query("ROLLBACK");
       throw e;
+    } finally {
+      client.release();
     }
   },
   delete: async (id) =&gt; {
+    const client = await pool.connect();
     try {
-      await db.query("BEGIN");
-      await db.query("DELETE FROM cliente_sucursal WHERE idcliente  = $1", [
+      await client.query("BEGIN");
+      await client.query("DELETE FROM cliente_sucursal WHERE idcliente  = $1", [
         id,
       ]);
-      const results = await db.query(
+      const results = await client.query(
         "DELETE FROM cliente WHERE idcliente  = $1",
         [id]
       );
-      await db.query("COMMIT");
+      await client.query("COMMIT");
       return results.rows;
     } catch (e) {
-      await db.query("ROLLBACK");
+      await client.query("ROLLBACK");
       throw e;
+    } finally {
+      client.release();
     }
   },
 };
@@ -466,7 +502,7 @@ export default ClienteService;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed May 05 2021 17:18:51 GMT-0400 (Paraguay Standard Time)
+                at Thu May 06 2021 14:22:04 GMT-0400 (Paraguay Standard Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

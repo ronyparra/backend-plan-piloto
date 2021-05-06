@@ -24,7 +24,7 @@ var getAll = /*#__PURE__*/function () {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return _db["default"].query(query + generateFilter(filters) + ' ORDER BY idactividad ASC');
+            return _db["default"].query(query + generateFilter(filters) + " ORDER BY idactividad ASC");
 
           case 3:
             results = _context.sent;
@@ -53,34 +53,51 @@ var getAll = /*#__PURE__*/function () {
 exports.getAll = getAll;
 
 var getById = /*#__PURE__*/function () {
-  var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(id) {
+  var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(id, dbInstance) {
     var results;
     return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.prev = 0;
-            _context2.next = 3;
-            return _db["default"].query(query + "WHERE idactividad  = $1", [id]);
 
-          case 3:
+            if (!dbInstance) {
+              _context2.next = 7;
+              break;
+            }
+
+            _context2.next = 4;
+            return dbInstance.query(query + "WHERE idactividad  = $1", [id]);
+
+          case 4:
             results = _context2.sent;
-            return _context2.abrupt("return", results.rows[0].rows);
+            _context2.next = 10;
+            break;
 
           case 7:
-            _context2.prev = 7;
+            _context2.next = 9;
+            return _db["default"].query(query + "WHERE idactividad  = $1", [id]);
+
+          case 9:
+            results = _context2.sent;
+
+          case 10:
+            return _context2.abrupt("return", results.rows[0].rows);
+
+          case 13:
+            _context2.prev = 13;
             _context2.t0 = _context2["catch"](0);
             throw _context2.t0;
 
-          case 10:
+          case 16:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[0, 7]]);
+    }, _callee2, null, [[0, 13]]);
   }));
 
-  return function getById(_x2) {
+  return function getById(_x2, _x3) {
     return _ref2.apply(this, arguments);
   };
 }();

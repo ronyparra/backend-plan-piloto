@@ -1,4 +1,4 @@
-import db from "../../db";
+import { pool } from "../../db";
 import { getById } from "./fetch.service";
 import {
   calcularTotal,
@@ -22,11 +22,13 @@ import { current_date } from "../../util/date.util";
 
 export const create = async (
   { master, tecnico, detalle, actividad_pendiente },
-  disabledTransaction
+  disabledTransaction,
+  dbInstance
 ) => {
+  const client = !disabledTransaction ? await pool.connect() : dbInstance;
   try {
-    if (!disabledTransaction) await db.query("BEGIN");
-    const results = await db.query(
+    if (!disabledTransaction) await client.query("BEGIN");
+    const results = await client.query(
       INSERT_ACTIVIDAD(
         master.idcliente,
         master.idcliente_sucursal,
@@ -38,24 +40,25 @@ export const create = async (
       )
     );
     const idactividad = results.rows[0].idactividad;
-    const resultsTecnico = await db.query(
+    const resultsTecnico = await client.query(
       INSERT_DET_TECNICO(tecnico, idactividad)
     );
-    const resultsConcepto = await db.query(
+    const resultsConcepto = await client.query(
       INSERT_DET_CONCEPTO(detalle, idactividad)
     );
-
     if (actividad_pendiente.length > 0) {
-      await db.query(INSERT_DET_PENDIENTE(idactividad, actividad_pendiente[0]));
-      await db.query(UPDATE_PENDIENTE(actividad_pendiente[0], false));
+      await client.query(INSERT_DET_PENDIENTE(idactividad, actividad_pendiente[0]));
+      await client.query(UPDATE_PENDIENTE(actividad_pendiente[0], false));
     }
     results.rows[0].tecnico = resultsTecnico.rows;
     results.rows[0].detalle = resultsConcepto.rows;
-    if (!disabledTransaction) await db.query("COMMIT");
+    if (!disabledTransaction) await client.query("COMMIT");
     return results.rows;
   } catch (e) {
-    if (!disabledTransaction) await db.query("ROLLBACK");
+    if (!disabledTransaction) await client.query("ROLLBACK");
     throw e;
+  } finally {
+    if (!disabledTransaction) await client.release();
   }
 };
 export const changeStatus = async ({
@@ -64,10 +67,10 @@ export const changeStatus = async ({
   idusuario,
   descripcion,
 }) => {
+  const client = await pool.connect();
   const actividadesSinOrden = [];
-
   try {
-    await db.query("BEGIN");
+    await client.query("BEGIN");
     for (const actividad of detalle) {
       const detActividadMoneda = ordenarDetActividadPorMoneda(
         actividad.detalle
@@ -77,7 +80,7 @@ export const changeStatus = async ({
           if (index === 0) {
             const execute = `${DELETE_DET_CONCEPTO(actividad.idactividad)} 
               ${INSERT_DET_CONCEPTO(detConcepto, actividad.idactividad)}`;
-            await db.query(execute);
+            await client.query(execute);
             actividad.detalle = JSON.parse(JSON.stringify(detConcepto));
           } else {
             const results = await create(
@@ -87,10 +90,11 @@ export const changeStatus = async ({
                 detalle: detConcepto,
                 actividad_pendiente: actividad.actividad_pendiente,
               },
-              true
+              true,
+              client
             );
-            
-            const newActividad = await getById(results[0].idactividad);
+
+            const newActividad = await getById(results[0].idactividad, client);
             actividadesSinOrden.push({
               ...newActividad,
               moneda: detConcepto[0].moneda,
@@ -100,12 +104,14 @@ export const changeStatus = async ({
       }
       actividadesSinOrden.push(actividad);
     }
+
     const actividadesConOrden = ordenarActividadPorMoneda(actividadesSinOrden);
+
     const cobrosGenerados = [];
     for (const actividad of actividadesConOrden) {
       const saldoacobrar = calcularTotal(actividad);
-      await db.query(CHANGE_ACTIVIDAD_STATUS(actividad, idestadocobro));
-      const results = await db.query(
+      await client.query(CHANGE_ACTIVIDAD_STATUS(actividad, idestadocobro));
+      const results = await client.query(
         INSERT_CLIENTE_COBRO(
           descripcion,
           actividad[0].idcliente.idcliente,
@@ -115,17 +121,18 @@ export const changeStatus = async ({
           actividad[0].moneda
         )
       );
-      cobrosGenerados.push(results.rows[0])
-      await db.query(
+      cobrosGenerados.push(results.rows[0]);
+      await client.query(
         INSERT_DET_ACT_COBRO(actividad, results.rows[0].idcliente_cobro)
       );
-      
     }
-    await db.query("COMMIT");
-    return cobrosGenerados
+    await client.query("COMMIT");
+    return cobrosGenerados;
   } catch (error) {
-    db.query("ROLLBACK");
-    throw error;
+    await client.query("ROLLBACK");
+    throw error.stack;
+  } finally {
+    client.release();
   }
 };
 export const update = async ({
@@ -135,9 +142,10 @@ export const update = async ({
   detalle,
   actividad_pendiente,
 }) => {
+  const client = await pool.connect();
   try {
-    await db.query("BEGIN");
-    const results = await db.query(
+    await client.query("BEGIN");
+    const results = await client.query(
       UPDATE_ACTIVIDAD(
         id,
         master.idcliente,
@@ -149,39 +157,44 @@ export const update = async ({
         master.fecha
       )
     );
-    await db.query(DELETE_DET_TECNICO(id));
-    await db.query(DELETE_DET_CONCEPTO(id));
-    await db.query(DELETE_DET_PENDIENTE(id));
+    await client.query(DELETE_DET_TECNICO(id));
+    await client.query(DELETE_DET_CONCEPTO(id));
+    await client.query(DELETE_DET_PENDIENTE(id));
 
-    const resultsTecnico = await db.query(INSERT_DET_TECNICO(tecnico, id));
-    const resultsConcepto = await db.query(INSERT_DET_CONCEPTO(detalle, id));
+    const resultsTecnico = await client.query(INSERT_DET_TECNICO(tecnico, id));
+    const resultsConcepto = await client.query(INSERT_DET_CONCEPTO(detalle, id));
 
     if (actividad_pendiente.length > 0)
-      await db.query(INSERT_DET_PENDIENTE(id, actividad_pendiente[0]));
+      await client.query(INSERT_DET_PENDIENTE(id, actividad_pendiente[0]));
 
     results.rows[0].tecnico = resultsTecnico.rows;
     results.rows[0].detalle = resultsConcepto.rows;
-    await db.query("COMMIT");
+    await client.query("COMMIT");
     return results.rows;
   } catch (e) {
-    await db.query("ROLLBACK");
+    await client.query("ROLLBACK");
     throw e;
+  } finally {
+    client.release();
   }
 };
 export const delet = async (id) => {
+  const client = await pool.connect();
   try {
-    await db.query("BEGIN");
-    await db.query(DELETE_DET_TECNICO(id));
-    await db.query(DELETE_DET_CONCEPTO(id));
-    const pendiente = await db.query(DELETE_DET_PENDIENTE(id));
+    await client.query("BEGIN");
+    await client.query(DELETE_DET_TECNICO(id));
+    await client.query(DELETE_DET_CONCEPTO(id));
+    const pendiente = await client.query(DELETE_DET_PENDIENTE(id));
     if (pendiente.rows.length > 0)
-      await db.query(UPDATE_PENDIENTE(pendiente.rows[0].idpendiente, true));
-    const results = await db.query(DELETE_ACTIVIDAD(id));
-    await db.query("COMMIT");
+      await client.query(UPDATE_PENDIENTE(pendiente.rows[0].idpendiente, true));
+    const results = await client.query(DELETE_ACTIVIDAD(id));
+    await client.query("COMMIT");
     return results.rows;
   } catch (e) {
-    await db.query("ROLLBACK");
+    await client.query("ROLLBACK");
     throw e;
+  } finally {
+    client.release();
   }
 };
 
