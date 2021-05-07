@@ -24,6 +24,8 @@ app.use("/analytics", routes.analytics);
 app.use("/usuariorol", routes.usuario_rol);
 app.use("/formulario", routes.formulario);
 app.use("/estadocobro", routes.estadocobro);
+app.use("/folder", routes.folder);
+app.use("/archivo", routes.archivo);
 app.use("/tipopendiente", routes.tipo_pendiente);
 
 

@@ -241,7 +241,7 @@ INSERT INTO usuario_rol_detalle(
 	idusuario, idusuario_rol)
 VALUES (1, 1);
 
-/* CREATE OR REPLACE FUNCTION calcularRetencion(retencion BOOLEAN, saldo DOUBLE PRECISION)
+CREATE OR REPLACE FUNCTION calcularRetencion(retencion BOOLEAN, saldo DOUBLE PRECISION)
 	RETURNS DOUBLE PRECISION
 	LANGUAGE plpgsql
 	AS $$
@@ -251,16 +251,15 @@ BEGIN
 			ELSE 0 
 		END);
 END;
-$$; */
+$$; 
 
---DROP FUNCTION calcularRetencion(BOOLEAN,DOUBLE PRECISION);
+DROP FUNCTION calcularRetencion(BOOLEAN,DOUBLE PRECISION);
 
 UPDATE actividad_concepto_detalle
 SET idmoneda = 2
 WHERE (idconcepto, idactividad) IN  
 (SELECT  idconcepto, idactividad FROM actividad_concepto_detalle WHERE precio < 1500);
 
------------------------------------
 
 CREATE TABLE categoria (
 	idcategoria SERIAL NOT NULL,
@@ -290,3 +289,21 @@ INSERT INTO usuario_rol_permiso(idusuario_rol, idformulario, permisos) VALUES
 INSERT INTO categoria(
 	idcategoria, descripcion)
 VALUES (2, 'Camaras'),(3, 'Alarmas'),(4,'Telefonia'),(5,'Licencias Software'),(6,'Accesorios Computadoras'),(7,'Redes');
+ 
+ --////////////////////////
+
+CREATE TABLE carpeta (
+	idcarpeta SERIAL NOT NULL,
+	descripcion TEXT NOT NULL,
+	PRIMARY KEY(idcarpeta)
+);
+
+CREATE TABLE archivo (
+	idarchivo SERIAL NOT NULL,
+	idcliente INT NOT NULL REFERENCES cliente (idcliente) ON UPDATE CASCADE,
+    idcarpeta INT NOT NULL REFERENCES carpeta (idcarpeta) ON UPDATE CASCADE,
+	descripcion TEXT NOT NULL,
+	comentario TEXT NULL,
+	filepath TEXT NULL,
+	PRIMARY KEY (idarchivo,idcliente)
+);

@@ -33,12 +33,18 @@ var _cobro = _interopRequireDefault(require("./cobro.router"));
 
 var _moneda = _interopRequireDefault(require("./moneda.router"));
 
+var _archivo = _interopRequireDefault(require("./archivo.router"));
+
+var _folder = _interopRequireDefault(require("./folder.router"));
+
 var _analytics = _interopRequireDefault(require("./analytics.router"));
 
 var _default = {
   auth: _auth["default"],
   user: _user["default"],
   cobro: _cobro["default"],
+  archivo: _archivo["default"],
+  folder: _folder["default"],
   moneda: _moneda["default"],
   cliente: _cliente["default"],
   concepto: _concepto["default"],

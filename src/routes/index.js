@@ -11,12 +11,16 @@ import formulario from "./formulario.router";
 import usuario_rol from "./usuario_rol.router";
 import cobro from "./cobro.router";
 import moneda from "./moneda.router";
+import archivo from "./archivo.router";
+import folder from "./folder.router";
 import analytics from "./analytics.router";
 
 export default {
   auth,
   user,
   cobro,
+  archivo,
+  folder,
   moneda,
   cliente,
   concepto,
