@@ -53,7 +53,7 @@ const UserService = {
     const client = await pool.connect();
     try {
       await client.query("BEGIN");
-      const results = await db.query(
+      const results = await client.query(
         "INSERT INTO usuario (username,password,nombre,apellido) VALUES ($1, $2,$3,$4) RETURNING *",
         [username, password, nombre, apellido]
       );
@@ -61,6 +61,7 @@ const UserService = {
       await client.query(
         formatRolUsuarioInsert(usuario_rol_detalle, idusuario)
       );
+      
       await client.query("COMMIT");
       return results.rows;
     } catch (e) {

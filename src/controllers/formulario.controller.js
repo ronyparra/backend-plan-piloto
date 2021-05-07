@@ -6,6 +6,7 @@ const FormularioController = {
       const response = await FormularioService.getAll();
       return res.status(200).json({ status: 200, data: response });
     } catch (e) {
+      /* istanbul ignore next */ 
       return res.status(400).json({ status: 400, message: e.message });
     }
   },

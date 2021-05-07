@@ -133,7 +133,7 @@ var UserService = {
 
             case 7:
               _context4.next = 9;
-              return _db["default"].query("INSERT INTO usuario (username,password,nombre,apellido) VALUES ($1, $2,$3,$4) RETURNING *", [username, password, nombre, apellido]);
+              return client.query("INSERT INTO usuario (username,password,nombre,apellido) VALUES ($1, $2,$3,$4) RETURNING *", [username, password, nombre, apellido]);
 
             case 9:
               results = _context4.sent;

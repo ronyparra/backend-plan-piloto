@@ -169,7 +169,7 @@ exports.create = create;
 
 var changeStatus = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(_ref3) {
-    var detalle, idestadocobro, idusuario, descripcion, client, actividadesSinOrden, _iterator, _step, actividad, detActividadMoneda, _iterator3, _step3, _step3$value, index, detConcepto, execute, results, newActividad, actividadesConOrden, cobrosGenerados, _iterator2, _step2, _actividad, saldoacobrar, _results;
+    var detalle, idestadocobro, idusuario, descripcion, client, actividadesSinOrden, _iterator, _step, actividad, detActividadMoneda, _iterator3, _step3, _step3$value, index, detConcepto, execute, results, newActividad, actividadesConOrden, cobrosGenerados, _iterator2, _step2, _actividad, saldoacobrar, _results, resultDetCobro, cobroAndDetail;
 
     return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
@@ -308,7 +308,7 @@ var changeStatus = /*#__PURE__*/function () {
 
           case 60:
             if ((_step2 = _iterator2.n()).done) {
-              _context2.next = 73;
+              _context2.next = 75;
               break;
             }
 
@@ -323,58 +323,64 @@ var changeStatus = /*#__PURE__*/function () {
 
           case 67:
             _results = _context2.sent;
-            cobrosGenerados.push(_results.rows[0]);
-            _context2.next = 71;
+            _context2.next = 70;
             return client.query((0, _formatter.INSERT_DET_ACT_COBRO)(_actividad, _results.rows[0].idcliente_cobro));
 
-          case 71:
+          case 70:
+            resultDetCobro = _context2.sent;
+            cobroAndDetail = _objectSpread(_objectSpread({}, _results.rows[0]), {}, {
+              detalle: resultDetCobro.rows
+            });
+            cobrosGenerados.push(cobroAndDetail);
+
+          case 73:
             _context2.next = 60;
             break;
 
-          case 73:
-            _context2.next = 78;
+          case 75:
+            _context2.next = 80;
             break;
 
-          case 75:
-            _context2.prev = 75;
+          case 77:
+            _context2.prev = 77;
             _context2.t2 = _context2["catch"](58);
 
             _iterator2.e(_context2.t2);
 
-          case 78:
-            _context2.prev = 78;
+          case 80:
+            _context2.prev = 80;
 
             _iterator2.f();
 
-            return _context2.finish(78);
-
-          case 81:
-            _context2.next = 83;
-            return client.query("COMMIT");
+            return _context2.finish(80);
 
           case 83:
+            _context2.next = 85;
+            return client.query("COMMIT");
+
+          case 85:
             return _context2.abrupt("return", cobrosGenerados);
 
-          case 86:
-            _context2.prev = 86;
+          case 88:
+            _context2.prev = 88;
             _context2.t3 = _context2["catch"](5);
-            _context2.next = 90;
+            _context2.next = 92;
             return client.query("ROLLBACK");
 
-          case 90:
+          case 92:
             throw _context2.t3.stack;
 
-          case 91:
-            _context2.prev = 91;
+          case 93:
+            _context2.prev = 93;
             client.release();
-            return _context2.finish(91);
+            return _context2.finish(93);
 
-          case 94:
+          case 96:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[5, 86, 91, 94], [9, 49, 52, 55], [16, 38, 41, 44], [58, 75, 78, 81]]);
+    }, _callee2, null, [[5, 88, 93, 96], [9, 49, 52, 55], [16, 38, 41, 44], [58, 77, 80, 83]]);
   }));
 
   return function changeStatus(_x4) {

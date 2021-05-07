@@ -11,7 +11,7 @@
     "unit": "jest unit",
     "int": "jest int --detectOpenHandles",
     "test": "jest",
-    "cover": "jest --coverage"
+    "cover": "jest --coverage --detectOpenHandles"
   },
   "keywords": [],
   "author": "",

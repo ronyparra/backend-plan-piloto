@@ -7,6 +7,7 @@ const PendienteController = {
       const response = await PendienteService.getDashboard(req.decoded.id);
       return res.status(200).json({ status: 200, data: response });
     } catch (e) {
+      /* istanbul ignore next */ 
       return res.status(400).json({ status: 400, message: e.message });
     }
   },
@@ -15,6 +16,7 @@ const PendienteController = {
       const pendiente = await PendienteService.getAll();
       return res.status(200).json({ status: 200, data: pendiente });
     } catch (e) {
+      /* istanbul ignore next */ 
       return res.status(400).json({ status: 400, message: e.message });
     }
   },

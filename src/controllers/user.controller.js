@@ -9,6 +9,7 @@ const UserController = {
         .status(200)
         .json({ status: 200, data: users});
     } catch (e) {
+      /* istanbul ignore next */ 
       return res.status(400).json({ status: 400, message: e.message });
     }
   },

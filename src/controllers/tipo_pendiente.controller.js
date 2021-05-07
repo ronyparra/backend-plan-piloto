@@ -6,6 +6,7 @@ const TipoPendienteController = {
       const tipo_pendiente = await TipoPendienteService.getAll();
       return res.status(200).json({ status: 200, data: tipo_pendiente });
     } catch (e) {
+      /* istanbul ignore next */ 
       return res.status(400).json({ status: 400, message: e.message });
     }
   },
@@ -26,6 +27,7 @@ const TipoPendienteController = {
       const tipo_pendiente = await TipoPendienteService.create(insert);
       return res.status(200).json({ status: 200, data: tipo_pendiente });
     } catch (e) {
+      /* istanbul ignore next */ 
       return res.status(400).json({ status: 400, message: e.message });
     }
   },

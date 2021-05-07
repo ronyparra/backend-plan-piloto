@@ -135,6 +135,8 @@ var invoice = {
   },
   twoCurrency: {
     id: null,
+    id2: null,
+    idactividad2: null,
     data: {
       descripcion: "Change Actividad two currency Testing",
       idestadocobro: 2,
@@ -437,6 +439,8 @@ describe("Crud Actividad", () => {
           .set("Authorization", "Bearer " + token)
           .end((err, res) => {
             invoice.twoCurrency.id = res.body.data[0].idcliente_cobro;
+            invoice.twoCurrency.id2 = res.body.data[1].idcliente_cobro;
+            invoice.twoCurrency.idactividad2 = res.body.data[1].detalle[0].idactividad;
             expect(res.statusCode).toEqual(200);
             done();
           });
@@ -486,6 +490,15 @@ describe("Crud Actividad", () => {
             done();
           });
       });
+      it("Delete cobro two currency ", (done) => {
+        request(app)
+          .delete("/cobro/" + invoice.twoCurrency.id2)
+          .set("Authorization", "Bearer " + token)
+          .end((err, res) => {
+            expect(res.statusCode).toEqual(200);
+            done();
+          });
+      });
     });
     it("Update actividad with two currency", (done) => {
       request(app)
@@ -503,6 +516,15 @@ describe("Crud Actividad", () => {
     it("Delete actividad with two currency", (done) => {
       request(app)
         .delete("/actividad/" + twoCurrency.id)
+        .set("Authorization", "Bearer " + token)
+        .end((err, res) => {
+          expect(res.statusCode).toEqual(200);
+          done();
+        });
+    });
+    it("Remove second generated activity", (done) => {
+      request(app)
+        .delete("/actividad/" + invoice.twoCurrency.idactividad2)
         .set("Authorization", "Bearer " + token)
         .end((err, res) => {
           expect(res.statusCode).toEqual(200);

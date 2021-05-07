@@ -6,6 +6,7 @@ const GrupoUsuarioController = {
       const result = await GrupoUsuarioService.getAll();
       return res.status(200).json({ status: 200, data: result });
     } catch (e) {
+      /* istanbul ignore next */ 
       return res.status(400).json({ status: 400, message: e.message });
     }
   },
@@ -22,6 +23,7 @@ const GrupoUsuarioController = {
       const concepto = await GrupoUsuarioService.create(req.body);
       return res.status(200).json({ status: 200, data: concepto });
     } catch (e) {
+      /* istanbul ignore next */ 
       return res.status(400).json({ status: 400, message: e.message });
     }
   },

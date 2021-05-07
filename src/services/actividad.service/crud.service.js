@@ -121,10 +121,11 @@ export const changeStatus = async ({
           actividad[0].moneda
         )
       );
-      cobrosGenerados.push(results.rows[0]);
-      await client.query(
+      const resultDetCobro = await client.query(
         INSERT_DET_ACT_COBRO(actividad, results.rows[0].idcliente_cobro)
       );
+      const cobroAndDetail = {...results.rows[0], detalle: resultDetCobro.rows}
+      cobrosGenerados.push(cobroAndDetail);
     }
     await client.query("COMMIT");
     return cobrosGenerados;
