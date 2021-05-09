@@ -18,6 +18,15 @@ const ArchivoController = {
       return res.status(400).json({ status: 400, message: e.message });
     }
   },
+  getByIdCliente: async (req, res) => {
+    try {
+      const idcarpeta  = req.query.idcarpeta;
+      const result = await ArchivoService.getByIdCliente(req.params.id,idcarpeta);
+      return res.status(200).json({ status: 200, data: result });
+    } catch (e) {
+      return res.status(400).json({ status: 400, message: e.message });
+    }
+  },
   create: async (req, res) => {
     const params = {
       idcliente: req.body.idcliente.idcliente,

@@ -304,6 +304,15 @@ CREATE TABLE archivo (
     idcarpeta INT NOT NULL REFERENCES carpeta (idcarpeta) ON UPDATE CASCADE,
 	descripcion TEXT NOT NULL,
 	comentario TEXT NULL,
-	filepath TEXT NULL,
 	PRIMARY KEY (idarchivo,idcliente)
 );
+
+
+CREATE TABLE archivo_detalle (
+    idarchivo_detalle SERIAL NOT NULL,
+    idarchivo INT NOT NULL,
+    idcliente INT NOT NULL,
+    titulo TEXT NOT NULL,
+    descripcion TEXT NOT NULL,
+    PRIMARY KEY(idarchivo_detalle, idarchivo, idcliente)
+)

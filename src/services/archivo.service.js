@@ -3,9 +3,13 @@ const query = `
 SELECT 
 	json_build_object(
 		'idarchivo', idarchivo,
-		'descripcion', descripcion,
+		'descripcion', archivo.descripcion,
 		'comentario', comentario,
 		'filepath', filepath,
+    'idcarpeta', json_build_object(
+      'idcarpeta', carpeta.idcarpeta,
+      'descripcion', carpeta.descripcion
+    ),
 		'idcliente', json_build_object(
 			'idcliente',cliente.idcliente,
 			'razonsocial',cliente.razonsocial
@@ -13,6 +17,7 @@ SELECT
 	) as rows
 FROM archivo
 JOIN cliente USING (idcliente)
+JOIN carpeta USING (idcarpeta)
 `;
 const ArchivoService = {
   getAll: async () => {
@@ -22,6 +27,10 @@ const ArchivoService = {
   getById: async (id) => {
     const results = await db.query(query + " WHERE idarchivo  = $1", [id]);
     return results.rows[0].rows;
+  },
+  getByIdCliente: async (id,idcarpeta) => {
+    const results = await db.query(query + " WHERE cliente.idcliente =$1 AND carpeta.idcarpeta = $2", [id, idcarpeta]);
+    return results.rows.map((x) => x.rows);
   },
   create: async ({ descripcion, comentario, filepath, idcliente, idcarpeta}) => {
     const results = await db.query(
