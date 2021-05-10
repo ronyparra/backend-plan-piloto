@@ -12,10 +12,15 @@ const ArchivoValidator = {
       .isEmpty()
       .withMessage("Cliente es obligatorio")
       .bail(),
-      body("idcarpeta.idcarpeta")
+    body("idcarpeta.idcarpeta")
       .not()
       .isEmpty()
       .withMessage("Carpeta es obligatorio")
+      .bail(),
+    body("archivo_detalle")
+      .not()
+      .isEmpty()
+      .withMessage("Detalle es obligatorio")
       .bail(),
 
     (req, res, next) => {

@@ -33,7 +33,7 @@ const ArchivoController = {
       idcarpeta: req.body.idcarpeta.idcarpeta,
       descripcion: req.body.descripcion,
       comentario: req.body.comentario,
-      filepath: req.body.filepath
+      archivo_detalle: req.body.archivo_detalle
     }
     try {
       const result = await ArchivoService.create(params);
@@ -48,7 +48,7 @@ const ArchivoController = {
       idcarpeta: req.body.idcarpeta.idcarpeta,
       descripcion: req.body.descripcion,
       comentario: req.body.comentario,
-      filepath: req.body.filepath
+      archivo_detalle: req.body.archivo_detalle
     }
     try {
       const result = await ArchivoService.update({

@@ -307,7 +307,6 @@ CREATE TABLE archivo (
 	PRIMARY KEY (idarchivo,idcliente)
 );
 
-
 CREATE TABLE archivo_detalle (
     idarchivo_detalle SERIAL NOT NULL,
     idarchivo INT NOT NULL,
@@ -315,4 +314,8 @@ CREATE TABLE archivo_detalle (
     titulo TEXT NOT NULL,
     descripcion TEXT NOT NULL,
     PRIMARY KEY(idarchivo_detalle, idarchivo, idcliente)
-)
+);
+
+ALTER TABLE archivo_detalle 
+ADD CONSTRAINT archivo_detalle_fkey FOREIGN KEY (idarchivo, idcliente)
+REFERENCES archivo (idarchivo, idcliente) ON UPDATE CASCADE;
