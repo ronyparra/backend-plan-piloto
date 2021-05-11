@@ -58,13 +58,13 @@ const ArchivoService = {
     const client = await pool.connect();
     try {
       await client.query("BEGIN");
-      const results = await db.query(
+      const results = await client.query(
         "INSERT INTO archivo (idcliente, descripcion, comentario, idcarpeta) VALUES ($1, $2, $3, $4) RETURNING *",
         [idcliente, descripcion, comentario, idcarpeta]
       );
       const idarchivo = results.rows[0].idarchivo;
-      const resultDet = await db.query(
-        insertDet(formatDet(archivo_detalle, idarchivo))
+      const resultDet = await client.query(
+        insertDet(formatDet(archivo_detalle, idarchivo, idcliente))
       );
       results.rows[0].archivo_detalle = resultDet.rows;
       await client.query("COMMIT");
@@ -76,27 +76,63 @@ const ArchivoService = {
       client.release();
     }
   },
-  update: async ({ descripcion, comentario, idcliente, idcarpeta, id }) => {
-    const results = await db.query(
-      "UPDATE archivo SET idcliente=$1, descripcion=$2, comentario=$3, idcarpeta=$4 WHERE idarchivo = $5 RETURNING *",
-      [idcliente, descripcion, comentario, idcarpeta, id]
-    );
-    return results.rows;
+  update: async ({
+    descripcion,
+    comentario,
+    idcliente,
+    idcarpeta,
+    archivo_detalle,
+    id,
+  }) => {
+    const client = await pool.connect();
+    try {
+      await client.query("BEGIN");
+      const results = await client.query(
+        `UPDATE archivo SET idcarpeta=$1, descripcion=$2, comentario=$3 WHERE idarchivo=$4, idcliente=$5  RETURNING *`,
+        [idcarpeta, descripcion, comentario, id, idcliente]
+      );
+      await client.query(
+        "DELETE FROM archivo_detalle WHERE idarchivo = $1 AND idcliente = $2;",
+        [id, idcliente]
+      );
+      await client.query(insertDet(formatDet(archivo_detalle, id, idcliente)));
+      await client.query("COMMIT");
+      return results.rows;
+    } catch (e) {
+      await client.query("ROLLBACK");
+      throw e;
+    } finally {
+      client.release();
+    }
   },
   delete: async (id) => {
-    const results = await db.query(
-      "DELETE FROM archivo WHERE idarchivo  = $1",
-      [id]
-    );
-    return results.rows;
+    const client = await pool.connect();
+    try {
+      await client.query("BEGIN");
+      await client.query("DELETE FROM archivo_detalle WHERE idarchivo = $1", [
+        id,
+      ]);
+      const results = await client.query(
+        "DELETE FROM archivo WHERE idarchivo  = $1",
+        [id]
+      );
+
+      await client.query("COMMIT");
+      return results.rows;
+    } catch (e) {
+      await client.query("ROLLBACK");
+      throw e;
+    } finally {
+      client.release();
+    }
   },
 };
 
-const formatDet = (detalle, id) => {
+const formatDet = (detalle, id, idcliente) => {
   return detalle.reduce((acc, curr) => {
     if (acc !== "") acc = acc + ",\n";
     return (acc =
-      acc + `(${id},${curr.idcliente},'${curr.descripcion}','${curr.titulo}')`);
+      acc + `(${id},${idcliente},'${curr.descripcion}','${curr.titulo}')`);
   }, "");
 };
 
