@@ -88,7 +88,7 @@ const ArchivoService = {
     try {
       await client.query("BEGIN");
       const results = await client.query(
-        `UPDATE archivo SET idcarpeta=$1, descripcion=$2, comentario=$3 WHERE idarchivo=$4, idcliente=$5  RETURNING *`,
+        `UPDATE archivo SET idcarpeta=$1, descripcion=$2, comentario=$3 WHERE idarchivo=$4  AND idcliente=$5  RETURNING *`,
         [idcarpeta, descripcion, comentario, id, idcliente]
       );
       await client.query(
@@ -128,7 +128,7 @@ const ArchivoService = {
   },
 };
 
-const formatDet = (detalle, id, idcliente) => {
+export const formatDet = (detalle, id, idcliente) => {
   return detalle.reduce((acc, curr) => {
     if (acc !== "") acc = acc + ",\n";
     return (acc =
