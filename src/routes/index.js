@@ -1,5 +1,6 @@
 import auth from "./auth.router";
 import user from "./user.router";
+import userfake from './user.fake.router';
 import cliente from "./cliente.router";
 import concepto from "./concepto.router";
 import categoria from "./categoria.router";
@@ -22,6 +23,7 @@ export default {
   archivo,
   folder,
   moneda,
+  userfake,
   cliente,
   concepto,
   categoria,

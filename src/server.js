@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/auth", routes.auth);
 app.use("/user", routes.user);
+app.use("/userfake", routes.userfake);
 app.use("/cobro", routes.cobro);
 app.use("/moneda", routes.moneda);
 app.use("/cliente", routes.cliente);
