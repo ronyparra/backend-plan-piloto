@@ -31,6 +31,11 @@ const UserService = {
     const client = await pool.connect();
     try {
       await client.query("BEGIN");
+      const verificar = await client.query(
+        "SELECT * FROM usuario WHERE username = $1",
+        [username]
+      );
+      if(verificar.rows.length > 0) throw 'Ya existe este usuario'
       const results = await client.query(
         "INSERT INTO usuario (username,password,nombre,apellido) VALUES ($1, $2,$3,$4) RETURNING *",
         [username, password, nombre, apellido]
