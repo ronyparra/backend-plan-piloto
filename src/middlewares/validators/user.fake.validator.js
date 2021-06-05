@@ -12,12 +12,6 @@ const UserValidator = {
       .isEmpty()
       .withMessage("Contraseña es obligatorio")
       .bail(),
-    body("nombre").not().isEmpty().withMessage("Nombre es obligatorio").bail(),
-    body("apellido")
-      .not()
-      .isEmpty()
-      .withMessage("Apellido es obligatorio")
-      .bail(),
     (req, res, next) => {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {

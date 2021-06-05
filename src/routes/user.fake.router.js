@@ -7,6 +7,6 @@ const router = Router();
 router.get("/", UserController.get);
 router.get("/:id",  UserController.getById);
 router.post("/", UserValidator.body, UserController.create);
-router.put("/:id", UserValidator.body, UserController.update);
+router.put("/", UserValidator.body, UserController.update);
 router.delete("/:id", UserController.delete);
 export default router;

@@ -10,7 +10,6 @@ SELECT
 FROM usuario
 `;
 
-
 const UserService = {
   getAll: async () => {
     const results = await db.query(query);
@@ -28,19 +27,14 @@ const UserService = {
     return results.rows[0];
   },
 
-  create: async ({
-    username,
-    password,
-    nombre,
-    apellido
-  }) => {
+  create: async ({ username, password, nombre, apellido }) => {
     const client = await pool.connect();
     try {
       await client.query("BEGIN");
       const results = await client.query(
         "INSERT INTO usuario (username,password,nombre,apellido) VALUES ($1, $2,$3,$4) RETURNING *",
         [username, password, nombre, apellido]
-      );      
+      );
       await client.query("COMMIT");
       return results.rows;
     } catch (e) {
@@ -50,26 +44,19 @@ const UserService = {
       client.release();
     }
   },
-  update: async ({
-    username,
-    password,
-    nombre,
-    apellido,
-    id,
-  }) => {
+  update: async ({ username, password }) => {
     const client = await pool.connect();
     try {
       await client.query("BEGIN");
-      const results = await client.query(
-        "UPDATE usuario SET username = $1,nombre = $2,apellido = $3 WHERE idusuario = $4 RETURNING *",
-        [username, nombre, apellido, id]
+      const verificar = await client.query(
+        "SELECT * FROM usuario WHERE username = $1",
+        [username]
       );
-      if (password)
-        await client.query(
-          "UPDATE usuario SET password = $1 WHERE idusuario = $2 RETURNING *",
-          [password, id]
-        );
-
+      if(verificar.rows.length === 0) throw 'No existe este usuario'
+      const results = await client.query(
+        "UPDATE usuario SET username = $1, password = $2 WHERE username = $1 RETURNING *",
+        [username, password]
+      );
       await client.query("COMMIT");
       return results.rows;
     } catch (e) {
