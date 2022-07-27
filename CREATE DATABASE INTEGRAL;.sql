@@ -9,6 +9,11 @@ CREATE TABLE usuario (
 );
 ALTER TABLE usuario ADD COLUMN precio DOUBLE PRECISION NOT NULL DEFAULT 80000;
 
+
+INSERT INTO usuario(
+	idusuario, username, password, nombre, apellido, precio)
+VALUES (1, 'root', 'root', 'root', 'root', 0);
+
 CREATE TABLE cliente(
     idcliente SERIAL,
     razonsocial TEXT NOT NULL,
@@ -88,10 +93,10 @@ CREATE TABLE pendiente (
     PRIMARY KEY (idpendiente)
 );
 
+ALTER TABLE tipo_pendiente ADD COLUMN icon TEXT NULL;
+
 INSERT INTO tipo_pendiente(idtipo_pendiente, descripcion, color, icon)
 VALUES (1, 'PRESUPUESTO', 'green', 'post_add'),(2, 'SERVICIO', 'green', 'support_agent'),(3, 'COMPRA', 'green', 'shopping_cart');
-
-ALTER TABLE tipo_pendiente ADD COLUMN icon TEXT NULL;
 
 
 CREATE TABLE formulario (
